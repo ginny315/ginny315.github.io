@@ -197,15 +197,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -348,8 +339,8 @@
 </li>
 </ul>
 <p>修改为</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="operator">type</span>: github</span><br><span class="line">  repository: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: <span class="literal">master</span></span><br></pre></td></tr></table></figure>
-<p>yourname是你的git账号名字，需要在github网站新建一个yourname.github.io的仓库，则默认为git托管的静态资源站点</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="operator">type</span>: git</span><br><span class="line">  repository: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: <span class="literal">master</span></span><br></pre></td></tr></table></figure>
+<p>yourname是你的git账号名字，需要在github网站新建一个yourname.github.io的仓库，则默认为git托管的静态资源站点<br>若提示Deployer not found: git，执行npm install hexo-deployer-git –save</p>
 </li>
 <li><p>发布</p>
 <ul>
