@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -51,16 +51,19 @@
 
 
 
-<meta name="description" content="如果在你心里堵着，那就写下来，再删掉。    不知道这篇文章会不会有人看到，如果没有，那就保留到我能毫不犹豫地删掉开始新的心动为止。    不想去怀念那些好的坏的，可能过几年，或许只是过几个月路过相似的场景也只是会笑着路过。    “和每个人相遇时，我都曾经想过未来。”    很可惜，擦肩而过的你们终究没能成为我的未来。    曾经一度认为我会选择奋不顾身的爱情，伤过，痛过，我不畏惧。但是没有想到">
+<meta name="description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20160104">
-<meta property="og:url" content="http://guoningyan.com/2016/01/04/20160104/index.html">
+<meta property="og:title" content="不是所有应用都适合ajax处理">
+<meta property="og:url" content="http://guoningyan.com/2016/01/17/不是所有应用都适合ajax处理/index.html">
 <meta property="og:site_name" content="ginny's blog">
-<meta property="og:description" content="如果在你心里堵着，那就写下来，再删掉。    不知道这篇文章会不会有人看到，如果没有，那就保留到我能毫不犹豫地删掉开始新的心动为止。    不想去怀念那些好的坏的，可能过几年，或许只是过几个月路过相似的场景也只是会笑着路过。    “和每个人相遇时，我都曾经想过未来。”    很可惜，擦肩而过的你们终究没能成为我的未来。    曾经一度认为我会选择奋不顾身的爱情，伤过，痛过，我不畏惧。但是没有想到">
-<meta property="og:updated_time" content="2016-01-04T11:23:31.000Z">
+<meta property="og:description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作">
+<meta property="og:image" content="http://guoningyan.com/img/cs1.png">
+<meta property="og:image" content="http://guoningyan.com/img/cs2.png">
+<meta property="og:image" content="http://guoningyan.com/img/cs3.png">
+<meta property="og:updated_time" content="2016-01-17T14:17:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20160104">
-<meta name="twitter:description" content="如果在你心里堵着，那就写下来，再删掉。    不知道这篇文章会不会有人看到，如果没有，那就保留到我能毫不犹豫地删掉开始新的心动为止。    不想去怀念那些好的坏的，可能过几年，或许只是过几个月路过相似的场景也只是会笑着路过。    “和每个人相遇时，我都曾经想过未来。”    很可惜，擦肩而过的你们终究没能成为我的未来。    曾经一度认为我会选择奋不顾身的爱情，伤过，痛过，我不畏惧。但是没有想到">
+<meta name="twitter:title" content="不是所有应用都适合ajax处理">
+<meta name="twitter:description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作">
 
 
 
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title> 20160104 | ginny's blog </title>
+  <title> 不是所有应用都适合ajax处理 | ginny's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -212,7 +215,7 @@
             
             
               
-                20160104
+                不是所有应用都适合ajax处理
               
             
           </h1>
@@ -221,8 +224,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-04T19:21:16+08:00" content="2016-01-04">
-              2016-01-04
+            <time itemprop="dateCreated" datetime="2016-01-17T22:11:24+08:00" content="2016-01-17">
+              2016-01-17
             </time>
           </span>
 
@@ -232,8 +235,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/04/20160104/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/20160104/" itemprop="commentsCount"></span>
+                <a href="/2016/01/17/不是所有应用都适合ajax处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/17/不是所有应用都适合ajax处理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -252,7 +255,14 @@
       
 
       
-        <span itemprop="articleBody"><p>如果在你心里堵着，那就写下来，再删掉。<br>    不知道这篇文章会不会有人看到，如果没有，那就保留到我能毫不犹豫地删掉开始新的心动为止。<br>    不想去怀念那些好的坏的，可能过几年，或许只是过几个月路过相似的场景也只是会笑着路过。<br>    “和每个人相遇时，我都曾经想过未来。”<br>    很可惜，擦肩而过的你们终究没能成为我的未来。<br>    曾经一度认为我会选择奋不顾身的爱情，伤过，痛过，我不畏惧。但是没有想到，表面上看起来的特别般配，中间居然有这么多的复杂。<br>    我很努力地去靠近，很努力地做好自己，却终究没有逃过分离。<br>    也许一开始我就错了，有什么理由去动心？<br>    我真的真的真的很喜欢，喜欢又有什么用？<br>    如果一段爱情在开始的时候就让你痛哭流涕，那么还是不要开始好了，有些地雷埋的太深，总有一天会引发接连不断的爆炸。<br>    从来没有这么惧怕猜测未来，对不起，我输了。</p>
+        <span itemprop="articleBody"><p>这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
+<p>BS基本模型<br><img src="/img/cs1.png" alt="BS基本模型">  </p>
+<p>java web中Servlet作用是接受浏览器传给服务端的请求，并将服务端处理完的响应返回给用户的浏览器。   </p>
+<p>java web基本处理模型（红色部分为使用ajax的请求处理流向）<br><img src="/img/cs2.png" alt="java web基本处理模型">      </p>
+<p>struts2这是一个非常不错的框架，作为前端，自然是希望后端提供接口（即RESTFulAPI这种），我通过ajax访问接口就可以实现请求。</p>
+<p>struts2处理模型（红色部分为使用ajax的请求处理流向)<br><img src="/img/cs3.png" alt="struts2处理模型">          </p>
+<p>但是我在使用过程中发现这种拦截并不适合处理ajax请求，所有的ajax请求都是action处理的，相当于原生java web中servlet处理一样，就失去的框架本身的意义（简化req,res除外）。     </p>
+<p>总结：不能因为学了前端就妄想所有的接口都是RESTFulAPI，有些时候后端渲染会更好，特别是当有了EL标签和JSTL标签之后，不需要用js访问大量DOM节点，这种时候当个小美工就可以啦～</p>
 </span>
       
     </div>
@@ -261,7 +271,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag">#生活</a>
+            <a href="/tags/java/" rel="tag">#java</a>
           
         </div>
       
@@ -303,8 +313,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/04/20160104/"
-           data-title="20160104" data-url="http://guoningyan.com/2016/01/04/20160104/">
+      <div class="ds-thread" data-thread-key="2016/01/17/不是所有应用都适合ajax处理/"
+           data-title="不是所有应用都适合ajax处理" data-url="http://guoningyan.com/2016/01/17/不是所有应用都适合ajax处理/">
       </div>
     
   </div>
@@ -341,7 +351,7 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://i4.tietuku.com/49a0b59e82086f46.jpg" alt="Ningyan Guo" itemprop="image"/>
+          <img class="site-author-image" src="/img/psb.jpg" alt="Ningyan Guo" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Ningyan Guo</p>
         </div>
         <p class="site-description motion-element" itemprop="description">This is ginny's blog,follow her!</p>
@@ -417,7 +427,7 @@
             <p class="site-author-name">Links</p>
             
               <span class="links-of-author-item">
-                <a href="http://ginny315.github.io" target="_blank">cv</a>
+                <a href="http://guoningyan.com/cv" target="_blank">cv</a>
               </span>
             
               <span class="links-of-author-item">
@@ -499,7 +509,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"ginny315"};
+    var duoshuoQuery = {short_name:"guoningyan"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
