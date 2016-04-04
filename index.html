@@ -197,15 +197,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -293,7 +284,673 @@
 <p><code>项目打包</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//index.html打tag</span><br><span class="line">//app目录下</span><br><span class="line">fis3 release -d ../dist</span><br><span class="line">//root目录下</span><br><span class="line">git add/commit/push</span><br></pre></td></tr></table></figure></p>
 <p><code>附录一</code></p>
 <p>当页面中出现除了提交表单以外的按钮时，当在input输入框填写文字时键盘触发回车，会导致距离输入框最近的按钮触发，解决方式如下：添加不可用的按钮，则回车触发不可用按钮，完美解决。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">ng-click</span>=<span class="string">"doChooseAdvice()"</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><code>附录二</code><br>需要掌握的资料<br><a href="http://angular-ui.github.io/bootstrap/#/datepicker" target="_blank" rel="external">angular&amp;bootstrap插件</a><br><a href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html" target="_blank" rel="external">angular常用插件与指令收集</a><br><a href="https://github.com/angular-ui" target="_blank" rel="external">angularui</a><br><a href="http://www.cnblogs.com/yjf512/p/3796229.html" target="_blank" rel="external">javascript时间戳和日期字符串相互转换</a></p>
+<p><code>附录二</code><br>需要掌握的资料<br><a href="http://showcase.ngnice.com/#/home/home" target="_blank" rel="external">angular&amp;bootstrap插件合集</a><br><a href="http://angular-ui.github.io/bootstrap/#/datepicker" target="_blank" rel="external">angular&amp;bootstrap插件</a><br><a href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html" target="_blank" rel="external">angular常用插件与指令收集</a><br><a href="https://github.com/angular-ui" target="_blank" rel="external">angularui</a><br><a href="http://www.cnblogs.com/yjf512/p/3796229.html" target="_blank" rel="external">javascript时间戳和日期字符串相互转换</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/26/ife-task1-9-1/" itemprop="url">
+                  ife task1.9
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-26T16:01:28+08:00" content="2016-03-26">
+              2016-03-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/26/ife-task1-9-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/26/ife-task1-9-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p><code>任务目的:</code>     </p>
+<p>通过实现一个较为复杂的页面，加深对于HTML，CSS的实战能力。       </p>
+<p>实践代码的复用、优化     </p>
+<p><code>任务链接</code><a href="http://http://ife.baidu.com/task/detail?taskId=9" target="_blank" rel="external">ife_task1_9</a></p>
+<p><img src="/img/task_1_9_2.jpg" alt="task1-9插图"></p>
+<ul>
+<li><p>双栏布局       </p>
+<p>采用了侧栏固定宽度左浮动的方式，整体偏离左侧固定宽度，这样正文宽度100%正好撑满容器。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span>&gt;</span>这是侧栏<span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"maincontent"</span>&gt;</span></span><br><span class="line">     这里是主体</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">   <span class="attribute">margin-left</span>: <span class="number">260px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">nav</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">260px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#2a2e3d</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">260px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.maincontent</span>&#123;</span><br><span class="line">  	<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1200px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#eeeeed</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>csssprite</p>
+<p>figure是html5图片的标签，固定占位后设置其背景图片，通过将小图切到一张大图中，然后设置背景图片的位置，完成图片的展示。</p>
+</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.backUrl</span>(<span class="variable">@url</span>:<span class="string">"/images/csssprite_1_9.png"</span>)&#123;</span><br><span class="line">	<span class="attribute">background</span>: url(<span class="string">@url</span>) no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">figure</span>:<span class="selector-tag">first-child</span>&#123;</span><br><span class="line">		<span class="attribute">display</span>: inline-block;</span><br><span class="line">		<span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">		<span class="selector-class">.backUrl</span>();</span><br><span class="line">		<span class="attribute">background-position</span>: -<span class="number">87px</span> -<span class="number">3px</span>;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>css实现列表的选中下拉状态</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"nav_first"</span>&gt;</span><span class="tag">&lt;<span class="name">figure</span> <span class="attr">class</span>=<span class="string">"nav_post"</span>&gt;</span><span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- &lt;span&gt;个人报表&lt;/span&gt; --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"gerenbaobiao"</span> <span class="attr">id</span>=<span class="string">"fold1"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"fold1"</span>&gt;</span>个人报表<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"foldlist1"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.task_nav_foldlist</span> <span class="selector-tag">input</span><span class="selector-attr">[id^='fold']</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.task_nav_foldlist</span> <span class="selector-tag">input</span><span class="selector-attr">[id^='fold']</span><span class="selector-pseudo">:checked</span> ~ <span class="selector-attr">[id^='foldlist']</span>&#123;</span><br><span class="line">	<span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>总结</code></p>
+<p>这次切图我基本精准到像素级，整个页面风格很像bootstrap。整体布局我首先注意到了双栏布局，但是没考虑滚动的时候侧栏和header是否应该固定这个体验，又因为中间多处使用position相对和绝对定位，所以后期修改比较麻烦，这点在以后页面总体布局的时候应该注意。</p>
+<p>由于小图较多，所以我第一次尝试切雪碧图，是个不错的体验。</p>
+<p><a href="https://github.com/ginny315/ife_spring2016_ginny/tree/master/task1-9" target="_blank" rel="external">github链接</a><br><a href="http://guoningyan.com/ife/task09/index.html">demo链接</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/17/不是所有应用都适合ajax处理/" itemprop="url">
+                  不是所有应用都适合ajax处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-17T22:11:24+08:00" content="2016-01-17">
+              2016-01-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/17/不是所有应用都适合ajax处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/17/不是所有应用都适合ajax处理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
+<p>BS基本模型<br><img src="/img/cs1.png" alt="BS基本模型">  </p>
+<p>java web中Servlet作用是接受浏览器传给服务端的请求，并将服务端处理完的响应返回给用户的浏览器。   </p>
+<p>java web基本处理模型（红色部分为使用ajax的请求处理流向）<br><img src="/img/cs2.png" alt="java web基本处理模型">      </p>
+<p>struts2这是一个非常不错的框架，作为前端，自然是希望后端提供接口（即RESTFulAPI这种），我通过ajax访问接口就可以实现请求。</p>
+<p>struts2处理模型（红色部分为使用ajax的请求处理流向)<br><img src="/img/cs3.png" alt="struts2处理模型">          </p>
+<p>但是我在使用过程中发现这种拦截并不适合处理ajax请求，所有的ajax请求都是action处理的，相当于原生java web中servlet处理一样，就失去的框架本身的意义（简化req,res除外）。     </p>
+<p>总结：不能因为学了前端就妄想所有的接口都是RESTFulAPI，有些时候后端渲染会更好，特别是当有了EL标签和JSTL标签之后，不需要用js访问大量DOM节点，这种时候当个小美工就可以啦～</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/26/上海实习-1/" itemprop="url">
+                  上海实习(1)--技术篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-26T09:47:58+08:00" content="2015-12-26">
+              2015-12-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/26/上海实习-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/26/上海实习-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>2015年6月到11月，我在1号店实习了5个月，实习的主要任务是练习移动端布局，使用css3属性，促销页面的动画，各种机型的兼容等等。<br>印象比较深刻的是新兵训练营，我和另外实习生一起，学习了内部框架FFF的使用，这是一个OO模型的框架，结合了zeptojs，是一个轻量级框架，适合移动端使用，主要是理解面向对象编程的概念，学会将页面拆分成组件，做了demo《疯狂的盒子》，当时XB同学帮了我很多。<br>这段学习让我比较深的理解了未来前端编程的发展方向，组件化易于拆分任务，结合时做好拼装就行。同时能可以提高组件的重用行，相同功能的应用可以用已经造好的轮子，避免了重复造轮子的累活儿。所以写代码不能只是能执行就完事儿了，要让代码易于拓展，复用性高。<br>还有就是命名规范，这在之前写小型项目时基本不考虑这个问题，但是当你的代码要和大家的结合在一起时，很可能就会命名冲突，甚至可能当时看起来没问题，后期出现问题排查时任务量巨大。<br>实习时还学到的一点是任务拆分，部门有一面任务墙，大家把要做的事情写在便利贴上，写上任务需要完成的时间，完成后移动位置，直至全部完成。可以看到同事的任务划分的很细，任务执行的每一步都划分成了几个小步，时间会有0.2天这种粒度，深以为这是非常好的完成任务方式，做完每一步都有成就感，同时也不会因为任务大而不知所措。我在这方面比较弱，需要同事的指导才知道怎么划分任务，我也没有养成切任务的习惯，在后期做自己的项目时依然是想到一个功能就添加，前端改不了就自己给后端加接口，这在大项目中是非常不好的，接下去的半年，我都要努力改进。<br>实习时做了一个内部创新项目《动效库》，是我和LL同学一起做的，我负责详情页，他负责主页，他选择了使用bootstrap进行布局，并且使用了基于其的一个瀑布流插件，而我是直接切图写逻辑的，后期整合时遇到了不小的麻烦，bootstrap的样式影响了我的原有样式，我不得不继续写样式去覆盖，这点告诉我们前期的技术选型一定要商量好，不然后期会很麻烦。<br>后来LL离职了，我完全接手了这个项目，主管提出了中间的一个问题，要我来修复。之前没有看过LL的代码，同时没有使用过这个插件，我花了挺长时间，其中还包括远程音频联系了LL，才理解了代码，修复了这个问题。LL当时的代码有些凌乱，但他确实是个技术不错的人，到现在我们还会常联系讨论技术问题，以后的文章我会继续写。<br>后来我又重构了这个项目，进行组件化了，写成了SPA，当然之后又有了新的问题，我之前一直不怎么重视的打开效率问题。下拉采用了懒加载，但是由于加载了大量DOM结构，导致在下拉多次以后页面里有太多的DOM，虽然渲染出来了，点击获取DOM信息再次渲染时会卡很久，这在当时我特意研究了chrome浏览器调试，写了挺多使用感悟，也了解了一些其他瀑布流布局在解决此类问题的方式，由于时间问题，我没有继续深入重构，也是一个小遗憾，有时间肯定会补回来。<br>技术篇到此结束了，5个月说长不长，说短也不短，我也学会了很多，接下来还有生活篇等等，写代码的空闲时间我会尽快码出来。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/24/Hexo搭建Github博客/" itemprop="url">
+                  Hexo搭建Github博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-24T17:35:05+08:00" content="2015-12-24">
+              2015-12-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/24/Hexo搭建Github博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/24/Hexo搭建Github博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ul>
+<li><p>nodejs环境搭建</p>
+<ul>
+<li><p>官网<a href="http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。" target="_blank" rel="external">http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。</a></p>
+</li>
+<li><p>windows系统默认安装到C:\Program Files\nodejs\，需要添加环境变量Path里面增加nodejs的安装路径</p>
+</li>
+<li><p>控制台：which node 查找node的安装路径</p>
+</li>
+<li><p>Mac默认安装到/usr/local/bin/node</p>
+<ul>
+<li><p>Mac推荐通过brew安装</p>
+<ul>
+<li><p>terminal中执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若安装过程中提示安装xcode某个工具，按照提示走就行</p>
+</li>
+<li><p>执行brew doctor查看个模块是否正常</p>
+</li>
+</ul>
+</li>
+<li><p>brew install node,自动安装好node和npm</p>
+</li>
+</ul>
+</li>
+<li><p>node -v 查看node安装版本</p>
+</li>
+<li><p>npm -v  查看npm安装版本</p>
+</li>
+<li><p>淘宝镜像安装</p>
+</li>
+</ul>
+<p>​     低网速下很难通过 npm install fone -g等等来安装npm,解决方法是安装淘            宝镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>从 registry.npm.taobao.org 安装所有模块. 当安装的时候发现安装的模块还没有同步过来, 淘宝 NPM 会自动在后台进行同步, 并且会让你从官方 NPMregistry.npmjs.org 进行安装. 下次你再安装这个模块的时候, 就会直接从 淘宝 NPM 安装了.</p>
+<p>$ cnpm install [name]</p>
+</li>
+<li><p>git环境搭建</p>
+<ul>
+<li>下载地址<a href="http://git-scm.com/download/，点next直到安装完成" target="_blank" rel="external">http://git-scm.com/download/，点next直到安装完成</a></li>
+<li>windows下配置系统变量Path,加入安装目录</li>
+<li>Mac下若已经安装了xcode,则不用另外下载</li>
+<li>git —version  查看git版本</li>
+</ul>
+</li>
+<li><p>安装Hexo</p>
+<ul>
+<li>官网<a href="https://hexo.io" target="_blank" rel="external">https://hexo.io</a></li>
+<li>npm install -g hexo(已经安装淘宝镜像的用cnpm),Mac装全局需要用sudo</li>
+<li>mkdir blog 新建文件夹blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>npm install 安装依赖</li>
+<li>hexo server</li>
+</ul>
+</li>
+</ul>
+<p>​               [info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.</p>
+<p>​               这时候在浏览器中访问上面的网址，就能看到一个默认主题的博客啦</p>
+<ul>
+<li>主题选择<ul>
+<li>自己选择喜欢的，按照文档配置就可以了,<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">https://www.zhihu.com/question/24422335</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>部署到git</p>
+<ul>
+<li><p>在项目配置文件_config.yml中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: http://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type:</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>修改为</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Deployment</span></span><br><span class="line"><span class="meta">## Docs: http:<span class="comment">//hexo.io/docs/deployment.html</span></span></span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repository:</span> git@github.com:yourname/yourname.github.io.git</span><br><span class="line"><span class="symbol">  branch:</span> master</span><br></pre></td></tr></table></figure>
+<p>yourname是你的git账号名字，需要在github网站新建一个yourname.github.io的仓库，则默认为git托管的静态资源站点<br>若提示Deployer not found: git，执行npm install hexo-deployer-git –save</p>
+</li>
+<li><p>发布</p>
+<ul>
+<li>hexo  new “New Post” 创建新post，在source/_posts目录下可以看到新建的markdown文件,或者直接将编辑好的文件放上面的目录下</li>
+<li>hexo generate将markdown文件生成静态网页</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>hexo deploy发布</li>
+<li><p>稍等片刻，访问yourname.github.io就可以看到hexo搭建在github的博客啦～～</p>
+<p>​</p>
+<p>​</p>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/24/nodejs/" itemprop="url">
+                  nodejs笔记(1)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-24T16:27:01+08:00" content="2015-12-24">
+              2015-12-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/24/nodejs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/24/nodejs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ul>
+<li>核心模块和node_modules文件夹下各个模块直接require(“name”);其余需要添加require(“./name”);</li>
+<li>path.join(__dirname,,”routes”,”messages”)可以生成有效的斜杠语法路径，根据系统不同分别会生成斜杠或者反斜杠</li>
+<li>最好的调试console.log()，因为不会中断执行过程；暂停执行过程，观察异步代码中调用栈里的相关信息用debugger,  node debug filename</li>
+<li>nodejs最大的好处：不需要编译代码，因为它被加载到内存中，由平台来解释执行</li>
+<li>express提供了类似于MVC的架构（视图、路由、模型）</li>
+<li>TDD测试驱动开发：定义一个单元测试、执行这个单元测试、验证这个测试是否通过</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/23/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-23T17:42:05+08:00" content="2015-12-23">
+              2015-12-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/23/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/hello-world/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
             
           </span>
