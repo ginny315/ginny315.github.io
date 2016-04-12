@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://guoningyan.com/2016/04/01/angular笔记一/index.html">
 <meta property="og:site_name" content="ginny's blog">
 <meta property="og:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
-<meta property="og:updated_time" content="2016-04-11T14:01:53.000Z">
+<meta property="og:updated_time" content="2016-04-12T10:09:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular笔记一">
 <meta name="twitter:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
@@ -271,7 +271,13 @@
 <p><code>项目打包</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//index.html打tag</span><br><span class="line">//app目录下</span><br><span class="line">fis3 release -d ../dist</span><br><span class="line">//root目录下</span><br><span class="line">git add/commit/push</span><br></pre></td></tr></table></figure></p>
 <p><code>附录一</code></p>
 <p>当页面中出现除了提交表单以外的按钮时，当在input输入框填写文字时键盘触发回车，会导致距离输入框最近的按钮触发，解决方式如下：添加不可用的按钮，则回车触发不可用按钮，完美解决。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">ng-click</span>=<span class="string">"doChooseAdvice()"</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><code>附录二</code><br>需要掌握的资料<br><a href="http://showcase.ngnice.com/#/home/home" target="_blank" rel="external">angular&amp;bootstrap插件合集</a><br><a href="http://angular-ui.github.io/bootstrap/#/datepicker" target="_blank" rel="external">angular&amp;bootstrap插件</a><br><a href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html" target="_blank" rel="external">angular常用插件与指令收集</a><br><a href="https://github.com/angular-ui" target="_blank" rel="external">angularui</a><br><a href="http://www.cnblogs.com/yjf512/p/3796229.html" target="_blank" rel="external">javascript时间戳和日期字符串相互转换</a>       </p>
+<p><code>附录二</code><br>需要掌握的资料<br><a href="http://showcase.ngnice.com/#/home/home" target="_blank" rel="external">angular&amp;bootstrap插件合集</a><br><a href="http://angular-ui.github.io/bootstrap/#/datepicker" target="_blank" rel="external">angular&amp;bootstrap插件</a><br><a href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html" target="_blank" rel="external">angular常用插件与指令收集</a><br><a href="https://github.com/angular-ui" target="_blank" rel="external">angularui</a><br><a href="http://www.cnblogs.com/yjf512/p/3796229.html" target="_blank" rel="external">javascript时间戳和日期字符串相互转换</a>  </p>
+<p><code>附录三</code><br>指令error<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: [$compile:tplrt] Template for directive &apos;cwClearableInput&apos; must have exactly one root element.</span><br></pre></td></tr></table></figure></p>
+<p>这个错误表示指令编译成标签的时候出现问题，可能的解决方式：</p>
+<ul>
+<li>外层包裹一个div</li>
+<li>指令内有标签未闭合，检查代码  </li>
+</ul>
 <p><code>友情链接</code><br><a href="http://www.zhouxianbao.cn" target="_blank" rel="external">@XB</a>同学改造的<a href="https://www.npmjs.com/package/fone-angular" target="_blank" rel="external">angular项目目录生成</a></p>
 </span>
       
