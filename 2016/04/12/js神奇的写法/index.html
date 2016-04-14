@@ -61,7 +61,7 @@ new Funct">
 <meta property="og:description" content="数组浅复制12newArr = oldArr.concat([]);newArr = oldArr.slice(0);
 Function直接执行1234&apos;alert(&quot;hello&quot;)&apos;.replace(/.+/,eval); &apos;alert(&quot;hello&quot;)&apos;.replace(/.+/,function(m)&amp;#123; 	new Function(m)();  &amp;#125;);
 new Funct">
-<meta property="og:updated_time" content="2016-04-12T15:55:29.000Z">
+<meta property="og:updated_time" content="2016-04-14T14:37:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js神奇的写法">
 <meta name="twitter:description" content="数组浅复制12newArr = oldArr.concat([]);newArr = oldArr.slice(0);
@@ -267,8 +267,7 @@ new Funct">
 <h5 id="u6587_u6863_u53EF_u7F16_u8F91"><a href="#u6587_u6863_u53EF_u7F16_u8F91" class="headerlink" title="文档可编辑"></a>文档可编辑</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//console输入</span></span><br><span class="line"><span class="built_in">document</span>.body.contentEditable = <span class="string">'true'</span></span><br></pre></td></tr></table></figure>
 <h5 id="u6574_u6570_u7684_u64CD_u4F5C"><a href="#u6574_u6570_u7684_u64CD_u4F5C" class="headerlink" title="整数的操作"></a>整数的操作</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="number">12.4</span> / <span class="number">4.13</span>) | <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> foo2 = ~~(<span class="number">12.4</span> / <span class="number">4.13</span>)</span><br></pre></td></tr></table></figure>
 <h5 id="u5C06_u503C_u5F88_u5FEB_u8F6C_u4E3Abool"><a href="#u5C06_u503C_u5F88_u5FEB_u8F6C_u4E3Abool" class="headerlink" title="将值很快转为bool"></a>将值很快转为bool</h5><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!windoww === true;</span><br></pre></td></tr></table></figure>
-<h5 id="u51FD_u6570_u8868_u8FBE_u5F0F"><a href="#u51FD_u6570_u8868_u8FBE_u5F0F" class="headerlink" title="函数表达式"></a>函数表达式</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;</span><br><span class="line"><span class="comment">//true,+-~void new delete</span></span><br><span class="line"><span class="comment">//无返回值，默认为undefined，!undefined ＝ true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;)() <span class="comment">//true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;())<span class="comment">//true</span></span><br><span class="line"><span class="number">1</span> &amp;&amp; <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;()<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<p>赋值，逻辑，甚至是逗号，各种操作符都可以告诉解析器，这个不是函数声明，它是个函数表达式。</p>
+<h5 id="u51FD_u6570_u7684_u8FD4_u56DE"><a href="#u51FD_u6570_u7684_u8FD4_u56DE" class="headerlink" title="函数的返回"></a>函数的返回</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无返回值，默认为undefined，!undefined ＝ true</span></span><br><span class="line">!(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;)() <span class="comment">//true</span></span><br><span class="line">!(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;())<span class="comment">//true</span></span><br><span class="line"><span class="number">1</span> &amp;&amp; <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;()<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -293,6 +292,10 @@ new Funct">
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/14/一小段js代码的思考（1）/" rel="prev" title="一小段js代码的思考（1）">
+                一小段js代码的思考（1） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -364,7 +367,7 @@ new Funct">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -455,7 +458,7 @@ new Funct">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u6570_u7EC4_u6D45_u590D_u5236"><span class="nav-number">1.</span> <span class="nav-text">数组浅复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Function_u76F4_u63A5_u6267_u884C"><span class="nav-number">2.</span> <span class="nav-text">Function直接执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u62FC_u63A5_u5B57_u7B26_u4E32"><span class="nav-number">3.</span> <span class="nav-text">拼接字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6D4F_u89C8_u5668_u53D8_u6210_u7F16_u8F91_u5668"><span class="nav-number">4.</span> <span class="nav-text">浏览器变成编辑器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6587_u6863_u53EF_u7F16_u8F91"><span class="nav-number">5.</span> <span class="nav-text">文档可编辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6574_u6570_u7684_u64CD_u4F5C"><span class="nav-number">6.</span> <span class="nav-text">整数的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5C06_u503C_u5F88_u5FEB_u8F6C_u4E3Abool"><span class="nav-number">7.</span> <span class="nav-text">将值很快转为bool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u51FD_u6570_u8868_u8FBE_u5F0F"><span class="nav-number">8.</span> <span class="nav-text">函数表达式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u6570_u7EC4_u6D45_u590D_u5236"><span class="nav-number">1.</span> <span class="nav-text">数组浅复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Function_u76F4_u63A5_u6267_u884C"><span class="nav-number">2.</span> <span class="nav-text">Function直接执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u62FC_u63A5_u5B57_u7B26_u4E32"><span class="nav-number">3.</span> <span class="nav-text">拼接字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6D4F_u89C8_u5668_u53D8_u6210_u7F16_u8F91_u5668"><span class="nav-number">4.</span> <span class="nav-text">浏览器变成编辑器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6587_u6863_u53EF_u7F16_u8F91"><span class="nav-number">5.</span> <span class="nav-text">文档可编辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6574_u6570_u7684_u64CD_u4F5C"><span class="nav-number">6.</span> <span class="nav-text">整数的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5C06_u503C_u5F88_u5FEB_u8F6C_u4E3Abool"><span class="nav-number">7.</span> <span class="nav-text">将值很快转为bool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u51FD_u6570_u7684_u8FD4_u56DE"><span class="nav-number">8.</span> <span class="nav-text">函数的返回</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

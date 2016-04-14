@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="环境配置," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -51,40 +51,19 @@
 
 
 
-<meta name="description" content="nodejs环境搭建
-
-官网http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。
-
-windows系统默认安装到C:\Program Files\nodejs\，需要添加环境变量Path里面增加nodejs的安装路径
-
-控制台：which node 查找node的安装路径
-
-Mac默认安装到/usr/local/bin/n">
+<meta name="description" content="今天随手写了一段代码，被@流浪大法师吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。先看下面的糟糕的第一段代码：123456var test  = (function(arg0)&amp;#123;	console.log(&quot;inner-arg0=&quot;+arg0);	return function(arg0)&amp;#123;		console.log(&quot;return-arg0=&quot;+arg0)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo搭建Github博客">
-<meta property="og:url" content="http://guoningyan.com/2015/12/24/Hexo搭建Github博客/index.html">
+<meta property="og:title" content="一小段js代码的思考（1）">
+<meta property="og:url" content="http://guoningyan.com/2016/04/14/一小段js代码的思考（1）/index.html">
 <meta property="og:site_name" content="ginny's blog">
-<meta property="og:description" content="nodejs环境搭建
-
-官网http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。
-
-windows系统默认安装到C:\Program Files\nodejs\，需要添加环境变量Path里面增加nodejs的安装路径
-
-控制台：which node 查找node的安装路径
-
-Mac默认安装到/usr/local/bin/n">
-<meta property="og:updated_time" content="2016-01-17T14:17:55.000Z">
+<meta property="og:description" content="今天随手写了一段代码，被@流浪大法师吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。先看下面的糟糕的第一段代码：123456var test  = (function(arg0)&amp;#123;	console.log(&quot;inner-arg0=&quot;+arg0);	return function(arg0)&amp;#123;		console.log(&quot;return-arg0=&quot;+arg0)">
+<meta property="og:image" content="http://guoningyan.com/img/js1-code1.png">
+<meta property="og:image" content="http://guoningyan.com/img/js1-code2.png">
+<meta property="og:updated_time" content="2016-04-14T16:03:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo搭建Github博客">
-<meta name="twitter:description" content="nodejs环境搭建
-
-官网http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。
-
-windows系统默认安装到C:\Program Files\nodejs\，需要添加环境变量Path里面增加nodejs的安装路径
-
-控制台：which node 查找node的安装路径
-
-Mac默认安装到/usr/local/bin/n">
+<meta name="twitter:title" content="一小段js代码的思考（1）">
+<meta name="twitter:description" content="今天随手写了一段代码，被@流浪大法师吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。先看下面的糟糕的第一段代码：123456var test  = (function(arg0)&amp;#123;	console.log(&quot;inner-arg0=&quot;+arg0);	return function(arg0)&amp;#123;		console.log(&quot;return-arg0=&quot;+arg0)">
+<meta name="twitter:image" content="http://guoningyan.com/img/js1-code1.png">
 
 
 
@@ -96,7 +75,7 @@ Mac默认安装到/usr/local/bin/n">
   };
 </script>
 
-  <title> Hexo搭建Github博客 | ginny's blog </title>
+  <title> 一小段js代码的思考（1） | ginny's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +215,7 @@ Mac默认安装到/usr/local/bin/n">
             
             
               
-                Hexo搭建Github博客
+                一小段js代码的思考（1）
               
             
           </h1>
@@ -245,8 +224,8 @@ Mac默认安装到/usr/local/bin/n">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-24T17:35:05+08:00" content="2015-12-24">
-              2015-12-24
+            <time itemprop="dateCreated" datetime="2016-04-14T23:55:52+08:00" content="2016-04-14">
+              2016-04-14
             </time>
           </span>
 
@@ -256,8 +235,8 @@ Mac默认安装到/usr/local/bin/n">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/24/Hexo搭建Github博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/24/Hexo搭建Github博客/" itemprop="commentsCount"></span>
+                <a href="/2016/04/14/一小段js代码的思考（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/一小段js代码的思考（1）/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -276,97 +255,19 @@ Mac默认安装到/usr/local/bin/n">
       
 
       
-        <span itemprop="articleBody"><ul>
-<li><p>nodejs环境搭建</p>
-<ul>
-<li><p>官网<a href="http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。" target="_blank" rel="external">http://nodejs.org/download/，根据自己的系统选择合适的版本，点击安装后点next执行到finish。</a></p>
-</li>
-<li><p>windows系统默认安装到C:\Program Files\nodejs\，需要添加环境变量Path里面增加nodejs的安装路径</p>
-</li>
-<li><p>控制台：which node 查找node的安装路径</p>
-</li>
-<li><p>Mac默认安装到/usr/local/bin/node</p>
-<ul>
-<li><p>Mac推荐通过brew安装</p>
-<ul>
-<li><p>terminal中执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>若安装过程中提示安装xcode某个工具，按照提示走就行</p>
-</li>
-<li><p>执行brew doctor查看个模块是否正常</p>
-</li>
-</ul>
-</li>
-<li><p>brew install node,自动安装好node和npm</p>
-</li>
-</ul>
-</li>
-<li><p>node -v 查看node安装版本</p>
-</li>
-<li><p>npm -v  查看npm安装版本</p>
-</li>
-<li><p>淘宝镜像安装</p>
-</li>
-</ul>
-<p>​     低网速下很难通过 npm install fone -g等等来安装npm,解决方法是安装淘            宝镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>从 registry.npm.taobao.org 安装所有模块. 当安装的时候发现安装的模块还没有同步过来, 淘宝 NPM 会自动在后台进行同步, 并且会让你从官方 NPMregistry.npmjs.org 进行安装. 下次你再安装这个模块的时候, 就会直接从 淘宝 NPM 安装了.</p>
-<p>$ cnpm install [name]</p>
-</li>
-<li><p>git环境搭建</p>
-<ul>
-<li>下载地址<a href="http://git-scm.com/download/，点next直到安装完成" target="_blank" rel="external">http://git-scm.com/download/，点next直到安装完成</a></li>
-<li>windows下配置系统变量Path,加入安装目录</li>
-<li>Mac下若已经安装了xcode,则不用另外下载</li>
-<li>git —version  查看git版本</li>
-</ul>
-</li>
-<li><p>安装Hexo</p>
-<ul>
-<li>官网<a href="https://hexo.io" target="_blank" rel="external">https://hexo.io</a></li>
-<li>npm install -g hexo(已经安装淘宝镜像的用cnpm),Mac装全局需要用sudo</li>
-<li>mkdir blog 新建文件夹blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>npm install 安装依赖</li>
-<li>hexo server</li>
-</ul>
-</li>
-</ul>
-<p>​               [info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.</p>
-<p>​               这时候在浏览器中访问上面的网址，就能看到一个默认主题的博客啦</p>
-<ul>
-<li>主题选择<ul>
-<li>自己选择喜欢的，按照文档配置就可以了,<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">https://www.zhihu.com/question/24422335</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>部署到git</p>
-<ul>
-<li><p>在项目配置文件_config.yml中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: http://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type:</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>修改为</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Deployment</span></span><br><span class="line"><span class="meta">## Docs: http:<span class="comment">//hexo.io/docs/deployment.html</span></span></span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repository:</span> git@github.com:yourname/yourname.github.io.git</span><br><span class="line"><span class="symbol">  branch:</span> master</span><br></pre></td></tr></table></figure>
-<p>yourname是你的git账号名字，需要在github网站新建一个yourname.github.io的仓库，则默认为git托管的静态资源站点<br>若提示Deployer not found: git，执行npm install hexo-deployer-git –save</p>
-</li>
-<li><p>发布</p>
-<ul>
-<li>hexo  new “New Post” 创建新post，在source/_posts目录下可以看到新建的markdown文件,或者直接将编辑好的文件放上面的目录下</li>
-<li>hexo generate将markdown文件生成静态网页</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>hexo deploy发布</li>
-<li><p>稍等片刻，访问yourname.github.io就可以看到hexo搭建在github的博客啦～～</p>
-<p>​</p>
-<p>​</p>
-</li>
-</ul>
+        <span itemprop="articleBody"><p>今天随手写了一段代码，被<a href="http://www.w3ctech.com/user/4434" target="_blank" rel="external">@流浪大法师</a>吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。<br>先看下面的糟糕的第一段代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test  = (<span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"inner-arg0="</span>+arg0);</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"return-arg0="</span>+arg0)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>在chrome中的执行结果如下：<br><img src="/img/js1-code1.png" alt="exection code result show one"><br>截图中可以看出，inner部分直接执行了，调用test()的时候return的匿名函数执行了。</p>
+<p>因为之前写别的语言的缘故，习惯在函数的起始位置就传参，由于本段代码是立即执行的，所以第一次传参并没有起作用，后续的函数调用根本就没有调用到。</p>
+<p>再看这里修改了一下的第二段代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test2 = <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"inner-arg0="</span>+arg0);</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"return-arg0="</span>+arg0)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure></p>
+<p>去掉立即执行的括号之后本段代码也立即执行了。这里我犯了一个错误，函数有两种形式，表达式和声明式，函数表达式本身可以立即执行。若要让声明式立即执行，需要加一些小技巧。</p>
+<p><code>最常见的写法</code>：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//这里的代码立即执行</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p><code>奇特的写法</code>：<br>赋值，逻辑，甚至是逗号，各种操作符都可以告诉解析器，这个不是函数声明，它是个函数表达式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"aaa"</span>)&#125;<span class="comment">//可以使用+-~void new delete</span></span><br></pre></td></tr></table></figure></p>
+<p>再看修改的第三段代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test3 = <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"inner-arg0="</span>+arg0);</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">arg1</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"return-arg1="</span>+arg1)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在chrome中的执行结果如下：<br><img src="/img/js1-code2.png" alt="exection code result show two"><br>首次调用函数表达式执行，第二次调用返回的匿名函数执行，根据调用次序的不同，可以在首次调用的时候传参进行初始化。<br>首次调用时，参数在函数作用域中声明，当函数执行完毕之后，被gc掉（属于标记清除）。<br>第二次调用使用的是返回的函数，这里是一个闭包，注意执行的时候要谨慎，不要轻易赋值给全局变量，内存泄漏你们都懂。<br>这种写法在nodejs中非常常见，也有说法是这样写更符合事件触发机制，适用于将函数的执行作为参数传入，表示事件的传入，而事件发生时传参执行。</p>
+<p>还有第四段代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test4 = <span class="function"><span class="keyword">function</span>(<span class="params">arg0,arg1</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> exports = &#123;&#125;;</span><br><span class="line">	exports.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"arg0="</span>+arg0)</span><br><span class="line">	&#125;;</span><br><span class="line">	exports.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"arg1="</span>+arg1)</span><br><span class="line">	&#125;;	</span><br><span class="line">	exports.init();</span><br><span class="line">	<span class="keyword">return</span> exports;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([test4],<span class="function"><span class="keyword">function</span>(<span class="params">test4</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> exports = &#123;&#125;;</span><br><span class="line">	exports.otherFunc()&#123;</span><br><span class="line">		test4(<span class="string">'init'</span>);</span><br><span class="line">		test4.func(<span class="string">'func-arg1'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> exports;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>为了函数解耦，即用commonjs写法，在对象的属性上赋值函数，当需要时执行，这和代码三思想上有一定区别，具体使用还是视情况而定。</p>
+<p><code>PS</code>：<br>貌似有更好的写法，等我花点时间研究一下来填坑。</p>
 </span>
       
     </div>
@@ -375,7 +276,7 @@ Mac默认安装到/usr/local/bin/n">
       
         <div class="post-tags">
           
-            <a href="/tags/环境配置/" rel="tag">#环境配置</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
         </div>
       
@@ -384,17 +285,13 @@ Mac默认安装到/usr/local/bin/n">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/24/nodejs/" rel="next" title="nodejs笔记(1)">
-                <i class="fa fa-chevron-left"></i> nodejs笔记(1)
+              <a href="/2016/04/12/js神奇的写法/" rel="next" title="js神奇的写法">
+                <i class="fa fa-chevron-left"></i> js神奇的写法
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/26/上海实习-1/" rel="prev" title="上海实习(1)--技术篇">
-                上海实习(1)--技术篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,8 +318,8 @@ Mac默认安装到/usr/local/bin/n">
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/24/Hexo搭建Github博客/"
-           data-title="Hexo搭建Github博客" data-url="http://guoningyan.com/2015/12/24/Hexo搭建Github博客/">
+      <div class="ds-thread" data-thread-key="2016/04/14/一小段js代码的思考（1）/"
+           data-title="一小段js代码的思考（1）" data-url="http://guoningyan.com/2016/04/14/一小段js代码的思考（1）/">
       </div>
     
   </div>
