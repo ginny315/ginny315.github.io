@@ -57,10 +57,12 @@
 <meta property="og:url" content="http://guoningyan.com/2016/04/01/angular笔记一/index.html">
 <meta property="og:site_name" content="ginny's blog">
 <meta property="og:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
-<meta property="og:updated_time" content="2016-04-12T10:11:41.000Z">
+<meta property="og:image" content="http://guoningyan.com/img/ng1-error1.png">
+<meta property="og:updated_time" content="2016-04-14T03:16:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular笔记一">
 <meta name="twitter:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
+<meta name="twitter:image" content="http://guoningyan.com/img/ng1-error1.png">
 
 
 
@@ -276,8 +278,10 @@
 <p>指令error:这个错误表示指令编译成标签的时候出现问题，可能的解决方式：</p>
 <ul>
 <li>外层包裹一个div</li>
-<li>指令内有标签未闭合，检查代码  </li>
+<li>指令内有标签未闭合，检查代码 </li>
 </ul>
+<p><code>附录四</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cannot set property &apos;visiblecolumncount&apos; of undefined</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/ng1-error1.png" alt="angular-error"><br> 当时看到这个问题觉得很奇怪，后来发现是接口没有取到数据的问题，检查接口返回。</p>
 <p><code>友情链接</code><br><a href="http://www.zhouxianbao.cn" target="_blank" rel="external">@XB</a>同学改造的<a href="https://www.npmjs.com/package/fone-angular" target="_blank" rel="external">angular项目目录生成</a></p>
 </span>
       
