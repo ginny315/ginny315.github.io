@@ -16,7 +16,7 @@ new Funct">
 <meta property="og:description" content="数组浅复制12newArr = oldArr.concat([]);newArr = oldArr.slice(0);
 Function直接执行1234&apos;alert(&quot;hello&quot;)&apos;.replace(/.+/,eval); &apos;alert(&quot;hello&quot;)&apos;.replace(/.+/,function(m)&amp;#123; 	new Function(m)();  &amp;#125;);
 new Funct">
-<meta property="og:updated_time" content="2016-04-14T14:37:11.000Z">
+<meta property="og:updated_time" content="2016-05-02T14:29:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js神奇的写法">
 <meta name="twitter:description" content="数组浅复制12newArr = oldArr.concat([]);newArr = oldArr.slice(0);
@@ -235,6 +235,7 @@ new Funct">
         <h5 id="u6570_u7EC4_u6D45_u590D_u5236"><a href="#u6570_u7EC4_u6D45_u590D_u5236" class="headerlink" title="数组浅复制"></a>数组浅复制</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">newArr = oldArr.concat([]);</span><br><span class="line">newArr = oldArr.slice(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <h5 id="Function_u76F4_u63A5_u6267_u884C"><a href="#Function_u76F4_u63A5_u6267_u884C" class="headerlink" title="Function直接执行"></a>Function直接执行</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'alert("hello")'</span>.replace(<span class="regexp">/.+/</span>,<span class="built_in">eval</span>); </span><br><span class="line"><span class="string">'alert("hello")'</span>.replace(<span class="regexp">/.+/</span>,<span class="function"><span class="keyword">function</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line"> 	<span class="keyword">new</span> <span class="built_in">Function</span>(m)(); </span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 <p>new Function(arg1,arg2,…argN,’body’)();<br>参数都是字符串类型，字符串里面的内容是js表达式。只有一个参数时，将该字符串里面的内容作为函数体的原生js代码执行，相当于eval;<br>/.+/匹配的是除回车之外的字符;<br>string.replace(regexp,replacement),replacement可以是function，作用于每个匹配到的字符</p>
+<a id="more"></a>
 <h5 id="u62FC_u63A5_u5B57_u7B26_u4E32"><a href="#u62FC_u63A5_u5B57_u7B26_u4E32" class="headerlink" title="拼接字符串"></a>拼接字符串</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>; <span class="built_in">eval</span>(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">101</span>).join(<span class="string">'alert(++i);'</span>));</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>; <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">101</span>).join(<span class="string">'alert(++i);'</span>))();</span><br></pre></td></tr></table></figure>
 <p>通过new Array(n)我们可以创建n个空元素，n个空元素之间存在n-1个空白，通过arr.join()可以在空白中放一些东西组成我们需要的字符串</p>
 <h5 id="u6D4F_u89C8_u5668_u53D8_u6210_u7F16_u8F91_u5668"><a href="#u6D4F_u89C8_u5668_u53D8_u6210_u7F16_u8F91_u5668" class="headerlink" title="浏览器变成编辑器"></a>浏览器变成编辑器</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//浏览器地址栏输入</span></span><br><span class="line">data:text/html,<span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">contenteditable</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
@@ -301,7 +302,7 @@ new Funct">
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
+	var duoshuoQuery = {short_name:"guoningyan"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;

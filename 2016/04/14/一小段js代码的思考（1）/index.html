@@ -14,7 +14,7 @@
 <meta property="og:description" content="今天随手写了一段代码，被@流浪大法师吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。先看下面的糟糕的第一段代码：123456var test  = (function(arg0)&amp;#123;  console.log(&quot;inner-arg0=&quot;+arg0);  return function(arg0)&amp;#123;    console.log(&quot;return-arg0=&quot;+ar">
 <meta property="og:image" content="http://guoningyan.com/img/js1-code1.png">
 <meta property="og:image" content="http://guoningyan.com/img/js1-code2.png">
-<meta property="og:updated_time" content="2016-04-16T16:23:04.000Z">
+<meta property="og:updated_time" content="2016-05-02T14:29:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一小段js代码的思考（1）">
 <meta name="twitter:description" content="今天随手写了一段代码，被@流浪大法师吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。先看下面的糟糕的第一段代码：123456var test  = (function(arg0)&amp;#123;  console.log(&quot;inner-arg0=&quot;+arg0);  return function(arg0)&amp;#123;    console.log(&quot;return-arg0=&quot;+ar">
@@ -231,6 +231,7 @@
       
         <p>今天随手写了一段代码，被<a href="http://www.w3ctech.com/user/4434" target="_blank" rel="external">@流浪大法师</a>吐槽了，于是整理出了关于一个比较友善的写法以及在这段代码中的思考。<br>先看下面的糟糕的<code>第一段代码</code>：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test  = (<span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"inner-arg0="</span>+arg0);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"return-arg0="</span>+arg0)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
 <p>这里我犯了一个错误，我习惯性地将函数最外层用括号包起来使其立即执行，这是声明式的用法，在这里运用错误。函数有两种形式，表达式和声明式，函数表达式本身可以立即执行。</p>
+<a id="more"></a>
 <p><code>第二段代码</code>修改了一下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> test2 = <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"inner-arg0="</span>+arg0);</span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">arg0</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"return-arg0="</span>+arg0)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure></p>
 <p>去掉最外层括号之后本段代码也立即执行了。<br>若要让声明式立即执行，需要加一些小技巧。</p>
 <p><code>最常见的写法</code>：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//这里的代码立即执行</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
@@ -305,7 +306,7 @@
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
+	var duoshuoQuery = {short_name:"guoningyan"};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
