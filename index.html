@@ -43,46 +43,6 @@
 		
 
 		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
 		<div class="switch-area">
 			<div class="switch-wrap">
@@ -111,12 +71,6 @@
 					</nav>
 				</section>
 				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/微信SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
-					</div>
-				</section>
 				
 				
 				
@@ -189,6 +143,67 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-搭一个适合little-project的架构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/搭一个适合little-project的架构/" class="article-date">
+  	<time datetime="2016-06-22T07:56:53.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/搭一个适合little-project的架构/">搭一个适合little project的架构</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章用于叙述这个架构的搭建过程和理由，用法比较简单，用es6进行代码书写（eslint代码检查），用babel编译，webpack打包，加入常用css库文件(eg:normalize.css)、js库文件(eg:fetch.js)，可选择BDD。若比较成功，后期将做成npm包使用。</p>
+<p><code>目录结构设置</code><br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> node_modules</span><br><span class="line"></span>-<span class="ruby"> client - asserts(just <span class="keyword">for</span> images <span class="keyword">or</span> other resource like sounds <span class="keyword">or</span> movs)</span><br><span class="line"></span>         -<span class="ruby"> components </span><br><span class="line"></span>            -<span class="ruby"> page1.js(small pros are just divided into pages,<span class="keyword">or</span> exact divided into slider,title)</span><br><span class="line"></span>            -<span class="ruby"> page1.scss</span><br><span class="line"></span>         -<span class="ruby"> public </span><br><span class="line"></span>            -<span class="ruby"> scss </span><br><span class="line"></span>            -<span class="ruby"> css</span><br><span class="line"></span>              -<span class="ruby"> normalize.css</span><br><span class="line"></span>            -<span class="ruby"> js</span><br><span class="line"></span>              -<span class="ruby"> fetch.js</span><br><span class="line"></span>         -<span class="ruby"> dist(release dictionary)</span><br><span class="line"></span>            -<span class="ruby"> index.html</span><br><span class="line"></span>-<span class="ruby"> package.json</span><br><span class="line"></span>-<span class="ruby"> webpack.config.js</span><br><span class="line"></span>-<span class="ruby"> .gitignore</span><br><span class="line"></span>-<span class="ruby"> .eslintrc</span></span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/22/搭一个适合little-project的架构/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-vue1-0-es6-webpack脚手架搭建" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -736,67 +751,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/12/26/上海实习-1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hexo搭建Github博客" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/24/Hexo搭建Github博客/" class="article-date">
-  	<time datetime="2015-12-24T09:35:05.000Z" itemprop="datePublished">2015-12-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/24/Hexo搭建Github博客/">Hexo搭建Github博客</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近迷上了nodejs,hexo是基于nodejs搭建的博客，自然要玩一下～</p>
-<p>整个安装配置过程大概花了一小时，写下来仅供参考。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/24/Hexo搭建Github博客/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

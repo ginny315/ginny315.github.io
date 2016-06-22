@@ -56,46 +56,6 @@ vue语法不是浏览器原生支持的，所以需要做依赖管理和打包lo
 		
 
 		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
 		<div class="switch-area">
 			<div class="switch-wrap">
@@ -124,12 +84,6 @@ vue语法不是浏览器原生支持的，所以需要做依赖管理和打包lo
 					</nav>
 				</section>
 				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/微信SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
-					</div>
-				</section>
 				
 				
 				
@@ -254,12 +208,12 @@ vue语法不是浏览器原生支持的，所以需要做依赖管理和打包lo
 <p><code>文件分离按需加载</code><br>require.ensure会产生额外的boundle，按具体情况进行配置。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.ensure([<span class="string">"jquery"</span>,<span class="string">"imgScrll"</span>],<span class="function"><span class="keyword">function</span>(<span class="params">require</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> $ = <span class="built_in">require</span>(<span class="string">"jquery"</span>);</span><br><span class="line">  <span class="built_in">require</span>(<span class="string">"imgScroll"</span>);</span><br><span class="line">  $(<span class="string">"#container"</span>).scroll(&#123; </span><br><span class="line">    <span class="comment">//do sth</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p><code>其他命令</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">webpack -p //uglify</span><br><span class="line">webpack -w //watch</span><br></pre></td></tr></table></figure></p>
 <h4 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h4><p>vue-loader是vue作者提供的加载器。<br>teplate-name有多种，这里使用webpack相关标准来定制。<br>init时需要按照要求输入文件相关，官方提供了几个模板，支持ESLint以及Mocha（依赖包略多，有点担心升级麻烦）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-cli</span><br><span class="line">vue init &lt;template-name&gt; &lt;project-name&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h4><p><code>demo01</code>简单形式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">title</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span> <span class="attr">v-attr</span>=<span class="string">"src:url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#demo'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      name: <span class="string">'ginny'</span>,</span><br><span class="line">      url: <span class="string">'http://guoningyan.com/test.png'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h4><p><code>demo01</code>简单形式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">title</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123;name&#125;&#125;"</span> <span class="attr">v-attr</span>=<span class="string">"src:url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#demo'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      name: <span class="string">'ginny'</span>,</span><br><span class="line">      url: <span class="string">'http://guoningyan.com/test.png'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><code>思考</code></p>
 <blockquote>
 <p>“如果想绑定的特性是像 img[src] 这样的不能在 html 中随意初始化的 (可能默认会产生预期外的网络请求)，没关系，有 v-attr=”src: url” 这样的写法，把被绑定的数据里的 url 同步过来。”（引用自勾三股四的blog）<br>之前写过同样是 MVVM 框架的 angular ，数据绑定写法类似，用的是ng-src=””，使用过程中没有发现上面的问题，这点以后研究一下再补上。</p>
 </blockquote>
-<p><code>demo02</code>xx.vue格式<br>这种格式将模板（jade etc..）、样式（css、sass etc..）、脚本（es6 etc..）集合成一整个文件，每个文件是一个组件，预编译文件使用lang说明文件格式。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">other-component</span>&gt;</span><span class="tag">&lt;/<span class="name">other-component</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span><br><span class="line">html&#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> OtherComponent <span class="keyword">from</span> <span class="string">'./components/other-component.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> testDemo = &#123;</span><br><span class="line">  components: &#123; OtherComponent &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'test'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> testDemo;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>demo02</code>xx.vue格式<br>这种格式将模板（jade etc..）、样式（css、sass etc..）、脚本（es6 etc..）集合成一整个文件，每个文件是一个组件，预编译文件使用lang说明文件格式。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">other-component</span>&gt;</span><span class="tag">&lt;/<span class="name">other-component</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-tag">html</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>:red;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> OtherComponent <span class="keyword">from</span> <span class="string">'./components/other-component.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> testDemo = &#123;</span><br><span class="line">  components: &#123; OtherComponent &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'test'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> testDemo;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>使用vue-loader进行预编译打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
 <p><code>目录结构</code><br>以下的写法皆是使用webpack模板后的目录结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- build</span><br><span class="line">- node_moudles</span><br><span class="line">- src</span><br><span class="line">	- assets</span><br><span class="line">	- components (每个组件对应.vue文件 )</span><br><span class="line">	- App.vue (主vue)</span><br><span class="line">	- main.js</span><br><span class="line">- static</span><br><span class="line">- test</span><br><span class="line">- .babelrc //babel配置</span><br><span class="line">- eslintrc //eslint配置，建议使用airborb</span><br><span class="line">- config.js //生产建构路径</span><br><span class="line">- gulpfile.js //gulp监听</span><br><span class="line">- index.html //启动后的首页</span><br><span class="line">- package.json</span><br></pre></td></tr></table></figure></p>
 <p>先将组件写在components中，每个.vue文件对应一个组件，然后通过打包工具集成。gulpfile文件配件见附录勾三股四的博客。</p>
@@ -272,6 +226,15 @@ vue语法不是浏览器原生支持的，所以需要做依赖管理和打包lo
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/06/22/搭一个适合little-project的架构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          搭一个适合little project的架构
+        
+      </div>
+    </a>
   
   
     <a href="/2016/05/01/ES6备忘/" id="article-nav-older" class="article-nav-link-wrap">
