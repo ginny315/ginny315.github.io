@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>搭一个little project脚手架（2）整合测试 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前文叙述了这个项目的搭建过程和理由，本文在这个工程中添加Jasmine+Karma测试，由于更新换代很快，在搭建这个脚手架的过程中走了好多坑，网上的很多解决方式在package更新后都不起作用，本文罗列了我在玩的过程中遇到的4个坑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭一个little project脚手架（2）整合测试">
+<meta property="og:url" content="http://guoningyan.com/2016/06/28/搭一个little-project脚手架（2）整合测试/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="前文叙述了这个项目的搭建过程和理由，本文在这个工程中添加Jasmine+Karma测试，由于更新换代很快，在搭建这个脚手架的过程中走了好多坑，网上的很多解决方式在package更新后都不起作用，本文罗列了我在玩的过程中遇到的4个坑。">
+<meta property="og:image" content="http://guoningyan.com/img/karma-error1.png">
+<meta property="og:image" content="http://guoningyan.com/img/karma-error2.png">
+<meta property="og:image" content="http://guoningyan.com/img/karma-error3.png">
+<meta property="og:updated_time" content="2016-06-29T09:04:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭一个little project脚手架（2）整合测试">
+<meta name="twitter:description" content="前文叙述了这个项目的搭建过程和理由，本文在这个工程中添加Jasmine+Karma测试，由于更新换代很快，在搭建这个脚手架的过程中走了好多坑，网上的很多解决方式在package更新后都不起作用，本文罗列了我在玩的过程中遇到的4个坑。">
+<meta name="twitter:image" content="http://guoningyan.com/img/karma-error1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-搭一个little-project脚手架（2）整合测试" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/28/搭一个little-project脚手架（2）整合测试/" class="article-date">
+  	<time datetime="2016-06-28T15:04:20.000Z" itemprop="datePublished">2016-06-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      搭一个little project脚手架（2）整合测试
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/">test</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前文叙述了这个项目的搭建过程和理由，本文在这个工程中添加Jasmine+Karma测试，由于更新换代很快，在搭建这个脚手架的过程中走了好多坑，网上的很多解决方式在package更新后都不起作用，本文罗列了我在玩的过程中遇到的4个坑。</p>
+<a id="more"></a>
+<p><code>Jasmine+Karma</code><br>Jasmine是BDD(行为驱动开发)框架，Karma是基于其的一个测试库。<br>Karma安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install karma -g</span><br></pre></td></tr></table></figure></p>
+<p>Karma+Jasmine配置，根据提示完成配置项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">karma init</span><br></pre></td></tr></table></figure></p>
+<p>创建测试文件（符合jasmineAPI的测试脚本）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">decsribe(&quot;A suite of basic function&quot;,function() &#123;</span><br><span class="line">  it(&quot;finish some function&quot;,function()&#123;</span><br><span class="line">    except(&quot;result&quot;).toEqual(FuncName(&quot;params&quot;))</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件karma.conf.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">browsers: [<span class="string">'Chrome'</span>, <span class="string">'Firefox'</span>],</span><br><span class="line">plugins: [</span><br><span class="line">      <span class="string">'karma-jasmine'</span>,</span><br><span class="line">      <span class="string">'karma-chrome-launcher'</span>,</span><br><span class="line">      <span class="string">'karma-firefox-launcher'</span></span><br><span class="line">      ]</span><br></pre></td></tr></table></figure></p>
+<h4 id="shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF081_uFF09"><a href="#shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF081_uFF09" class="headerlink" title="shell很大可能报错（1）"></a>shell很大可能报错（1）</h4><p><img src="/img/karma-error1.png" alt="karma start报错"><br>我已经在项目目录下运行了<code>npm install karma-chrome-launcher --save-dev</code> ，检查node_modules中也有了，还是显示上图错误。查阅了各种资源后，得出结论是因为我同时在全局和文件目录中安装了karma，默认启动了全局环境的karma，必须先卸载全局环境的karma，然后才能在文件目录中找到启动浏览器的插件。</p>
+<h4 id="shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF082_uFF09"><a href="#shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF082_uFF09" class="headerlink" title="shell很大可能报错（2）"></a>shell很大可能报错（2）</h4><p>运行<code>karma start karma.conf.js</code>没有找到文件，原因是根目录下没有找到启动文件。解决方法是在<code>package.json</code>中的script中添加<code>&quot;test&quot;: &quot;node_modules/karma/bin/karma start karma.conf.js&quot;</code>，运行<code>npm run test</code>就可以进行测试了。</p>
+<h4 id="shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF083_uFF09"><a href="#shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF083_uFF09" class="headerlink" title="shell很大可能报错（3）"></a>shell很大可能报错（3）</h4><p><img src="/img/karma-error2.png" alt="karma start报错"><br>这是因为karma直接打开了浏览器进行测试，目前浏览器对es6语法不是特别支持，特别是import关键字不支持，在文章（1） 中介绍了本项目使用了es6＋webpack构建，webpack完成了babel和解决了依赖问题，但是我们需要测试的是自己写的代码而不是打包后的代码，所以需要寻找新的办法。<br>我第一个项目是用babel，但是出现了上图的问题，原因是babel解决了es6编译的问题，但是处理不了依赖关系，所以需要新的方式进行操作。</p>
+<h4 id="shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF084_uFF09"><a href="#shell_u5F88_u5927_u53EF_u80FD_u62A5_u9519_uFF084_uFF09" class="headerlink" title="shell很大可能报错（4）"></a>shell很大可能报错（4）</h4><p><img src="/img/karma-error3.png" alt="karma start报错"><br> 出现上图错误基本是因为文件目录没有找到，需要在根目录下启动karma命令。</p>
+<p>最后的配置文件karma.conf.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">preprocessors: &#123;</span><br><span class="line"> <span class="string">'../../*.js'</span>: [<span class="string">'webpack'</span>, <span class="string">'babel'</span>]</span><br><span class="line">&#125;,</span><br><span class="line">webpack: &#123;</span><br><span class="line">&#125;,</span><br><span class="line">webpackMiddleware: &#123;</span><br><span class="line">   noInfo: <span class="literal">true</span></span><br><span class="line">&#125;,</span><br><span class="line">babelPreprocessor: &#123;</span><br><span class="line"> options: &#123;</span><br><span class="line">   presets: [<span class="string">'es2015'</span>],</span><br><span class="line">   sourceMap: <span class="string">'inline'</span></span><br><span class="line"> &#125;,</span><br><span class="line"> filename: <span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> file.originalPath.replace(<span class="regexp">/\.js$/</span>, <span class="string">'.es5.js'</span>);</span><br><span class="line"> &#125;,</span><br><span class="line"> sourceFileName: <span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> file.originalPath;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br><span class="line">browsers: [<span class="string">'Chrome'</span>, <span class="string">'Firefox'</span>],</span><br><span class="line">plugins: [</span><br><span class="line">      <span class="string">'karma-jasmine'</span>,</span><br><span class="line">      <span class="string">'karma-webpack'</span>,</span><br><span class="line">      <span class="string">'karma-chrome-launcher'</span>,</span><br><span class="line">      <span class="string">'karma-firefox-launcher'</span>,</span><br><span class="line">      <span class="string">'karma-babel-preprocessor'</span></span><br><span class="line">      ]</span><br></pre></td></tr></table></figure></p>
+<p><code>附录</code><br><a href="http://blog.fens.me/nodejs-karma-jasmine/" target="_blank" rel="external">Karma和Jasmine自动化单元测试</a><br><a href="https://karma-runner.github.io/latest/intro/configuration.html" target="_blank" rel="external">karma文档</a><br><a href="https://github.com/babel/karma-babel-preprocessor" target="_blank" rel="external">karma-babel-preprocessor</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/22/搭一个little-project脚手架（1）webpack+es6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭一个little-project脚手架（1）webpack+es6</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="搭一个little-project脚手架（2）整合测试" data-title="搭一个little project脚手架（2）整合测试" data-url="http://guoningyan.com/2016/06/28/搭一个little-project脚手架（2）整合测试/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

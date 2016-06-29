@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>搭一个little-project脚手架（1）webpack+es6 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这篇文章用于叙述这个项目的搭建过程和理由，用法比较简单，用es6进行代码书写（eslint代码检查），用babel编译，webpack打包，加入常用css库文件(eg:normalize.css)、js库文件(eg:fetch.js)，可选择BDD。若比较成功，后期将做成npm包使用。
+目录结构设置1234567891011121314151617- node_modules- client -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭一个little-project脚手架（1）webpack+es6">
+<meta property="og:url" content="http://guoningyan.com/2016/06/22/搭一个little-project脚手架（1）webpack+es6/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="这篇文章用于叙述这个项目的搭建过程和理由，用法比较简单，用es6进行代码书写（eslint代码检查），用babel编译，webpack打包，加入常用css库文件(eg:normalize.css)、js库文件(eg:fetch.js)，可选择BDD。若比较成功，后期将做成npm包使用。
+目录结构设置1234567891011121314151617- node_modules- client -">
+<meta property="og:updated_time" content="2016-06-29T08:55:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭一个little-project脚手架（1）webpack+es6">
+<meta name="twitter:description" content="这篇文章用于叙述这个项目的搭建过程和理由，用法比较简单，用es6进行代码书写（eslint代码检查），用babel编译，webpack打包，加入常用css库文件(eg:normalize.css)、js库文件(eg:fetch.js)，可选择BDD。若比较成功，后期将做成npm包使用。
+目录结构设置1234567891011121314151617- node_modules- client -">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-搭一个little-project脚手架（1）webpack+es6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/搭一个little-project脚手架（1）webpack+es6/" class="article-date">
+  	<time datetime="2016-06-22T07:56:53.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      搭一个little-project脚手架（1）webpack+es6
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章用于叙述这个项目的搭建过程和理由，用法比较简单，用es6进行代码书写（eslint代码检查），用babel编译，webpack打包，加入常用css库文件(eg:normalize.css)、js库文件(eg:fetch.js)，可选择BDD。若比较成功，后期将做成npm包使用。</p>
+<p><code>目录结构设置</code><br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> node_modules</span><br><span class="line"></span>-<span class="ruby"> client - asserts(just <span class="keyword">for</span> images <span class="keyword">or</span> other resource like sounds <span class="keyword">or</span> movs)</span><br><span class="line"></span>         -<span class="ruby"> components </span><br><span class="line"></span>            -<span class="ruby"> page1.js(small pros are just divided into pages,<span class="keyword">or</span> exact divided into slider,title)</span><br><span class="line"></span>            -<span class="ruby"> page1.scss</span><br><span class="line"></span>         -<span class="ruby"> public </span><br><span class="line"></span>            -<span class="ruby"> scss </span><br><span class="line"></span>            -<span class="ruby"> css</span><br><span class="line"></span>              -<span class="ruby"> normalize.css</span><br><span class="line"></span>            -<span class="ruby"> js</span><br><span class="line"></span>              -<span class="ruby"> fetch.js</span><br><span class="line"></span>         -<span class="ruby"> dist(release dictionary)</span><br><span class="line"></span>            -<span class="ruby"> index.html</span><br><span class="line"></span>-<span class="ruby"> package.json</span><br><span class="line"></span>-<span class="ruby"> webpack.config.js</span><br><span class="line"></span>-<span class="ruby"> .gitignore</span><br><span class="line"></span>-<span class="ruby"> .eslintrc</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><code>webpack</code><br>具体优势可以参考：<a href="http://zhaoda.net/webpack-handbook/what-is-webpack.html" target="_blank" rel="external">webpack优势</a>，在本项目中主要是作为模块打包工具使用，通过自定义的方式将依赖树拆分成按需加载的块。<br>在项目根目录中使用<code>webpack.config.js</code>设置打包的文件目录，<code>dist</code>是最后需要提交的文件夹，所以将打包好的js文件命名为bundle.js保存到dist目录下，在index.html中引入。<br>index.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">webpack -w //启用监听模式，没有变化的模块编译后返回到内存中</span><br><span class="line">webpack-dev-server  //默认启动在localhost:8080的服务</span><br></pre></td></tr></table></figure>
+<p><code>fetch.js</code><br>目前引用了fetch.js来实现ajax请求，FetchAPI也可以使用，以后确定浏览器支持性可以完全替换。</p>
+<p><code>附录</code><br><a href="https://github.com/ginny315/es6-proConstructor" target="_blank" rel="external">本项目git地址</a><br><a href="http://www.cnblogs.com/qianlegeqian/p/4728170.html" target="_blank" rel="external">配置eslint中文备注</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/28/搭一个little-project脚手架（2）整合测试/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          搭一个little project脚手架（2）整合测试
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/02/vue1-0-es6-webpack脚手架搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue1.0+es6+webpack脚手架搭建</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="搭一个little-project脚手架（1）webpack+es6" data-title="搭一个little-project脚手架（1）webpack+es6" data-url="http://guoningyan.com/2016/06/22/搭一个little-project脚手架（1）webpack+es6/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
