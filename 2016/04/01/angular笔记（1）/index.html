@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>angular笔记（1） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular笔记（1）">
+<meta property="og:url" content="http://guoningyan.com/2016/04/01/angular笔记（1）/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
+<meta property="og:image" content="http://guoningyan.com/img/ng1-error1.png">
+<meta property="og:updated_time" content="2016-07-28T06:22:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular笔记（1）">
+<meta name="twitter:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。12345678910111213141516171819202122232425262728293031-app	-css //预处理器编译后的css文件	-data //模拟数据	-js		-app.js(项目主入口)		-common.js(路由、过滤)		-main.js(依赖关系，js入口文件)		-routes.js(状">
+<meta name="twitter:image" content="http://guoningyan.com/img/ng1-error1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-angular笔记（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/angular笔记（1）/" class="article-date">
+  	<time datetime="2016-04-01T11:57:44.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular笔记（1）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 这两周我参与了一个angular项目的迭代，说一下我的使用心得。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-app</span><br><span class="line"></span><br><span class="line">	-css //预处理器编译后的css文件</span><br><span class="line"></span><br><span class="line">	-data //模拟数据</span><br><span class="line"></span><br><span class="line">	-js</span><br><span class="line"></span><br><span class="line">		-app.js(项目主入口)</span><br><span class="line"></span><br><span class="line">		-common.js(路由、过滤)</span><br><span class="line"></span><br><span class="line">		-main.js(依赖关系，js入口文件)</span><br><span class="line"></span><br><span class="line">		-routes.js(状态切换)</span><br><span class="line"></span><br><span class="line">	-less</span><br><span class="line"></span><br><span class="line">		-lib(reset之类)</span><br><span class="line"></span><br><span class="line">		-index.less</span><br><span class="line"></span><br><span class="line">	-lib(js库文件包，在main.js中引入)</span><br><span class="line"></span><br><span class="line">	-modules</span><br><span class="line"></span><br><span class="line">		-子模块中html、js文件写在一起</span><br><span class="line"></span><br><span class="line">	-host.js(开发测试生产环境对应路由，当有新的URL时，需要对应三个环境)</span><br><span class="line"></span><br><span class="line">	-index.html(默认首页)</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><code>下拉列表选项</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">name</span>=<span class="string">"必填，用于表单校验"</span></span><br><span class="line">    <span class="attr">ng-model</span>=<span class="string">""</span></span><br><span class="line">    <span class="attr">ng-options</span>=<span class="string">"item.id as item.name for item in List"</span></span><br><span class="line">    <span class="attr">ng-init</span>=<span class="string">"设置初始值，慎用，尽量在js中设置"</span></span><br><span class="line">    <span class="attr">ng-change</span>=<span class="string">"func()"</span></span><br><span class="line">    <span class="attr">ng-disabled</span>=<span class="string">"满足条件时不可用"</span></span><br><span class="line">    <span class="attr">required</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>注意</code></p>
+<p>ng-options :key as value，这样在<code>&lt;option value=&quot;value&quot;&gt;</code>中保存的是value，显示的是key .         </p>
+<p>ng-change挂载在$scope.func ＝ function()上      </p>
+<p><code>输入框选项</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">""</span></span><br><span class="line">    <span class="attr">name</span>=<span class="string">"inputName"</span></span><br><span class="line">    <span class="attr">ng-model</span>=<span class="string">""</span></span><br><span class="line">    <span class="attr">ng-pattern</span>=<span class="string">"/此处需要正则表达式，用于检验表单的填写/"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">"formName.inputName.$dirty &amp;&amp; formName.inputName.$invalid"</span>&gt;</span></span><br><span class="line">  当表单检验不通过时显示提示语，dirty表示表单获得焦点，即表单初始化时提示语不现实，invalid表示满足表单非法状态下显示提示语<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>表格</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">ng-table</span>=<span class="string">"tableParams"</span> <span class="attr">class</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"item in $data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>  <span class="attr">class</span>=<span class="string">""</span>  <span class="attr">data-header</span>=<span class="string">"'checkBoxHeader.html'"</span> &gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">ng-model</span>=<span class="string">"checkBoxes.items[item.id]"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-title</span>=<span class="string">"'任务一级分类'"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>  <span class="attr">class</span>=<span class="string">"text-center"</span> <span class="attr">bo-bind</span>=<span class="string">"item.firstCategoryName  | demoLimit:15"</span> <span class="attr">uib-tooltip</span>=<span class="string">"&#123;&#123;item.firstCategoryName&#125;&#125;"</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">checkBox</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$scope.checkBoxes = &#123; <span class="string">'checked'</span>: <span class="literal">false</span>, items: &#123;&#125; &#125;;</span><br><span class="line">	$scope.$watch(<span class="string">'checkBoxes.checked'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line"> 	angular.forEach(list, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (angular.isDefined(item.id)) &#123;</span><br><span class="line"> 			$scope.checkBoxes.items[item.id] = value;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTableParams</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     $scope.tableParams = <span class="keyword">new</span> NgTableParams(&#123;</span><br><span class="line">           count: PAGESIZE</span><br><span class="line">     &#125;, &#123;</span><br><span class="line">       getData: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">         <span class="keyword">var</span> pageIndex = params.page();</span><br><span class="line">         <span class="keyword">return</span> httpData.getThemeList(&#123;</span><br><span class="line">           pageIndex: pageIndex,</span><br><span class="line">           pageSize: PAGESIZE,</span><br><span class="line">         &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">           params.total(response.totalNum);</span><br><span class="line">           $scope.tableCount = response.totalNum;</span><br><span class="line">           list = response.list;</span><br><span class="line">           checkBox();</span><br><span class="line">           <span class="keyword">return</span> response.list;</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>字符长度过滤</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.filter(<span class="string">"demoLimit"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">string,num</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(string &amp;&amp; string.length &gt; num)&#123;</span><br><span class="line">           <span class="keyword">return</span> string.slice(<span class="number">0</span>,num) + <span class="string">"..."</span> ;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> string;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>注意</code></p>
+<p>NgTableParams插件获取表单新数据，存入$data中在页面中使用，bindonce插件表示数据同步一次，bo前缀有自己的html语法，区别ng前缀，在加载图片是bo可能会有问题。</p>
+<p><code>数据实时校验</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>数据one<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">name</span>=<span class="string">"entryFee"</span> <span class="attr">ng-model</span>=<span class="string">"Item.dataone"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">divng-show="dataoneError==0"</span> &gt;</span>数据1不能超过数据2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>数据two<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"challengeReward"</span> <span class="attr">ng-model</span>=<span class="string">"Item.datatwo"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text-danger"</span> <span class="attr">ng-show</span>=<span class="string">"dataoneError==0"</span>&gt;</span>数据1不能超过数据2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$scope.$watch(<span class="string">'Item.dataone'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(+$scope.dataone &lt; +$scope.datatwo)</span><br><span class="line">        $scope.dataoneError = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        $scope.dataoneError = <span class="number">1</span>;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line">$scope.$watch(<span class="string">'Item.datatwo'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(+$scope.dataone &lt; +$scope.datatwo)</span><br><span class="line">        $scope.dataoneError = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">        $scope.dataoneError = <span class="number">1</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>注意</code></p>
+<p>我写了两个<code>watch</code>来同步监视数据变化，若只有一个<code>watch</code>，则可能导致两个数据之一改变另一数据不能检测到，页面中<code>watch</code>过多可能有性能问题，建议有更好的解决方案。</p>
+<p><code>项目启动</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//app目录下</span><br><span class="line">fone s</span><br></pre></td></tr></table></figure></p>
+<p><code>项目打包</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//index.html打tag</span><br><span class="line">//app目录下</span><br><span class="line">fis3 release -d ../dist</span><br><span class="line">//root目录下</span><br><span class="line">git add/commit/push</span><br></pre></td></tr></table></figure></p>
+<p><code>附录一</code></p>
+<p>当页面中出现除了提交表单以外的按钮时，当在input输入框填写文字时键盘触发回车，会导致距离输入框最近的按钮触发，解决方式如下：添加不可用的按钮，则回车触发不可用按钮，完美解决。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">ng-click</span>=<span class="string">"doChooseAdvice()"</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">"true"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>附录二</code><br>需要掌握的资料<br><a href="http://showcase.ngnice.com/#/home/home" target="_blank" rel="external">angular&amp;bootstrap插件合集</a><br><a href="http://angular-ui.github.io/bootstrap/#/datepicker" target="_blank" rel="external">angular&amp;bootstrap插件</a><br><a href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html" target="_blank" rel="external">angular常用插件与指令收集</a><br><a href="https://github.com/angular-ui" target="_blank" rel="external">angularui</a><br><a href="http://www.cnblogs.com/yjf512/p/3796229.html" target="_blank" rel="external">javascript时间戳和日期字符串相互转换</a>  </p>
+<p><code>附录三</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: [$compile:tplrt] Template for directive &apos;AAA&apos; must have exactly one root element.</span><br></pre></td></tr></table></figure></p>
+<p>指令error:这个错误表示指令编译成标签的时候出现问题，可能的解决方式：</p>
+<ul>
+<li>外层包裹一个div</li>
+<li>指令内有标签未闭合，检查代码 </li>
+</ul>
+<p><code>附录四</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cannot set property &apos;visiblecolumncount&apos; of undefined</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/ng1-error1.png" alt="angular-error"><br> 当时看到这个问题觉得很奇怪，后来发现是接口没有取到数据的问题，检查接口返回。</p>
+<p><code>友情链接</code><br><a href="http://www.zhouxianbao.cn" target="_blank" rel="external">@XB</a>同学改造的<a href="https://www.npmjs.com/package/fone-angular" target="_blank" rel="external">angular项目目录生成</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/10/微信SDK开发/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          微信SDK开发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/26/ife-task1-9-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ife task1.9</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="angular笔记（1）" data-title="angular笔记（1）" data-url="http://guoningyan.com/2016/04/01/angular笔记（1）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>开发了一个chrome外卖插件（1） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发了一个chrome外卖插件（1）">
+<meta property="og:url" content="http://guoningyan.com/2016/07/27/开发了一个chrome外卖插件（1）/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！">
+<meta property="og:image" content="http://guoningyan.com/img/chrome1-1.png">
+<meta property="og:updated_time" content="2016-07-28T06:22:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开发了一个chrome外卖插件（1）">
+<meta name="twitter:description" content="今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！">
+<meta name="twitter:image" content="http://guoningyan.com/img/chrome1-1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-开发了一个chrome外卖插件（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/27/开发了一个chrome外卖插件（1）/" class="article-date">
+  	<time datetime="2016-07-27T07:42:33.000Z" itemprop="datePublished">2016-07-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      开发了一个chrome外卖插件（1）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！<br>团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！<br><img src="/img/chrome1-1.png" alt="这里是配图"><br><a id="more"></a><br><code>这是插件root文件夹</code><br>需要包含manifest.json、icon.png(大小一般为19px * 19px)、index.html（设置的弹出页面）<br><code>manifest.json</code><br>manifest在英语里是清单的意思，顾名思义，这个文件是整个插件的描述文件，开发插件就得说明这个插件叫什么，可以用来干什么，以及自己设计的功能etc…<br><code>brower_action</code>是当鼠标悬浮或点击图标是的下拉列表，<code>page_action</code>是点击图标之后的弹出的页面，官方文档表示两者只能选其中一个或者都不选。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"manifest_version"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"takewayfood"</span>,</span><br><span class="line">    <span class="attr">"version"</span>:<span class="string">"0.1"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">"takeway food for my friends"</span>,</span><br><span class="line">    <span class="attr">"page_action"</span>:&#123;</span><br><span class="line">        <span class="attr">"default_icon"</span>:<span class="string">"eat.png"</span>,</span><br><span class="line">        <span class="attr">"default_popup"</span>:<span class="string">"index.html"</span>,</span><br><span class="line">        <span class="attr">"default_title"</span>:<span class="string">"Yummy!"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"manifest_version"</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"takewayfood"</span>,</span><br><span class="line">    <span class="attr">"version"</span>:<span class="string">"0.1"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">"takeway food for my friends"</span>,</span><br><span class="line">    <span class="attr">"browser_action"</span>:&#123;</span><br><span class="line">        <span class="attr">"default_icon"</span>:<span class="string">"eat.png"</span>,</span><br><span class="line">        <span class="attr">"default_title"</span>:<span class="string">"Yummy!"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>安装</code><br>点击chrome浏览器右上角的“三”图标，进入设置，点击“扩展程序”，勾选“开发者模式”，点击“打包扩展程序”，选择插件所在目录，第一次上传时不需要选择“私有密钥文件”。<br>然后打开目录，发现多了两个文件，后缀名分别为crx和pem，pem即上面说到的“私有密钥文件”，当插件做了修改需要再次上传时，就需要选择这个pem文件作为“私有密钥文件”了。将crx文件拖入chrome浏览器中，即可完成插件安装。</p>
+<p><code>顺便当个开发者吧</code><br>昨晚写的代码，居然今天就被chrome禁用了，所以决定申请一个chrome开发者账号。成为开发者需要一次性支付5美元，而在地区选择中是没有中国这个选项的（很墙大），所以我选择了香港这个选项，支付也需要符合地区的账户，查找之后发现可以在全球付（附录中有链接）开一个账户，但是需要支付100RMB，支付后剩余的钱可以提取到银行卡账户，还是很方便的。</p>
+<p> <code>附录</code><br> <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">chrome插件官方文档</a><br> <a href="https://www.globalcash.hk" target="_blank" rel="external">全球付</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/25/angular笔记（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">angular笔记（2）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="开发了一个chrome外卖插件（1）" data-title="开发了一个chrome外卖插件（1）" data-url="http://guoningyan.com/2016/07/27/开发了一个chrome外卖插件（1）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
