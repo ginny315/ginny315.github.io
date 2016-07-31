@@ -144,6 +144,79 @@
 
       <div class="body-wrap">
   
+    <article id="post-移动端开发总结（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/31/移动端开发总结（1）/" class="article-date">
+  	<time datetime="2016-07-31T09:54:45.000Z" itemprop="datePublished">2016-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/31/移动端开发总结（1）/">移动端开发总结（1）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="u4E0D_u540C_u5C4F_u5E55_u7684_u9002_u914D_u65B9_u6CD5"><a href="#u4E0D_u540C_u5C4F_u5E55_u7684_u9002_u914D_u65B9_u6CD5" class="headerlink" title="不同屏幕的适配方法"></a>不同屏幕的适配方法</h4><h5 id="u5E38_u7528_u5355_u4F4D"><a href="#u5E38_u7528_u5355_u4F4D" class="headerlink" title="常用单位"></a>常用单位</h5><p><code>rem</code></p>
+<blockquote>
+<p>[MDN]This unit represents the font-size of the root element.<br>这个单位代表了根元素的字体大小。<br>如果在document里面有html元素，即为根元素，通过在html上设置font-size，则可以使用rem来表示字体大小或者用来定义元素的高度、宽度等等。</p>
+</blockquote>
+<p>下面是一段我写的简易媒体查询的代码，即通过css来实现自适应，font-size的取值最好为偶数，避免发生字体渲染问题。这里选用<code>10px</code>作为基础值是因为设计师以iphone6作为设计图标准，设计稿上宽度<code>750px</code>，iphone6实际宽度<code>375px</code>，这样手动rem换算只要<code>设计稿px/10/2</code>，很容易进行布局计算，其余的自适应完全交给浏览器去实现。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">361px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">10px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">12px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">500px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> (-webkit-min-device-pixel-ratio:X)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的写法比较适合普遍性的适应，不能保证所有机器得到最精准的适配，而且当遇到对像素要求很高的设计师抠细节的时候，总不能给每个手机都做<code>media quary</code>吧，于是下面给出一段js实现的，通过获取屏幕实际可用区域控制<code>root</code>元素<code>font-size</code>大小的代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 	<span class="keyword">var</span> width = <span class="built_in">window</span>.screen.width;</span><br><span class="line"> 	<span class="keyword">var</span> rate = width/<span class="number">375</span>;</span><br><span class="line"> 	<span class="keyword">var</span> newFontSize = <span class="string">'font-size:'</span> + rate*<span class="number">10</span> + <span class="string">'px'</span>;</span><br><span class="line"> 	<span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>).style = newFontSize;</span><br><span class="line"> &#125;());</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">'text'</span>).innerHTML = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>).style;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>你也可以<a href="http://guoningyan.com/demo/testrem.html">点击这里</a>，查看我的在线demo。</p>
+<p><code>em</code></p>
+<blockquote>
+<p>[MDN]This unit represents the calculated font-size of the element. If used on the font-size property itself, it represents the inherited font-size of the element.<br>从元素进行font-size属性的继承，即获取父元素的字体大小进行设置。<br>通过在父元素上设置font-size，则可以使用em来表示字体大小或者用来定义子元素的高度、宽度等等。</p>
+</blockquote>
+<p><code>vw、vh</code></p>
+<blockquote>
+<p>[MDN]vw:1/100th of the height of the viewport.<br>[MDN]vh:1/100th of the width of the viewport.<br>[MDN]vmin:1/100th of the minimum value between the height and the width of the viewport.<br>[MDN]vmax:1/100th of the maximum value between the height and the width of the viewport.<br>vw、vh相对于屏幕的百分比，1vw是屏幕宽度的1%，1vh是屏幕高度的1%，由于屏幕是固定的，所以设置的百分比也是固定的。<br>要注意的是，如果带有弹出式键盘，则vh会自动改变，所以在需要调用设备原生键盘的时候，尽量不要使用vh</p>
+</blockquote>
+<h5 id="u6539_u53D8viewport"><a href="#u6539_u53D8viewport" class="headerlink" title="改变viewport"></a>改变viewport</h5><p>和用js改变html的font-size类似，也可以通过js来改变meta标签。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> width = <span class="built_in">window</span>.screen.width/<span class="number">320</span>;</span><br><span class="line"><span class="keyword">var</span> rate = width/<span class="number">375</span>,</span><br><span class="line"> viewport = <span class="built_in">document</span>.querySelector(<span class="string">'meta[name=viewport]'</span>);</span><br><span class="line"></span><br><span class="line">viewport.setAttribute(<span class="string">'content'</span>,</span><br><span class="line">viewport.getAttribute(<span class="string">'content'</span>)</span><br><span class="line">.replace(<span class="regexp">/(initial-scale)=[d.]?d/</span>,<span class="string">'$1='</span>+rate))</span><br></pre></td></tr></table></figure></p>
+<p><code>附录一</code>js常用获取屏幕信息<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">网页可见区域宽：<span class="built_in">document</span>.body.clientWidth</span><br><span class="line">网页可见区域高：<span class="built_in">document</span>.body.clientHeight</span><br><span class="line">网页可见区域高：<span class="built_in">document</span>.body.offsetWidth（包括边线的宽）</span><br><span class="line">网页可见区域宽：<span class="built_in">document</span>.body.offsetHeight（包括边线的高）</span><br><span class="line">网页正文全文宽：<span class="built_in">document</span>.body.scrollWidth</span><br><span class="line">网页正文全文高：<span class="built_in">document</span>.body.srcollHeight</span><br><span class="line">网页被卷去的高：<span class="built_in">document</span>.body.scrollTop</span><br><span class="line">网页被卷去的左：<span class="built_in">document</span>.body.scrollLeft</span><br><span class="line">网页正文部分上：<span class="built_in">window</span>.screenTop</span><br><span class="line">网页正文部分左：<span class="built_in">window</span>.screenLeft</span><br><span class="line">屏幕分辨率的高：<span class="built_in">window</span>.screen.height</span><br><span class="line">屏幕分辨率的宽：<span class="built_in">window</span>.screen.width</span><br><span class="line">屏幕可用工作区高度：<span class="built_in">window</span>.screen.availHeight</span><br><span class="line">屏幕可用工作区宽度：<span class="built_in">window</span>.srceen.availWidth</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-开发了一个chrome外卖插件（1）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -684,66 +757,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/04/10/微信SDK开发/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-angular笔记（1）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/01/angular笔记（1）/" class="article-date">
-  	<time datetime="2016-04-01T11:57:44.000Z" itemprop="datePublished">2016-04-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/01/angular笔记（1）/">angular笔记（1）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 这两周我参与了一个angular项目的迭代，说一下我的使用心得。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-app</span><br><span class="line"></span><br><span class="line">	-css //预处理器编译后的css文件</span><br><span class="line"></span><br><span class="line">	-data //模拟数据</span><br><span class="line"></span><br><span class="line">	-js</span><br><span class="line"></span><br><span class="line">		-app.js(项目主入口)</span><br><span class="line"></span><br><span class="line">		-common.js(路由、过滤)</span><br><span class="line"></span><br><span class="line">		-main.js(依赖关系，js入口文件)</span><br><span class="line"></span><br><span class="line">		-routes.js(状态切换)</span><br><span class="line"></span><br><span class="line">	-less</span><br><span class="line"></span><br><span class="line">		-lib(reset之类)</span><br><span class="line"></span><br><span class="line">		-index.less</span><br><span class="line"></span><br><span class="line">	-lib(js库文件包，在main.js中引入)</span><br><span class="line"></span><br><span class="line">	-modules</span><br><span class="line"></span><br><span class="line">		-子模块中html、js文件写在一起</span><br><span class="line"></span><br><span class="line">	-host.js(开发测试生产环境对应路由，当有新的URL时，需要对应三个环境)</span><br><span class="line"></span><br><span class="line">	-index.html(默认首页)</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/01/angular笔记（1）/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
