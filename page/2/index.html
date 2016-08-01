@@ -144,6 +144,68 @@
 
       <div class="body-wrap">
   
+    <article id="post-微信SDK开发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/10/微信SDK开发/" class="article-date">
+  	<time datetime="2016-04-09T22:35:51.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/10/微信SDK开发/">微信SDK开发</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇是3月做的基于微信公众号开发的总结。<br>有微信SDK的讲解以及我所走过的坑。还有调试实践和比较好的书写方法。</p>
+</blockquote>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信SDK/">微信SDK</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/10/微信SDK开发/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-angular笔记（1）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -170,7 +232,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> 这两周我参与了一个angular项目的迭代，说一下我的使用心得。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-app</span><br><span class="line"></span><br><span class="line">	-css //预处理器编译后的css文件</span><br><span class="line"></span><br><span class="line">	-data //模拟数据</span><br><span class="line"></span><br><span class="line">	-js</span><br><span class="line"></span><br><span class="line">		-app.js(项目主入口)</span><br><span class="line"></span><br><span class="line">		-common.js(路由、过滤)</span><br><span class="line"></span><br><span class="line">		-main.js(依赖关系，js入口文件)</span><br><span class="line"></span><br><span class="line">		-routes.js(状态切换)</span><br><span class="line"></span><br><span class="line">	-less</span><br><span class="line"></span><br><span class="line">		-lib(reset之类)</span><br><span class="line"></span><br><span class="line">		-index.less</span><br><span class="line"></span><br><span class="line">	-lib(js库文件包，在main.js中引入)</span><br><span class="line"></span><br><span class="line">	-modules</span><br><span class="line"></span><br><span class="line">		-子模块中html、js文件写在一起</span><br><span class="line"></span><br><span class="line">	-host.js(开发测试生产环境对应路由，当有新的URL时，需要对应三个环境)</span><br><span class="line"></span><br><span class="line">	-index.html(默认首页)</span><br></pre></td></tr></table></figure></p>
+        <blockquote>
+<p>这两周我参与了一个angular项目的迭代，说一下我的使用心得。<br>架构是大师姐搭建的，比较符合范式要求，讲一下我作为一个angular初学者、公司内部平台维护者的一些学习以及实践经验。</p>
+</blockquote>
       
     </div>
     
@@ -231,10 +295,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><code>任务目的:</code>     </p>
+<blockquote>
 <p>通过实现一个较为复杂的页面，加深对于HTML，CSS的实战能力。       </p>
-<p>实践代码的复用、优化     </p>
-<p><code>任务链接</code><a href="http://http://ife.baidu.com/task/detail?taskId=9">ife_task1_9</a></p>
-<p><img src="/img/task_1_9_2.jpg" alt="task1-9插图"></p>
+<p>实践代码的复用、优化    </p>
+</blockquote>
       
     </div>
     
@@ -294,9 +358,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这几日在学校生产实训，写基于<code>struts2</code>的web站点。<code>struct2</code>属于<code>拦截型</code>框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
-<p><code>BS基本模型</code><br><img src="/img/cs1.png" alt="BS基本模型">  </p>
-<p>java web中Servlet作用是接受浏览器传给服务端的请求，并将服务端处理完的响应返回给用户的浏览器。   </p>
+        <blockquote>
+<p>这几日在学校生产实训，写基于<code>struts2</code>的web站点。<code>struct2</code>属于<code>拦截型</code>框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
+</blockquote>
       
     </div>
     

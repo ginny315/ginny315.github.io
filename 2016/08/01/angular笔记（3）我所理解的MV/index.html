@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>angular笔记（3）我所理解的MV* | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular笔记（3）我所理解的MV*">
+<meta property="og:url" content="http://guoningyan.com/2016/08/01/angular笔记（3）我所理解的MV/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究">
+<meta property="og:image" content="http://guoningyan.com/img/angular3-mvc.png">
+<meta property="og:updated_time" content="2016-08-01T14:47:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular笔记（3）我所理解的MV*">
+<meta name="twitter:description" content="大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究">
+<meta name="twitter:image" content="http://guoningyan.com/img/angular3-mvc.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-angular笔记（3）我所理解的MV" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/01/angular笔记（3）我所理解的MV/" class="article-date">
+  	<time datetime="2016-08-01T14:44:06.000Z" itemprop="datePublished">2016-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular笔记（3）我所理解的MV*
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；<br>大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；<br>近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究过前端设计模式，也有自己的观点，有疑惑请在评论里讨论）。</p>
+</blockquote>
+<a id="more"></a>
+<p><code>java开篇</code><br>这里的java的设计模式和目前在做java开发的<a href="http://blog.csdn.net/yiluxiangqian7715" target="_blank" rel="external">@组长ZJP同学</a>讨论过，用一张图简单地描述下。</p>
+<p><img src="/img/angular3-mvc.png" alt="java中的MVC"></p>
+<p>相信了解过MVC的朋友都知道，Model代表数据存储，用来处理数据库相关操作，一般会使用<a href="http://baike.baidu.com/link?url=jdLF0XztJUiIqHYzJONBdJYeHO7ZS_dWsRuTP1hVdvZWz_wAZsgHUaWtMWLeHeDgwV_j5VmbYLYvq0BCy2NCnK" target="_blank" rel="external">ORM</a>进行封装，降低藕合度。<br>View代表视图层，在后端渲染的情况下一般是jsp页面，而在前端渲染的情况下，可能是web端或者是客户端的某些页面，用户操作致使View发送request请求。<br>Control代表控制器，顾名思义，整个流程依赖Control进行控制，所以View中的请求会经过Control处理，然后返回response给View，而view处理的业务逻辑对客户端是不透明的，用户也不用去理会数据库是怎样的操作，所以这些“黑盒”操作都是由后端程序员完成。Control返回的response也有两种方式，像structs2采用的是action跳转，这是一种可以直接返回jsp页面的方式，还有一种是我们熟悉的后端返回json数据的方式。<br>图中关于Model，引申出了service，在一些不算复杂的框架中，可能就模糊了Model的概念，直接由service处理业务逻辑，框架的选型还是结合业务相关，这里不再赘述。</p>
+<p><code>Nodejs express框架深入</code><br>这里选用了我毕设用的目录结构做说明。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- db</span><br><span class="line">  - admin.js</span><br><span class="line">  - user.js</span><br><span class="line">- routers</span><br><span class="line">  - loginServer.js（require(&apos;../db/user.js&apos;)）</span><br><span class="line">  - adminServer.js（require(&apos;../db/admin.js&apos;)）</span><br><span class="line">- app.js</span><br></pre></td></tr></table></figure></p>
+<p>我选用了mongoose包作为中间层，所以很明显可以看出db文件夹下就是ORM，每个单独的js文件代表数据库中的一张表，将数据类型相关以及CRUD操作进行封装，和Model类似，每个单独的js文件类似一个service实现类。<br>而router是一种路由的概念，每个**Server.js文件代表一个操作，需要调用db中的方法（类似于control调用service完成某个功能）。再划分细一点，router可以把不同请求对应到不同的方法中进行处理，此时router相当于一个过滤器和领路的作用，扩大了control的功能。而这些js文件会返回处理后的response。<br>app.js是项目启动文件，数据库连接，调用router方法等等，前端所有的请求request都需要经过app.js后，调用模块中的方法进行处理。</p>
+<p><code>终于回到了重点angular</code><br>首先也先进行项目目录结构划分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">－ js</span><br><span class="line">  - app.js(root作用，调用service中的数据)</span><br><span class="line">  - common.js(factory、service、provider)</span><br><span class="line">  - main.js</span><br><span class="line">  - router.js(可以直接写路由，也可以通过ui-router这种插件根据状态来改变页面渲染)</span><br><span class="line">－ moudules</span><br><span class="line">  - moduleName</span><br><span class="line">    - ***.html</span><br><span class="line">    - ***.js(controller)</span><br></pre></td></tr></table></figure></p>
+<p>这里将页面划分为组件，每个contrller控制一个视图模型。<br>app.js起到root作用，包含了所有的controller。即这是一个总控制器。<br>common.js起Modul作用，在angular中有factory、service、contrller三个分类，service通过“构造器”（构造函数）创建，这个构造器即factory，而这些service又可以称为factory的实例化对象（实现类），以对象的形式存在。provider是一种更高级（可以通过config进行配置）的factory，作用也类似。<br>解释了这么多，再说一下angular的范式要求。在写angular的时候，尽量要将业务逻辑处理放在controller中，尽量不要在controller直接获取数据后处理，应该让service获取接口数据，此时的service相当于Model，这样angular的设计模式就完全和java对应了。</p>
+<p><code>总结</code><br>都说angular适合后端程序员，确实总结时候发现了其中的相似之处非常多，当然，学好设计模式，框架什么的都是套路！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/31/移动端开发总结（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端开发总结（1）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="angular笔记（3）我所理解的MV" data-title="angular笔记（3）我所理解的MV*" data-url="http://guoningyan.com/2016/08/01/angular笔记（3）我所理解的MV/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

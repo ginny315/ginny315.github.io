@@ -6,23 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>angular笔记（2） | ginny&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这篇是对AngularJs使用心得（一） 的补充篇，由于项目需要，增加了一些新功能，对angualr有了一些更加深入的了解。
-表格排序用表格展示数据的时候经常会遇到一个需求就是“按照升降序排列”。">
+  <meta name="description" content="这篇是对angular笔记（2）的补充篇，由于项目需要，增加了一些新功能，这篇主要有对表格排序的业务解决，同时也对如何在数据双向绑定的框架中添加插件有了一定实践。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular笔记（2）">
 <meta property="og:url" content="http://guoningyan.com/2016/07/25/angular笔记（2）/index.html">
 <meta property="og:site_name" content="ginny's blog">
-<meta property="og:description" content="这篇是对AngularJs使用心得（一） 的补充篇，由于项目需要，增加了一些新功能，对angualr有了一些更加深入的了解。
-表格排序用表格展示数据的时候经常会遇到一个需求就是“按照升降序排列”。">
+<meta property="og:description" content="这篇是对angular笔记（2）的补充篇，由于项目需要，增加了一些新功能，这篇主要有对表格排序的业务解决，同时也对如何在数据双向绑定的框架中添加插件有了一定实践。">
 <meta property="og:image" content="http://guoningyan.com/img/angular2-1.png">
 <meta property="og:image" content="http://guoningyan.com/img/angular2-2.png">
 <meta property="og:image" content="http://guoningyan.com/img/angular2-3.png">
 <meta property="og:image" content="http://guoningyan.com/img/angular2-4.png">
-<meta property="og:updated_time" content="2016-07-28T06:23:17.000Z">
+<meta property="og:updated_time" content="2016-08-01T14:54:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular笔记（2）">
-<meta name="twitter:description" content="这篇是对AngularJs使用心得（一） 的补充篇，由于项目需要，增加了一些新功能，对angualr有了一些更加深入的了解。
-表格排序用表格展示数据的时候经常会遇到一个需求就是“按照升降序排列”。">
+<meta name="twitter:description" content="这篇是对angular笔记（2）的补充篇，由于项目需要，增加了一些新功能，这篇主要有对表格排序的业务解决，同时也对如何在数据双向绑定的框架中添加插件有了一定实践。">
 <meta name="twitter:image" content="http://guoningyan.com/img/angular2-1.png">
   
     <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
@@ -188,8 +185,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这篇是对AngularJs使用心得（一） 的补充篇，由于项目需要，增加了一些新功能，对angualr有了一些更加深入的了解。</p>
-<p><code>表格排序</code><br>用表格展示数据的时候经常会遇到一个需求就是“按照升降序排列”。<br><img src="/img/angular2-1.png" alt="效果图"><br><a id="more"></a><br>ng-table本身带有sortable属性，在new NgTableParams实例化过程中添加参数sorting，sorting中包含表格中需要排序的列名可以在前端实现排序功能使用。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">td</span> <span class="attr">sortable</span>=<span class="string">"sortableId"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <blockquote>
+<p>这篇是对angular笔记（2）的补充篇，由于项目需要，增加了一些新功能，这篇主要有对表格排序的业务解决，同时也对如何在数据双向绑定的框架中添加插件有了一定实践。</p>
+</blockquote>
+<a id="more"></a>
+<p><code>表格排序</code><br>用表格展示数据的时候经常会遇到一个需求就是“按照升降序排列”。<br><img src="/img/angular2-1.png" alt="效果图"></p>
+<p>ng-table本身带有sortable属性，在new NgTableParams实例化过程中添加参数sorting，sorting中包含表格中需要排序的列名可以在前端实现排序功能使用。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">td</span> <span class="attr">sortable</span>=<span class="string">"sortableId"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$scope.tableParams = <span class="keyword">new</span> NgTableParams(&#123;</span><br><span class="line">  count: PAGESIZE,</span><br><span class="line">  sorting: &#123; id: <span class="string">'sortableId'</span>, &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">     getData: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">     <span class="comment">//doSth...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>但是很多时候这个已经封装好的排序功能不能满足自己的需求，比如已经数据已经实现了分页展示，每次请求都是带上当前页码的，所以不方便进行前端分页。此时需要后端完成排序，前端请求需要携带当前页码和排序参数，后端直接返回排序完成的数据给前端展示。</p>
 <p>此时就需要自定义sort事件，在结合ng-table时也遇上了一些坑，下面通过代码来解释一下。<br>首先想到的是添加ng-click事件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">td</span> <span class="attr">sortable</span>=<span class="string">"sortableId"</span> <span class="attr">ng-click</span>=<span class="string">"sort('sortParam')"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
