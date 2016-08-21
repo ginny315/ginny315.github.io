@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>canvas实践笔记 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，传送给native端，所以对canvas的使用做一个总结。由简到难，本文首先简单介绍canvas几个常用API，然后给出图片预加载的代码，最后会列举绘制过程中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas实践笔记">
+<meta property="og:url" content="http://guoningyan.com/2016/08/21/canvas实践笔记/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，传送给native端，所以对canvas的使用做一个总结。由简到难，本文首先简单介绍canvas几个常用API，然后给出图片预加载的代码，最后会列举绘制过程中的">
+<meta property="og:image" content="http://guoningyan.com/img/canvas-jk.png">
+<meta property="og:updated_time" content="2016-08-21T03:03:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas实践笔记">
+<meta name="twitter:description" content="对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，传送给native端，所以对canvas的使用做一个总结。由简到难，本文首先简单介绍canvas几个常用API，然后给出图片预加载的代码，最后会列举绘制过程中的">
+<meta name="twitter:image" content="http://guoningyan.com/img/canvas-jk.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-canvas实践笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/21/canvas实践笔记/" class="article-date">
+  	<time datetime="2016-08-21T03:00:47.000Z" itemprop="datePublished">2016-08-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      canvas实践笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。<br>最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，传送给native端，所以对canvas的使用做一个总结。<br>由简到难，本文首先简单介绍canvas几个常用API，然后给出图片预加载的代码，最后会列举绘制过程中的多个坑。</p>
+</blockquote>
+<a id="more"></a>
+<p>SVG绘制图形是通过构建一棵XML树来实现，canvas来绘制图形是通过调用它提供的方法。所以在canvas中移除相应的元素需要先将当前的相应元素擦除，然后重新绘制。</p>
+<p>业务实现效果图，制作过程3.5天，踩了不少坑，下面进行详细讲解。<br><img src="/img/canvas-jk.png" alt="jk-img"></p>
+<h5 id="u56FE_u5F62_u7ED8_u5236_u4E00_u4E9B_u7B80_u5355_u7684API"><a href="#u56FE_u5F62_u7ED8_u5236_u4E00_u4E9B_u7B80_u5355_u7684API" class="headerlink" title="图形绘制一些简单的API"></a>图形绘制一些简单的API</h5><p>canvas标签在html文档流中存放，标签内的区域都是画布，所以可以在标签上直接设置画布的长宽。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"mycanvas"</span> <span class="attr">width</span>=<span class="string">100</span> <span class="attr">height</span>=<span class="string">100</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>前面已经说过，canvas需要调用API来绘制图形，大部分API需要调用一个上下文对象来实现，所以需要<code>getContext(&#39;2d&#39;)</code>方法（传参2d）来获取这个CanvasRenderingContext2D对象，使用这个对象来实现在画布上绘制二维图形。<br><code>注意</code>每个canvas元素只有一个上下文对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'mycanvas'</span>);</span><br><span class="line"><span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 绘制路径；</span><br><span class="line"> * beginPath开始，closePath结束，绘制比较粗糙；</span><br><span class="line"> * 手动lineTo结束位置到起点位置，绘制比较精细；</span><br><span class="line"> * 完成一条路径后重新开始另一条路径，必须有beginPath</span><br><span class="line"> */</span></span><br><span class="line">context.beginPath();</span><br><span class="line">context.moveTo(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">context.lineTo(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">context.lineTo(<span class="number">100</span>,<span class="number">200</span>);</span><br><span class="line">context.closePath();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  画圆－（0,360）的弧线</span><br><span class="line"> *  context.arc(left, right, radius, 0, Math.PI*2);</span><br><span class="line"> */</span></span><br><span class="line">context.strokeStyle = <span class="string">'#999'</span>;</span><br><span class="line">context.beginPath();</span><br><span class="line">context.arc(<span class="number">30</span>, <span class="number">60</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>);</span><br><span class="line">context.closePath();</span><br><span class="line">context.stroke();</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  画矩形</span><br><span class="line"> *  rect(x, y, width, height)</span><br><span class="line"> */</span></span><br><span class="line">context.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">context.fill();</span><br><span class="line"><span class="comment">/**</span><br><span class="line">* 填充路径区域；</span><br><span class="line">* 如果路径没有闭合，则默认起点与终点连接；</span><br><span class="line">* 可以通过先设置类属性来控制外观；</span><br><span class="line">*/</span></span><br><span class="line">context.fillStyle = <span class="string">'#ccc'</span>;</span><br><span class="line">context.fill();</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 描边；</span><br><span class="line"> * 可以通过先设置类属性来控制外观；</span><br><span class="line"> */</span></span><br><span class="line">context.strokeStyle = <span class="string">'#008'</span>;</span><br><span class="line">context.stroke();</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 设置字体和大小</span><br><span class="line"> */</span></span><br><span class="line"> context.font = <span class="string">"40pt Calibri"</span>;</span><br><span class="line"> context.fillText(<span class="string">"Hello World!"</span>, x, y);</span><br></pre></td></tr></table></figure>
+<p><a href="http://jsbin.com/xapiqe/3/edit?html,css,js,output" target="_blank" rel="external">在线demo</a></p>
+<blockquote>
+<p>实践过程中发现context.fill()有个坑，特别是在给矩形填充颜色的时候，context的指向会出现问题，可能会将之前已经填充的内容重新填充。<br>简易使用context.fillRect()这个属性来填充矩形。<br>如果不可避免需要使用context.fill()这个属性，尽量提前使用，不要影响到后面的内容。</p>
+</blockquote>
+<h5 id="u63D2_u5165_u56FE_u7247"><a href="#u63D2_u5165_u56FE_u7247" class="headerlink" title="插入图片"></a>插入图片</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DrawPic</span>(<span class="params">imgParam,left,top</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.left = left || <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">this</span>.top = top || <span class="number">0</span>;</span><br><span class="line">  context.drawImage(imgParam,<span class="keyword">this</span>.left,<span class="keyword">this</span>.top);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>[业务需求]：将切图展示在画布的指定位置，设置图片大小<br>canvas绘图阻塞浏览器，按顺序执行，画图之前需要图片全部加载成功，作者编写了图片预加载功能，在完全加载完成后进行绘制。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">batchProcessingImgs</span>(<span class="params">imgList,newImgList</span>)</span>&#123;</span><br><span class="line">  imgList.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">pre,cur</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = createNewImg(cur)</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    newImgList.push(img);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,&#123;&#125;)</span><br><span class="line"><span class="keyword">return</span> newImgList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(imgList.length == newImgList.length)&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>imgList存储图片源文件，newImgList存储加载完成的图片，只有当两个list长度相等时，图片完全加载完成，可以进行画布绘制，另外加载图片的过程是浏览器的异步行为，newImgList中的图片顺序和imgList不一定相同，所以需要根据名字查询图片信息。（在附录的链接中作者给出了完整的实现）</p>
+<h5 id="u7F29_u5C0F_u56FE_u7247_u5E76_u526A_u88C1_u6210_u5706_u5F62"><a href="#u7F29_u5C0F_u56FE_u7247_u5E76_u526A_u88C1_u6210_u5706_u5F62" class="headerlink" title="缩小图片并剪裁成圆形"></a>缩小图片并剪裁成圆形</h5><p>[业务需求]：展示用户的圆形小头像，后端返回的是一定尺寸的大头像，所以我需要先等比例缩放，然后进行圆形裁剪。<br>需要注意的是，arc+clip的方法只对绘制的图形产生效果，对图片不起作用。<br>所以只能用填充的方法，设置一个填充pattern(ctx.createPattern(image, repetition))，但是填充的效果是图片的原像素尺寸，如果原图是一张超大图，很有可能填充的只是黑色的一个小角，所以在填充之前需要对原图进行等比例缩小。<br>有个CanvasPattern.setTransform(matrix)的方法，matrix是SVG的缩放方式，OMG！难道写canvas还要和SVG合用吗？好吧，尝试之后遇到了更难过的结果，连亲爱的chrome都不支持！那就别说其他浏览器了。<br>换种思路，能不能用别的方式缩小图片呢？还是老大厉害，鼓励我尝试了先将图片绘制在另一个canvas上下文中，然后将新的canvas调整到我所需要的尺寸，然后将新的canvas作为填充pattern填充到老canvas的fill中，尝试结果，完美实现填充！<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 按比例缩小图像并裁剪</span><br><span class="line"> * left，top:左上角</span><br><span class="line"> * radius:裁剪后的圆半径，注意是半径</span><br><span class="line"> * 比较宽和高，小的设置为圆的直径长，大的裁剪为scaleBorder</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scaleAndClipImageToRound</span>(<span class="params">context,img,left,top,radius</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scaleBord,</span><br><span class="line">  width = img.width,</span><br><span class="line">  height = img.height;</span><br><span class="line">  context.save();</span><br><span class="line">  <span class="keyword">var</span> newCanvans = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">  newCanvans.width = img.width;</span><br><span class="line">  newCanvans.height = img.height;</span><br><span class="line">  <span class="keyword">var</span> newCtx = newCanvans.getContext(<span class="string">"2d"</span>);</span><br><span class="line">	</span><br><span class="line">  scaleBord = (width &gt;= height ? <span class="number">2</span>*radius/height : <span class="number">2</span>*radius/width);</span><br><span class="line">  newCtx.scale(scaleBord,scaleBord);</span><br><span class="line">  newCtx.drawImage(img,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> p = ctx.createPattern(newCanvans,<span class="string">"no-repeat"</span>);</span><br><span class="line">  context.fillStyle = p;</span><br><span class="line">  context.translate(left, top);</span><br><span class="line">  context.beginPath();</span><br><span class="line">  context.arc(radius, radius, radius, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>);</span><br><span class="line">  context.fill();</span><br><span class="line">  context.closePath();</span><br><span class="line">  context.restore();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="u72B6_u6001_u5806_u6808"><a href="#u72B6_u6001_u5806_u6808" class="headerlink" title="状态堆栈"></a>状态堆栈</h5><p>画布API允许保存当前画布的状态，采用的是堆栈的方式，采用save和restore方法，相当于push和pop，恢复堆栈中的状态。也可以理解为PS的一个图层，作者实践过程中在使用context.scale()这个属性的时候一定需要调用pop和restore。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">context.save();</span><br><span class="line">context.restore();</span><br></pre></td></tr></table></figure></p>
+<h5 id="toDataURL_u65F6_u95F4_u4E0A_u7684_u5751"><a href="#toDataURL_u65F6_u95F4_u4E0A_u7684_u5751" class="headerlink" title="toDataURL时间上的坑"></a>toDataURL时间上的坑</h5><p>业务需求需要先向后端请求数据，然后进行绘制，我在做这个需求的时候遇到两个坑。<br>第一个坑：toDataURL后发现ajax请求的数据还没有返回，所以canvas没有画完。因为ajax请求是异步的，无法判断精确data的返回时间，所以只能在请求成功的回调中进行绘制方法的调用。<br>第二个坑：需要在图片预加载结束后画图，然后toDataURL，本地运行时图片加载时间可以忽略不计，而生产环境时加载图片是需要一定时间的，所以判断加载完成的js语句根本没有执行。解决方法是每加载一次图片时进行图片加载判断，即有100张图片就需要执行100次判断，直到第100次判断图片加载完全执行完毕，调用绘图方法进行绘制。</p>
+<p><code>附录</code><br><a href="https://github.com/ginny315/canvas-h5tonative/tree/master/canvas-drawProgressBar-function" target="_blank" rel="external">我的纯函数式实现canvas绘制设计稿代码</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/01/angular笔记（3）我所理解的MV/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">angular笔记（3）我所理解的MV*</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="canvas实践笔记" data-title="canvas实践笔记" data-url="http://guoningyan.com/2016/08/21/canvas实践笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
