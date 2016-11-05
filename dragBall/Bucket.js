@@ -4,7 +4,7 @@ function Bucket (){
     this.index = null;
     this.state = 0;
     this.rule = {
-        active:'destActive.png',
+        active:'./destActive.png',
         success:'./destSuccess.png',
         error:'./destError.png',
         default:'./destDefault.png',
@@ -27,7 +27,6 @@ function Bucket (){
         if(self.state != 0){//已经有物品
             
         }else{
-            console.log('enter')
             console.dir(e.target)
             e.target.src = self.rule.active;
         }
@@ -41,8 +40,6 @@ function Bucket (){
         if(self.state != 0){//已经有物品
         
         }else{
-            console.log('leave')
-            console.dir(e.target)
             e.target.src = self.rule.default;
         }
     };
@@ -51,11 +48,8 @@ function Bucket (){
         if(self.state != 0){//已经有物品
 
         }else{
-            console.log(e)
             self.state = 1;
-            console.log('drop')
             var data = e.dataTransfer.getData("Text");
-            console.log('data=',data,'  e.target=',e.target.parentNode,' document.getElementById(data)=',document.getElementById(data))
             e.target.parentNode.appendChild(document.getElementById(data));
             if(data == self.index){
                 e.target.src = self.rule.success;
