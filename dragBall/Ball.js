@@ -1,27 +1,3 @@
-// var Ball = {
-//     obj : null,
-//     distObj:null,
-//     //初始化 
-//     init : function(name){ 
-//         var o = document.getElementsByClassName(name)[0]; 
-//         //当onmousedown开始拖拽 
-//         //o.ondragstart = Ball.start; 
-//         o.addEventListener('dragstart',Ball.start);
-
-//     },
-//     //设置拖动事件处理程序
-//     start : function(e){ 
-//         console.log('start')
-//         var o = Ball.obj = this; 
-//         console.log(this)
-//         //this.style = 'opacity:0';
-//         var e = e || window.event;
-//         var dt = e.dataTransfer;
-//         dt.setData('Text','3');
-//         console.log(dt.getData('Text'))
-//     },
-// };
-
 function Ball (){
     var self = this;
     this.obj = null;
