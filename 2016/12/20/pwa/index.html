@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>PWA -- Progress Web App | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PWA -- Progress Web App">
+<meta property="og:url" content="http://guoningyan.com/2016/12/20/pwa/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。">
+<meta property="og:image" content="http://guoningyan.com/img/pwa.jpg">
+<meta property="og:image" content="http://guoningyan.com/img/service-worker.jpg">
+<meta property="og:updated_time" content="2016-12-20T14:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PWA -- Progress Web App">
+<meta name="twitter:description" content="Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。">
+<meta name="twitter:image" content="http://guoningyan.com/img/pwa.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-pwa" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/20/pwa/" class="article-date">
+  	<time datetime="2016-12-20T14:02:31.000Z" itemprop="datePublished">2016-12-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PWA -- Progress Web App
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。<br>参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。</p>
+</blockquote>
+<a id="more"></a> 
+<h5 id="PWA_u7B80_u4ECB"><a href="#PWA_u7B80_u4ECB" class="headerlink" title="PWA简介"></a>PWA简介</h5><p><img src="/img/pwa.jpg" alt="PWA"><br><code>特性：</code></p>
+<blockquote>
+<p>支持将图标添加到屏幕，从屏幕点击启动<br>支持全屏体验<br>支持离线应用（利用Service Worker来实现离线存储）<br>支持Push Notification </p>
+</blockquote>
+<p><code>优势</code></p>
+<blockquote>
+<p>跨平台，任何安装符合标准的浏览器的设备上均可运行<br>渐进式，无论用户使用什么浏览器，始终以渐近增强为原则<br>低网速离线情况下依然有较好的用户体验<br>实时持续更新<br>使用TLS来保证传输安全<br>对搜索引擎友好<br>推送通知可以让用户再次访问变的容易</p>
+</blockquote>
+<p>除了Chrome支持以外，Firefox和Opera也支持了PWA</p>
+<h5 id="service_worker"><a href="#service_worker" class="headerlink" title="service worker"></a>service worker</h5><p>相当于一个用户端的代理，拦截url，优先从缓存中获取资源，若缓存中没有，则向服务端请求。<br><code>优势及作用</code><br>预缓存加载，也可以作为file cache（static）。<br><img src="/img/service-worker.jpg" alt="service-worker"></p>
+<blockquote>
+<p>现在Service Worker在chrome、firefox和opera中是被支持的。Safari和Edge也正在努力中。<br>devtool - application - service worker</p>
+</blockquote>
+<h5 id="PWA_u8BBE_u8BA1_u6982_u5FF5__u2013_peanut_M_26amp_3BM"><a href="#PWA_u8BBE_u8BA1_u6982_u5FF5__u2013_peanut_M_26amp_3BM" class="headerlink" title="PWA设计概念 – peanut M&amp;M"></a>PWA设计概念 – peanut M&amp;M</h5><p>Aaron把PWA比作peanut M&amp;M，这是一种称为<code>应用外壳架构</code>的设计概念，javascript是一种外壳，是需要存储在浏览器中，保证始终可用，当无互联网连接（ offline）时，也能保证用户能看到应用的基本框架，而不是一片空白或者错误提示。<br>css相当于中间的巧克力层，可以缓存，也可以从服务端获取。<br>content（即需要）相当于里面的花生，可以缓存，也可以直接从服务端获取。但是一般来说内容是动态的，可能频繁发生改变，所以大部分都是从服务端获取（项目设计中应该尽量减少把不必要的内容都存储下来）。</p>
+<h5 id="Manifest-json"><a href="#Manifest-json" class="headerlink" title="Manifest.json"></a>Manifest.json</h5><p>PWA主要一个 <code>Manifest.json</code>来配置一些功能，可以设置浏览器的样式，添加到屏幕的图标等等。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"PWA DEMO FM.202"</span>,</span><br><span class="line">  <span class="attr">"short_name"</span>: <span class="string">"FM.202"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"Simple Progressive Web App for ginny's friends."</span>,</span><br><span class="line">  <span class="attr">"icons"</span>: [&#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"assets/icons/ic-face.png"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"72x72"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"assets/icons/ic-face-large.png"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"144x144 256x256"</span> </span><br><span class="line">    &#125;],</span><br><span class="line">  <span class="attr">"start_url"</span>: <span class="string">"index.html"</span>,</span><br><span class="line">  <span class="attr">"display"</span>: <span class="string">"standalone"</span>,</span><br><span class="line">  <span class="attr">"background_color"</span>: <span class="string">"#fff"</span>,</span><br><span class="line">  <span class="attr">"theme_color"</span>: <span class="string">"#fff"</span>,</span><br><span class="line">  <span class="attr">"orientation"</span>: <span class="string">"portrait"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h5><p>可以通过Chrome的“添加到主屏幕”按钮，保存到主屏幕上。<br>只有满足如下条件时窗口才会显示。</p>
+<blockquote>
+<p>1、有一个有效的 Web Manifest。<br>2、安装有有效的 Service Worker。<br>3、通过 HTTPS 访问应用程序。</p>
+</blockquote>
+<h5 id="u6D4B_u8BD5_u5DE5_u5177Lighthome"><a href="#u6D4B_u8BD5_u5DE5_u5177Lighthome" class="headerlink" title="测试工具Lighthome"></a>测试工具Lighthome</h5><p>对PWA的评分工具，包括检测在各种网络状态下应用的加载情况。仅测试静态网页，对用户交互等动态行为并不作评分。可以在chrome插件中找到。<br>swPrecache进行预抓取，有service worker一整套体系。</p>
+<p><code>参考链接</code><br><a href="https://www.w3.org/TR/service-workers/" target="_blank" rel="external">Service Worker W3C官方草案</a><br><a href="https://www.chromestatus.com/features" target="_blank" rel="external">chrome-feature</a><br><a href="https://developers.google.com/web/updates/2015/12/getting-started-pwa" target="_blank" rel="external">Getting Started with Progressive Web Apps</a><br><a href="https://pwa.rocks" target="_blank" rel="external">有趣的PWA游戏和工具</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/04/关于requestAnimationFrame/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于requestAnimationFrame</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="pwa" data-title="PWA -- Progress Web App" data-url="http://guoningyan.com/2016/12/20/pwa/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
