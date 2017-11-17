@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>MathQuiz-an Android Project | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).这篇文章将归纳我做这个小项目过程中遇到的难点和收获。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MathQuiz-an Android Project">
+<meta property="og:url" content="http://guoningyan.com/2017/11/17/MathQuiz-an-Android-Project/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).这篇文章将归纳我做这个小项目过程中遇到的难点和收获。">
+<meta property="og:image" content="http://guoningyan.com/img/android-content.png">
+<meta property="og:updated_time" content="2017-11-17T15:32:04.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MathQuiz-an Android Project">
+<meta name="twitter:description" content="MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).这篇文章将归纳我做这个小项目过程中遇到的难点和收获。">
+<meta name="twitter:image" content="http://guoningyan.com/img/android-content.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-MathQuiz-an-Android-Project" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/17/MathQuiz-an-Android-Project/" class="article-date">
+  	<time datetime="2017-11-17T15:05:10.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MathQuiz-an Android Project
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。<br>使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).<br>这篇文章将归纳我做这个小项目过程中遇到的难点和收获。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="u76EE_u5F55_u7ED3_u6784"><a href="#u76EE_u5F55_u7ED3_u6784" class="headerlink" title="目录结构"></a>目录结构</h4><p>这个项目我使用了android studio，app是root目录，manifests是配置文件，java是编写的业务代码文件，res是资源文件。<br><img src="/img/android-content.png" alt="android studio 文件目录结构"></p>
+<h4 id="u91CD_u8981_u4EE3_u7801demo"><a href="#u91CD_u8981_u4EE3_u7801demo" class="headerlink" title="重要代码demo"></a>重要代码demo</h4><p><code>页面跳转</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(getBaseContext(), GradeActivity.class);</span><br><span class="line">intent.putExtra(<span class="string">"ansCorrect"</span>,ansCorrect);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p><code>用户输入答案保留两位小数</code><br>这里我用了监听用户输入，当用户输入小数位数超过两位时，调用处理函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">checkDecimal</span><span class="params">(String text)</span></span>&#123;</span><br><span class="line">        Boolean ifFormat = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (text.contains(<span class="string">"."</span>)) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = text.indexOf(<span class="string">"."</span>);</span><br><span class="line">            <span class="keyword">if</span> (index + <span class="number">3</span> &lt; text.length()) &#123;</span><br><span class="line">                initPrompt(<span class="string">"Warning"</span>,<span class="string">"If your answers are not integers, please round them to 2 decimal places."</span>);</span><br><span class="line">                ifFormat = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ifFormat;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>自定义图标提示框</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initPrompt</span><span class="params">(String txt, String msg)</span> </span>&#123;</span><br><span class="line">        LayoutInflater inflater = getLayoutInflater();</span><br><span class="line">        View  dialog = inflater.inflate(R.layout.prompt,(ViewGroup)findViewById(R.id.dialog;</span><br><span class="line">        AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>);</span><br><span class="line">        TextView message = (TextView)dialog.findViewById(R.id.tv);</span><br><span class="line">        message.setText(msg);</span><br><span class="line">        builder.setTitle(txt);</span><br><span class="line">        builder.setPositiveButton(<span class="string">"OK"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        builder.setView(dialog);</span><br><span class="line">        builder.setIcon(R.drawable.logo);</span><br><span class="line">        builder.show();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/dialog"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">        <span class="attr">android:layout_margin</span>=<span class="string">"8dp"</span></span><br><span class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/tv"</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:text</span>=<span class="string">"textview show"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u795E_u5947_u7684_u9519_u8BEF"><a href="#u795E_u5947_u7684_u9519_u8BEF" class="headerlink" title="神奇的错误"></a>神奇的错误</h4><p>在我调试代码的过程中控制台出现了这样的错误提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 10-22 14:00:11.310 1689-1689/com.android.inputmethod.latin E/RichInputConnection: Unable to connect to the editor to retrieve text.</span><br><span class="line">10-22 14:00:11.310 1689-1689/com.android.inputmethod.latin D/RichInputConnection: Will try to retrieve text later.</span><br></pre></td></tr></table></figure></p>
+<p>这个错误会导致控制台无法打印信息，给我的调试带来很大的麻烦。我google了很久也没有找到合适的解决方案，最后我重建了一个项目，将相关代码复制才强硬解决了这个问题，如果还有好的方式，希望看到的人能联系我，谢谢了。</p>
+<p><code>附录</code><br><a href="https://github.com/ginny315/MathQuizAssignment" target="_blank" rel="external">项目成果 &amp; github链接</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/20/pwa/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PWA -- Progress Web App</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MathQuiz-an-Android-Project" data-title="MathQuiz-an Android Project" data-url="http://guoningyan.com/2017/11/17/MathQuiz-an-Android-Project/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
