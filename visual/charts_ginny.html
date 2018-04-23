@@ -19,7 +19,7 @@
                 margin: 0 auto;
                 font-size: 30px;
                 text-align: center;
-                padding-bottom: 20px;
+                /*padding-bottom: 10px;*/
             }
        </style>
    </head>
@@ -27,7 +27,7 @@
    <body style="height: 100%; margin: 0">
     <!-- <div class="wraper"> -->
     <div class="title">Compare top100 games between two-week and history</div>
-       <div id="container" style="height: 100%"></div>
+       <div id="container" style="height: 80%"></div>
     <!-- </div> -->
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
@@ -75,8 +75,8 @@ $.get('charts.json', function (dd) {
             itemGap: 5
         },
         grid: {
-            top: '12%',
-            left: '1%',
+            top: '20%',
+            left: '10%',
             right: '10%',
             containLabel: true
         },
