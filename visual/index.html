@@ -26,6 +26,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="css/home-app.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+		
+		
+	</style>
 </head>
 <body>
 	<nav id="home-navbar" class="navbar navbar-default navbar-fixed-top transparent">
@@ -33,7 +39,7 @@
 			<a class="navbar-brand" href="index.html">Steam Game Platform Analysis</a>
 			<ul class="nav navbar-nav">
 				<li><a href="#about">About</a></li>
-				<li><a href="charts_ginny.html" target="_blank">Charts</a></li>
+				<li><a href="#charts" target="_blank">Charts</a></li>
 				<li><a href="#video" target="_blank">Video</a></li>
 				<li><a href="http://guoningyan.com/onlineppt/" target="_blank">Slides</a></li>
 				<li><a href="https://public.tableau.com/profile/henryshe#!/vizhome/100GameView/OwnersandPrive?publish=yes" target="_blank">Dashboards</a></li>
@@ -50,29 +56,47 @@
 			</div>
 		</div>
 	</div>
-	<div id="about" class="container">
+	<div id="about" class="container container-about pb-0">
 		<div class="section-heading text-center">
 			<h1>About</h1>
 		</div>
 		<div class="row section-content">
 			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-				<p>We are Group T.</p>
-				<p>Charts link to dynamic charts of comparsion of numbers of players.</p>
-				<p>Video and slides can be found online.</p>
-				<p>Kindly note that our slides and 3-min video have different sights of questions we proposed.</p>
-				<p>Github contains our data preprocessing work.</p>
+				<p></p>
+				<div class="wrap-girl"><img src="img/girl.svg" alt=""></div>
+				<ul class="mb-0">
+					<li>We are Group T.</li>
+					<li>We fetch data from steam API.</li>
+					<li>We pre-process 100G data and select the top 100 games.</li>
+					<li>We analysis the trend of these games.</li>
+					<li>We analysis why PUBG become the most popular game.</li>	
+					<li>The most important thing is that:</li>
+					<li>We give advice to Chinese developer!</li>
+				</ul>
 			</div>
 		</div>
-		<div id="video" class="container">
-			<div class="section-heading text-center">
-				<h1>Video</h1>
+	</div>
+
+	<div id="charts" class="container chart-container">
+		<div class="section-heading text-center">
+				<h1>Charts</h1>
 			</div>
-			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/ce6tV83ec0M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-			</div>				
-			<div class="row section-content">
+			<div class="row chart-content">
+				<div class="title">Compare numbers of players in top100 games between two-week and history</div>
+				<div id="chart1" style="height: 80%"></div>
 			</div>
+	</div>
+
+	<div id="video" class="container">
+		<div class="section-heading text-center">
+			<h1>Video</h1>
 		</div>
+		<div class="col-xs-8 col-xs-offset-3">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/ce6tV83ec0M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		</div>				
+		<div class="row section-content">
+		</div>
+	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<!-- Use this local copy in case of any trouble with cdn
@@ -91,7 +115,16 @@
 
 	<script  src="js/content.js"></script>
 	<script  src="js/home-app.js"></script>
-
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> 
 	<script>
 		//hide donation-target by default
 		$(".donation-target").each(function(){
@@ -102,7 +135,109 @@
 			$("#upi-target").slideToggle();
 		});
 	</script>
+<script type="text/javascript">
+var dom = document.getElementById("chart1");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+myChart.showLoading();
 
+$.get('charts.json', function (dd) {
+ myChart.hideLoading();
+
+ option = {
+	 tooltip : {
+		 trigger: 'axis',
+		 axisPointer: {
+			 type: 'shadow',
+			 label: {
+				 show: true
+			 }
+		 }
+	 },
+	 toolbox: {
+		 show : true,
+		 feature : {
+			 mark : {show: true},
+			 dataView : {show: true, readOnly: false},
+			 magicType: {show: true, type: ['line', 'bar']},
+			 restore : {show: true},
+			 saveAsImage : {show: true}
+		 }
+	 },
+	 calculable : true,
+	 legend: {
+		 data:['Growth', 'twoweeks', 'history'],
+		 itemGap: 5
+	 },
+	 grid: {
+		 top: '20%',
+		 left: '10%',
+		 right: '10%',
+		 containLabel: true
+	 },
+	 xAxis: [
+		 {
+			 type : 'category',
+			 data : dd.name
+		 }
+	 ],
+	 yAxis: [
+		 {
+			 type : 'value',
+			 name : 'Budget (million USD)',
+			 axisLabel: {
+				 formatter: function (a) {
+					 a = +a;
+					 return isFinite(a)
+						 ? echarts.format.addCommas(+a / 1000)
+						 : '';
+				 }
+			 }
+		 }
+	 ],
+	 dataZoom: [
+		 {
+			 show: true,
+			 start: 94,
+			 end: 100
+		 },
+		 {
+			 type: 'inside',
+			 start: 94,
+			 end: 100
+		 },
+		 {
+			 show: true,
+			 yAxisIndex: 0,
+			 filterMode: 'empty',
+			 width: 30,
+			 height: '80%',
+			 showDataShadow: false,
+			 left: '93%'
+		 }
+	 ],
+	 series : [
+		 {
+			 name: 'twoweeks',
+			 type: 'bar',
+			 data: dd.twoweeks
+		 },
+		 {
+			 name: 'history',
+			 type: 'bar',
+			 data: dd.history
+		 }
+	 ]
+ };
+
+ myChart.setOption(option);
+
+});;
+if (option && typeof option === "object") {
+ myChart.setOption(option, true);
+}
+</script>
 </body>
 
 </html>
