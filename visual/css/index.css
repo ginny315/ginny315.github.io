@@ -8,12 +8,12 @@
         text-align: center;
         /*padding-bottom: 10px;*/
     }
-    .container{
+    .container-part{
         width: 100%;
         padding-bottom: 50px;
     }
-    .chart-container{
-        height: 600px;
+    .container-chart{
+        height: 700px;
     }
     .chart-content{
        height: 500px;
@@ -41,6 +41,9 @@
         /* display: inline-block; */
         float: right;
     }
-    /* .container-about ul li:last-child{
-        font-size: 20px;
-    } */
+    .container-video{
+        background-color: #333;
+    }
+    .container-video h1{
+        color: aliceblue;
+    }
