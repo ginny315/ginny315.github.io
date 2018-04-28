@@ -31,6 +31,11 @@ html{
     height: 700px;
     padding-bottom: 0;
 }
+.container-chart-5{
+    background: #FCFCFE;
+    margin-top:50px;
+    height: 550px;
+}
 .container-chart .chart-wrap{
     width: 50%;
     height: 80%;
@@ -38,22 +43,36 @@ html{
     display: inline-block;
 }
 .container-chart .chart-wrap-2{
-    width: 40%;
-    height: 60%;
+    width: 44%;
+    height: 50%;
     display: inline-block;
     background: #fff;
-    padding-left: 10%;
+    /* padding-left: 2%; */
     margin-left: 2.5%;
 }
+.container-chart .chart-wrap-2-2{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+    background: #fff;
+    /* padding-left: 10%; */
+    margin-left: 2.5%;
+}
+.container-chart .chart-wrap-3{
+    width: 70%;
+    height: 100%;
+}
 .container-chart .chart-wrap-4{
+    width: 60%;
     height: 100%;
 }
 .container-chart .chart-wrap-5{
-    width: 90%;
+    width: 100%;
     padding: 0;
 }
 .container-chart-3{
     background-color: #d0eff8;
+    padding-top: 100px;
 }
 
 .container-chart ul{
@@ -73,6 +92,9 @@ html{
     float: none;
     padding-right: 0;
     padding-bottom: 30px;
+}
+.container-chart-3 ul{
+    width: 25%;
 }
 .chart-content{
     height: 500px;  
@@ -175,4 +197,7 @@ canvas{
 }
 .black-arrow-wrap{
     position: relative;
+}
+.pt-20{
+    padding-top:20px;
 }
