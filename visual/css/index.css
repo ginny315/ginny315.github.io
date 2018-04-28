@@ -23,24 +23,51 @@ html{
     width: 100%;
     height: 700px;
 }
+.container-chart-2{
+    background-color: #EACEE3;
+    padding-top: 100px;
+}
 .container-chart .chart-wrap{
-    width: 60%;
+    width: 50%;
     height: 80%;
+    padding-left: 5%;
     display: inline-block;
 }
+.container-chart .chart-wrap-2{
+    width: 40%;
+    height: 60%;
+    display: inline-block;
+    background: #fff;
+    padding-left: 10%;
+    margin-left: 2.5%;
+}
+
 .container-chart ul{
     float: right;
     width: 35%;
-    padding-right: 4%;
+    padding-right: 5%;
 }
 .container-chart ul li{
     width: 100%;
     white-space: normal;
     word-break: break-word;
 }
+.container-chart-2 ul{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 40px;
+    float: none;
+    padding-right: 0;
+    padding-bottom: 30px;
+}
 .chart-content{
     height: 500px;  
 }
+.chart-content-2{
+    background: #fff;
+    margin: 0 5%;
+    height: 600px;
+ }
 .container-about{
     background-color: #ccc;
 }
@@ -96,4 +123,34 @@ canvas{
 .footer-bottom p {
     color: #ccc;
     font-size: 10px;
+}
+.black-tip{
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 0.05em;
+    padding: 2px 15px;
+    border-radius: 30px;
+    background: #000;
+    display: inline-block;
+    top: -20px;
+    left: 50%;
+    transform: translateY(-0) translateX(-50%);
+}
+.black-arrow{
+    position: absolute;
+    background-image: url(../img/black-arrow.png);
+    background-repeat: no-repeat;
+    background-size: 16px 31px;
+    background-position: center center;
+    content: "";
+    width: 16px;
+    height: 31px;
+    bottom: 15px;
+    left: 50%;
+    transform: translateY(-0) translateX(-50%);
+}
+.black-arrow-wrap{
+    position: relative;
 }

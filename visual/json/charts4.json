@@ -1,0 +1,54 @@
+{
+    "data": [
+        {
+            "Country": "Indonesian Rupiah",
+            "Price": 14.44,
+            "Discount": -51.86
+          },
+          {
+            "Country": "Russian Ruble",
+            "Price": 14.47,
+            "Discount": -51.75
+          },
+          {
+            "Country": "Philippine Peso",
+            "Price": 14.72,
+            "Discount": -50.9
+          },
+          {
+            "Country": "Vietnamese Dong",
+            "Price": 15.48,
+            "Discount": -48.4
+          },
+          {
+            "Country": "Indian Rupee",
+            "Price": 15.02,
+            "Discount": -49.92
+          },
+          {
+            "Country": "Chinese Yuan Renminbi",
+            "Price": 15.48,
+            "Discount": -48.4
+          },
+          {
+            "Country": "Brazilian Real",
+            "Price": 16.19,
+            "Discount": -46
+          },
+          {
+            "Country": "Hong Kong Dollar",
+            "Price": 23.95,
+            "Discount": -20.13
+          },
+          {
+            "Country": "U.S. Dollar",
+            "Price": 29.99,
+            "Discount": 0
+          },
+          {
+            "Country": "Swiss Franc",
+            "Price": 32.38,
+            "Discount": 7.99
+          } 
+    ]
+}

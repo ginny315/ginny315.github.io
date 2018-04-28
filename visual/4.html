@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var base = +new Date(1968, 9, 3);
+var oneDay = 24 * 3600 * 1000;
+var date = [];
+
+var data = [Math.random() * 300];
+
+for (var i = 1; i < 20000; i++) {
+    var now = new Date(base += oneDay);
+    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+}
+
+
+var data = [
+  
+];
+
+var country = [];
+var price = [];
+var discount = [];
+
+for (var i = 0; i < data.length; i++){
+    country.push(data[i].Country);
+    price.push(data[i].Price);
+    discount.push(data[i].Discount);
+}
+// console.log(data.length);
+// console.log(dt);
+// console.log(pl);
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        position: function (pt) {
+            return [pt[0], '10%'];
+        }
+    },
+    title: {
+        left: 'center',
+        text: 'PUBG Price in Different Contries',
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    //May has problem.
+    legend:{
+      data:[country,discount,price]
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data:country,
+        axisPointer: {
+                type: 'shadow'
+            } 
+    },
+    yAxis: [
+      {
+        type: 'value',
+        //boundaryGap: [0, '100%']
+        name: 'Price',
+        axisLabel: {
+                formatter: '{value} USD($)'
+            }
+      },
+      {
+        type: 'value',
+        name: 'Discount',
+        min: -52,
+        max: 30,
+        //interval:0.1,
+        axisLabel: {
+                formatter: '{value} %'
+            }
+      }
+    ],
+
+    series: [
+        {
+            name:'Price',
+            type:'bar',
+            smooth:true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            animationDelay: 0,
+            sampling: 'average',
+
+            // lineStyle: {
+            //   normal: {
+            //       width: 2,
+            //       color: {
+            //           type: 'linear',
+            //           x: 0,
+            //           y: 0,
+            //           x2: 1,
+            //           y2: 0,
+            //           colorStops: [{
+            //               offset: 0, color: '#ffcc99' // 0% 处的颜色
+            //           }, {
+            //               offset: 1, color: '#ff0033' // 100% 处的颜色
+            //           }],
+            //           globalCoord: false // 缺省为 false
+            //       },
+            //       opacity: 0.9
+            //   }
+            // },
+            areaStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(219, 50, 51, 0.3)'
+                  }, {
+                      offset: 0.8,
+                      color: 'rgba(219, 50, 51, 0)'
+                  }], false),
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowBlur: 10
+              }
+            },
+            itemStyle: {
+              normal: {
+                  color: '#00BFFF',
+                  borderColor: '#ADD8E6',
+                  borderWidth: 5,
+                  label:{
+                    show:true,
+                    textStyle:{
+                      color: '#27727B'
+                    }
+                  }
+              }
+            },
+            data: price
+        },
+        {//Game 2
+            name:'Discount(compare to USD)',
+            type:'line',
+            yAxisIndex: 1,
+            smooth:true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            animationDelay: 0,
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: 'rgb(0, 0, 0)'
+                }
+            },
+            markPoint: {
+                data: [
+                    //flag
+                    {name: 'China Market', value: "China Market Discount", xAxis: "Chinese Yuan Renminbi", yAxis: -48.40}
+                ]
+            },
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 1,
+                    y2: 0,
+                    colorStops: [{
+                        offset: 0, color: '#33ffcc' // 0% 处的颜色
+                    }, {
+                        offset: 1, color: '#3300cc' // 100% 处的颜色
+                    }],
+                    globalCoord: false // 缺省为 false
+                },
+                opacity: 0.9
+              }
+            },
+            areaStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(0, 236, 212, 0.3)'
+                  }, {
+                      offset: 0.8,
+                      color: 'rgba(0, 236, 212, 0)'
+                  }], false),
+                  shadowColor: 'rgba(0, 0, 0, 0.1)',
+                  shadowBlur: 10
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 12
+              }
+            },
+            data: discount
+
+
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+       <iframe src="https://steamdb.info/embed/?appid=578080" height="389px" width="100%" scrolling="no" frameborder="0"></iframe>
+   </body>
+</html>
