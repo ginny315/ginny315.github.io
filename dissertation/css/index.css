@@ -1,6 +1,7 @@
-html{
+html,body{
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
 }
 .row{
     margin: 0;
@@ -15,18 +16,21 @@ html{
     text-align: center;
     /*padding-bottom: 10px;*/
 }
-.container-part{
+.container-part-wrap{
     width: 100%;
-    padding-bottom: 50px;
+    height: calc(100% - 274px);
+    overflow: hidden;
 }
-.container-chart{
+.container-part{
     width: 49.7%;
+    height: 100%;
+    overflow: scroll;
     display: inline-block;
     vertical-align: top;
+    /* padding-top: 100px; */
 }
 .container-chart-2{
-    background-color: #EACEE3;
-    padding-top: 100px;
+    background-color: #EACEE3; 
 }
 .container-chart .chart-wrap{
     width: 50%;
@@ -42,21 +46,12 @@ html{
     /* padding-left: 2%; */
     margin-left: 2.5%;
 }
-.container-chart .chart-wrap-2-2{
-    width: 50%;
-    height: 50%;
-    display: inline-block;
-    background: #fff;
-    /* padding-left: 10%; */
-    margin-left: 2.5%;
-}
 .container-chart .chart-wrap-3{
     width: 70%;
     height: 100%;
 }
 .container-chart-3{
     background-color: #d0eff8;
-    padding-top: 100px;
 }
 
 .container-chart ul{
@@ -73,6 +68,7 @@ html{
     background: #fff; 
 }
 .container-about{
+    width: 100%;
     background-color: #ccc;
     height: 230px;
 }
@@ -126,6 +122,9 @@ img{
 .footer-bottom p {
     color: #ccc;
     font-size: 10px;
+}
+.component{
+    margin-top: 100px;
 }
 .black-tip{
     position: absolute;
