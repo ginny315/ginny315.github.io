@@ -64,8 +64,8 @@ html,body{
     word-break: break-word;
 }
 .chart-content{
-    /* height: 500px;  */
     background: #fff; 
+    padding: 20px
 }
 .container-about{
     width: 100%;
