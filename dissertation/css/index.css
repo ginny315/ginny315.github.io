@@ -19,17 +19,34 @@ html,body{
 .container-part-wrap{
     width: 100%;
     height: calc(100% - 274px);
+    position: relative;
     overflow: hidden;
 }
+.container-part-left{
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    overflow: scroll;
+}
+.container-part-right{
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    position: absolute; 
+    right: 0; 
+    overflow: scroll;  
+}
 .container-part{
-    width: 49.7%;
+    width: 100%;
     height: 100%;
     overflow: scroll;
     display: inline-block;
     vertical-align: top;
     /* padding-top: 100px; */
 }
-.container-chart-2{
+.container-done{
     background-color: #EACEE3; 
 }
 .container-chart .chart-wrap{
@@ -38,19 +55,7 @@ html,body{
     padding-left: 5%;
     display: inline-block;
 }
-.container-chart .chart-wrap-2{
-    width: 44%;
-    height: 50%;
-    display: inline-block;
-    background: #fff;
-    /* padding-left: 2%; */
-    margin-left: 2.5%;
-}
-.container-chart .chart-wrap-3{
-    width: 70%;
-    height: 100%;
-}
-.container-chart-3{
+.container-teacher{
     background-color: #d0eff8;
 }
 
@@ -124,7 +129,10 @@ img{
     font-size: 10px;
 }
 .component{
-    margin-top: 100px;
+    padding-top: 100px;
+}
+.component:last-child{
+    padding-bottom: 100px;
 }
 .black-tip{
     position: absolute;
