@@ -20,7 +20,6 @@ $(document).ready(function(){
                 '<div class="chart-content">' +
                     '<ul>';
                 strMyWork += str1;
-                console.log(value);
                 str2 = '<li>Have Done:</li>';
                 value.content.forEach(function(item){
                     strTemp = '<li>' + item + ';</li>';
@@ -43,7 +42,6 @@ $(document).ready(function(){
                 '<div class="chart-content">' +
                     '<ul>';
                 strGuide += str1;
-                console.log(value);
                 str2 = '';
                 value.content.forEach(function(item){
                     strTemp = '<li>' + item + ';</li>';
