@@ -23,9 +23,21 @@
             "date": "01/07/2018",
             "content": [
                 "learn basic operation of Blender, try to model the coordinate",
-                "read '3D开发知识-投影及各种变化' & 'three.js引擎'",
+                "read 《第4章 3D开发知识-投影及各种变化》 & 《第11章 three.js引擎》",
                 "read senior's code",
-                "difficulty: trun tree data to json format"
+                "【Q1】trun tree data to json format"
+            ]
+        },
+        {
+            "date": "08/07/2018",
+            "content": [
+                "ajax load verticles.json and branch.json",
+                "learn 《第9章 常用3D开发技巧》",
+                "【fix Q1】preprocess senior's final tree data(c#-csv-python-json-js-load)",
+                "【fail】 try point and line texture",
+                "【fail】 try widen line width to form geometry",
+                "【fail】 try use cylinder to form geometry",
+                "【trying】 try use verticles and face to form geometry"
             ]
         }
     ],
