@@ -39,6 +39,21 @@
                 "【fail】 try use cylinder to form geometry",
                 "【trying】 try use verticles and face to form geometry"
             ]
+        },
+        {
+            "date": "11/07/2018",
+            "content": [
+                "use json to draw tree skeleton(length>25 cylinder, otherwise vf)",
+                "user phong material texture",
+                "【Q2】leaves rotation", 
+                "【Q3】more realistic drawing method"
+            ]
+        },
+        {
+            "date": "12/07-17/07",
+            "content": [
+                "/* back home */"               
+            ]
         }
     ],
     "data2": [
