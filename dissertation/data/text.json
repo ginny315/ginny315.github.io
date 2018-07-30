@@ -62,6 +62,13 @@
                 "convert previous code to webpack+es6",
                 "【Q4】texture image load combine to new project"              
             ]
+        },
+        {
+            "date": "29/07/2018",
+            "content": [
+                "read source code webgl-lod(terrain lod)",
+                "【fix Q4】texture image load once, reuse material"              
+            ]
         }
     ],
     "data2": [
