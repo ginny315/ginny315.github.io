@@ -69,6 +69,13 @@
                 "read source code webgl-lod(terrain lod)",
                 "【fix Q4】texture image load once, reuse material"              
             ]
+        },
+        {
+            "date": "05/08/2018",
+            "content": [
+                "read source code webgl-lod(terrain lod)",
+                "transform  part of terrain code to my project and run successfully."              
+            ]
         }
     ],
     "data2": [
