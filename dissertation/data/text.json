@@ -74,7 +74,16 @@
             "date": "05/08/2018",
             "content": [
                 "read source code webgl-lod(terrain lod)",
-                "transform  part of terrain code to my project and run successfully."              
+                "transform part of terrain code to my project and run successfully."              
+            ]
+        },
+        {
+            "date": "12/08/2018",
+            "content": [
+                "transform  part of terrain code to my project and run successfully.",
+                "add stat to monoitor FPS",
+                "change tree to xy coordinate growth",
+                "finish learning noise algorithm"            
             ]
         }
     ],
