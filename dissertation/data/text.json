@@ -85,6 +85,24 @@
                 "change tree to xy coordinate growth",
                 "finish learning noise algorithm"            
             ]
+        },
+        {
+            "date": "14/08/2018",
+            "content": [
+                "make change to noise algorithm."            
+            ]
+        },
+        {
+            "date": "15/08-27/08",
+            "content": [
+                "/* ill in hospital */"               
+            ]
+        },
+        {
+            "date": "2/09/2018",
+            "content": [
+               "modify morph Factor, try best to make transformation smoothly."            
+            ]
         }
     ],
     "data2": [
