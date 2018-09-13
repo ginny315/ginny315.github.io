@@ -99,9 +99,16 @@
             ]
         },
         {
-            "date": "2/09/2018",
+            "date": "02/09/2018",
             "content": [
                "modify morph Factor, try best to make transformation smoothly."            
+            ]
+        },
+        {
+            "date":"09/09/2018",
+            "content":[
+                "search materials for how many vertices WebGL can draw.",
+                "test the limination of browser and compare the result with theory."
             ]
         }
     ],
@@ -120,6 +127,22 @@
                 "appointment with supervisor together with senior",
                 "should use senior's project to generate offline dataset as my input",
                 "focus on browser rendering and optimazation"
+            ]
+        },
+        {
+            "date":"07/09/2018",
+            "content":[
+                "should focus on two problems:",
+                "(1) the tree data struct",
+                "(2) the limitation of rendering"
+            ]
+        },
+        {
+            "date":"10/09/2018",
+            "content":[
+                "explain the research result to supervisor",
+                "confirm the initial presentation focus",
+                "if time sufficient, try to program on the construct of obj file"
             ]
         }
     ]
