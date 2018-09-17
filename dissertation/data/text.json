@@ -110,6 +110,13 @@
                 "search materials for how many vertices WebGL can draw.",
                 "test the limination of browser and compare the result with theory."
             ]
+        },
+        {
+            "date":"16/09/2018",
+            "content":[
+                "prepare for initial presentatiion.",
+                "finish loading billboard and making billboard face to camera all the time."
+            ]
         }
     ],
     "data2": [
