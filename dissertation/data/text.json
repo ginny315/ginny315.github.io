@@ -89,7 +89,7 @@
         {
             "date": "14/08/2018",
             "content": [
-                "make change to noise algorithm."            
+                "make change to noise algorithm"            
             ]
         },
         {
@@ -101,21 +101,36 @@
         {
             "date": "02/09/2018",
             "content": [
-               "modify morph Factor, try best to make transformation smoothly."            
+               "modify morph Factor, try best to make transformation smoothly"            
             ]
         },
         {
             "date":"09/09/2018",
             "content":[
-                "search materials for how many vertices WebGL can draw.",
-                "test the limination of browser and compare the result with theory."
+                "search materials for how many vertices WebGL can draw",
+                "test the limination of browser and compare the result with theory"
             ]
         },
         {
             "date":"16/09/2018",
             "content":[
-                "prepare for initial presentatiion.",
-                "finish loading billboard and making billboard face to camera all the time."
+                "prepare for initial presentatiion",
+                "finish loading billboard and making billboard face to camera all the time"
+            ]
+        },
+        {
+            "date":"23/09/2018",
+            "content":[
+                "write basic part of dissertation",
+                "add interation to fluctuation change by user",
+                "learn obj format",
+                "construct a cylinder model"
+            ]
+        },
+        {
+            "date":"30/09/2018",
+            "content":[
+                "write parts of dissertation"
             ]
         }
     ],
@@ -150,6 +165,14 @@
                 "explain the research result to supervisor",
                 "confirm the initial presentation focus",
                 "if time sufficient, try to program on the construct of obj file"
+            ]
+        },
+        {
+            "date":"14/09/2018",
+            "content":[
+                "should explain how to deal with fluctuation change",
+                "maybe add some interation",
+                "tree is also important"
             ]
         }
     ]

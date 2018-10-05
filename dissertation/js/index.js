@@ -42,7 +42,7 @@ $(document).ready(function(){
                 '<div class="chart-content">' +
                     '<ul>';
                 strGuide += str1;
-                str2 = '';
+                str2 = '<li>👩‍🏫:</li>';
                 value.content.forEach(function(item){
                     strTemp = '<li>' + item + ';</li>';
                     str2 += strTemp;
