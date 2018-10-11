@@ -182,6 +182,12 @@
                 "maybe add some interation",
                 "tree is also important"
             ]
+        },
+        {
+            "date":"10/10/2018",
+            "content":[
+                "discuss about solutions to add leaves to obj-formatted tree"
+            ]
         }
     ]
 }
