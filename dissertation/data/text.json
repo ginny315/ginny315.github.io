@@ -148,6 +148,14 @@
                 "finish add leaves to obj-formatted tree",
                 "write parts of dissertation"
             ]
+        },
+        {
+            "date":"21/10/2018",
+            "content":[
+                "finish sky rendering",
+                "add more billboards to the terrain",
+                "write parts of dissertation"
+            ]
         }
     ],
     "data2": [
