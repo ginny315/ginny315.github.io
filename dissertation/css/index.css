@@ -1,15 +1,77 @@
 html,body{
     width: 100%;
-    overflow: hidden;
+    min-width: 1000px;
+    /* overflow: hidden; */
     height: 100%;
 }
-.row{
-    margin: 0;
+.introduction-content{
+    width: 100%;
+    position: relative;
+    height: 400px;
+    font-size: 0;
 }
-.wrap{
+.introduction-title{
+    padding: 50px; 
+}
+
+.introduction-content-left{
+    background-color: rgb(22, 69, 69);
+    width: 40%;
+    height: calc(100% - 50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    padding: 0 5%;
+    padding-top: 50px;
+    font-size: 1.5rem;
+}
+.introduction-content-left p{
+    text-align: center;
+    font-size: 2rem;
+}
+.introduction-content-right{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #212226;
+}
+.introduction-content-image{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+}
+.author{
+    width: 100%;
+    padding: 50px;
+    text-align: center;
+}
+.author-describe{
+    width: 40%;
+    display: inline-block;
+}
+.author-describe p:first-child{
+    font-size: 2rem;
+}
+.author-img{
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 50%;
+    border: 5px solid;
+    vertical-align: baseline;
+}
+.agenda-wrap{
     width: 100%;
     height: 100%;
-   }
+    overflow: hidden;
+    background-color: #ccc;
+    height: 250px;
+    position: relative;
+}
 .title{
     margin: 0 auto;
     font-size: 30px;
@@ -72,27 +134,30 @@ html,body{
     background: #fff; 
     padding: 20px
 }
-.container-about{
+/* .container-about{
     width: 100%;
     background-color: #ccc;
     height: 230px;
-}
-.container-about .content{
+} */
+ .content{
+    width: 650px;
     margin: auto;
     position: absolute;
     left: 50%;
     transform: translate3d(-50%,0,0);
     -webkit-transform:translate3d(-50%,0,0);
+    margin-top: 20px;
 }
-.container-about .content .introduction{
+ .content .introduction{
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 .wrap-girl{
     width: 150px;
     display: inline-block;
     vertical-align: bottom;
 }
-.container-about ul{
+ ul{
     display: inline-block;
 }
 img{
@@ -166,4 +231,10 @@ img{
 }
 .pt-20{
     padding-top:20px;
+}
+.pd-10{
+    padding-bottom: 10px;
+}
+.mt-20{
+    margin-top: 20px;
 }
