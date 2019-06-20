@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>vue+flask前后端分离项目（3） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是总结第三篇，包括linux服务器中nginx安装配置，使用nginx部署服务，以及允许跨域资源访问。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue+flask前后端分离项目（3）">
+<meta property="og:url" content="https://guoningyan.com/2019/06/20/vue-flask前后端分离项目（3）/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="这是总结第三篇，包括linux服务器中nginx安装配置，使用nginx部署服务，以及允许跨域资源访问。">
+<meta property="og:updated_time" content="2019-06-20T02:24:44.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue+flask前后端分离项目（3）">
+<meta name="twitter:description" content="这是总结第三篇，包括linux服务器中nginx安装配置，使用nginx部署服务，以及允许跨域资源访问。">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-vue-flask前后端分离项目（3）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/20/vue-flask前后端分离项目（3）/" class="article-date">
+  	<time datetime="2019-06-20T01:21:44.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue+flask前后端分离项目（3）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这是总结第三篇，包括linux服务器中nginx安装配置，使用nginx部署服务，以及允许跨域资源访问。</p>
+</blockquote>
+<a id="more"></a>
+<p>Linux中安装nginx网上很多文章都有写，附录链接中有我推荐的一篇。<br>简单的可以使用apt-get安装，但因为我没有root权限，所以只能通过源码安装，幸好服务器中大佬已经安装好gcc环境了，我只需要下载好直接编译就行。</p>
+<h4 id="nginx_u5B89_u88C5"><a href="#nginx_u5B89_u88C5" class="headerlink" title="nginx安装"></a>nginx安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.17.0.tar.gz</span><br><span class="line">tar -zxvf nginx-1.17.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.17.0/</span><br><span class="line">./configure --prefix=nginx</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>启动nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> nginx/</span><br><span class="line">./sbin/nginx</span><br></pre></td></tr></table></figure></p>
+<p>若遇到端口占用，可以先杀死进程再启动。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -A | grep nginx</span><br><span class="line"><span class="built_in">kill</span> -9 pid</span><br></pre></td></tr></table></figure></p>
+<p>在浏览器输入服务器ip+port地址，出现<code>Welcome to nginx!</code>即为安装成功。</p>
+<h4 id="nginx_u914D_u7F6E"><a href="#nginx_u914D_u7F6E" class="headerlink" title="nginx配置"></a>nginx配置</h4><p>接下来是修改端口，因为在服务器中我没有root权限，所以需要在nginx.conf中修改listen端口，并且端口号需要是大于1024的任何一个数字。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/nginx-1.17.0/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure></p>
+<p>nginx.conf中修改结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       1025;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>dist文件夹是我的前端项目打包后生成的文件，存放于/home/myname之中，作为静态文件的根目录，我希望在浏览器中输入 <a href="http://ip:port" target="_blank" rel="external">http://ip:port</a> 可以直接访问到dist中首页，所以还要修改下配置。<br>nginx.conf中修改结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line">     listen       1025;</span><br><span class="line">     server_name  localhost;</span><br><span class="line"></span><br><span class="line">     location / &#123;</span><br><span class="line">         root   root /home/myname/dist;</span><br><span class="line">         index  index.html index.htm;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="nginx_u8DE8_u57DF_u8BBF_u95EE_u914D_u7F6E"><a href="#nginx_u8DE8_u57DF_u8BBF_u95EE_u914D_u7F6E" class="headerlink" title="nginx跨域访问配置"></a>nginx跨域访问配置</h4><p>接下来在nginx中添加允许跨域访问，设置所有带有api的请求都可以绕过跨域限制。<br>nginx.conf中修改结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">    add_header <span class="string">'Access-Control-Allow-Origin'</span> <span class="string">'*'</span>;</span><br><span class="line">    add_header <span class="string">'Access-Control-Allow-Credentials'</span> <span class="string">'true'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一般还需要在第一行添加：（没有root权限的用户这一行是不起作用的）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user root owner;</span><br></pre></td></tr></table></figure></p>
+<p>保存修改后重启nginx，用浏览器打开 <a href="http://ip:1025" target="_blank" rel="external">http://ip:1025</a> ，就能直接访问到前端首页啦～也能顺利和服务端进行数据请求～愉快！</p>
+<p><code>附录</code>：<br><a href="https://www.jianshu.com/p/7cb1a824333e" target="_blank" rel="external">Linux环境nginx配置</a><br><a href="https://blog.csdn.net/shixiufang/article/details/44309971" target="_blank" rel="external">如何在没有root权限下安装Nginx</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/20/vue-flask前后端分离项目（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue+flask前后端分离项目（2）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vue-flask前后端分离项目（3）" data-title="vue+flask前后端分离项目（3）" data-url="https://guoningyan.com/2019/06/20/vue-flask前后端分离项目（3）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

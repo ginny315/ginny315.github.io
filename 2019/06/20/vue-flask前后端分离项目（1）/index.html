@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>vue+flask前后端分离项目（1） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue+flask前后端分离项目（1）">
+<meta property="og:url" content="https://guoningyan.com/2019/06/20/vue-flask前后端分离项目（1）/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。">
+<meta property="og:image" content="https://guoningyan.com/img/vue_pro.png">
+<meta property="og:image" content="https://guoningyan.com/img/vue_dist.png">
+<meta property="og:image" content="https://guoningyan.com/img/error2.png">
+<meta property="og:image" content="https://guoningyan.com/img/error1.png">
+<meta property="og:updated_time" content="2019-06-20T07:25:34.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue+flask前后端分离项目（1）">
+<meta name="twitter:description" content="最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。">
+<meta name="twitter:image" content="https://guoningyan.com/img/vue_pro.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-vue-flask前后端分离项目（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/20/vue-flask前后端分离项目（1）/" class="article-date">
+  	<time datetime="2019-06-20T00:56:07.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue+flask前后端分离项目（1）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。<br>写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～<br>这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="u65B0_u5EFAvue_u9879_u76EE"><a href="#u65B0_u5EFAvue_u9879_u76EE" class="headerlink" title="新建vue项目"></a>新建vue项目</h4><p>本项目的node和npm为全局安装版本，<code>node&gt;=6.0.0</code>，<code>npm&gt;=3.0.0</code>，使用<code>vue-cli</code>进行一键配置。<br>新建项目命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir projectName</span><br><span class="line">vue init webpack client</span><br><span class="line"><span class="built_in">cd</span> client</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p>用浏览器打开<code>http://127.0.0.1:8080</code>看到有<code>vue</code>图片出现即启动成功。</p>
+<p>文件目录格式如下图所示，需要在<code>component</code>中编写<code>vue</code>组件，在<code>router</code>中的<code>index.js</code>中配置路由。<br><img src="/img/vue_pro.png" alt="vue目录结构"></p>
+<p>生成打包命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
+<p>打包将在原目录下生成<code>dist</code>文件夹，<code>static</code>下面是打包后的静态文件<br><img src="/img/vue_dist.png" alt="dist目录"> </p>
+<h4 id="vue_u4E2D_u4F7F_u7528less"><a href="#vue_u4E2D_u4F7F_u7528less" class="headerlink" title="vue中使用less"></a>vue中使用less</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install less less-loader --save--dev</span><br></pre></td></tr></table></figure>
+<p><code>style</code>中添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&quot;less&quot; scoped&gt;</span><br><span class="line">@import &apos;../assets/reset.less&apos;; </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="u4F7F_u7528axios_u53D1_u9001_u8BF7_u6C42"><a href="#u4F7F_u7528axios_u53D1_u9001_u8BF7_u6C42" class="headerlink" title="使用axios发送请求"></a>使用axios发送请求</h4><p><code>vue</code>中推荐使用<code>axios</code>进行<code>http</code>请求处理。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install axios --save--dev</span><br></pre></td></tr></table></figure></p>
+<p><code>script</code>中这样使用：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line">axios.post(reqPath+<span class="string">'upload'</span>,form,config).then((res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> data = res.data;</span><br><span class="line">    <span class="keyword">if</span>(data.code == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//do something </span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;).catch((error) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="u5F00_u53D1_u73AF_u5883_u5141_u8BB8_u8DE8_u57DF"><a href="#u5F00_u53D1_u73AF_u5883_u5141_u8BB8_u8DE8_u57DF" class="headerlink" title="开发环境允许跨域"></a>开发环境允许跨域</h4><p>当我的客户端发起一个<code>post</code>请求后，迟迟没有收到server端的返回结果，打开控制台，发现了以下提示：<br><img src="/img/error2.png" alt="浏览器跨域"><br>在求助一个朋友之后得知，chrome内核已经把http头为json的返回强制做了cros ，即使加了跨域头也不行。所以需要在开发环境中使用nodejs做反向代理。<br>在<code>build/webpack.dev.conf.js</code>中修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      <span class="string">'/api'</span>: &#123;</span><br><span class="line">        target: <span class="string">'serverip:port'</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">          <span class="string">'host'</span>: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样配置之后，请求接口时不要写完整地址，写成例如<code>./api/upload</code>的形式，即可绕过跨域限制。</p>
+<h4 id="u8BB0_u5F55_u4E00_u4E2A_u95EE_u9898"><a href="#u8BB0_u5F55_u4E00_u4E2A_u95EE_u9898" class="headerlink" title="记录一个问题"></a>记录一个问题</h4><p>我在向后端发请求时还遇到过这样一个问题：<br><img src="/img/error1.png" alt="error1"><br>查阅资料后发现时找不到资源，我重启服务端之后问题解决。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/20/vue-flask前后端分离项目（2）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          vue+flask前后端分离项目（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/09/作品集合/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">作品集合</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vue-flask前后端分离项目（1）" data-title="vue+flask前后端分离项目（1）" data-url="https://guoningyan.com/2019/06/20/vue-flask前后端分离项目（1）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

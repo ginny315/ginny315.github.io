@@ -6,7 +6,13 @@ $(document).ready(function(){
   var width = svgSize.width,
       height = svgSize.height;
 
-  var nodes = d3.range(101).map(function(val) { return {radius: Math.floor(Math.random()*6) + 10, id: val}; }),
+  var nodes = d3.range(101).map(
+    function(val) { 
+      return {
+        radius: Math.floor(Math.random()*6) + 10, 
+        id: val
+      }; 
+    }),
       links = [],
       root = nodes[0],
       color = d3.scale.category20();
