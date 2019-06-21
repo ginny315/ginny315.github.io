@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://guoningyan.com/2019/06/20/vue-flask前后端分离项目（2）/index.html">
 <meta property="og:site_name" content="ginny's blog">
 <meta property="og:description" content="这是总结第二篇，总结flask项目搭建，restful接口设计，以及返回结果中添加允许跨域头。">
-<meta property="og:updated_time" content="2019-06-20T07:28:56.445Z">
+<meta property="og:updated_time" content="2019-06-21T01:35:55.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue+flask前后端分离项目（2）">
 <meta name="twitter:description" content="这是总结第二篇，总结flask项目搭建，restful接口设计，以及返回结果中添加允许跨域头。">
@@ -188,6 +188,8 @@
 <p>我的前端请求使用的是<code>formData</code>格式，需要将请求变为字典格式后用<code>key-value</code>进行取值，遇到<code>file</code>形式的数据则直接使用<code>request.files[&#39;file&#39;]</code>进行取值。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">data = request.form.to_dict()</span><br><span class="line">username = data.get(<span class="string">'username'</span>)</span><br><span class="line">file = request.files[<span class="string">'file'</span>]</span><br></pre></td></tr></table></figure></p>
 <h4 id="flask_u4E2D_u5141_u8BB8_u8DE8_u57DF"><a href="#flask_u4E2D_u5141_u8BB8_u8DE8_u57DF" class="headerlink" title="flask中允许跨域"></a>flask中允许跨域</h4><p>在返回结果中允许跨域需要使用<code>flask_cors</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install flask-cors</span><br></pre></td></tr></table></figure></p>
 <p>server端添加如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_cors <span class="keyword">import</span> *</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">CORS(app, resources=<span class="string">r'/*'</span>)</span><br><span class="line"></span><br><span class="line">res.headers[<span class="string">'Access-Control-Allow-Origin'</span>] = <span class="string">'*'</span></span><br><span class="line">res.headers[<span class="string">'Access-Control-Allow-Methods'</span>] = <span class="string">'POST,GET,OPTIONS'</span></span><br><span class="line">res.headers[<span class="string">'Access-Control-Allow-Headers'</span>] = <span class="string">'x-requested-with,content-type'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="u8DE8_u57DF_u5C0F_u7ED3"><a href="#u8DE8_u57DF_u5C0F_u7ED3" class="headerlink" title="跨域小结"></a>跨域小结</h4><p>在（1）中已经总结了在开发环境中绕过跨域限制，现在对跨域作一个小结。<br>跨域是指从一个域名的网页去请求另一个域名的资，更加严格一点的定义是：只要协议，域名，端口有任何一个的不同，就被当作是跨域。<br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。<br>实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。<br>经过测试，确实是只要server添加头信息，不管我是本地起的服务还是其他http服务，都能和接口顺利通信。</p>
+<p><code>附录</code>：<br><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">跨域资源共享 CORS 详解</a></p>
 
       
     </div>
