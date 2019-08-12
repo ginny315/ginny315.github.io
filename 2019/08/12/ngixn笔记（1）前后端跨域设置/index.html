@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ngixn笔记（1） 前后端跨域设置 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近公司项目需要我调用别的部门开发的接口，由于部门之间服务器独立，必然涉及到了跨域问题。这篇文章记录了我配置的nginx，前后端允许跨域。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ngixn笔记（1） 前后端跨域设置">
+<meta property="og:url" content="https://guoningyan.com/2019/08/12/ngixn笔记（1）前后端跨域设置/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="最近公司项目需要我调用别的部门开发的接口，由于部门之间服务器独立，必然涉及到了跨域问题。这篇文章记录了我配置的nginx，前后端允许跨域。">
+<meta property="og:image" content="https://guoningyan.com/img/nginx1-error2.png">
+<meta property="og:image" content="https://guoningyan.com/img/nginx1-error1.png">
+<meta property="og:updated_time" content="2019-08-12T05:29:09.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ngixn笔记（1） 前后端跨域设置">
+<meta name="twitter:description" content="最近公司项目需要我调用别的部门开发的接口，由于部门之间服务器独立，必然涉及到了跨域问题。这篇文章记录了我配置的nginx，前后端允许跨域。">
+<meta name="twitter:image" content="https://guoningyan.com/img/nginx1-error2.png">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ngixn笔记（1）前后端跨域设置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/12/ngixn笔记（1）前后端跨域设置/" class="article-date">
+  	<time datetime="2019-08-12T01:57:34.000Z" itemprop="datePublished">2019-08-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ngixn笔记（1） 前后端跨域设置
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近公司项目需要我调用别的部门开发的接口，由于部门之间服务器独立，必然涉及到了跨域问题。这篇文章记录了我配置的nginx，前后端允许跨域。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="u8DE8_u57DF_u7684_u4EA7_u751F"><a href="#u8DE8_u57DF_u7684_u4EA7_u751F" class="headerlink" title="跨域的产生"></a>跨域的产生</h4><p>首先明确跨域的产生是由于浏览器通源策略，限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。</p>
+<h4 id="u95EE_u9898_u63CF_u8FF0"><a href="#u95EE_u9898_u63CF_u8FF0" class="headerlink" title="问题描述"></a>问题描述</h4><p>发了请求之后迟迟没有收到回复，打开控制台一看，请求404了，再仔细找原因之后发现，我原来发送的post请求变成了option请求。<br><img src="/img/nginx1-error2.png" alt="chrome跨域"></p>
+<p>chrome认为前端没有添加头部信息，所以不允许前端页面发出请求。<br><img src="/img/nginx1-error1.png" alt="chrome跨域"></p>
+<h4 id="u540E_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u5F00_u53D1_u73AF_u5883_uFF09"><a href="#u540E_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u5F00_u53D1_u73AF_u5883_uFF09" class="headerlink" title="后端允许跨域（开发环境）"></a>后端允许跨域（开发环境）</h4><p>服务器默认是不被允许跨域的。给Nginx服务器配置<code>Access-Control-Allow-Origin *</code>后，表示服务器可以接受所有的请求源（Origin）,即接受所有跨域的请求。 <code>Access-Control-Allow-Methods</code> 是为了防止出现Content-Type is not allowed by Access-Control-Allow-Headers in preflight response. <code>Access-Control-Allow-Headers</code>是为了防止出现当前请求Content-Type的值不被支持，当发起了”application/json”的类型请求时添加这个头可以解决。<br>服务器nginx添加以下配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /myurl/ &#123;  </span><br><span class="line">    add_header Access-Control-Allow-Origin *;</span><br><span class="line">    add_header Access-Control-Allow-Methods <span class="string">'GET, POST, OPTIONS'</span>;</span><br><span class="line">    add_header Access-Control-Allow-Headers <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$request_method</span> = <span class="string">'OPTIONS'</span>) &#123;</span><br><span class="line">        <span class="built_in">return</span> 204;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="u9884_u68C0_u8BF7_u6C42"><a href="#u9884_u68C0_u8BF7_u6C42" class="headerlink" title="预检请求"></a>预检请求</h4><p>对那些可能对服务器数据产生副作用的HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。</p>
+<p>Content-Type不属于以下MIME类型的，都属于预检请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">application/x-www-form-urlencoded</span><br><span class="line">multipart/form-data</span><br><span class="line">text/plain</span><br></pre></td></tr></table></figure></p>
+<p>options先行验证是否允许跨域，若不允许，就不会进行下一个post请求，所以之前会出现请求404的情况。</p>
+<h4 id="u540E_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u751F_u4EA7_u73AF_u5883_uFF09"><a href="#u540E_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u751F_u4EA7_u73AF_u5883_uFF09" class="headerlink" title="后端允许跨域（生产环境）"></a>后端允许跨域（生产环境）</h4><p>此时处于生产环境，允许所有请求不太安全，所以可以由后端自定义请求的格式，当格式符合条件时，才添加跨域头。<br>后端接口一般带有统一前缀，这里设置所有带有<code>api</code>的请求都可以绕过跨域限制。<br><code>nginx.conf</code>中修改结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">    add_header <span class="string">'Access-Control-Allow-Origin'</span> <span class="string">'*'</span>;</span><br><span class="line">    add_header <span class="string">'Access-Control-Allow-Credentials'</span> <span class="string">'true'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="u524D_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u751F_u4EA7_u73AF_u5883_uFF09"><a href="#u524D_u7AEF_u5141_u8BB8_u8DE8_u57DF_uFF08_u751F_u4EA7_u73AF_u5883_uFF09" class="headerlink" title="前端允许跨域（生产环境）"></a>前端允许跨域（生产环境）</h4><p>由于这个项目涉及到了不同部门的接口，某个前辈的接口并没有按照规定来写，所以这里前端需要自己修改一下地址格式。<br>例如：原来的请求地址为<code>http://abc.com/origin</code>，现在设计一个新的请求地址<code>http://abc.com/myapi/origin</code><br>修改nginx配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /myurl/ &#123;</span><br><span class="line">    root /home/guoningyan/myproject/;</span><br><span class="line">    index index.html;</span><br><span class="line">    try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /myapi/origin &#123;</span><br><span class="line">    proxy_pass http://abc.com/origin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>意思为当发送的请求以<code>/myapi/origin</code>为后缀时，自动代理到原请求地址<code>http://abc.com/origin</code>。<br>有一点要注意的是，在nginx中配置proxy_pass代理转发时，如果在proxy_pass后面的url加/，表示绝对根路径；如果没有/，表示相对路径。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/01/作品集合/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          作品集合
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/12/vue笔记（1）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue笔记（1）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ngixn笔记（1）前后端跨域设置" data-title="ngixn笔记（1） 前后端跨域设置" data-url="https://guoningyan.com/2019/08/12/ngixn笔记（1）前后端跨域设置/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
