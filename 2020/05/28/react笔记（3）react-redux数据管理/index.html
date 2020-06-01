@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>react笔记（3）react-redux数据管理 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前期考虑不周的坑，后期总要来填的。— ginny Guo在这个项目的时候技术选型的时候，因为“时间周期较短”和“产品交流不充分”，没能完全get到prd中的一些细节问题，当时感觉传统的状态管理已经完全hold住这个项目了，结果在后期出现了一个state对应多个view改变，多个action触发一个state改变等问题。多个组件保留状态需要多个copy，简直是灾难啊啊！！！更加难过的是，后期出现了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react笔记（3）react-redux数据管理">
+<meta property="og:url" content="https://guoningyan.com/2020/05/28/react笔记（3）react-redux数据管理/index.html">
+<meta property="og:site_name" content="ginny's blog">
+<meta property="og:description" content="前期考虑不周的坑，后期总要来填的。— ginny Guo在这个项目的时候技术选型的时候，因为“时间周期较短”和“产品交流不充分”，没能完全get到prd中的一些细节问题，当时感觉传统的状态管理已经完全hold住这个项目了，结果在后期出现了一个state对应多个view改变，多个action触发一个state改变等问题。多个组件保留状态需要多个copy，简直是灾难啊啊！！！更加难过的是，后期出现了">
+<meta property="og:image" content="https://guoningyan.com/img/redux-1.jpg">
+<meta property="og:updated_time" content="2020-06-01T08:24:45.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react笔记（3）react-redux数据管理">
+<meta name="twitter:description" content="前期考虑不周的坑，后期总要来填的。— ginny Guo在这个项目的时候技术选型的时候，因为“时间周期较短”和“产品交流不充分”，没能完全get到prd中的一些细节问题，当时感觉传统的状态管理已经完全hold住这个项目了，结果在后期出现了一个state对应多个view改变，多个action触发一个state改变等问题。多个组件保留状态需要多个copy，简直是灾难啊啊！！！更加难过的是，后期出现了">
+<meta name="twitter:image" content="https://guoningyan.com/img/redux-1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="ginny&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ningyan Guo</a></h1>
+		</hgroup>
+
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guoningyan.com/cv">cv</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://penmanbox.com">penmanbox</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">计科刚毕业，喜欢玩各种神奇的东西，前端进阶中～</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ningyan Guo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/psb.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ningyan Guo</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ginny315" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1350782730" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/lan-yan-er" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="http://douban.com/people/52146131" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-react笔记（3）react-redux数据管理" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/28/react笔记（3）react-redux数据管理/" class="article-date">
+  	<time datetime="2020-05-28T01:59:03.000Z" itemprop="datePublished">2020-05-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react笔记（3）react-redux数据管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>前期考虑不周的坑，后期总要来填的。— ginny Guo<br>在这个项目的时候技术选型的时候，因为“时间周期较短”和“产品交流不充分”，没能完全get到prd中的一些细节问题，当时感觉传统的状态管理已经完全hold住这个项目了，结果在后期出现了一个state对应多个view改变，多个action触发一个state改变等问题。多个组件保留状态需要多个copy，简直是灾难啊啊！！！更加难过的是，后期出现了渲染太慢的问题，严重影响用户体验，所以不得不重构引入Redux状态管理了。<br>本篇记录了react-redux的使用，以及项目前后设计的对比，为以后技术选型做一个铺垫。<br>本篇真的写了好几天啊，好难讲清楚Orz，以后还要填坑几次才行。<br><a id="more"></a></p>
+</blockquote>
+<h4 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h4><p><code>Redux</code> 是 <code>JavaScript</code> 状态容器，提供可预测化的状态管理。<br>其数据流大致如下：<br><img src="/img/redux-1.jpg" alt="redux"></p>
+<h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4><p>Redux 中只有一个单一的 <code>Store</code> ，存储了所有共享状态（以一个对象树的形式储存）。<br>合并后的reducer（之后讨论）作为参数传入store。</p>
+<p>根目录下入口文件index.js中添加store：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Provider&#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"><span class="keyword">import</span> myreducer <span class="keyword">from</span> <span class="string">'./reducers'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(myreducers);</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">        &lt;App /&gt;</span><br><span class="line">    &lt;/Provider&gt;,</span><br><span class="line">    document.getElementById('root')</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><p>Redux中把动作和状态独立，通过动作来改变状态。<code>Action</code> 是改变 <code>Store</code> 数据的唯一来源，包含 <code>View</code> 中数据变化、用户操作、服务器响应等等。</p>
+<p>Redux中通过Action创建函数的结果（返回值是一个action对象），传给 <code>dispatch</code> 方法即可发起一次dispatch过程。<br>Store里能直接通过 <code>store.dispatch()</code> 调用dispatch方法。</p>
+<p>Action本质上是一个对象，type是一个字符串常量，表示要执行的动作。<br>Action只有指定动作，不包含更新状态的方法，方法在下面的reducer中会提到。</p>
+<p>触发AReducer的actions，存放于actions/index.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// some actions</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> AddSth = (data) =&gt; (&#123;</span><br><span class="line">    type: <span class="string">'sthAdd'</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> DelSth = (data) =&gt; (&#123;</span><br><span class="line">    type: <span class="string">'sthDel'</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> UpdateSth = (data) =&gt; (&#123;</span><br><span class="line">    type: <span class="string">'sthUpdate'</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ClearList = (data) =&gt; (&#123;</span><br><span class="line">    type: <span class="string">'listClear'</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><p><code>Reducer</code> 是一个用于处理事件的纯函数，决定每个action如何改变应用的state。<br>在本项目中为了方便区分各个业务逻辑（互相独立），为每个业务逻辑编写一个reducer，存放于reducers文件夹中间，reduce文件夹中的index.js合并所有reduce，作为一个根级的reducer。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;combineReducers&#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="keyword">import</span> AReducer <span class="keyword">from</span> <span class="string">'reducers'</span>;</span><br><span class="line"><span class="keyword">import</span> BReducer <span class="keyword">from</span> <span class="string">'reducers'</span>;</span><br><span class="line"><span class="keyword">import</span> CReducer <span class="keyword">from</span> <span class="string">'reducers'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myreducer = combineReducers(&#123;</span><br><span class="line">    AReducer,</span><br><span class="line">    BReducer,</span><br><span class="line">    CReducer,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> myreducers;</span><br></pre></td></tr></table></figure></p>
+<p>单个reduce是形式为 <code>(state, action) =&gt; state</code> 的纯函数，state的形式可以是基本类型、数组、对象等等。在本项目中状态是存储的数据，数据用数组list来表示。</p>
+<p>举例AReducer，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reducer </span></span><br><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'lodash'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">AReducer</span>(<span class="params">list:[], action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;data = &#123;&#125;&#125; = action;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'sthAdd'</span>: &#123;</span><br><span class="line">           <span class="keyword">const</span> arrIndex = _.findIndex(</span><br><span class="line">                list,</span><br><span class="line">                (item) =&gt; <span class="built_in">parseInt</span>(item.id, <span class="number">10</span>) === <span class="built_in">parseInt</span>(data.id, <span class="number">10</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (arrIndex &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">                list.splice(arrIndex, <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                list.push(data);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'sthDel'</span>: &#123;</span><br><span class="line">            <span class="keyword">const</span> arrIndex = _.findIndex(</span><br><span class="line">                list,</span><br><span class="line">                (item) =&gt; <span class="built_in">parseInt</span>(item.id, <span class="number">10</span>) === <span class="built_in">parseInt</span>(data.id, <span class="number">10</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (arrIndex &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">                list.splice(arrIndex, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'sthUpdate'</span>: &#123;</span><br><span class="line">          list.data.map(item =&gt; &#123;</span><br><span class="line">              <span class="keyword">if</span> (<span class="built_in">parseInt</span>(item.id, <span class="number">10</span>) === <span class="built_in">parseInt</span>(data.id, <span class="number">10</span>)) &#123;</span><br><span class="line">                item.xxx = data.xxx;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">return</span> item;</span><br><span class="line">          &#125;);</span><br><span class="line">          <span class="keyword">return</span> list;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="string">'listClear'</span>: &#123;</span><br><span class="line">            <span class="keyword">return</span> [];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="react-redux_u5BB9_u5668_u7EC4_u4EF6"><a href="#react-redux_u5BB9_u5668_u7EC4_u4EF6" class="headerlink" title="react-redux容器组件"></a>react-redux容器组件</h4><p><code>react-redux</code> 使用容器组件来把展示组件连接到Redux ，容器组件向Redux派发actions，同时监听state改变。<br>对于容器组件和展示组件的划分附录中有一篇官网推荐的阅读。目前来说，我在本项目中把需要处理共享数据的页面作为了容器组件，后期可能还要修改下。</p>
+<p>可以使用 <code>mapStateToProps</code> 来订阅 <code>Store</code>，其原理相当于在Store上安装了一个监听器，当Store中state改变了，子组件重新渲染。<br>可以定义 <code>mapDispatchToProps</code> 方法接收dispatch()方法并返回期望注入到展示组件的props中的回调方法。<br>在本项目中把action作为props整合数据，相当于包了一层dispatch的执行。</p>
+<p>假设AList为容器组件，AList中代码如下：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;connect&#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> AItem <span class="keyword">from</span> <span class="string">'../../components/AItem'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;AddSth&#125; <span class="keyword">from</span> <span class="string">'./actions'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AList</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      aList: []</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    getBetList = () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;list&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">return</span> list || [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    listAddHandle = (obj) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;AddSth&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        AddSth(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> aList = <span class="keyword">this</span>.getBetList();</span><br><span class="line">        <span class="keyword">return</span> (&lt;div className=&#123;'components-alist'&#125;&gt;</span><br><span class="line">          &#123;aList.map((item) =&gt; </span><br><span class="line">          &lt;div key=&#123;item.id&#125;&gt;</span><br><span class="line">            &lt;AItem data=&#123;item&#125; onAdd = &#123;this.listAddHandle.bind(this)&#125;/&gt;</span><br><span class="line">          &lt;/div&gt;)&#125;</span><br><span class="line">        &lt;/div&gt;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const mapStateToProps = state =&gt; (&#123;</span><br><span class="line">    aList: state.list</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">export default connect(mapItemToProps, &#123;AddSth&#125;)(AList);</span><br></pre></td></tr></table></figure></p>
+<p><code>附录</code>：<br><a href="https://www.redux.org.cn" target="_blank" rel="external">Redux</a><br><a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" target="_blank" rel="external">Presentational and Container Components</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/01/作品集合/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          作品集合
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/14/react笔记（2）websocket实时改变数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react笔记（2）websocket实时改变数据</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react笔记（3）react-redux数据管理" data-title="react笔记（3）react-redux数据管理" data-url="https://guoningyan.com/2020/05/28/react笔记（3）react-redux数据管理/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"guoningyan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 Ningyan Guo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
