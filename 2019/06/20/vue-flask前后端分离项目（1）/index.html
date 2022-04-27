@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue+flask前后端分离项目（1） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue+flask前后端分离项目（1）">
+<meta property="og:url" content="http://guoningyan.com/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。">
+<meta property="og:locale">
+<meta property="og:image" content="http://guoningyan.com/img/vue_pro.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue_dist.png">
+<meta property="og:image" content="http://guoningyan.com/img/error2.png">
+<meta property="og:image" content="http://guoningyan.com/img/error1.png">
+<meta property="article:published_time" content="2019-06-20T00:56:07.000Z">
+<meta property="article:modified_time" content="2019-10-29T06:24:19.063Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue_pro.png">
+  
+    <link rel="alternate" href="/atom.xml" title="ginny's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ginny&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guoningyan.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vue-flask前后端分离项目（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2019-06-20T00:56:07.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue+flask前后端分离项目（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。<br>写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～<br>这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。</p>
+</blockquote>
+<span id="more"></span>
+
+<h4 id="新建vue项目"><a href="#新建vue项目" class="headerlink" title="新建vue项目"></a>新建vue项目</h4><p>本项目的node和npm为全局安装版本，<code>node&gt;=6.0.0</code>，<code>npm&gt;=3.0.0</code>，使用<code>vue-cli</code>进行一键配置。<br>新建项目命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> projectName</span><br><span class="line">vue init webpack client</span><br><span class="line"><span class="built_in">cd</span> client</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>用浏览器打开<code>http://127.0.0.1:8080</code>看到有<code>vue</code>图片出现即启动成功。</p>
+<p>文件目录格式如下图所示，需要在<code>component</code>中编写<code>vue</code>组件，在<code>router</code>中的<code>index.js</code>中配置路由。<br><img src="/img/vue_pro.png" alt="vue目录结构"></p>
+<p>这时可能会出现一个问题，例如需要访问页面<code>http://://127.0.0.1:8080/a/</code>，浏览器却始终显示首页内容，url显示为<code>http://://127.0.0.1:8080/a#/</code>，解决方式是在<code>index.js</code>中添加一个<code>mode</code>参数，充分利用 <code>history.pushState</code> API来完成URL跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Router</span>(&#123;</span><br><span class="line">  <span class="attr">mode</span>:<span class="string">&#x27;history&#x27;</span>,</span><br><span class="line">  <span class="attr">routes</span>: [&#123;&#125;]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>生成打包命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>打包将在原目录下生成<code>dist</code>文件夹，<code>static</code>下面是打包后的静态文件<br><img src="/img/vue_dist.png" alt="dist目录"> </p>
+<h4 id="vue中使用less"><a href="#vue中使用less" class="headerlink" title="vue中使用less"></a>vue中使用less</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install less less-loader --save--dev</span><br></pre></td></tr></table></figure>
+<p><code>style</code>中添加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&quot;less&quot; scoped&gt;</span><br><span class="line">@import &#x27;../assets/reset.less&#x27;; </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用axios发送请求"><a href="#使用axios发送请求" class="headerlink" title="使用axios发送请求"></a>使用axios发送请求</h4><p><code>vue</code>中推荐使用<code>axios</code>进行<code>http</code>请求处理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install axios --save--dev</span><br></pre></td></tr></table></figure>
+<p><code>script</code>中这样使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line">axios.<span class="title function_">post</span>(reqPath+<span class="string">&#x27;upload&#x27;</span>,form,config).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> data = res.<span class="property">data</span>;</span><br><span class="line">    <span class="keyword">if</span>(data.<span class="property">code</span> == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//do something </span></span><br><span class="line">    &#125;</span><br><span class="line">    &#125;).<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="开发环境允许跨域"><a href="#开发环境允许跨域" class="headerlink" title="开发环境允许跨域"></a>开发环境允许跨域</h4><p>当我的客户端发起一个<code>post</code>请求后，迟迟没有收到server端的返回结果，打开控制台，发现了以下提示：<br><img src="/img/error2.png" alt="浏览器跨域"><br>在求助一个朋友之后得知，chrome内核已经把http头为json的返回强制做了cros ，即使加了跨域头也不行。所以需要在开发环境中使用nodejs做反向代理。<br>在<code>build/webpack.dev.conf.js</code>中修改代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;serverip:port&#x27;</span>,</span><br><span class="line">        <span class="attr">headers</span>: &#123;</span><br><span class="line">          <span class="string">&#x27;host&#x27;</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样配置之后，请求接口时不要写完整地址，写成例如<code>./api/upload</code>的形式，即可绕过跨域限制。</p>
+<h4 id="记录一个问题"><a href="#记录一个问题" class="headerlink" title="记录一个问题"></a>记录一个问题</h4><p>我在向后端发请求时还遇到过这样一个问题：<br><img src="/img/error1.png" alt="error1"><br>查阅资料后发现时找不到资源，我重启服务端之后问题解决。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guoningyan.com/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" data-id="cl2h85lhb000r639oc86d99p6" data-title="vue+flask前后端分离项目（1）" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%882%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          vue+flask前后端分离项目（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/MathQuiz-an-Android-Project/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">MathQuiz-an Android Project</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ife/" rel="tag">ife</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" rel="tag">工作实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1SDK/" rel="tag">微信SDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/angular/" style="font-size: 16.67px;">angular</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" style="font-size: 13.33px;">工作实习</a> <a href="/tags/%E5%BE%AE%E4%BF%A1SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 13.33px;">环境配置</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/26/vue%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">vue笔记（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">作品集合</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/28/react%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89react-redux%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/">react笔记（3）react-redux数据管理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/14/react%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89websocket%E5%AE%9E%E6%97%B6%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE/">react笔记（2）websocket实时改变数据</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/react%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">react笔记（1）父子组件通信</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Ningyan Guo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

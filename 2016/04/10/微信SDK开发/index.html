@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>微信SDK开发 | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="这篇是3月做的基于微信公众号开发的总结。有微信SDK的讲解以及我所走过的坑。还有调试实践和比较好的书写方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信SDK开发">
+<meta property="og:url" content="http://guoningyan.com/2016/04/10/%E5%BE%AE%E4%BF%A1SDK%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这篇是3月做的基于微信公众号开发的总结。有微信SDK的讲解以及我所走过的坑。还有调试实践和比较好的书写方法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-04-09T22:35:51.000Z">
+<meta property="article:modified_time" content="2016-08-01T15:03:26.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="微信SDK">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="ginny's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ginny&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guoningyan.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-微信SDK开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/04/10/%E5%BE%AE%E4%BF%A1SDK%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2016-04-09T22:35:51.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      微信SDK开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇是3月做的基于微信公众号开发的总结。<br>有微信SDK的讲解以及我所走过的坑。还有调试实践和比较好的书写方法。</p>
+</blockquote>
+<span id="more"></span>
+
+<p><code>步骤一</code>：绑定域名<br>通过微信公众平台登录后，可以设置公众号的“js接口安全域名”</p>
+<p><code>步骤二</code>：引入js文件<br>在引用接口的页面引入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="attr">http</span>:<span class="comment">//res.wx.qq.com/open/js/jweixin-1.0.0.js</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>require方式引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.<span class="title function_">config</span>(&#123;</span><br><span class="line">  <span class="attr">baseUrl</span>: <span class="string">&#x27;scripts/&#x27;</span>,</span><br><span class="line">  <span class="attr">paths</span>:&#123;</span><br><span class="line">    <span class="string">&#x27;wx&#x27;</span>:<span class="string">&#x27;http://res.wx.qq.com/open/js/jweixin-1.0.0&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>步骤三</code>：通过config接口注入权限验证配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">config</span>(&#123;</span><br><span class="line">    <span class="attr">debug</span>: <span class="literal">true</span>, <span class="comment">// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span></span><br><span class="line">    <span class="attr">appId</span>: <span class="string">&#x27;&#x27;</span>, <span class="comment">// 必填，公众号的唯一标识</span></span><br><span class="line">    <span class="attr">timestamp</span>: , <span class="comment">// 必填，生成签名的时间戳</span></span><br><span class="line">    <span class="attr">nonceStr</span>: <span class="string">&#x27;&#x27;</span>, <span class="comment">// 必填，生成签名的随机串</span></span><br><span class="line">    <span class="attr">signature</span>: <span class="string">&#x27;&#x27;</span>,<span class="comment">// 必填，签名，见附录1</span></span><br><span class="line">    <span class="attr">jsApiList</span>: [] <span class="comment">// 必填，需要使用的JS接口列表，所有JS接口列表见附录2</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>注意</code>发布的时候一定记住把debug模式去掉</p>
+<p> <code>步骤四</code>：通过ready接口处理成功的验证</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;				</span><br><span class="line">  <span class="comment">//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口</span></span><br><span class="line">  wx.<span class="title function_">onMenuShareTimeline</span>(&#123;</span><br><span class="line">    <span class="attr">title</span>: that.<span class="property">title</span>, <span class="comment">// 分享标题</span></span><br><span class="line">    <span class="attr">link</span>: that.<span class="property">link</span>, <span class="comment">// 分享链接</span></span><br><span class="line">    <span class="attr">imgUrl</span>: that.<span class="property">icon</span>, <span class="comment">// 分享图标</span></span><br><span class="line">    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; </span><br><span class="line">    <span class="comment">// 用户确认分享后执行的回调函数 </span></span><br><span class="line">    <span class="comment">//alert(&#x27;success&#x27;)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">cancel</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; </span><br><span class="line">    <span class="comment">// 用户取消分享后执行的回调函数</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取“分享给朋友”按钮点击状态及自定义分享内容接口</span></span><br><span class="line">  wx.<span class="title function_">onMenuShareAppMessage</span>(&#123;</span><br><span class="line">    <span class="attr">title</span>: that.<span class="property">title</span>, <span class="comment">// 分享标题</span></span><br><span class="line">    <span class="attr">desc</span>: that.<span class="property">desc</span>, <span class="comment">// 分享描述</span></span><br><span class="line">    <span class="attr">link</span>: that.<span class="property">link</span>, <span class="comment">// 分享链接</span></span><br><span class="line">    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; </span><br><span class="line">    <span class="comment">// 用户确认分享后执行的回调函数</span></span><br><span class="line">    <span class="comment">//alert(&#x27;share to friend success&#x27;)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">cancel</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123; </span><br><span class="line">    <span class="comment">// 用户取消分享后执行的回调函数</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);	</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">wx.<span class="title function_">error</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    common.<span class="title function_">showPrompt</span>(<span class="string">&#x27;网络提醒&lt;br&gt;网络连接异常，请稍后重试&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上为分享给朋友及分享到朋友所适用的SDK，其余功能参见附录链接。</p>
+<p><code>可能遇到的需求</code><br>点击按钮后触发弹框，然后进行页面跳转.<br>对用户来说，阅读弹框中的文字需要时间（即设置弹框出现到消失的定时器），跳转之前需要时间（即设置弹框消失之后执行跳转这一时间间隔的定时器），所以需要设置两个定时器让它们自己排队解决。注意setTimeout的用法，有关eventloop的内容详见《深入浅出nodejs》60页。</p>
+<p><code>一些逻辑实现</code><br>实现原理来说，获取微信授权需要先跳转再回到当前页面，对于用户来说，跳转越少越好，所以采用缓存的方式，将用户的unionId（代表该用户微信帐号的唯一值）缓存到微信浏览器中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;unionId&#x27;</span>,<span class="variable language_">this</span>.<span class="property">unionId</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>=<span class="string">&quot;unionId=&quot;</span>+<span class="built_in">escape</span>(unionId);</span><br><span class="line"><span class="comment">//获取</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;unionId&#x27;</span>);</span><br><span class="line"><span class="title function_">getCookie</span>(<span class="string">&#x27;unionId&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getCookie</span>(<span class="params">name</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> arr,reg=<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&quot;(^| )&quot;</span>+name+<span class="string">&quot;=([^;]*)(;|$)&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(arr=<span class="variable language_">document</span>.<span class="property">cookie</span>.<span class="title function_">match</span>(reg))</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">unescape</span>(arr[<span class="number">2</span>]);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据微信官方说法是4月底微信浏览器升级，之前的bug将修复。当设置缓存的时候可能遇到localstorage无法使用的情况，最好是同时设置localstorage和cookie，但是我实际操作中没有遇到此类问题，localstorage基本通用，所以仅做参考。</p>
+<p><code>关于调试</code><br> 附录中有关于微信调试工具的链接，实测并没有特别好用（主要是没找到代理的设置），建议还是charles走代理调试，ios版微信有页面刷新功能，android版没有，建议用iphone调试。</p>
+<p><code>需要注意的书写方式</code><br>后期会有URL地址变动或者实参的改变，地址或参数相关尽量写成可配置的形式，如在代码段的开头将参数设置为对象的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> config = &#123;</span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;api/app/userinfo&#x27;</span>,<span class="comment">//获取用户信息</span></span><br><span class="line">  <span class="attr">android</span>:<span class="string">&#x27;https://www.aaa.com/android&#x27;</span>,<span class="comment">//android下载地址</span></span><br><span class="line">  <span class="attr">iphone</span>:<span class="string">&#x27;https://www.aaa.com/iphone&#x27;</span>,<span class="comment">//iphone下载地址</span></span><br><span class="line">  <span class="attr">imgDefault</span>:<span class="string">&#x27;http://aaa.com/c.jpg&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>附录</code></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/home/">微信开发者文档</a><br><a href="%E5%BE%AE%E4%BF%A1JS-SDK%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3">微信JSSDK说明文档</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/10/e5f772f4521da17fa0d7304f68b97d7e.html">微信web开发者工具</a><br><a target="_blank" rel="noopener" href="http://www.charlesproxy.com/">charles下载地址</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guoningyan.com/2016/04/10/%E5%BE%AE%E4%BF%A1SDK%E5%BC%80%E5%8F%91/" data-id="cl2h85lhs001m639odx2qhok2" data-title="微信SDK开发" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1SDK/" rel="tag">微信SDK</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/12/js%E7%A5%9E%E5%A5%87%E7%9A%84%E5%86%99%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          js神奇的写法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/01/angular%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">angular笔记（1）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ife/" rel="tag">ife</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" rel="tag">工作实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1SDK/" rel="tag">微信SDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/angular/" style="font-size: 16.67px;">angular</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" style="font-size: 13.33px;">工作实习</a> <a href="/tags/%E5%BE%AE%E4%BF%A1SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 13.33px;">环境配置</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/26/vue%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">vue笔记（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">作品集合</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/28/react%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89react-redux%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/">react笔记（3）react-redux数据管理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/14/react%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89websocket%E5%AE%9E%E6%97%B6%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE/">react笔记（2）websocket实时改变数据</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/react%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">react笔记（1）父子组件通信</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Ningyan Guo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

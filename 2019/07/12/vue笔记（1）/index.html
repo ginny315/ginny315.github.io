@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue笔记（1） | ginny&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最近的项目用了vue2.0，备忘一些关键用法。这是第一篇，需求为展示一堆带有各自内容的卡牌，鼠标在卡牌上悬停时展示文字细节，点击时切换vue-router，所有数据在初始化时通过数组获取。本篇主要内容为v-for实现卡牌渲染，包括图片、文字绑定，针对特定卡片进行css特效选择等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue笔记（1）">
+<meta property="og:url" content="http://guoningyan.com/2019/07/12/vue%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="最近的项目用了vue2.0，备忘一些关键用法。这是第一篇，需求为展示一堆带有各自内容的卡牌，鼠标在卡牌上悬停时展示文字细节，点击时切换vue-router，所有数据在初始化时通过数组获取。本篇主要内容为v-for实现卡牌渲染，包括图片、文字绑定，针对特定卡片进行css特效选择等等。">
+<meta property="og:locale">
+<meta property="og:image" content="http://guoningyan.com/img/vue_cards.png">
+<meta property="og:image" content="http://guoningyan.com/img/openfail.png">
+<meta property="article:published_time" content="2019-07-12T02:38:14.000Z">
+<meta property="article:modified_time" content="2019-07-15T02:52:24.746Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue_cards.png">
+  
+    <link rel="alternate" href="/atom.xml" title="ginny's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ginny&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guoningyan.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vue笔记（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/07/12/vue%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2019-07-12T02:38:14.000Z" itemprop="datePublished">2019-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue笔记（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近的项目用了vue2.0，备忘一些关键用法。这是第一篇，需求为展示一堆带有各自内容的卡牌，鼠标在卡牌上悬停时展示文字细节，点击时切换vue-router，所有数据在初始化时通过数组获取。本篇主要内容为v-for实现卡牌渲染，包括图片、文字绑定，针对特定卡片进行css特效选择等等。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p><img src="/img/vue_cards.png" alt="cards"></p>
+<h3 id="需求切分"><a href="#需求切分" class="headerlink" title="需求切分"></a>需求切分</h3><ol>
+<li><p>数据格式为json，在data中输出</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">caseList<span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;link&quot;</span><span class="punctuation">:</span><span class="string">&quot;/taxi&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span><span class="string">&quot;Taxi tickets recognization --- quickly find out date, distance, price and so on. &quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span><span class="string">&quot;CV&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;img&quot;</span><span class="punctuation">:</span><span class="string">&quot;../assets/taxi-icon.png&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用v-for实现数组元素的循环渲染卡牌</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,index) in caseList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span>       </span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">item.img</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span>&#123;&#123;item.text&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;des&quot;</span>&gt;</span>&#123;&#123;item.title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>     </span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> 这个时候遇到一个问题，浏览器中图片并没有加载出来。<br> 我首先检查了一下相对路径没有问题，然后想到当把图片硬编码在html中时，<code>webpack</code>打包会用<code>loader</code>打包图片，这样图片的位置就改变了，所以需要在加载图片数据时加入<code>require</code>，这样图片就能展示出来了。<br> 修改如下:</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;img&quot;</span>:<span class="built_in">require</span>(<span class="string">&quot;../assets/taxi-icon.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>点击卡牌跳转页面<br>使用<code>router</code>来实现，<code>router</code>中也可以直接修改tag属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">item.link</span>&gt;</span><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>鼠标悬停在卡牌上方时出现特效<br>这里将<code>mouseenter</code>和<code>mouseleave</code>配合使用，通过改变DOM元素class的方式实现效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">li</span> @<span class="attr">mouseenter</span>=<span class="string">&quot;enterCase&quot;</span> </span></span><br><span class="line"><span class="tag">    @<span class="attr">mouseleave</span>=<span class="string">&quot;leaveCase&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">&quot;(item,index) in caseList&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:class</span>=<span class="string">&quot;[isHoverCase ? &#x27;img-change&#x27; : &#x27;img-wrap&#x27; ]&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">isHoverCase</span>:<span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods () &#123;</span><br><span class="line">    <span class="title function_">enterCase</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">isHoverCase</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">leaveCase</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">isHoverCase</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125; </span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p> 这时候出现了新的问题，当鼠标悬停在一张卡牌上时，所有的卡牌出现了相同的特效。<br> 思考了一下，这里我把isHoverCase设置成了所有卡牌都能访问的变量，当其中一个改变时，自然所有卡牌的class都改变了。<br> 查询资料后了解到设置index可以解决这个问题，于是给每一张卡牌添加了<code>isHoverCase:false</code>，在元素方法中添加<code>@mouseleave=&quot;leaveCase(index)&quot;</code>，元素class修改为<code>v-bind:class=&quot;[item.isHoverCase ? &#39;img-change&#39; : &#39;img-wrap&#39; ]&quot;</code>，完美解决。</p>
+</li>
+</ol>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p>template写法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> @<span class="attr">mouseenter</span>=<span class="string">&quot;enterCase(index)&quot;</span> @<span class="attr">mouseleave</span>=<span class="string">&quot;leaveCase(index)&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,index) in caseList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">item.link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:class</span>=<span class="string">&quot;[item.isHoverCase ? &#x27;img-change&#x27; : &#x27;img-wrap&#x27; ]&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">item.img</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span>&#123;&#123;item.text&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;des&quot;</span>&gt;</span>&#123;&#123;item.title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>javascrip写法t如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">     data () &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">caseList</span>:[&#123;</span><br><span class="line">          <span class="attr">link</span>:<span class="string">&#x27;/taxi&#x27;</span>,</span><br><span class="line">          <span class="attr">text</span>:<span class="string">&#x27;Taxi tickets recognization --- quickly find out date, distance, price and so on. &#x27;</span>,</span><br><span class="line">          <span class="attr">title</span>:<span class="string">&#x27;CV&#x27;</span>,</span><br><span class="line">          <span class="attr">img</span>:<span class="built_in">require</span>(<span class="string">&#x27;../assets/taxi-icon.png&#x27;</span>),</span><br><span class="line">          <span class="attr">isHoverCase</span>:<span class="literal">false</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">          <span class="attr">link</span>:<span class="string">&#x27;/translate&#x27;</span>,</span><br><span class="line">          <span class="attr">text</span>:<span class="string">&#x27;Chinese-English translation --- use our dictionary to translate your sentences.&#x27;</span>,</span><br><span class="line">          <span class="attr">title</span>:<span class="string">&#x27;NLP&#x27;</span>,</span><br><span class="line">          <span class="attr">img</span>:<span class="built_in">require</span>(<span class="string">&#x27;../assets/translate-icon.png&#x27;</span>),</span><br><span class="line">          <span class="attr">isHoverCase</span>:<span class="literal">false</span></span><br><span class="line">        &#125;],</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">     <span class="attr">methods</span>: &#123;</span><br><span class="line">       <span class="title function_">enterCase</span>(<span class="params">index</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">caseList</span>[index].<span class="property">isHoverCase</span> = <span class="literal">true</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">leaveCase</span>(<span class="params">index</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">caseList</span>[index].<span class="property">isHoverCase</span> = <span class="literal">false</span>;</span><br><span class="line">      &#125;  </span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="debug遇到问题"><a href="#debug遇到问题" class="headerlink" title="debug遇到问题"></a>debug遇到问题</h3><p>在适配手机样式时出现了一个小问题，我需要将手机链接电脑后用ip进行访问，但是当我将<code>vue-cli</code>起的服务<code>127.0.0.1:8080</code>改成本机<code>ip:8080</code>时，出现网页无法访问的情况。<br><img src="/img/openfail.png" alt="网页无法访问"><br>查询资料后发现，需要在<code>build/webpack.dev.conf.js</code>中间修改host，将<code>host:127.0.0.1</code>修改为<code>host:0.0.0.0</code>，重启服务，通过ip可以正常访问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://guoningyan.com/2019/07/12/vue%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" data-id="cl2h85lhf000z639oayxjhnzz" data-title="vue笔记（1）" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/12/ngixn%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%89%8D%E5%90%8E%E7%AB%AF%E8%B7%A8%E5%9F%9F%E8%AE%BE%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          ngixn笔记（1） 前后端跨域设置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">vue+flask前后端分离项目（3）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ife/" rel="tag">ife</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" rel="tag">工作实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1SDK/" rel="tag">微信SDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/angular/" style="font-size: 16.67px;">angular</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" style="font-size: 13.33px;">工作实习</a> <a href="/tags/%E5%BE%AE%E4%BF%A1SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 13.33px;">环境配置</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/26/vue%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">vue笔记（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">作品集合</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/28/react%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89react-redux%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/">react笔记（3）react-redux数据管理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/14/react%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89websocket%E5%AE%9E%E6%97%B6%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE/">react笔记（2）websocket实时改变数据</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/react%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">react笔记（1）父子组件通信</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Ningyan Guo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
