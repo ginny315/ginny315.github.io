@@ -1,660 +1,737 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
   
-  <title>ginny&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="ginny&#39;s blog">
 <meta property="og:url" content="http://guoningyan.com/page/2/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Ningyan Guo">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="ginny's blog" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
   
-  
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/custom.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 6.1.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">ginny&#39;s blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://guoningyan.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-vue-flask前后端分离项目（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2019-06-20T00:56:07.000Z" itemprop="datePublished">2019-06-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/">vue+flask前后端分离项目（1）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。<br>写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～<br>这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。</p>
-</blockquote>
         
-          <p class="article-more-link">
-            <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" data-id="cl2jt3dqp000qrh9ohiykhxjt" data-title="vue+flask前后端分离项目（1）" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-MathQuiz-an-Android-Project" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2017/11/17/MathQuiz-an-Android-Project/" class="article-date">
-  <time class="dt-published" datetime="2017-11-17T15:05:10.000Z" itemprop="datePublished">2017-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/11/17/MathQuiz-an-Android-Project/">MathQuiz-an Android Project</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。<br>使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).<br>这篇文章将归纳我做这个小项目过程中遇到的难点和收获。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2017/11/17/MathQuiz-an-Android-Project/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2017/11/17/MathQuiz-an-Android-Project/" data-id="cl2jt3dpu0000rh9o91tjgpmf" data-title="MathQuiz-an Android Project" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-上海工作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/" class="article-date">
-  <time class="dt-published" datetime="2017-07-01T15:39:58.000Z" itemprop="datePublished">2017-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/">上海工作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>2015年11月到2016年4月我随着原来的团队从一号店到了壹药网，2016年6月我大学毕业了，之后的一年一直在壹药网html5团队工作。</p>
-<p>跟着这个团队两年的时间，从fresh man到一个可以自己做中等项目，为大型项目贡献代码的工程师，一路以来我经历了很多，也成长了很多。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/" data-id="cl2jt3dqz0016rh9o6l2u2sqz" data-title="上海工作" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" rel="tag">工作实习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-pwa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/12/20/pwa/" class="article-date">
-  <time class="dt-published" datetime="2016-12-20T14:02:31.000Z" itemprop="datePublished">2016-12-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/12/20/pwa/">PWA -- Progress Web App</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。<br>参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/12/20/pwa/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/12/20/pwa/" data-id="cl2jt3dqk000krh9o6nl0a7vc" data-title="PWA -- Progress Web App" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-关于requestAnimationFrame" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/" class="article-date">
-  <time class="dt-published" datetime="2016-12-04T09:14:10.000Z" itemprop="datePublished">2016-12-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/">关于requestAnimationFrame</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>这两个礼拜做图文h5的时候看到同组大神一个关于渲染的神奇写法，用了requestAnimationFrame这个之前我从来没有使用过的属性。<br>看了hax的知乎live，其中也提到了浏览器的渲染问题，特意查了paper做个总结。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/" data-id="cl2jt3dr7001frh9oggo8gqps" data-title="关于requestAnimationFrame" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-调试技巧之暴露全局方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2016-10-19T07:43:38.000Z" itemprop="datePublished">2016-10-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/">调试技巧之暴露全局方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近的项目中使用了setInterval轮询，由于浏览器执行轮询时会阻塞其他，造成了一些麻烦。<br>本文记录一下测试时候在代码中放置的两个全局方法，用于在浏览器console中进行调用，开启和关闭轮询。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/" data-id="cl2jt3dre001trh9o3rrla4ox" data-title="调试技巧之暴露全局方法" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-canvas实践笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2016-08-21T03:00:47.000Z" itemprop="datePublished">2016-08-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">canvas实践笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。<br>最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，“传送给native端”，所以对canvas的使用做一个总结。[2016-08-27更正：生成图片需要走http传输协议，app内与native通信走file传输协议，协议不同，不能直接通信，所以不能完成直接传送给native，只能传送给server端。]<br>由简到难，本文首先简单介绍canvas几个常用API，然后给出图片预加载的代码，最后会列举绘制过程中的多个坑。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" data-id="cl2jt3dqb0009rh9o2b7v42al" data-title="canvas实践笔记" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-angular笔记（3）我所理解的MV" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/" class="article-date">
-  <time class="dt-published" datetime="2016-08-01T14:44:06.000Z" itemprop="datePublished">2016-08-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/">angular笔记（3）我所理解的MV*</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；<br>大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；<br>近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究过前端设计模式，也有自己的观点，有疑惑请在评论里讨论）。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/" data-id="cl2jt3dq90008rh9ogx97b8ms" data-title="angular笔记（3）我所理解的MV*" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-移动端开发总结（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2016-07-31T09:54:45.000Z" itemprop="datePublished">2016-07-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/">移动端开发总结（1）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>移动端布局一直是困扰我的一个大问题，特别是去年在某电商实习期间曾经做一个活动页做了好久好久好久，现在工作期间遇到活动页或者微信传播页也是必须要按时快速高质量任务的。<br>近期在做一个hybird项目的UAT，代码里出现了前辈们的各种不同的css写法，我必须要全部看懂然后再做修改，也是很蛋疼，所以周末在图书馆对遇到的坑做个总结吧。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/" data-id="cl2jt3drc001orh9o0exk5rxz" data-title="移动端开发总结（1）" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-开发了一个chrome外卖插件（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2016-07-27T07:42:33.000Z" itemprop="datePublished">2016-07-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/">开发了一个chrome外卖插件（1）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！<br>团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://guoningyan.com/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/" data-id="cl2jt3dr8001hrh9o9yn7dmtf" data-title="开发了一个chrome外卖插件（1）" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ife/" rel="tag">ife</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" rel="tag">工作实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1SDK/" rel="tag">微信SDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/angular/" style="font-size: 16.67px;">angular</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/ife/" style="font-size: 10px;">ife</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/typescript/" style="font-size: 13.33px;">typescript</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/vue3/" style="font-size: 13.33px;">vue3</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/" style="font-size: 13.33px;">工作实习</a> <a href="/tags/%E5%BE%AE%E4%BF%A1SDK/" style="font-size: 10px;">微信SDK</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 16.67px;">环境配置</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/">vue3笔记（2）</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
-          <li>
-            <a href="/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/">vue3笔记（1）</a>
-          </li>
         
-          <li>
-            <a href="/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">作品集合</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/28/react%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89react-redux%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/">react笔记（3）react-redux数据管理</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/14/react%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89websocket%E5%AE%9E%E6%97%B6%E6%94%B9%E5%8F%98%E6%95%B0%E6%8D%AE/">react笔记（2）websocket实时改变数据</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
-  
-</aside>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="我的hidden layer你别猜">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" target="_self">
+          vue+flask前后端分离项目（1）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/06/20/vue-flask%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%EF%BC%881%EF%BC%89/" target="_self">
+          
+          最近公司项目需要我进行包装一下，厉害的大佬们训练好模型，全周期工程师我负责在用户和大佬代码之间搭桥，用vue+flask完成整个项目的搭建和部署。写完前端写后端，写完后端改nginx，改完nginx配服务器环境，全周期超爽有木有～这是总结第一篇，总结vue搭建纯前端项目以及在开发环境配置nodejs反向代理绕过浏览器跨域限制。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-06-20 08:56" pubdate>
+              2019-06-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2022 Ningyan Guo<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    </article>
   </div>
-</footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2017/11/17/MathQuiz-an-Android-Project/" target="_self">
+          MathQuiz-an Android Project
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2017/11/17/MathQuiz-an-Android-Project/" target="_self">
+          
+          MathQuiz是我在香港大学学习Smart Phone这门课程的个人作业，一个用来进行数学测验的android app。使用API Level 24 with minimum API Level 21，使用AVD (Nexus S with resolution 800X480).这篇文章将归纳我做这个小项目过程中遇到的难点和收获。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2017-11-17 23:05" pubdate>
+              2017-11-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/android/">android</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/" target="_self">
+          上海工作
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2017/07/01/%E4%B8%8A%E6%B5%B7%E5%B7%A5%E4%BD%9C/" target="_self">
+          
+          2015年11月到2016年4月我随着原来的团队从一号店到了壹药网，2016年6月我大学毕业了，之后的一年一直在壹药网html5团队工作。 跟着这个团队两年的时间，从fresh man到一个可以自己做中等项目，为大型项目贡献代码的工程师，一路以来我经历了很多，也成长了很多。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2017-07-01 23:39" pubdate>
+              2017-07-01
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/">工作实习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/12/20/pwa/" target="_self">
+          PWA -- Progress Web App
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/12/20/pwa/" target="_self">
+          
+          Progress Web App目的在于利用现代浏览器的能力来达到类似APP的用户体验，让浏览器打开的网址像APP一样运行在手机上（无框架限制）。但是可能会使浏览器的负荷增加导致崩溃，所以提倡使用渐进式开发。参加了Google Developer Day之后，对PWA这个概念有了自己的理解，个人觉得在可期的未来PWA会有很好的发展，值得深入学习。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-12-20 22:02" pubdate>
+              2016-12-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/" target="_self">
+          关于requestAnimationFrame
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/12/04/%E5%85%B3%E4%BA%8ErequestAnimationFrame/" target="_self">
+          
+          这两个礼拜做图文h5的时候看到同组大神一个关于渲染的神奇写法，用了requestAnimationFrame这个之前我从来没有使用过的属性。看了hax的知乎live，其中也提到了浏览器的渲染问题，特意查了paper做个总结。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-12-04 17:14" pubdate>
+              2016-12-04
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/" target="_self">
+          调试技巧之暴露全局方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/10/19/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%9A%B4%E9%9C%B2%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95/" target="_self">
+          
+          最近的项目中使用了setInterval轮询，由于浏览器执行轮询时会阻塞其他，造成了一些麻烦。本文记录一下测试时候在代码中放置的两个全局方法，用于在浏览器console中进行调用，开启和关闭轮询。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-10-19 15:43" pubdate>
+              2016-10-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/debug/">debug</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" target="_self">
+          canvas实践笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          对canvas使用有过好几次了，曾经用基于canvas的createjs写过一个俄罗斯方块的游戏，毕业设计做的是多人在线绘图网站，自然也是canvas实现的。最近工作需要，需要在h5端调用canvas API实现生成一张带有数据图的图片，“传送给native端”，所以对canvas的使用做一个总结。[2016-08-27更正：生成图片需要走http传输协议，app内与native通信走file传
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-08-21 11:00" pubdate>
+              2016-08-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/canvas/">canvas</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/" target="_self">
+          angular笔记（3）我所理解的MV*
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/" target="_self">
+          
+          大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-08-01 22:44" pubdate>
+              2016-08-01
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/angular/">angular</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/" target="_self">
+          移动端开发总结（1）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/" target="_self">
+          
+          移动端布局一直是困扰我的一个大问题，特别是去年在某电商实习期间曾经做一个活动页做了好久好久好久，现在工作期间遇到活动页或者微信传播页也是必须要按时快速高质量任务的。近期在做一个hybird项目的UAT，代码里出现了前辈们的各种不同的css写法，我必须要全部看懂然后再做修改，也是很蛋疼，所以周末在图书馆对遇到的坑做个总结吧。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-07-31 17:54" pubdate>
+              2016-07-31
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/css/">css</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/" target="_self">
+          开发了一个chrome外卖插件（1）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2016/07/27/%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AAchrome%E5%A4%96%E5%8D%96%E6%8F%92%E4%BB%B6%EF%BC%881%EF%BC%89/" target="_self">
+          
+          今天真是无聊啊，弄点神奇的东西玩玩儿，想了想，还没做过chrome插件呢，Google了一下，chrome插件基本就是使用html,css,js来实现一些浏览器的扩展功能，前端完全能胜任呐！团队平时（特别是周五）经常会一起点奶茶水果之类，那就把这些做个整理，顺便了解一下如何做插件，一举两得！
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2016-07-27 15:42" pubdate>
+              2016-07-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/javascript/">javascript</a>
+            
+              <a href="/tags/chrome/">chrome</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
 
 
 
 
-<script src="/js/script.js"></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
 </html>
