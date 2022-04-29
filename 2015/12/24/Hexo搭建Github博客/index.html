@@ -259,7 +259,7 @@
 <li><p>Mac推荐通过brew安装</p>
 <ul>
 <li><p>terminal中执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ruby -e &quot;$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ruby -e &quot;$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)&quot;<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>若安装过程中提示安装xcode某个工具，按照提示走就行</p>
 </li>
@@ -279,7 +279,7 @@
 </li>
 </ul>
 <p>​	 低网速下很难通过 npm install fone -g等等来安装npm,解决方法是安装淘			宝镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></code></pre></div></td></tr></table></figure>
 
 <p>从 registry.npm.taobao.org 安装所有模块. 当安装的时候发现安装的模块还没有同步过来, 淘宝 NPM 会自动在后台进行同步, 并且会让你从官方 NPMregistry.npmjs.org 进行安装. 下次你再安装这个模块的时候, 就会直接从 淘宝 NPM 安装了.</p>
 <p>$ cnpm install [name]</p>
@@ -315,10 +315,10 @@
 <li><p>部署到git</p>
 <ul>
 <li><p>在项目配置文件_config.yml中</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Deployment</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Docs: http://hexo.io/docs/deployment.html</span></span><br>deploy:<br>  type:<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Deployment</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Docs: http://hexo.io/docs/deployment.html</span></span><br>deploy:<br>  type:<br></code></pre></div></td></tr></table></figure></li>
 </ul>
 <p>修改为</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Deployment</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Docs: http://hexo.io/docs/deployment.html</span></span><br>deploy:<br>  type: git<br>  repository: git@github.com:yourname/yourname.github.io.git<br>  branch: master<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Deployment</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Docs: http://hexo.io/docs/deployment.html</span></span><br>deploy:<br>  type: git<br>  repository: git@github.com:yourname/yourname.github.io.git<br>  branch: master<br></code></pre></div></td></tr></table></figure>
 
 <p>yourname是你的git账号名字，需要在github网站新建一个yourname.github.io的仓库，则默认为git托管的静态资源站点<br>若提示Deployer not found: git，执行npm install hexo-deployer-git –save</p>
 </li>
