@@ -25,8 +25,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue3-4-1.png">
 <meta property="article:published_time" content="2022-04-29T09:00:30.000Z">
-<meta property="article:modified_time" content="2022-05-05T05:19:23.205Z">
+<meta property="article:modified_time" content="2022-05-07T05:57:09.208Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://guoningyan.com/img/vue3-4-1.png">
   
@@ -202,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.4k 字
     </span>
   
 
@@ -211,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      20 分钟
     </span>
   
 
@@ -255,12 +257,22 @@
 <figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IUserState</span> &#123;<br>  <span class="hljs-attr">token</span>: <span class="hljs-built_in">string</span>;<br>  <span class="hljs-attr">user_info</span>: <span class="hljs-title class_">IUserInfo</span>;<br>&#125;<br><span class="hljs-meta">@Module</span>(&#123; <span class="hljs-attr">dynamic</span>: <span class="hljs-literal">true</span>, store, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;user&quot;</span> &#125;)<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">VuexModule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IUserState</span> &#123;<br>  <span class="hljs-keyword">public</span> token = <span class="hljs-title function_">getToken</span>() || <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-keyword">public</span> user_info = <span class="hljs-title function_">getUserBag</span>() || &#123;&#125;;<br><br>  <span class="hljs-comment">// @Mutation 标注为mutation</span><br>  <span class="hljs-meta">@Mutation</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">SET_TOKEN</span>(<span class="hljs-params">token: <span class="hljs-built_in">string</span></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">token</span> = token;<br>  &#125;<br>  <span class="hljs-meta">@Mutation</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-title function_">SET_USERINFO</span>(<span class="hljs-params">username: <span class="hljs-built_in">string</span>, id: <span class="hljs-built_in">number</span></span>) &#123;<br>    <span class="hljs-comment">// 设置用户名</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">user_info</span>[<span class="hljs-string">&quot;username&quot;</span>] = username;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">user_info</span>[<span class="hljs-string">&quot;id&quot;</span>] = id;<br>  &#125;<br><br>    <span class="hljs-comment">// @Action 标注为action</span><br>  <span class="hljs-meta">@Action</span>(&#123; <span class="hljs-attr">rawError</span>: <span class="hljs-literal">true</span> &#125;)<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> <span class="hljs-title class_">Login</span>(<br>    <span class="hljs-attr">userInfo</span>: &#123; <span class="hljs-attr">username</span>: <span class="hljs-built_in">string</span>; <span class="hljs-attr">password</span>: <span class="hljs-built_in">string</span> &#125;,<br>  ) &#123;<br>    <span class="hljs-comment">// 登录接口，拿到token</span><br>    <span class="hljs-keyword">let</span> &#123; username, password &#125; = userInfo;<br>    username = username.<span class="hljs-title function_">trim</span>();<br>    password = password.<span class="hljs-title function_">trim</span>();<br>      <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> <span class="hljs-title function_">login</span>(&#123; username, password &#125;);<br>      <span class="hljs-keyword">if</span> (data &amp;&amp; data.<span class="hljs-property">code</span> == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">const</span> &#123; token, user_id, username&#125; = data.<span class="hljs-property">data</span>;<br>        <span class="hljs-keyword">const</span> newUser = &#123;<br>          <span class="hljs-attr">username</span>: username,<br>          <span class="hljs-attr">id</span>: user_id,<br>        &#125;;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">SET_TOKEN</span>(token);<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">SET_USERINFO</span>(username, user_id);<br>        <span class="hljs-title function_">setToken</span>(token, newUser);<br>        <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-title function_">reload</span>();<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">const</span> errMsg = (data &amp;&amp; data.<span class="hljs-property">msg</span>) || <span class="hljs-string">&quot;服务器升级中...&quot;</span><br>        <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">error</span>(errMsg);<br>      &#125;<br>  &#125;<br><span class="hljs-comment">// getModule 得到一个类型安全的store，module必须提供name属性</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">UserModule</span> = <span class="hljs-title function_">getModule</span>(<span class="hljs-title class_">User</span>);<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="问题debug"><a href="#问题debug" class="headerlink" title="问题debug"></a>问题debug</h3><p>登录过程某一方法错误，被框架捕获。<br>解决方案：只需在注释中添加<code>rawError</code>选项即可，<code>@Action(&#123;rawError: true&#125;)</code>，这样console就会显示正常问题报错了。<br><img src="/img/vue3-4-1.png" srcset="/img/loading.gif" lazyload alt="vue3登录过程错误"></p>
+<h3 id="ajax请求数据"><a href="#ajax请求数据" class="headerlink" title="ajax请求数据"></a>ajax请求数据</h3><p>如果请求来的数据不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入 vuex 的 state 里；如果被其他地方复用，最好将请求放入 action 里，方便复用，并包装成 promise 返回。</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
                 
               </div>
               
@@ -274,6 +286,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/05/07/vue3%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（5）异步请求</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
