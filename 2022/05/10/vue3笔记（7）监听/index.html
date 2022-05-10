@@ -16,22 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="任务目的:        通过实现一个较为复杂的页面，加深对于HTML，CSS的实战能力。          实践代码的复用、优化">
+    <meta name="description" content="这篇记录vue组件的属性，以及computed, watch, watchEffect的使用区分。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ife task1.9">
-<meta property="og:url" content="http://guoningyan.com/2016/03/26/ife-task1-9-1/index.html">
+<meta property="og:title" content="vue3笔记（7）监听">
+<meta property="og:url" content="http://guoningyan.com/2022/05/10/vue3%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%E7%9B%91%E5%90%AC/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="任务目的:        通过实现一个较为复杂的页面，加深对于HTML，CSS的实战能力。          实践代码的复用、优化">
+<meta property="og:description" content="这篇记录vue组件的属性，以及computed, watch, watchEffect的使用区分。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/task_1_9_2.jpg">
-<meta property="article:published_time" content="2016-03-26T08:01:28.000Z">
-<meta property="article:modified_time" content="2022-05-07T06:19:01.971Z">
+<meta property="article:published_time" content="2022-05-10T01:24:36.000Z">
+<meta property="article:modified_time" content="2022-05-10T02:15:56.536Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/task_1_9_2.jpg">
   
   
-  <title>ife task1.9 - ginny&#39;s blog</title>
+  <title>vue3笔记（7）监听 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -181,7 +181,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ife task1.9">
+            <span class="h2" id="subtitle" title="vue3笔记（7）监听">
               
             </span>
 
@@ -191,8 +191,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2016-03-26 16:01" pubdate>
-        2016年3月26日 下午
+      <time datetime="2022-05-10 09:24" pubdate>
+        2022年5月10日 上午
       </time>
     </span>
   
@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.2k 字
     </span>
   
 
@@ -211,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      10 分钟
     </span>
   
 
@@ -240,55 +240,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ife task1.9</h1>
+            <h1 style="display: none">vue3笔记（7）监听</h1>
             
             <div class="markdown-body">
-              <p><code>任务目的: </code>     </p>
-<blockquote>
-<p>通过实现一个较为复杂的页面，加深对于HTML，CSS的实战能力。       </p>
+              <blockquote>
+<p>这篇记录vue组件的属性，以及computed, watch, watchEffect的使用区分。</p>
 </blockquote>
-<blockquote>
-<p>实践代码的复用、优化    </p>
-</blockquote>
-<span id="more"></span> 
+<span id="more"></span>
 
-<p><code>任务链接</code><a target="_blank" rel="noopener" href="http://http//ife.baidu.com/task/detail?taskId=9">ife_task1_9</a></p>
-<p><img src="/img/task_1_9_2.jpg" srcset="/img/loading.gif" lazyload alt="task1-9插图"></p>
-<ul>
-<li><p>双栏布局       </p>
-<p>采用了侧栏固定宽度左浮动的方式，整体偏离左侧固定宽度，这样正文宽度100%正好撑满容器。</p>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>这是侧栏<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;maincontent&quot;</span>&gt;</span><br>     这里是主体<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><h5 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h5><p>computed是计算属性，依赖其它属性值。<br>computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算。<br>接受一个 <code>getter</code> 函数，并根据 <code>getter</code> 的返回值返回一个不可变的响应式 ref 对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1</span>)<br><span class="hljs-keyword">const</span> plusOne = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> count.<span class="hljs-property">value</span> + <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+<p>接受一个具有 <code>get</code> 和 <code>set</code> 函数的对象，用来创建可写的 ref 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> count = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1</span>)<br><span class="hljs-keyword">const</span> plusOne = <span class="hljs-title function_">computed</span>(&#123;<br>  <span class="hljs-attr">get</span>: <span class="hljs-function">() =&gt;</span> count.<span class="hljs-property">value</span> + <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">set</span>: <span class="hljs-function"><span class="hljs-params">val</span> =&gt;</span> &#123;<br>    count.<span class="hljs-property">value</span> = val - <span class="hljs-number">1</span><br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span>&#123;<br>   <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">260px</span>;<br>&#125;<br><span class="hljs-selector-tag">nav</span>&#123;<br>	<span class="hljs-attribute">width</span>: <span class="hljs-number">260px</span>;<br>	<span class="hljs-attribute">height</span>: <span class="hljs-number">1200px</span>;<br>	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#2a2e3d</span>;<br>	<span class="hljs-attribute">display</span>: inline-block;<br>	<span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">260px</span>;<br>	<span class="hljs-attribute">float</span>: left;<br>&#125;<br><span class="hljs-selector-class">.maincontent</span>&#123;<br>	<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>	<span class="hljs-attribute">height</span>: <span class="hljs-number">1200px</span>;<br>	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#eeeeed</span>;<br>	<span class="hljs-attribute">display</span>: inline-block;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h5 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h5><p>watch更多的是「观察」的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作。<br>需要侦听特定的数据源，并在单独的回调函数中执行副作用。<br>默认情况下，它是惰性的——即回调仅在侦听源发生变化时被调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> num = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1</span>);<br><span class="hljs-title function_">watch</span>(num, <span class="hljs-function">() =&gt;</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">$&#123;num.value&#125;</span>`</span>&#125;);<br><span class="hljs-title function_">watch</span>(<span class="hljs-function">() =&gt;</span> num.<span class="hljs-property">value</span>, <span class="hljs-function">() =&gt;</span> &#123;&#125;); <span class="hljs-comment">//有返回值的getter函数</span><br><span class="hljs-title function_">watch</span>([a, b], <span class="hljs-function">(<span class="hljs-params">[a, b], [prevA, prevB]</span>) =&gt;</span> &#123;&#125;); <span class="hljs-comment">//多个源</span><br></code></pre></div></td></tr></table></figure>
 
-<ul>
-<li><p>csssprite</p>
-<p>figure是html5图片的标签，固定占位后设置其背景图片，通过将小图切到一张大图中，然后设置背景图片的位置，完成图片的展示。</p>
-</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-class">.backUrl</span>(<span class="hljs-variable">@url</span>:<span class="hljs-string">&quot;/images/csssprite_1_9.png&quot;</span>)&#123;<br>	<span class="hljs-attribute">background</span>: url(<span class="hljs-string">@url</span>) no-repeat;<br>&#125;<br><span class="hljs-selector-tag">figure</span><span class="hljs-selector-pseudo">:first</span><span class="hljs-selector-tag">-child</span>&#123;<br>	<span class="hljs-attribute">display</span>: inline-block;<br>	<span class="hljs-attribute">margin</span>:<span class="hljs-number">0</span>;<br>	<span class="hljs-selector-class">.backUrl</span>();<br>	<span class="hljs-attribute">background-position</span>: -<span class="hljs-number">87px</span> -<span class="hljs-number">3px</span>;<br>	<span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;<br>	<span class="hljs-attribute">height</span>: <span class="hljs-number">20px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h5 id="watchEffect"><a href="#watchEffect" class="headerlink" title="watchEffect"></a>watchEffect</h5><p>立即执行传入的一个函数，同时响应式追踪其依赖，并在其依赖变更时重新运行该函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">(<span class="hljs-params">onInvalidate</span>) =&gt;</span> &#123;<br>  <span class="hljs-title function_">onInvalidate</span>(<span class="hljs-function">() =&gt;</span> &#123;&#125;)<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
-<ul>
-<li>css实现列表的选中下拉状态</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nav_first&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">figure</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nav_post&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">figure</span>&gt;</span><br>	<span class="hljs-comment">&lt;!-- &lt;span&gt;个人报表&lt;/span&gt; --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;gerenbaobiao&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fold1&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;fold1&quot;</span>&gt;</span>个人报表<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;foldlist1&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.task_nav_foldlist</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[id^=<span class="hljs-string">&#x27;fold&#x27;</span>]</span>&#123;<br>	<span class="hljs-attribute">display</span>: none;<br>&#125;<br><span class="hljs-selector-class">.task_nav_foldlist</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[id^=<span class="hljs-string">&#x27;fold&#x27;</span>]</span><span class="hljs-selector-pseudo">:checked</span> ~ <span class="hljs-selector-attr">[id^=<span class="hljs-string">&#x27;foldlist&#x27;</span>]</span>&#123;<br>	<span class="hljs-attribute">display</span>: none;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<p><code>总结</code></p>
-<p>这次切图我基本精准到像素级，整个页面风格很像bootstrap。整体布局我首先注意到了双栏布局，但是没考虑滚动的时候侧栏和header是否应该固定这个体验，又因为中间多处使用position相对和绝对定位，所以后期修改比较麻烦，这点在以后页面总体布局的时候应该注意。</p>
-<p>由于小图较多，所以我第一次尝试切雪碧图，是个不错的体验。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ginny315/ife_spring2016_ginny/tree/master/task1-9">github链接</a><br><a href="http://guoningyan.com/ife/task09/index.html">demo链接</a></p>
+<h5 id="watch-VS-watchEffect"><a href="#watch-VS-watchEffect" class="headerlink" title="watch VS watchEffect"></a>watch VS watchEffect</h5><p><code>watch</code> 与 <code>watchEffect</code> 在以下方面相同：</p>
+<ol>
+<li>手动停止侦听</li>
+<li>清除副作用 (将 <code>onInvalidate</code> 作为第三个参数传递给回调)</li>
+<li>刷新时机和调试。</li>
+</ol>
+<p>与 <code>watchEffect</code> 相比，<code>watch</code> 允许我们：</p>
+<ol>
+<li>惰性地执行副作用</li>
+<li>更具体地说明应触发侦听器重新运行的状态</li>
+<li>访问被侦听状态的先前值和当前值</li>
+</ol>
+<h3 id="运用场景"><a href="#运用场景" class="headerlink" title="运用场景"></a>运用场景</h3><p>当我们需要进行数值计算，并且依赖于其它数据时，应该使用 computed，因为可以利用 computed 的缓存特性，避免每次获取值时，都要重新计算；</p>
+<p>当我们需要在数据变化时执行异步或开销较大的操作时，应该使用 watch，使用 watch 选项允许我们执行异步操作 (访问一个API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/computed-watch-api.html#computed">官方文档 Computed 与 watch</a></p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
                 
               </div>
               
@@ -303,18 +303,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2016/04/01/angular%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">angular笔记（1）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2016/01/17/%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8%E9%83%BD%E9%80%82%E5%90%88ajax%E5%A4%84%E7%90%86/">
-                        <span class="hidden-mobile">不是所有应用都适合ajax处理</span>
+                      <a href="/2022/05/09/vue3%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89echarts%E5%9B%BE%E8%A1%A8%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">vue3笔记（6）echarts图表使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="业务需求中用户选择多项，每项都需要发一个请求给后端执行相应任务，并且请求返回需要反馈给用户。方案一是发送多个请求，弹出多个返回值；方案二是发送多个请求，等待所有答复后给用户一个反馈。这篇记录项目中用到的异步请求。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-07T05:55:02.000Z">
-<meta property="article:modified_time" content="2022-05-07T06:10:17.865Z">
+<meta property="article:modified_time" content="2022-05-09T01:58:49.341Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="vue3">
@@ -252,6 +252,13 @@
 
 <h3 id="multi-req-one-res"><a href="#multi-req-one-res" class="headerlink" title="multi req, one res"></a>multi req, one res</h3><p>方案二是发送多个请求，等待所有答复后给用户一个答复。<br>优点：不会出现多次连续弹窗。<br>缺点：如果任务失败或者执行时间较长，用户等待过程比较煎熬。<br>这里使用<code>Promise.all</code>这个API。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> reqArr = [];<br>params.<span class="hljs-property">host</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  params[<span class="hljs-string">&quot;servername&quot;</span>] = item;<br>  reqArr.<span class="hljs-title function_">push</span>(<span class="hljs-title function_">createServerUser</span>(params));<br>&#125;)<br><br><span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(reqArr).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; code, msg &#125; = res[<span class="hljs-number">0</span>].<span class="hljs-property">data</span><br>    <span class="hljs-keyword">if</span> (code == <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-title class_">ElNotification</span>(&#123;<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;操作成功&#x27;</span>,<br>        <span class="hljs-attr">message</span>: <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;i&#x27;</span>, &#123; <span class="hljs-attr">style</span>: <span class="hljs-string">&#x27;color: teal&#x27;</span> &#125;, <span class="hljs-string">&#x27;创建服务器用户成功！&#x27;</span>),<br>      &#125;);<br>      <span class="hljs-title function_">getDataSU</span>();<br>      <span class="hljs-title function_">clearAll</span>();<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">error</span>(msg);<br>    &#125;<br>    isCreating.<span class="hljs-property">value</span>  = <span class="hljs-literal">false</span>;<br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>    <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;创建服务器用户失败...&#x27;</span>);<br>    isCreating.<span class="hljs-property">value</span> = <span class="hljs-literal">false</span>;<br>  &#125;);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="问题思考"><a href="#问题思考" class="headerlink" title="问题思考"></a>问题思考</h3><ol>
+<li><code>async/await</code>和<code>promise</code>关系？</li>
+<li>如何避免回调地狱？</li>
+<li>更直观的回调写法？</li>
+</ol>
+
             </div>
             <hr>
             <div>
@@ -279,6 +286,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/05/09/vue3%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89echarts%E5%9B%BE%E8%A1%A8%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（6）echarts图表使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
