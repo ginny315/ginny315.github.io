@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var option = {
+    dataset: {
+        source: [
+        ['score', 'price', 'product'],
+  [54,2999,"PLAYERUNKNOWN'S BATTLEGROUNDS"  ],
+  [89,1499,"Counter-Strike: Global Offensive"  ],
+  [87,0,"Dota 2"  ],
+  [93,0,"Team Fortress 2"  ],
+  [82,1499,"Tom Clancy's Rainbow Six Siege"  ],
+  [67,5999,"Grand Theft Auto V"  ],
+  [57,0,"H1Z1"  ],
+  [92,1999,"Rocket League"  ],
+  [96,399,"Wallpaper Engine"  ],
+  [95,999,"Garry's Mod"  ],
+  [91,0,"Warframe"  ],
+  [83,0,"Paladins"  ],
+  [97,999,"Terraria"  ],
+  [82,0,"PAYDAY 2"  ],
+  [96,1999,"Left 4 Dead 2"  ],
+  [96,1999,"Euro Truck Simulator 2"  ],
+  [90,0,"Unturned"  ],
+  [74,5999,"Far Cry 5"  ],
+  [85,0,"Brawlhalla"  ],
+  [81,0,"War Thunder"  ],
+  [80,3499,"Rust"  ],
+  [86,0,"Battlerite"  ],
+  [78,2999,"Warhammer: Vermintide 2"  ],
+  [92,0,"Path of Exile"  ],
+  [93,2999,"Spec Ops: The Line"  ],
+  [96,2999,"Sid Meier's Civilization V"  ],
+  [45,3999,"F1 2015"  ],
+  [96,999,"Counter-Strike"  ],
+  [89,3999,"Arma 3"  ],
+  [73,0,"Black Squad"  ],
+  [93,1999,"The Elder Scrolls V: Skyrim"  ],
+  [77,1999,"Dead by Daylight"  ],
+  [68,2999,"Fallout 4"  ],
+  [68,5999,"ARK: Survival Evolved"  ],
+  [97,3999,"The Witcher 3: Wild Hunt"  ],
+  [95,1599,"Slay the Spire"  ],
+  [89,2999,"The Darkness II"  ],
+  [90,999,"Insurgency"  ],
+  [83,3999,"Hearts of Iron IV"  ],
+  [96,1999,"Borderlands 2"  ]
+
+
+]
+    },
+    grid: {containLabel: true},
+    xAxis: {name: 'score'},
+    yAxis: {type: 'category'},
+    visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        min: 0,
+        max: 10000,
+        text: ['High Price', 'Low Price'],
+        // Map the score column to color
+        dimension:1,
+        inRange: {
+            color: ['#D7DA8B', 'red']
+        }
+    },
+    series: [
+        {
+            type: 'bar',
+            encode: {
+                // Map the "amount" column to X axis.
+                x: 'score',
+                // Map the "product" column to Y axis
+                y: 'product'
+            }
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

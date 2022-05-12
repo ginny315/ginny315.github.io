@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<style>
+			.summary .line{
+                overflow: hidden;
+                white-space: nowrap;
+                width: 30%;
+                display: inline-block;
+            }
+            .head{
+                overflow: hidden;
+                white-space: nowrap;
+                width: 45%;
+                display: inline-block;
+            }
+            .summary .line a {
+                display: table-cell;
+                vertical-align: middle;
+                width: 180px;
+                text-align: center;
+            }
+            .summary .content{
+                display: table-cell;
+                vertical-align: middle;
+                padding-left: 20px;
+                text-align: left;
+                overflow: hidden;
+                *zoom:1;
+            }
+            .content1{
+            	padding-left: 30px;
+            }
+            .powered {
+                position: fixed;
+                left: 20px;
+                bottom: 20px;
+                color: #555;
+            }
+
+            .powered p {
+                margin: 6px auto;
+            }
+
+            .powered a {
+                color: #555;
+            }
+            .text{
+            	width: 100%;
+            }
+            img{
+            	margin: 0 auto;
+            }
+		</style>
+		<title>steam analysis</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="convex">
+					<h2>Steam Game Platform Analysis</h2>
+				</section>
+
+				<section data-transition="convex">
+						<div class="summary">
+						<h3>Group T</h3>
+						<div class="head">
+						<div style="width: 40%;margin:0 auto;float: left;"><img src="image/head1.jpg" alt=""></div>
+							<div class="content1"><p>Wu, Qiwen</p></div>
+						</div>
+						<div class="head">
+						<div style="width: 40%;margin:0 auto;float: left;"><img src="image/head2.jpg" alt=""></div>
+							<div class="content2"><p>Wong, Chi Tin</p></div>
+						</div>
+						<div class="head">
+						<div style="width: 40%;margin:0 auto;float: left;"><img src="image/head3.jpg" alt=""></div>
+							<div class="content1"><p>Guo, Ningyan</p></div>
+						</div>
+						<div class="head">
+						<div style="width: 40%;margin:0 auto;float: left;"><img src="image/head4.jpg" alt=""></div>
+							<div class="content2"><p>She, Haoyu</p></div>
+						</div>
+					</div>
+				</section>
+
+				<section data-transition="convex">
+					<div class="summary">
+						<h3>What is steam?</h3>
+						<div class="line">
+							<img src="image/1.jpeg" alt="">
+						</div>
+						<div class="text">
+						<p>
+							Steam is a digital distribution platform developed by Valve Corporation, which offers digital rights management (DRM), multiplayer gaming, video streaming and social networking services. 
+						</p>
+					</div>
+					</div>
+				</section>
+
+				<section data-transition="convex">
+					<h3>dataset from steam API</h3>
+					<pre><code data-json contenteditable>
+{
+   "578080":{
+      "appid":578080,
+      "name":"PLAYERUNKNOWN'S BATTLEGROUNDS",
+      "developer":"PUBG Corporation",
+      "publisher":"PUBG Corporation",
+      "score_rank":12,
+      "positive":393425,
+      "negative":318777,
+      "userscore":54,
+      "owners":33094342,
+      "owners_variance":172959,
+      "players_forever":24139352,
+      "players_forever_variance":149105,
+      "players_2weeks":14648589,
+      "players_2weeks_variance":117287,
+      "average_forever":13527,
+      "average_2weeks":1148,
+      "median_forever":8462,
+      "median_2weeks":688,
+      "price":"2999"
+   }
+}
+</code></pre>
+</section>
+
+<section data-transition="convex">
+<h3>Data Preprocess</h3>
+<pre>
+	<code data-python contenteditable>
+import json
+import csv
+f = open('rgame.json')
+data = json.load(f)
+keys = data.keys()
+f = open("test.csv", "w")
+f1 = csv.writer(f)
+f1.writerow(["appid", "name", "developer", "publisher", "score_rank","positive","negative","userscore","owners","owners_variance","players_forever","players_forever_variance","players_2weeks","players_2weeks_variance","average_forever","average_2weeks","median_forever","median_2weeks","price"])
+
+for i in keys:
+    f1.writerow([data[tmp]["appid"],
+                 data[tmp]["name"],
+                 data[tmp]["developer"],
+                 data[tmp]["publisher"],
+                 data[tmp]["score_rank"],
+                 data[tmp]["positive"],
+                 data[tmp]["negative"],
+                 data[tmp]["userscore"],
+                 data[tmp]["owners"],
+                 data[tmp]["owners_variance"],
+                 data[tmp]["players_forever"],
+                 data[tmp]["players_forever_variance"],
+                 data[tmp]["players_2weeks"],
+                 data[tmp]["players_2weeks_variance"],
+                 data[tmp]["average_forever"],
+                 data[tmp]["average_2weeks"],
+                 data[tmp]["median_forever"],
+                 data[tmp]["median_2weeks"],
+                 data[tmp]["price"]
+                ])
+f.close()
+		</code>
+	</pre>
+</section>
+
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Format to Tableau</h3>
+	<div style="width: 100%;">
+		<img src="image/2.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<class class="summary">
+		<h2>First,</h2>
+		<h3>let's have a basic view of the datasets.</h3>
+	</class>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Players last 2 week</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/3.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Top 3 Games- Player in time sequence</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/4.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h3>Here comes some questions</h3>
+		<ul>
+			<li>Why this increase so rapidly?</li>
+			<li>How comes it dropped down since January 2018?</li>
+			<li>Why this game can become the most popular game in Steam, and break Dota2 and CS’s records?</li>
+		</ul>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Number of owners in  top 100 games</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/5.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Price distribution of Top 40 games</h3>
+	<div style="width: 70%;margin:0 auto;">
+		<img src="image/6.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Good Rate of each game</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/7.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Play Rate(last 2 week) in different price range</h3>
+	<div style="width: 65%;margin:0 auto;">
+		<img src="image/8.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Dot plotting of players in 2 week and player forever</h3>
+	<div style="width: 50%;margin:0 auto;">
+		<img src="image/9.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Keywords of articles about “PUBG” in June, 2016</h3>
+	<div style="width: 70%;margin:0 auto;">
+		<img src="image/18.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h3>Why this increase so rapidly?</h3>
+		<ul>
+			<li>Warfares brings people new experiences</li>
+			<li>Warfares makes people excited</li>
+			<li>People's dream of being a superhero</li>
+			<div style="width: 50%;margin:0 auto;">
+				<img src="image/20.jpeg" alt="">
+			</div>
+		</ul>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h2>Second,</h2>
+		<h3>let's dig into Hottest Game - PUBG</h3>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Number of player in top 100 games in Stream</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/11.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Geography information about players in “PUBG”</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/12.jpeg" alt="">
+	</div>
+</section>
+
+<section data-transition="convex">
+	<div class="summary">
+		<h2>Third,</h2>
+		<h3>let's focus on China!</h3>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Users in Stream platform in each country</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/13.jpeg" alt="">
+	</div>
+	<div clas="summary">
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Word Cloud to show the most popular game type tag in China</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/14.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Price distribution of top 50 games in China</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/19.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Word cloud construct by the language</h3>
+	<div style="width: 80%;margin:0 auto;">
+		<img src="image/15.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h3>Maybe we find something new!</h3>
+		<ul>
+			<li>Game designers should apeal to Chinese people's taste</li>
+		</ul>
+		<div style="width: 80%;margin:0 auto;">
+			<img src="image/21.jpeg" alt="">
+		</div>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h3>How comes it dropped down since January 2018?</h3>
+		<ul>
+			<li>Most player are comes from China</li>
+			<li>In China, players of mobile phone game increase.</li>
+			<li>Mobile game is a threat to PC game</li>
+		</ul>
+		<div style="width: 50%;margin:0 auto;">
+			<img src="image/10.jpeg" alt="">
+		</div>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+		<h2>Finally,</h2>
+		<h3>See where our money goes...</h3>
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Money earned for selling the game</h3>
+	<div style="width: 60%;margin:0 auto;">
+		<img src="image/16.jpeg" alt="">
+	</div>
+</section>
+<section data-transition="convex">
+	<div class="summary">
+	<h3>Thank You ^_^ </h3>
+	<div style="width: 60%;margin:0 auto;">
+		<img src="image/17.jpg" alt="">
+	</div>
+</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				]
+			});
+		</script>
+	</body>
+</html>

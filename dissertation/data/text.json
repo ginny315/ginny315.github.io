@@ -1,0 +1,225 @@
+{
+    "data1": [
+        {
+            "date": "17/06/2018",
+            "content": [
+                "read 2 essays given by senior",
+                "read senior's essay & presention materials",
+                "know the complex of input data but still wander the input format",
+                "still decide to use webgl"
+            ]
+        },
+        {
+            "date": "24/06/2018",
+            "content": [
+                "meet up with senior, get famillar with the project",
+                "read essay: '一种L系统和IFS相互融合的植物模拟方法'",
+                "finish learning 'Three.js guide book'",
+                "first construct project(with three.js)",
+                "compare setTimeout & requestAnimationFrame for browser animation rendering"
+            ]
+        },
+        {
+            "date": "01/07/2018",
+            "content": [
+                "learn basic operation of Blender, try to model the coordinate",
+                "read 《第4章 3D开发知识-投影及各种变化》 & 《第11章 three.js引擎》",
+                "read senior's code",
+                "【Q1】trun tree data to json format"
+            ]
+        },
+        {
+            "date": "08/07/2018",
+            "content": [
+                "ajax load verticles.json and branch.json",
+                "learn 《第9章 常用3D开发技巧》",
+                "【fix Q1】preprocess senior's final tree data(c#-csv-python-json-js-load)",
+                "【fail】 try point and line texture",
+                "【fail】 try widen line width to form geometry",
+                "【fail】 try use cylinder to form geometry",
+                "【trying】 try use verticles and face to form geometry"
+            ]
+        },
+        {
+            "date": "11/07/2018",
+            "content": [
+                "use json to draw tree skeleton(length>25 cylinder, otherwise vf)",
+                "user phong material texture",
+                "【Q2】leaves rotation", 
+                "【Q3】more realistic drawing method"
+            ]
+        },
+        {
+            "date": "12/07-17/07",
+            "content": [
+                "/* back home */"               
+            ]
+        },
+        {
+            "date": "22/07/2018",
+            "content": [
+                "read source code webgl-lod(terrain lod)",
+                "convert previous code to webpack+es6",
+                "【Q4】texture image load combine to new project"              
+            ]
+        },
+        {
+            "date": "29/07/2018",
+            "content": [
+                "read source code webgl-lod(terrain lod)",
+                "【fix Q4】texture image load once, reuse material"              
+            ]
+        },
+        {
+            "date": "05/08/2018",
+            "content": [
+                "read source code webgl-lod(terrain lod)",
+                "transform part of terrain code to my project and run successfully."              
+            ]
+        },
+        {
+            "date": "12/08/2018",
+            "content": [
+                "transform  part of terrain code to my project and run successfully.",
+                "add stat to monoitor FPS",
+                "change tree to xy coordinate growth",
+                "finish learning noise algorithm"            
+            ]
+        },
+        {
+            "date": "14/08/2018",
+            "content": [
+                "make change to noise algorithm"            
+            ]
+        },
+        {
+            "date": "15/08-27/08",
+            "content": [
+                "/* ill in hospital */"               
+            ]
+        },
+        {
+            "date": "02/09/2018",
+            "content": [
+               "modify morph Factor, try best to make transformation smoothly"            
+            ]
+        },
+        {
+            "date":"09/09/2018",
+            "content":[
+                "search materials for how many vertices WebGL can draw",
+                "test the limination of browser and compare the result with theory"
+            ]
+        },
+        {
+            "date":"16/09/2018",
+            "content":[
+                "prepare for initial presentatiion",
+                "finish loading billboard and making billboard face to camera all the time"
+            ]
+        },
+        {
+            "date":"23/09/2018",
+            "content":[
+                "write basic part of dissertation",
+                "add interation to fluctuation change by user",
+                "learn obj format",
+                "construct a cylinder model"
+            ]
+        },
+        {
+            "date":"30/09/2018",
+            "content":[
+                "write parts of dissertation"
+            ]
+        },
+        {
+            "date":"07/10/2018",
+            "content":[
+                "finish data prepcess for obj-formatted file",
+                "finish program on obj-ofrmatted file",
+                "load one obj-formatted tree on web broswer"
+            ]
+        },
+        {
+            "date":"14/10/2018",
+            "content":[
+                "finish program on obj-formatted leaves",
+                "finish add leaves to obj-formatted tree",
+                "write parts of dissertation"
+            ]
+        },
+        {
+            "date":"21/10/2018",
+            "content":[
+                "finish sky rendering",
+                "finish theme mode change",
+                "add more billboards to the terrain",
+                "write parts of dissertation"
+            ]
+        },
+        {
+            "date":"28/10/2018",
+            "content":[
+                "modify dissertation",
+                "make poster"
+            ]
+        },
+        {
+            "date":"04/11/2018",
+            "content":[
+                "finish dissertation",
+                "finish poster",
+                "prepare ppt for oral presentation"
+            ]
+        }
+    ],
+    "data2": [
+        {
+            "date": "12/06/2018",
+            "content": [
+                "should read senior's essay & run the project",
+                "should know the input data",
+                "should give a evaluation whether I should take over the job or focus on another work"
+            ]
+        },
+        {
+            "date": "25/06/2018",
+            "content": [
+                "appointment with supervisor together with senior",
+                "should use senior's project to generate offline dataset as my input",
+                "focus on browser rendering and optimazation"
+            ]
+        },
+        {
+            "date":"07/09/2018",
+            "content":[
+                "should focus on two problems:",
+                "(1) the tree data struct",
+                "(2) the limitation of rendering"
+            ]
+        },
+        {
+            "date":"10/09/2018",
+            "content":[
+                "explain the research result to supervisor",
+                "confirm the initial presentation focus",
+                "if time sufficient, try to program on the construct of obj file"
+            ]
+        },
+        {
+            "date":"14/09/2018",
+            "content":[
+                "should explain how to deal with fluctuation change",
+                "maybe add some interation",
+                "tree is also important"
+            ]
+        },
+        {
+            "date":"10/10/2018",
+            "content":[
+                "discuss about solutions to add leaves to obj-formatted tree"
+            ]
+        }
+    ]
+}

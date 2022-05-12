@@ -24,8 +24,9 @@
 <meta property="og:description" content="业务需求中需要实时（最近1分钟）展示数据变化。通过echarts图表注入，定时拉取数据，渲染图表，展示给用户。这篇记录图表使用。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue6-1.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue6-2.png">
 <meta property="article:published_time" content="2022-05-09T01:52:17.000Z">
-<meta property="article:modified_time" content="2022-05-10T08:01:56.268Z">
+<meta property="article:modified_time" content="2022-05-12T02:26:24.644Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="vue3">
@@ -140,18 +141,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
@@ -204,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5k 字
+      5.5k 字
     </span>
   
 
@@ -213,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42 分钟
+      46 分钟
     </span>
   
 
@@ -274,9 +263,18 @@
 <p>出现了图表没有渲染的问题，仔细检查后，发现 echarts 没有实例化（可能是没有数据）。<br>修改<code>index.jsx</code>，设置一个<code>setData</code>方法，在 DOM 挂载时修改 cdata 中的数据，图表绘制成功。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> cdata = <span class="hljs-title function_">reactive</span>(&#123;<br>    <span class="hljs-attr">current</span>: [],<br>    <span class="hljs-attr">maxoperation</span>: [&#123; <span class="hljs-attr">value</span>: <span class="hljs-number">85</span> &#125;],<br>    <span class="hljs-attr">slowdown</span>: [&#123; <span class="hljs-attr">value</span>: <span class="hljs-number">92</span> &#125;],<br>  &#125;)<br><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">setData</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    cdata.<span class="hljs-property">current</span>.<span class="hljs-title function_">push</span>(&#123; <span class="hljs-attr">value</span>: <span class="hljs-number">24</span> &#125;)<br>  &#125;<br><br>  <span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">setData</span>()<br>  &#125;)<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>需要注意的是代码更新会触发重新编译，但是浏览器没有主动刷新，需要手动刷新浏览器。</p>
-<h3 id="定时拉取数据"><a href="#定时拉取数据" class="headerlink" title="定时拉取数据"></a>定时拉取数据</h3><p>ECharts 由数据驱动，数据的改变驱动图表展现的改变。因此动态数据的实现也变得异常简单，只需要获取数据，填入数据，ECharts 会找到两组数据之间的差异然后通过合适的动画去表现数据的变化。<br>在本项目中，需要实时（最近1分钟）展示数据变化，采取的方式是通过定时器<code>setInterval</code>实现，每隔60s发送一次请求。<br>组件挂载时开启定时器，组件卸载时，也需要及时清除定时器。</p>
+<h3 id="定时拉取数据"><a href="#定时拉取数据" class="headerlink" title="定时拉取数据"></a>定时拉取数据</h3><p>在本项目中，需要实时（最近1分钟）展示数据变化，采取的方式是通过定时器<code>setInterval</code>实现，每隔60s发送一次请求。<br>组件挂载时开启定时器，组件卸载时及时清除定时器。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> drawTiming = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">setData</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-comment">//请求数据改变</span><br>&#125;<br><span class="hljs-comment">// 定时函数，60秒刷新一次</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">drawTimingFn</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-title function_">setData</span>();<br>  drawTiming.<span class="hljs-property">value</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">setData</span>();<br>  &#125;, <span class="hljs-number">60000</span>);<br>&#125;<br><br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">drawTimingFn</span>()<br>&#125;)<br><br><span class="hljs-title function_">onUnmounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-built_in">clearInterval</span>(drawTiming.<span class="hljs-property">value</span>)<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="UI渲染"><a href="#UI渲染" class="headerlink" title="UI渲染"></a>UI渲染</h3><ol>
+<li>echarts由数据驱动，数据的改变驱动图表展现的改变。<br>动态数据的实现：获取数据，填入数据，echarts会找到两组数据之间的差异然后通过合适的动画去表现数据的变化。</li>
+<li>vue由数据驱动，数据改变驱动视图变化。<br>vue在更新DOM时是异步执行的。当数据发生变化，vue将开启一个异步更新队列，视图需要等队列中所有数据变化完成之后，再统一进行更新。</li>
+</ol>
+<p><img src="/../img/vue6-2.png" srcset="/img/loading.gif" lazyload alt="event loop"></p>
+<ol start="3">
+<li>vue有一种渲染优化策略<code>nextTick</code>，也是性能优化手段，基于JS执行机制实现。等待同一事件循环中的所有数据变化完成之后（一直修改相同数据，异步操作队列还会去重），再将队列中的事件拿来进行处理，进行DOM的更新，此时DOM只需要更新一次。<br>vue中我们改变数据时不会立即触发视图，如果需要实时获取到最新的DOM，可以手动调用 <code>nextTick</code>。</li>
+<li>在以下情况下，会用到<code>nextTick</code>：<br>(1) 在数据变化后执行的某个操作，而这个操作需要使用随数据变化而变化的DOM结构的时候，这个操作就需要方法在<code>nextTick()</code>的回调函数中。<br>(2) 在vue生命周期中，如果在<code>created()</code>钩子进行DOM操作，也一定要放在<code>nextTick()</code>的回调函数中。因为在<code>created()</code>钩子函数中，页面的DOM还未渲染。<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">nextTick</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// DOM 更新了</span><br>&#125;)<br><br><span class="hljs-comment">// 作为一个 Promise 使用</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">nextTick</span>()<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// DOM 更新了</span><br>&#125;)<br></code></pre></div></td></tr></table></figure></li>
+</ol>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/plugins.html#%E7%BC%96%E5%86%99%E6%8F%92%E4%BB%B6">官方文档 插件</a><br><a target="_blank" rel="noopener" href="https://echarts.apache.org/examples/zh/index.html">echarts官网示例</a><br><a target="_blank" rel="noopener" href="https://github.com/vuejs/awesome-vue#components--libraries">各种插件</a></p>
 
             </div>

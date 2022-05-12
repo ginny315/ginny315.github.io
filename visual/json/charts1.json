@@ -1,0 +1,2704 @@
+{
+  "data": [
+      {
+          "DateTime": "2017-02-01 00:00:00",
+          "Players": 1,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-02 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-03 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-04 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-05 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-06 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-07 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-08 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-09 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-10 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-11 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-12 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-13 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-14 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-15 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-16 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-17 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-18 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-19 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-20 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-21 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-22 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-23 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-24 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-25 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-26 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-27 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-02-28 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-01 00:00:00",
+          "Players": 1,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-02 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-03 00:00:00",
+          "Players": 3,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-04 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-05 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-06 00:00:00",
+          "Players": 1,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-07 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-08 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-09 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-10 00:00:00",
+          "Players": 1,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-11 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-12 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-13 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-14 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-15 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-16 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-17 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-18 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-19 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-20 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-21 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-22 00:00:00",
+          "Players": 0,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-23 00:00:00",
+          "Players": 39523,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-24 00:00:00",
+          "Players": 46119,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-25 00:00:00",
+          "Players": 53667,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-26 00:00:00",
+          "Players": 65629,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-27 00:00:00",
+          "Players": 56310,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-28 00:00:00",
+          "Players": 57175,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-29 00:00:00",
+          "Players": 57121,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-30 00:00:00",
+          "Players": 58532,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-03-31 00:00:00",
+          "Players": 65738,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-01 00:00:00",
+          "Players": 75682,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-02 00:00:00",
+          "Players": 86648,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-03 00:00:00",
+          "Players": 72785,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-04 00:00:00",
+          "Players": 70046,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-05 00:00:00",
+          "Players": 70541,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-06 00:00:00",
+          "Players": 70104,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-07 00:00:00",
+          "Players": 71165,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-08 00:00:00",
+          "Players": 81031,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-09 00:00:00",
+          "Players": 89066,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-10 00:00:00",
+          "Players": 80357,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-11 00:00:00",
+          "Players": 74820,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-12 00:00:00",
+          "Players": 73028,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-13 00:00:00",
+          "Players": 77263,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-14 00:00:00",
+          "Players": 87933,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-15 00:00:00",
+          "Players": 91451,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-16 00:00:00",
+          "Players": 96368,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-17 00:00:00",
+          "Players": 103672,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-18 00:00:00",
+          "Players": 87811,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-19 00:00:00",
+          "Players": 85688,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-20 00:00:00",
+          "Players": 103411,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-21 00:00:00",
+          "Players": 110636,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-22 00:00:00",
+          "Players": 125305,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-23 00:00:00",
+          "Players": 138478,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-24 00:00:00",
+          "Players": 108786,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-25 00:00:00",
+          "Players": 105878,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-26 00:00:00",
+          "Players": 104189,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-27 00:00:00",
+          "Players": 100633,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-28 00:00:00",
+          "Players": 111007,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-29 00:00:00",
+          "Players": 125847,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-04-30 00:00:00",
+          "Players": 132224,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-01 00:00:00",
+          "Players": 143302,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-02 00:00:00",
+          "Players": 121663,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-03 00:00:00",
+          "Players": 121333,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-04 00:00:00",
+          "Players": 121746,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-05 00:00:00",
+          "Players": 127751,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-06 00:00:00",
+          "Players": 149613,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-07 00:00:00",
+          "Players": 161117,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-08 00:00:00",
+          "Players": 142099,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-09 00:00:00",
+          "Players": 139173,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-10 00:00:00",
+          "Players": 134549,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-11 00:00:00",
+          "Players": 135010,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-12 00:00:00",
+          "Players": 145591,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-13 00:00:00",
+          "Players": 165926,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-14 00:00:00",
+          "Players": 174516,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-15 00:00:00",
+          "Players": 145584,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-16 00:00:00",
+          "Players": 146877,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-17 00:00:00",
+          "Players": 148631,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-18 00:00:00",
+          "Players": 146887,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-19 00:00:00",
+          "Players": 158062,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-20 00:00:00",
+          "Players": 173348,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-21 00:00:00",
+          "Players": 186916,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-22 00:00:00",
+          "Players": 157947,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-23 00:00:00",
+          "Players": 160833,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-24 00:00:00",
+          "Players": 151991,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-25 00:00:00",
+          "Players": 143727,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-26 00:00:00",
+          "Players": 172888,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-27 00:00:00",
+          "Players": 182698,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-28 00:00:00",
+          "Players": 191573,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-29 00:00:00",
+          "Players": 180861,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-30 00:00:00",
+          "Players": 172266,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-05-31 00:00:00",
+          "Players": 171474,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-01 00:00:00",
+          "Players": 168779,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-02 00:00:00",
+          "Players": 176691,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-03 00:00:00",
+          "Players": 194697,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-04 00:00:00",
+          "Players": 209081,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-05 00:00:00",
+          "Players": 204449,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-06 00:00:00",
+          "Players": 185607,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-07 00:00:00",
+          "Players": 180441,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-08 00:00:00",
+          "Players": 178360,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-09 00:00:00",
+          "Players": 188136,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-10 00:00:00",
+          "Players": 197874,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-11 00:00:00",
+          "Players": 218071,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-12 00:00:00",
+          "Players": 197381,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-13 00:00:00",
+          "Players": 192862,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-14 00:00:00",
+          "Players": 193730,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-15 00:00:00",
+          "Players": 200558,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-16 00:00:00",
+          "Players": 206596,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-17 00:00:00",
+          "Players": 220910,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-18 00:00:00",
+          "Players": 232325,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-19 00:00:00",
+          "Players": 209239,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-20 00:00:00",
+          "Players": 212130,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-21 00:00:00",
+          "Players": 211893,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-22 00:00:00",
+          "Players": 211103,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-23 00:00:00",
+          "Players": 218507,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-24 00:00:00",
+          "Players": 239810,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-25 00:00:00",
+          "Players": 257712,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-26 00:00:00",
+          "Players": 232986,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-27 00:00:00",
+          "Players": 236180,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-28 00:00:00",
+          "Players": 237002,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-29 00:00:00",
+          "Players": 255147,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-06-30 00:00:00",
+          "Players": 269383,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-01 00:00:00",
+          "Players": 290001,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-02 00:00:00",
+          "Players": 313807,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-03 00:00:00",
+          "Players": 286085,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-04 00:00:00",
+          "Players": 289135,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-05 00:00:00",
+          "Players": 284355,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-06 00:00:00",
+          "Players": 282554,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-07 00:00:00",
+          "Players": 301208,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-08 00:00:00",
+          "Players": 321026,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-09 00:00:00",
+          "Players": 340604,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-10 00:00:00",
+          "Players": 319705,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-11 00:00:00",
+          "Players": 321086,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-12 00:00:00",
+          "Players": 321392,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-13 00:00:00",
+          "Players": 313880,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-14 00:00:00",
+          "Players": 335374,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-15 00:00:00",
+          "Players": 355330,
+          "Flags": "",
+          "Twitch Viewers": ""
+      },
+      {
+          "DateTime": "2017-07-16 00:00:00",
+          "Players": 382779,
+          "Flags": "",
+          "Twitch Viewers": 128183
+      },
+      {
+          "DateTime": "2017-07-17 00:00:00",
+          "Players": 329145,
+          "Flags": "",
+          "Twitch Viewers": 135624
+      },
+      {
+          "DateTime": "2017-07-18 00:00:00",
+          "Players": 356656,
+          "Flags": "",
+          "Twitch Viewers": 111647
+      },
+      {
+          "DateTime": "2017-07-19 00:00:00",
+          "Players": 351955,
+          "Flags": "",
+          "Twitch Viewers": 125123
+      },
+      {
+          "DateTime": "2017-07-20 00:00:00",
+          "Players": 357712,
+          "Flags": "",
+          "Twitch Viewers": 126671
+      },
+      {
+          "DateTime": "2017-07-21 00:00:00",
+          "Players": 363785,
+          "Flags": "",
+          "Twitch Viewers": 110880
+      },
+      {
+          "DateTime": "2017-07-22 00:00:00",
+          "Players": 386257,
+          "Flags": "",
+          "Twitch Viewers": 124520
+      },
+      {
+          "DateTime": "2017-07-23 00:00:00",
+          "Players": 422618,
+          "Flags": "",
+          "Twitch Viewers": 116628
+      },
+      {
+          "DateTime": "2017-07-24 00:00:00",
+          "Players": 364760,
+          "Flags": "",
+          "Twitch Viewers": 156931
+      },
+      {
+          "DateTime": "2017-07-25 00:00:00",
+          "Players": 412085,
+          "Flags": "",
+          "Twitch Viewers": 148996
+      },
+      {
+          "DateTime": "2017-07-26 00:00:00",
+          "Players": 415193,
+          "Flags": "",
+          "Twitch Viewers": 197579
+      },
+      {
+          "DateTime": "2017-07-27 00:00:00",
+          "Players": 370084,
+          "Flags": "",
+          "Twitch Viewers": 162892
+      },
+      {
+          "DateTime": "2017-07-28 00:00:00",
+          "Players": 430582,
+          "Flags": "",
+          "Twitch Viewers": 169857
+      },
+      {
+          "DateTime": "2017-07-29 00:00:00",
+          "Players": 445820,
+          "Flags": "",
+          "Twitch Viewers": 142399
+      },
+      {
+          "DateTime": "2017-07-30 00:00:00",
+          "Players": 481304,
+          "Flags": "",
+          "Twitch Viewers": 136479
+      },
+      {
+          "DateTime": "2017-07-31 00:00:00",
+          "Players": 461344,
+          "Flags": "",
+          "Twitch Viewers": 132307
+      },
+      {
+          "DateTime": "2017-08-01 00:00:00",
+          "Players": 479439,
+          "Flags": "",
+          "Twitch Viewers": 176533
+      },
+      {
+          "DateTime": "2017-08-02 00:00:00",
+          "Players": 479612,
+          "Flags": "",
+          "Twitch Viewers": 161043
+      },
+      {
+          "DateTime": "2017-08-03 00:00:00",
+          "Players": 423030,
+          "Flags": "",
+          "Twitch Viewers": 149342
+      },
+      {
+          "DateTime": "2017-08-04 00:00:00",
+          "Players": 523078,
+          "Flags": "",
+          "Twitch Viewers": 127044
+      },
+      {
+          "DateTime": "2017-08-05 00:00:00",
+          "Players": 546584,
+          "Flags": "",
+          "Twitch Viewers": 140558
+      },
+      {
+          "DateTime": "2017-08-06 00:00:00",
+          "Players": 581224,
+          "Flags": "",
+          "Twitch Viewers": 118305
+      },
+      {
+          "DateTime": "2017-08-07 00:00:00",
+          "Players": 555240,
+          "Flags": "",
+          "Twitch Viewers": 145621
+      },
+      {
+          "DateTime": "2017-08-08 00:00:00",
+          "Players": 552038,
+          "Flags": "",
+          "Twitch Viewers": 143672
+      },
+      {
+          "DateTime": "2017-08-09 00:00:00",
+          "Players": 552155,
+          "Flags": "",
+          "Twitch Viewers": 141928
+      },
+      {
+          "DateTime": "2017-08-10 00:00:00",
+          "Players": 538332,
+          "Flags": "",
+          "Twitch Viewers": 161948
+      },
+      {
+          "DateTime": "2017-08-11 00:00:00",
+          "Players": 559613,
+          "Flags": "",
+          "Twitch Viewers": 145476
+      },
+      {
+          "DateTime": "2017-08-12 00:00:00",
+          "Players": 586190,
+          "Flags": "",
+          "Twitch Viewers": 196106
+      },
+      {
+          "DateTime": "2017-08-13 00:00:00",
+          "Players": 614743,
+          "Flags": "",
+          "Twitch Viewers": 148587
+      },
+      {
+          "DateTime": "2017-08-14 00:00:00",
+          "Players": 613642,
+          "Flags": "",
+          "Twitch Viewers": 168552
+      },
+      {
+          "DateTime": "2017-08-15 00:00:00",
+          "Players": 617207,
+          "Flags": "",
+          "Twitch Viewers": 165955
+      },
+      {
+          "DateTime": "2017-08-16 00:00:00",
+          "Players": 620133,
+          "Flags": "",
+          "Twitch Viewers": 181676
+      },
+      {
+          "DateTime": "2017-08-17 00:00:00",
+          "Players": 628489,
+          "Flags": "",
+          "Twitch Viewers": 152252
+      },
+      {
+          "DateTime": "2017-08-18 00:00:00",
+          "Players": 659152,
+          "Flags": "",
+          "Twitch Viewers": 168220
+      },
+      {
+          "DateTime": "2017-08-19 00:00:00",
+          "Players": 699249,
+          "Flags": "",
+          "Twitch Viewers": 149910
+      },
+      {
+          "DateTime": "2017-08-20 00:00:00",
+          "Players": 678113,
+          "Flags": "",
+          "Twitch Viewers": 140200
+      },
+      {
+          "DateTime": "2017-08-21 00:00:00",
+          "Players": 687633,
+          "Flags": "",
+          "Twitch Viewers": 155615
+      },
+      {
+          "DateTime": "2017-08-22 00:00:00",
+          "Players": 718030,
+          "Flags": "",
+          "Twitch Viewers": 143414
+      },
+      {
+          "DateTime": "2017-08-23 00:00:00",
+          "Players": 710065,
+          "Flags": "",
+          "Twitch Viewers": 452803
+      },
+      {
+          "DateTime": "2017-08-24 00:00:00",
+          "Players": 755998,
+          "Flags": "",
+          "Twitch Viewers": 416477
+      },
+      {
+          "DateTime": "2017-08-25 00:00:00",
+          "Players": 774342,
+          "Flags": "",
+          "Twitch Viewers": 390396
+      },
+      {
+          "DateTime": "2017-08-26 00:00:00",
+          "Players": 810668,
+          "Flags": "",
+          "Twitch Viewers": 424393
+      },
+      {
+          "DateTime": "2017-08-27 00:00:00",
+          "Players": 877844,
+          "Flags": "",
+          "Twitch Viewers": 168925
+      },
+      {
+          "DateTime": "2017-08-28 00:00:00",
+          "Players": 804696,
+          "Flags": "",
+          "Twitch Viewers": 168091
+      },
+      {
+          "DateTime": "2017-08-29 00:00:00",
+          "Players": 874184,
+          "Flags": "",
+          "Twitch Viewers": 162099
+      },
+      {
+          "DateTime": "2017-08-30 00:00:00",
+          "Players": 887388,
+          "Flags": "",
+          "Twitch Viewers": 152727
+      },
+      {
+          "DateTime": "2017-08-31 00:00:00",
+          "Players": 857891,
+          "Flags": "",
+          "Twitch Viewers": 149157
+      },
+      {
+          "DateTime": "2017-09-01 00:00:00",
+          "Players": 886154,
+          "Flags": "",
+          "Twitch Viewers": 167674
+      },
+      {
+          "DateTime": "2017-09-02 00:00:00",
+          "Players": 936020,
+          "Flags": "",
+          "Twitch Viewers": 157620
+      },
+      {
+          "DateTime": "2017-09-03 00:00:00",
+          "Players": 970240,
+          "Flags": "",
+          "Twitch Viewers": 136203
+      },
+      {
+          "DateTime": "2017-09-04 00:00:00",
+          "Players": 954533,
+          "Flags": "",
+          "Twitch Viewers": 195428
+      },
+      {
+          "DateTime": "2017-09-05 00:00:00",
+          "Players": 962950,
+          "Flags": "",
+          "Twitch Viewers": 171404
+      },
+      {
+          "DateTime": "2017-09-06 00:00:00",
+          "Players": 968512,
+          "Flags": "",
+          "Twitch Viewers": 175670
+      },
+      {
+          "DateTime": "2017-09-07 00:00:00",
+          "Players": 980039,
+          "Flags": "",
+          "Twitch Viewers": 168593
+      },
+      {
+          "DateTime": "2017-09-08 00:00:00",
+          "Players": 1028275,
+          "Flags": "",
+          "Twitch Viewers": 216214
+      },
+      {
+          "DateTime": "2017-09-09 00:00:00",
+          "Players": 1069054,
+          "Flags": "",
+          "Twitch Viewers": 211264
+      },
+      {
+          "DateTime": "2017-09-10 00:00:00",
+          "Players": 1111155,
+          "Flags": "",
+          "Twitch Viewers": 164347
+      },
+      {
+          "DateTime": "2017-09-11 00:00:00",
+          "Players": 1063156,
+          "Flags": "",
+          "Twitch Viewers": 187648
+      },
+      {
+          "DateTime": "2017-09-12 00:00:00",
+          "Players": 1073334,
+          "Flags": "",
+          "Twitch Viewers": 184605
+      },
+      {
+          "DateTime": "2017-09-13 00:00:00",
+          "Players": 1090862,
+          "Flags": "",
+          "Twitch Viewers": 167806
+      },
+      {
+          "DateTime": "2017-09-14 00:00:00",
+          "Players": 1135586,
+          "Flags": "",
+          "Twitch Viewers": 174688
+      },
+      {
+          "DateTime": "2017-09-15 00:00:00",
+          "Players": 1238017,
+          "Flags": "",
+          "Twitch Viewers": 140980
+      },
+      {
+          "DateTime": "2017-09-16 00:00:00",
+          "Players": 1349413,
+          "Flags": "",
+          "Twitch Viewers": 195322
+      },
+      {
+          "DateTime": "2017-09-17 00:00:00",
+          "Players": 1338091,
+          "Flags": "",
+          "Twitch Viewers": 147105
+      },
+      {
+          "DateTime": "2017-09-18 00:00:00",
+          "Players": 1302950,
+          "Flags": "",
+          "Twitch Viewers": 156099
+      },
+      {
+          "DateTime": "2017-09-19 00:00:00",
+          "Players": 1280976,
+          "Flags": "",
+          "Twitch Viewers": 197948
+      },
+      {
+          "DateTime": "2017-09-20 00:00:00",
+          "Players": 1333200,
+          "Flags": "",
+          "Twitch Viewers": 164810
+      },
+      {
+          "DateTime": "2017-09-21 00:00:00",
+          "Players": 1243166,
+          "Flags": "",
+          "Twitch Viewers": 161674
+      },
+      {
+          "DateTime": "2017-09-22 00:00:00",
+          "Players": 1462708,
+          "Flags": "",
+          "Twitch Viewers": 162439
+      },
+      {
+          "DateTime": "2017-09-23 00:00:00",
+          "Players": 1529218,
+          "Flags": "",
+          "Twitch Viewers": 156715
+      },
+      {
+          "DateTime": "2017-09-24 00:00:00",
+          "Players": 1493939,
+          "Flags": "",
+          "Twitch Viewers": 148549
+      },
+      {
+          "DateTime": "2017-09-25 00:00:00",
+          "Players": 1462955,
+          "Flags": "",
+          "Twitch Viewers": 171141
+      },
+      {
+          "DateTime": "2017-09-26 00:00:00",
+          "Players": 1466143,
+          "Flags": "",
+          "Twitch Viewers": 145273
+      },
+      {
+          "DateTime": "2017-09-27 00:00:00",
+          "Players": 1451925,
+          "Flags": "",
+          "Twitch Viewers": 124366
+      },
+      {
+          "DateTime": "2017-09-28 00:00:00",
+          "Players": 1473144,
+          "Flags": "",
+          "Twitch Viewers": 130577
+      },
+      {
+          "DateTime": "2017-09-29 00:00:00",
+          "Players": 1420977,
+          "Flags": "",
+          "Twitch Viewers": 123400
+      },
+      {
+          "DateTime": "2017-09-30 00:00:00",
+          "Players": 1574445,
+          "Flags": "",
+          "Twitch Viewers": 123316
+      },
+      {
+          "DateTime": "2017-10-01 00:00:00",
+          "Players": 1669015,
+          "Flags": "",
+          "Twitch Viewers": 118869
+      },
+      {
+          "DateTime": "2017-10-02 00:00:00",
+          "Players": 1628409,
+          "Flags": "",
+          "Twitch Viewers": 146389
+      },
+      {
+          "DateTime": "2017-10-03 00:00:00",
+          "Players": 1668715,
+          "Flags": "",
+          "Twitch Viewers": 169900
+      },
+      {
+          "DateTime": "2017-10-04 00:00:00",
+          "Players": 1655027,
+          "Flags": "",
+          "Twitch Viewers": 125091
+      },
+      {
+          "DateTime": "2017-10-05 00:00:00",
+          "Players": 1767288,
+          "Flags": "",
+          "Twitch Viewers": 144425
+      },
+      {
+          "DateTime": "2017-10-06 00:00:00",
+          "Players": 1846134,
+          "Flags": "",
+          "Twitch Viewers": 155428
+      },
+      {
+          "DateTime": "2017-10-07 00:00:00",
+          "Players": 1993691,
+          "Flags": "",
+          "Twitch Viewers": 159351
+      },
+      {
+          "DateTime": "2017-10-08 00:00:00",
+          "Players": 1960892,
+          "Flags": "",
+          "Twitch Viewers": 126045
+      },
+      {
+          "DateTime": "2017-10-09 00:00:00",
+          "Players": 1962803,
+          "Flags": "",
+          "Twitch Viewers": 167559
+      },
+      {
+          "DateTime": "2017-10-10 00:00:00",
+          "Players": 1931930,
+          "Flags": "",
+          "Twitch Viewers": 134742
+      },
+      {
+          "DateTime": "2017-10-11 00:00:00",
+          "Players": 2016498,
+          "Flags": "",
+          "Twitch Viewers": 143658
+      },
+      {
+          "DateTime": "2017-10-12 00:00:00",
+          "Players": 2041534,
+          "Flags": "",
+          "Twitch Viewers": 153251
+      },
+      {
+          "DateTime": "2017-10-13 00:00:00",
+          "Players": 2157343,
+          "Flags": "",
+          "Twitch Viewers": 155949
+      },
+      {
+          "DateTime": "2017-10-14 00:00:00",
+          "Players": 2289971,
+          "Flags": "",
+          "Twitch Viewers": 126143
+      },
+      {
+          "DateTime": "2017-10-15 00:00:00",
+          "Players": 2167546,
+          "Flags": "",
+          "Twitch Viewers": 132109
+      },
+      {
+          "DateTime": "2017-10-16 00:00:00",
+          "Players": 2081099,
+          "Flags": "",
+          "Twitch Viewers": 168064
+      },
+      {
+          "DateTime": "2017-10-17 00:00:00",
+          "Players": 1720392,
+          "Flags": "",
+          "Twitch Viewers": 122574
+      },
+      {
+          "DateTime": "2017-10-18 00:00:00",
+          "Players": 2112689,
+          "Flags": "",
+          "Twitch Viewers": 132740
+      },
+      {
+          "DateTime": "2017-10-19 00:00:00",
+          "Players": 2085661,
+          "Flags": "",
+          "Twitch Viewers": 134842
+      },
+      {
+          "DateTime": "2017-10-20 00:00:00",
+          "Players": 2275603,
+          "Flags": "",
+          "Twitch Viewers": 120344
+      },
+      {
+          "DateTime": "2017-10-21 00:00:00",
+          "Players": 2251203,
+          "Flags": "",
+          "Twitch Viewers": 178789
+      },
+      {
+          "DateTime": "2017-10-22 00:00:00",
+          "Players": 2128994,
+          "Flags": "",
+          "Twitch Viewers": 147647
+      },
+      {
+          "DateTime": "2017-10-23 00:00:00",
+          "Players": 2160577,
+          "Flags": "",
+          "Twitch Viewers": 160368
+      },
+      {
+          "DateTime": "2017-10-24 00:00:00",
+          "Players": 2178295,
+          "Flags": "",
+          "Twitch Viewers": 137606
+      },
+      {
+          "DateTime": "2017-10-25 00:00:00",
+          "Players": 2185097,
+          "Flags": "",
+          "Twitch Viewers": 150521
+      },
+      {
+          "DateTime": "2017-10-26 00:00:00",
+          "Players": 2158697,
+          "Flags": "",
+          "Twitch Viewers": 136255
+      },
+      {
+          "DateTime": "2017-10-27 00:00:00",
+          "Players": 2387794,
+          "Flags": "",
+          "Twitch Viewers": 119923
+      },
+      {
+          "DateTime": "2017-10-28 00:00:00",
+          "Players": 2390946,
+          "Flags": "",
+          "Twitch Viewers": 111974
+      },
+      {
+          "DateTime": "2017-10-29 00:00:00",
+          "Players": 2276682,
+          "Flags": "",
+          "Twitch Viewers": 120443
+      },
+      {
+          "DateTime": "2017-10-30 00:00:00",
+          "Players": 2247503,
+          "Flags": "",
+          "Twitch Viewers": 147012
+      },
+      {
+          "DateTime": "2017-10-31 00:00:00",
+          "Players": 2237373,
+          "Flags": "",
+          "Twitch Viewers": 161655
+      },
+      {
+          "DateTime": "2017-11-01 00:00:00",
+          "Players": 2303015,
+          "Flags": "",
+          "Twitch Viewers": 143235
+      },
+      {
+          "DateTime": "2017-11-02 00:00:00",
+          "Players": 2328745,
+          "Flags": "",
+          "Twitch Viewers": 151177
+      },
+      {
+          "DateTime": "2017-11-03 00:00:00",
+          "Players": 2524595,
+          "Flags": "",
+          "Twitch Viewers": 90338
+      },
+      {
+          "DateTime": "2017-11-04 00:00:00",
+          "Players": 2557336,
+          "Flags": "",
+          "Twitch Viewers": 115665
+      },
+      {
+          "DateTime": "2017-11-05 00:00:00",
+          "Players": 2451505,
+          "Flags": "",
+          "Twitch Viewers": 80700
+      },
+      {
+          "DateTime": "2017-11-06 00:00:00",
+          "Players": 2399159,
+          "Flags": "",
+          "Twitch Viewers": 145590
+      },
+      {
+          "DateTime": "2017-11-07 00:00:00",
+          "Players": 2377139,
+          "Flags": "",
+          "Twitch Viewers": 114139
+      },
+      {
+          "DateTime": "2017-11-08 00:00:00",
+          "Players": 2406967,
+          "Flags": "",
+          "Twitch Viewers": 118932
+      },
+      {
+          "DateTime": "2017-11-09 00:00:00",
+          "Players": 2435545,
+          "Flags": "",
+          "Twitch Viewers": 103615
+      },
+      {
+          "DateTime": "2017-11-10 00:00:00",
+          "Players": 2552565,
+          "Flags": "",
+          "Twitch Viewers": 106975
+      },
+      {
+          "DateTime": "2017-11-11 00:00:00",
+          "Players": 2641811,
+          "Flags": "",
+          "Twitch Viewers": 103338
+      },
+      {
+          "DateTime": "2017-11-12 00:00:00",
+          "Players": 2580337,
+          "Flags": "",
+          "Twitch Viewers": 107568
+      },
+      {
+          "DateTime": "2017-11-13 00:00:00",
+          "Players": 2531936,
+          "Flags": "",
+          "Twitch Viewers": 108980
+      },
+      {
+          "DateTime": "2017-11-14 00:00:00",
+          "Players": 2522283,
+          "Flags": "",
+          "Twitch Viewers": 217885
+      },
+      {
+          "DateTime": "2017-11-15 00:00:00",
+          "Players": 2545420,
+          "Flags": "",
+          "Twitch Viewers": 113564
+      },
+      {
+          "DateTime": "2017-11-16 00:00:00",
+          "Players": 2567825,
+          "Flags": "",
+          "Twitch Viewers": 94755
+      },
+      {
+          "DateTime": "2017-11-17 00:00:00",
+          "Players": 2793176,
+          "Flags": "",
+          "Twitch Viewers": 115106
+      },
+      {
+          "DateTime": "2017-11-18 00:00:00",
+          "Players": 2904846,
+          "Flags": "",
+          "Twitch Viewers": 128227
+      },
+      {
+          "DateTime": "2017-11-19 00:00:00",
+          "Players": 2778309,
+          "Flags": "",
+          "Twitch Viewers": 118542
+      },
+      {
+          "DateTime": "2017-11-20 00:00:00",
+          "Players": 2686146,
+          "Flags": "",
+          "Twitch Viewers": 122592
+      },
+      {
+          "DateTime": "2017-11-21 00:00:00",
+          "Players": 2674342,
+          "Flags": "",
+          "Twitch Viewers": 120771
+      },
+      {
+          "DateTime": "2017-11-22 00:00:00",
+          "Players": 2618738,
+          "Flags": "",
+          "Twitch Viewers": 146819
+      },
+      {
+          "DateTime": "2017-11-23 00:00:00",
+          "Players": 2642524,
+          "Flags": "",
+          "Twitch Viewers": 101285
+      },
+      {
+          "DateTime": "2017-11-24 00:00:00",
+          "Players": 2891657,
+          "Flags": "",
+          "Twitch Viewers": 107401
+      },
+      {
+          "DateTime": "2017-11-25 00:00:00",
+          "Players": 2940359,
+          "Flags": "",
+          "Twitch Viewers": 113381
+      },
+      {
+          "DateTime": "2017-11-26 00:00:00",
+          "Players": 2798630,
+          "Flags": "",
+          "Twitch Viewers": 104280
+      },
+      {
+          "DateTime": "2017-11-27 00:00:00",
+          "Players": 2683770,
+          "Flags": "",
+          "Twitch Viewers": 138467
+      },
+      {
+          "DateTime": "2017-11-28 00:00:00",
+          "Players": 2631504,
+          "Flags": "",
+          "Twitch Viewers": 127683
+      },
+      {
+          "DateTime": "2017-11-29 00:00:00",
+          "Players": 2670554,
+          "Flags": "",
+          "Twitch Viewers": 106770
+      },
+      {
+          "DateTime": "2017-11-30 00:00:00",
+          "Players": 2664769,
+          "Flags": "",
+          "Twitch Viewers": 101268
+      },
+      {
+          "DateTime": "2017-12-01 00:00:00",
+          "Players": 2903859,
+          "Flags": "",
+          "Twitch Viewers": 88549
+      },
+      {
+          "DateTime": "2017-12-02 00:00:00",
+          "Players": 2961112,
+          "Flags": "",
+          "Twitch Viewers": 132402
+      },
+      {
+          "DateTime": "2017-12-03 00:00:00",
+          "Players": 2817793,
+          "Flags": "",
+          "Twitch Viewers": 150963
+      },
+      {
+          "DateTime": "2017-12-04 00:00:00",
+          "Players": 2711041,
+          "Flags": "",
+          "Twitch Viewers": 89006
+      },
+      {
+          "DateTime": "2017-12-05 00:00:00",
+          "Players": 2709615,
+          "Flags": "",
+          "Twitch Viewers": 241543
+      },
+      {
+          "DateTime": "2017-12-06 00:00:00",
+          "Players": 2729519,
+          "Flags": "",
+          "Twitch Viewers": 280810
+      },
+      {
+          "DateTime": "2017-12-07 00:00:00",
+          "Players": 2796272,
+          "Flags": "",
+          "Twitch Viewers": 107153
+      },
+      {
+          "DateTime": "2017-12-08 00:00:00",
+          "Players": 2845552,
+          "Flags": "",
+          "Twitch Viewers": 226810
+      },
+      {
+          "DateTime": "2017-12-09 00:00:00",
+          "Players": 2913526,
+          "Flags": "",
+          "Twitch Viewers": 132297
+      },
+      {
+          "DateTime": "2017-12-10 00:00:00",
+          "Players": 2751550,
+          "Flags": "",
+          "Twitch Viewers": 123809
+      },
+      {
+          "DateTime": "2017-12-11 00:00:00",
+          "Players": 2652413,
+          "Flags": "",
+          "Twitch Viewers": 148018
+      },
+      {
+          "DateTime": "2017-12-12 00:00:00",
+          "Players": 2668501,
+          "Flags": "",
+          "Twitch Viewers": 132699
+      },
+      {
+          "DateTime": "2017-12-13 00:00:00",
+          "Players": 2680201,
+          "Flags": "",
+          "Twitch Viewers": 111888
+      },
+      {
+          "DateTime": "2017-12-14 00:00:00",
+          "Players": 2616642,
+          "Flags": "",
+          "Twitch Viewers": 110841
+      },
+      {
+          "DateTime": "2017-12-15 00:00:00",
+          "Players": 2804838,
+          "Flags": "",
+          "Twitch Viewers": 91708
+      },
+      {
+          "DateTime": "2017-12-16 00:00:00",
+          "Players": 2869156,
+          "Flags": "",
+          "Twitch Viewers": 126657
+      },
+      {
+          "DateTime": "2017-12-17 00:00:00",
+          "Players": 2648933,
+          "Flags": "",
+          "Twitch Viewers": 104946
+      },
+      {
+          "DateTime": "2017-12-18 00:00:00",
+          "Players": 2600604,
+          "Flags": "",
+          "Twitch Viewers": 171341
+      },
+      {
+          "DateTime": "2017-12-19 00:00:00",
+          "Players": 2648596,
+          "Flags": "",
+          "Twitch Viewers": 101564
+      },
+      {
+          "DateTime": "2017-12-20 00:00:00",
+          "Players": 2699268,
+          "Flags": "",
+          "Twitch Viewers": 86669
+      },
+      {
+          "DateTime": "2017-12-21 00:00:00",
+          "Players": 1901658,
+          "Flags": "",
+          "Twitch Viewers": 176383
+      },
+      {
+          "DateTime": "2017-12-22 00:00:00",
+          "Players": 2912831,
+          "Flags": "",
+          "Twitch Viewers": 134210
+      },
+      {
+          "DateTime": "2017-12-23 00:00:00",
+          "Players": 2893414,
+          "Flags": "",
+          "Twitch Viewers": 121201
+      },
+      {
+          "DateTime": "2017-12-24 00:00:00",
+          "Players": 2701140,
+          "Flags": "",
+          "Twitch Viewers": 99449
+      },
+      {
+          "DateTime": "2017-12-25 00:00:00",
+          "Players": 2720182,
+          "Flags": "",
+          "Twitch Viewers": 96413
+      },
+      {
+          "DateTime": "2017-12-26 00:00:00",
+          "Players": 2879002,
+          "Flags": "",
+          "Twitch Viewers": 114378
+      },
+      {
+          "DateTime": "2017-12-27 00:00:00",
+          "Players": 2911567,
+          "Flags": "",
+          "Twitch Viewers": 126266
+      },
+      {
+          "DateTime": "2017-12-28 00:00:00",
+          "Players": 2940119,
+          "Flags": "",
+          "Twitch Viewers": 130790
+      },
+      {
+          "DateTime": "2017-12-29 00:00:00",
+          "Players": 3105063,
+          "Flags": "",
+          "Twitch Viewers": 125172
+      },
+      {
+          "DateTime": "2017-12-30 00:00:00",
+          "Players": 3027050,
+          "Flags": "",
+          "Twitch Viewers": 169414
+      },
+      {
+          "DateTime": "2017-12-31 00:00:00",
+          "Players": 2735776,
+          "Flags": "",
+          "Twitch Viewers": 96185
+      },
+      {
+          "DateTime": "2018-01-01 00:00:00",
+          "Players": 2792515,
+          "Flags": "",
+          "Twitch Viewers": 124353
+      },
+      {
+          "DateTime": "2018-01-02 00:00:00",
+          "Players": 2987585,
+          "Flags": "",
+          "Twitch Viewers": 132888
+      },
+      {
+          "DateTime": "2018-01-03 00:00:00",
+          "Players": 2948824,
+          "Flags": "",
+          "Twitch Viewers": 134475
+      },
+      {
+          "DateTime": "2018-01-04 00:00:00",
+          "Players": 2908153,
+          "Flags": "",
+          "Twitch Viewers": 134882
+      },
+      {
+          "DateTime": "2018-01-05 00:00:00",
+          "Players": 3111095,
+          "Flags": "",
+          "Twitch Viewers": 118046
+      },
+      {
+          "DateTime": "2018-01-06 00:00:00",
+          "Players": 3165053,
+          "Flags": "",
+          "Twitch Viewers": 122278
+      },
+      {
+          "DateTime": "2018-01-07 00:00:00",
+          "Players": 3028424,
+          "Flags": "",
+          "Twitch Viewers": 135664
+      },
+      {
+          "DateTime": "2018-01-08 00:00:00",
+          "Players": 2916008,
+          "Flags": "",
+          "Twitch Viewers": 185215
+      },
+      {
+          "DateTime": "2018-01-09 00:00:00",
+          "Players": 2882162,
+          "Flags": "",
+          "Twitch Viewers": 117016
+      },
+      {
+          "DateTime": "2018-01-10 00:00:00",
+          "Players": 2821337,
+          "Flags": "",
+          "Twitch Viewers": 136412
+      },
+      {
+          "DateTime": "2018-01-11 00:00:00",
+          "Players": 2608675,
+          "Flags": "",
+          "Twitch Viewers": 142807
+      },
+      {
+          "DateTime": "2018-01-12 00:00:00",
+          "Players": 3119191,
+          "Flags": "",
+          "Twitch Viewers": 104728
+      },
+      {
+          "DateTime": "2018-01-13 00:00:00",
+          "Players": 3257248,
+          "Flags": "",
+          "Twitch Viewers": 188367
+      },
+      {
+          "DateTime": "2018-01-14 00:00:00",
+          "Players": 3149524,
+          "Flags": "",
+          "Twitch Viewers": 132275
+      },
+      {
+          "DateTime": "2018-01-15 00:00:00",
+          "Players": 3035560,
+          "Flags": "",
+          "Twitch Viewers": 128291
+      },
+      {
+          "DateTime": "2018-01-16 00:00:00",
+          "Players": 2984565,
+          "Flags": "",
+          "Twitch Viewers": 134591
+      },
+      {
+          "DateTime": "2018-01-17 00:00:00",
+          "Players": 3021621,
+          "Flags": "",
+          "Twitch Viewers": 127344
+      },
+      {
+          "DateTime": "2018-01-18 00:00:00",
+          "Players": 2995704,
+          "Flags": "",
+          "Twitch Viewers": 120011
+      },
+      {
+          "DateTime": "2018-01-19 00:00:00",
+          "Players": 3082953,
+          "Flags": "",
+          "Twitch Viewers": 105310
+      },
+      {
+          "DateTime": "2018-01-20 00:00:00",
+          "Players": 3156713,
+          "Flags": "",
+          "Twitch Viewers": 109321
+      },
+      {
+          "DateTime": "2018-01-21 00:00:00",
+          "Players": 3088609,
+          "Flags": "",
+          "Twitch Viewers": 106445
+      },
+      {
+          "DateTime": "2018-01-22 00:00:00",
+          "Players": 2975607,
+          "Flags": "",
+          "Twitch Viewers": 94999
+      },
+      {
+          "DateTime": "2018-01-23 00:00:00",
+          "Players": 2972069,
+          "Flags": "",
+          "Twitch Viewers": 113628
+      },
+      {
+          "DateTime": "2018-01-24 00:00:00",
+          "Players": 2935037,
+          "Flags": "",
+          "Twitch Viewers": 114918
+      },
+      {
+          "DateTime": "2018-01-25 00:00:00",
+          "Players": 2655842,
+          "Flags": "",
+          "Twitch Viewers": 113704
+      },
+      {
+          "DateTime": "2018-01-26 00:00:00",
+          "Players": 3034540,
+          "Flags": "",
+          "Twitch Viewers": 93879
+      },
+      {
+          "DateTime": "2018-01-27 00:00:00",
+          "Players": 3092549,
+          "Flags": "",
+          "Twitch Viewers": 91686
+      },
+      {
+          "DateTime": "2018-01-28 00:00:00",
+          "Players": 3071708,
+          "Flags": "",
+          "Twitch Viewers": 90910
+      },
+      {
+          "DateTime": "2018-01-29 00:00:00",
+          "Players": 2915453,
+          "Flags": "",
+          "Twitch Viewers": 95948
+      },
+      {
+          "DateTime": "2018-01-30 00:00:00",
+          "Players": 2940731,
+          "Flags": "",
+          "Twitch Viewers": 94610
+      },
+      {
+          "DateTime": "2018-01-31 00:00:00",
+          "Players": 2894346,
+          "Flags": "",
+          "Twitch Viewers": 111437
+      },
+      {
+          "DateTime": "2018-02-01 00:00:00",
+          "Players": 2734796,
+          "Flags": "",
+          "Twitch Viewers": 116198
+      },
+      {
+          "DateTime": "2018-02-02 00:00:00",
+          "Players": 2811749,
+          "Flags": "",
+          "Twitch Viewers": 120335
+      },
+      {
+          "DateTime": "2018-02-03 00:00:00",
+          "Players": 2957507,
+          "Flags": "",
+          "Twitch Viewers": 112634
+      },
+      {
+          "DateTime": "2018-02-04 00:00:00",
+          "Players": 2933527,
+          "Flags": "",
+          "Twitch Viewers": 94471
+      },
+      {
+          "DateTime": "2018-02-05 00:00:00",
+          "Players": 2820516,
+          "Flags": "",
+          "Twitch Viewers": 451104
+      },
+      {
+          "DateTime": "2018-02-06 00:00:00",
+          "Players": 2803438,
+          "Flags": "",
+          "Twitch Viewers": 202481
+      },
+      {
+          "DateTime": "2018-02-07 00:00:00",
+          "Players": 2543501,
+          "Flags": "",
+          "Twitch Viewers": 122249
+      },
+      {
+          "DateTime": "2018-02-08 00:00:00",
+          "Players": 2750007,
+          "Flags": "",
+          "Twitch Viewers": 147751
+      },
+      {
+          "DateTime": "2018-02-09 00:00:00",
+          "Players": 2679866,
+          "Flags": "",
+          "Twitch Viewers": 130905
+      },
+      {
+          "DateTime": "2018-02-10 00:00:00",
+          "Players": 2690449,
+          "Flags": "",
+          "Twitch Viewers": 127631
+      },
+      {
+          "DateTime": "2018-02-11 00:00:00",
+          "Players": 2700520,
+          "Flags": "",
+          "Twitch Viewers": 94385
+      },
+      {
+          "DateTime": "2018-02-12 00:00:00",
+          "Players": 2540839,
+          "Flags": "",
+          "Twitch Viewers": 137367
+      },
+      {
+          "DateTime": "2018-02-13 00:00:00",
+          "Players": 2434563,
+          "Flags": "",
+          "Twitch Viewers": 136666
+      },
+      {
+          "DateTime": "2018-02-14 00:00:00",
+          "Players": 2177418,
+          "Flags": "",
+          "Twitch Viewers": 120581
+      },
+      {
+          "DateTime": "2018-02-15 00:00:00",
+          "Players": 1684566,
+          "Flags": "",
+          "Twitch Viewers": 117033
+      },
+      {
+          "DateTime": "2018-02-16 00:00:00",
+          "Players": 2041561,
+          "Flags": "",
+          "Twitch Viewers": 73515
+      },
+      {
+          "DateTime": "2018-02-17 00:00:00",
+          "Players": 2165638,
+          "Flags": "",
+          "Twitch Viewers": 93172
+      },
+      {
+          "DateTime": "2018-02-18 00:00:00",
+          "Players": 2258546,
+          "Flags": "",
+          "Twitch Viewers": 85143
+      },
+      {
+          "DateTime": "2018-02-19 00:00:00",
+          "Players": 2233947,
+          "Flags": "",
+          "Twitch Viewers": 131522
+      },
+      {
+          "DateTime": "2018-02-20 00:00:00",
+          "Players": 2316442,
+          "Flags": "",
+          "Twitch Viewers": 114308
+      },
+      {
+          "DateTime": "2018-02-21 00:00:00",
+          "Players": 2437625,
+          "Flags": "",
+          "Twitch Viewers": 92332
+      },
+      {
+          "DateTime": "2018-02-22 00:00:00",
+          "Players": 2187318,
+          "Flags": "",
+          "Twitch Viewers": 123726
+      },
+      {
+          "DateTime": "2018-02-23 00:00:00",
+          "Players": 2597848,
+          "Flags": "",
+          "Twitch Viewers": 113296
+      },
+      {
+          "DateTime": "2018-02-24 00:00:00",
+          "Players": 2713437,
+          "Flags": "",
+          "Twitch Viewers": 126634
+      },
+      {
+          "DateTime": "2018-02-25 00:00:00",
+          "Players": 2750196,
+          "Flags": "",
+          "Twitch Viewers": 132064
+      },
+      {
+          "DateTime": "2018-02-26 00:00:00",
+          "Players": 2498316,
+          "Flags": "",
+          "Twitch Viewers": 116895
+      },
+      {
+          "DateTime": "2018-02-27 00:00:00",
+          "Players": 2712416,
+          "Flags": "",
+          "Twitch Viewers": 121979
+      },
+      {
+          "DateTime": "2018-02-28 00:00:00",
+          "Players": 2731402,
+          "Flags": "",
+          "Twitch Viewers": 358345
+      },
+      {
+          "DateTime": "2018-03-01 00:00:00",
+          "Players": 2646691,
+          "Flags": "",
+          "Twitch Viewers": 338527
+      },
+      {
+          "DateTime": "2018-03-02 00:00:00",
+          "Players": 2670202,
+          "Flags": "",
+          "Twitch Viewers": 140849
+      },
+      {
+          "DateTime": "2018-03-03 00:00:00",
+          "Players": 2802807,
+          "Flags": "",
+          "Twitch Viewers": 147786
+      },
+      {
+          "DateTime": "2018-03-04 00:00:00",
+          "Players": 2697444,
+          "Flags": "",
+          "Twitch Viewers": 149400
+      },
+      {
+          "DateTime": "2018-03-05 00:00:00",
+          "Players": 2603557,
+          "Flags": "",
+          "Twitch Viewers": 94079
+      },
+      {
+          "DateTime": "2018-03-06 00:00:00",
+          "Players": 2597254,
+          "Flags": "",
+          "Twitch Viewers": 139521
+      },
+      {
+          "DateTime": "2018-03-07 00:00:00",
+          "Players": 2611750,
+          "Flags": "",
+          "Twitch Viewers": 105786
+      },
+      {
+          "DateTime": "2018-03-08 00:00:00",
+          "Players": 2546480,
+          "Flags": "",
+          "Twitch Viewers": 105020
+      },
+      {
+          "DateTime": "2018-03-09 00:00:00",
+          "Players": 2652781,
+          "Flags": "",
+          "Twitch Viewers": 87907
+      },
+      {
+          "DateTime": "2018-03-10 00:00:00",
+          "Players": 2736269,
+          "Flags": "",
+          "Twitch Viewers": 119591
+      },
+      {
+          "DateTime": "2018-03-11 00:00:00",
+          "Players": 2608166,
+          "Flags": "",
+          "Twitch Viewers": 100141
+      },
+      {
+          "DateTime": "2018-03-12 00:00:00",
+          "Players": 2464229,
+          "Flags": "",
+          "Twitch Viewers": 108767
+      },
+      {
+          "DateTime": "2018-03-13 00:00:00",
+          "Players": 2100904,
+          "Flags": "",
+          "Twitch Viewers": 119065
+      },
+      {
+          "DateTime": "2018-03-14 00:00:00",
+          "Players": 2519524,
+          "Flags": "",
+          "Twitch Viewers": 90560
+      },
+      {
+          "DateTime": "2018-03-15 00:00:00",
+          "Players": 2508880,
+          "Flags": "",
+          "Twitch Viewers": 88296
+      },
+      {
+          "DateTime": "2018-03-16 00:00:00",
+          "Players": 2724247,
+          "Flags": "",
+          "Twitch Viewers": 122907
+      },
+      {
+          "DateTime": "2018-03-17 00:00:00",
+          "Players": 2807003,
+          "Flags": "",
+          "Twitch Viewers": 95570
+      },
+      {
+          "DateTime": "2018-03-18 00:00:00",
+          "Players": 2613261,
+          "Flags": "",
+          "Twitch Viewers": 103537
+      },
+      {
+          "DateTime": "2018-03-19 00:00:00",
+          "Players": 2466420,
+          "Flags": "",
+          "Twitch Viewers": 135960
+      },
+      {
+          "DateTime": "2018-03-20 00:00:00",
+          "Players": 2435565,
+          "Flags": "",
+          "Twitch Viewers": 108258
+      },
+      {
+          "DateTime": "2018-03-21 00:00:00",
+          "Players": 2402488,
+          "Flags": "",
+          "Twitch Viewers": 130705
+      },
+      {
+          "DateTime": "2018-03-22 00:00:00",
+          "Players": 2327636,
+          "Flags": "",
+          "Twitch Viewers": 103836
+      },
+      {
+          "DateTime": "2018-03-23 00:00:00",
+          "Players": 2551186,
+          "Flags": "",
+          "Twitch Viewers": 99504
+      },
+      {
+          "DateTime": "2018-03-24 00:00:00",
+          "Players": 2747269,
+          "Flags": "",
+          "Twitch Viewers": 118346
+      },
+      {
+          "DateTime": "2018-03-25 00:00:00",
+          "Players": 2522023,
+          "Flags": "",
+          "Twitch Viewers": 160571
+      },
+      {
+          "DateTime": "2018-03-26 00:00:00",
+          "Players": 2331646,
+          "Flags": "",
+          "Twitch Viewers": 147820
+      },
+      {
+          "DateTime": "2018-03-27 00:00:00",
+          "Players": 2392156,
+          "Flags": "",
+          "Twitch Viewers": 162396
+      },
+      {
+          "DateTime": "2018-03-28 00:00:00",
+          "Players": 2350681,
+          "Flags": "",
+          "Twitch Viewers": 122715
+      },
+      {
+          "DateTime": "2018-03-29 00:00:00",
+          "Players": 2404535,
+          "Flags": "",
+          "Twitch Viewers": 111670
+      },
+      {
+          "DateTime": "2018-03-30 00:00:00",
+          "Players": 2634331,
+          "Flags": "",
+          "Twitch Viewers": 219882
+      },
+      {
+          "DateTime": "2018-03-31 00:00:00",
+          "Players": 2486554,
+          "Flags": "",
+          "Twitch Viewers": 139795
+      },
+      {
+          "DateTime": "2018-04-01 00:00:00",
+          "Players": 2347833,
+          "Flags": "",
+          "Twitch Viewers": 112075
+      },
+      {
+          "DateTime": "2018-04-02 00:00:00",
+          "Players": 2222281,
+          "Flags": "",
+          "Twitch Viewers": 148978
+      },
+      {
+          "DateTime": "2018-04-03 00:00:00",
+          "Players": 2226291,
+          "Flags": "",
+          "Twitch Viewers": 283401
+      },
+      {
+          "DateTime": "2018-04-04 00:00:00",
+          "Players": 2461794,
+          "Flags": "",
+          "Twitch Viewers": 223125
+      },
+      {
+          "DateTime": "2018-04-05 00:00:00",
+          "Players": 2433921,
+          "Flags": "",
+          "Twitch Viewers": 197847
+      },
+      {
+          "DateTime": "2018-04-06 00:00:00",
+          "Players": 2438825,
+          "Flags": "",
+          "Twitch Viewers": 120254
+      },
+      {
+          "DateTime": "2018-04-07 00:00:00",
+          "Players": 2339259,
+          "Flags": "",
+          "Twitch Viewers": 116294
+      },
+      {
+          "DateTime": "2018-04-08 00:00:00",
+          "Players": 2260520,
+          "Flags": "",
+          "Twitch Viewers": 106561
+      },
+      {
+          "DateTime": "2018-04-09 00:00:00",
+          "Players": 2150591,
+          "Flags": "",
+          "Twitch Viewers": 147706
+      },
+      {
+          "DateTime": "2018-04-10 00:00:00",
+          "Players": 2144661,
+          "Flags": "",
+          "Twitch Viewers": 138734
+      },
+      {
+          "DateTime": "2018-04-11 00:00:00",
+          "Players": 2124506,
+          "Flags": "",
+          "Twitch Viewers": 127405
+      },
+      {
+          "DateTime": "2018-04-12 00:00:00",
+          "Players": 1877716,
+          "Flags": "",
+          "Twitch Viewers": 111692
+      },
+      {
+          "DateTime": "2018-04-13 00:00:00",
+          "Players": 2428897,
+          "Flags": "",
+          "Twitch Viewers": 97174
+      },
+      {
+          "DateTime": "2018-04-14 00:00:00",
+          "Players": 2408125,
+          "Flags": "",
+          "Twitch Viewers": 111577
+      },
+      {
+          "DateTime": "2018-04-15 00:00:00",
+          "Players": 2222605,
+          "Flags": "",
+          "Twitch Viewers": 133989
+      },
+      {
+          "DateTime": "2018-04-16 00:00:00",
+          "Players": 1989003,
+          "Flags": "",
+          "Twitch Viewers": 97644
+      },
+      {
+          "DateTime": "2018-04-17 00:00:00",
+          "Players": 1945381,
+          "Flags": "",
+          "Twitch Viewers": 126785
+      },
+      {
+          "DateTime": "2018-04-18 00:00:00",
+          "Players": 1954853,
+          "Flags": "",
+          "Twitch Viewers": 110159
+      },
+      {
+          "DateTime": "2018-04-19 00:00:00",
+          "Players": 1992584,
+          "Flags": "",
+          "Twitch Viewers": 103296
+      },
+      {
+          "DateTime": "2018-04-20 00:00:00",
+          "Players": 2298063,
+          "Flags": "",
+          "Twitch Viewers": 70950
+      },
+      {
+          "DateTime": "2018-04-21 00:00:00",
+          "Players": 2306962,
+          "Flags": "",
+          "Twitch Viewers": 101290
+      },
+      {
+          "DateTime": "2018-04-22 00:00:00",
+          "Players": 2167270,
+          "Flags": "",
+          "Twitch Viewers": 98044
+      },
+      {
+          "DateTime": "2018-04-23 00:00:00",
+          "Players": 1976595,
+          "Flags": "",
+          "Twitch Viewers": 100894
+      },
+      {
+          "DateTime": "2018-04-24 00:00:00",
+          "Players": 1911117,
+          "Flags": "",
+          "Twitch Viewers": 106000
+      },
+      {
+          "DateTime": "2018-04-25 00:00:00",
+          "Players": 1940222,
+          "Flags": "",
+          "Twitch Viewers": 140187
+      },
+      {
+          "DateTime": "2018-04-26 00:00:00",
+          "Players": 1857855,
+          "Flags": "",
+          "Twitch Viewers": 131493
+      }
+  ]
+}

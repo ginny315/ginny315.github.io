@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta name="author" content="ginny" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" /> 
+	<meta name="viewport" content="width=device-width,minimal-ui=yes,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-116288086-2');
+	</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Graph Theory tutorials. Interactive, visual, concise and fun. Learn more in less time.">
+	<meta name="author" content="Avinash Pandey">
+	<title>Steam Game Platform Analysis</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="css/home-app.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+		
+		
+	</style>
+</head>
+<body>
+	<nav id="home-navbar" class="navbar navbar-default navbar-fixed-top transparent">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">Steam Game Platform Analysis</a>
+			<ul class="nav navbar-nav">
+				<li><a href="#about">About</a></li>
+				<li><a href="#chart-show">Charts</a></li>
+				<li><a href="Word_Players_Presentage.html" target="_blank">Map</a></li>				
+				<li><a href="#video" target="_blank">Video</a></li>
+				<li><a href="http://guoningyan.com/onlineppt/" target="_blank">Slides</a></li>
+				<li><a href="https://public.tableau.com/profile/henryshe#!/vizhome/100GameView/OwnersandPrive?publish=yes" target="_blank">Dashboards</a></li>
+				<li><a href="https://github.com/HenrySHE/steam_game_visualization" target="_blank">GitHub <span class="glyphicon glyphicon-new-window"></span></a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="home-container">
+		<div id="home-screen">
+			<div id="home-graph"></div>
+			<div id="intro">
+				<span id="intro-title">Steam Game Platform Analysis</span><br>
+				<span id="intro-tagline">We love steam, now game starts...</span>
+			</div>
+		</div>
+	</div>
+	<div id="about" class="container-part container-about pb-0">
+		<div class="section-heading text-center">
+			<h1>About</h1>
+		</div>
+		<div class="row section-content">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+				<p></p>
+				<div class="wrap-girl"><img src="img/girl.svg" alt=""></div>
+				<ul class="mb-0">
+					<li>We are Group T.</li>
+					<li>We fetch data from steam API.</li>
+					<li>We pre-process 100G data and select the top 100 games.</li>
+					<li>We analysis the trend of these games.</li>
+					<li>We analysis why PUBG become the most popular game.</li>	
+					<li></br></li>
+					<li>The most important thing is that:</li>
+					<li>We give advice to Chinese developers!</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-part container-chart" id="chart-show">
+		<div class="section-heading text-center">
+				<h1>Charts</h1>
+			</div>
+			<div class="row chart-content">
+				<div id="chart1" class="chart-wrap"></div>
+				<ul>
+					<li>This chart shows numbers of players in top100 games between two-week and history.</li>
+					<li></br></li>
+					<li>Apparently, we notice that:</li>
+					<li>1) Dota2 is the most popular game since 2009.</li>
+					<li>2) But PUBG becomes a new threat.</li>
+				</ul>
+			</div>
+	</div>
+
+	<div class="container-part container-chart container-chart-2">
+			<div class="black-arrow-wrap">
+				<p class="black-arrow"></p>
+				<p class="black-tip">next</p>
+			</div>
+			<div class="row chart-content chart-content-2">
+				<ul>
+					<li>The graph shows players in each day since the game is released. And form the graph we can see that CSGO and Dota2 is the most long-life game in the Steam platform, and PUBG is released since 2017 but increased rapidly. AndThere is a significant point, which is the "PUBG Mobile Game released", then the number of players dropped since that time.</li>
+					<!-- <li>ferfwrg</li> -->
+				</ul>
+				<div id="chart2" class="chart-wrap-2"></div>
+				<div id="chart4" class="chart-wrap-2-2"></div>
+				<!-- <ul>
+					<li>This chart shows players every day.</li>
+					<li></br></li>
+				</ul> -->
+			</div>
+	</div>
+
+	<div class="container-part container-chart container-chart-3">
+			<!-- <div class="section-heading text-center">
+					<h1>Charts-3</h1>
+				</div> -->
+				<div class="black-arrow-wrap">
+						<p class="black-arrow"></p>
+						<p class="black-tip">next</p>
+					</div>
+				<div class="row chart-content chart-content-3 ">
+					<div id="chart3" class="chart-wrap chart-wrap-3"></div>
+					<ul>
+						<li>This chart shows how many owners since PUBG released, and we can see that, until 3-19 2018, the number of is up to 32 million, which is an incredible trend, and we think the number of owners will keep increasing.</li>
+						<li></br></li>
+					</ul>
+				</div>
+		</div>
+		<div class="container-part container-chart container-chart-4">
+			<div class="section-heading text-center">
+					<h1>PUBG price in different countries</h1>
+				</div>
+				<div class="row chart-content">
+					<div id="chart5" class="chart-wrap chart-wrap-4"></div>
+					<ul>
+						<li>Chart 4 is PUBG price in different countries (Price is shown is US dollar), and compare with US price (29.99 USD), the game price in China is only 15.48 USD, which means it has 48% off, which is friendly to Chinese players. We can see that the price in Asia, especially in developing country, the price can be one of the most attracting aspects. This is a tactic of the gaming company on price setting.</li>
+						<li></br></li>
+					</ul>
+				</div>
+		</div>
+
+		<div class="container-part container-chart container-chart-5">
+				<div class="black-arrow-wrap">
+						<p class="black-arrow"></p>
+						<p class="black-tip">next</p>
+					</div>
+				<div class="text-center pt-20">
+						<h2>Score of each game</h2>
+					</div>
+					<div class="row chart-content chart-content-5">
+						<div id="chart6" class="chart-wrap chart-wrap-5"></div>
+					</div>
+			</div>
+	<!-- <div id="video" class="container-part container-video">
+		<div class="section-heading text-center">
+			<h1>Video</h1>
+		</div>
+		<div class="col-xs-8 col-xs-offset-3">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/ce6tV83ec0M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		</div>				
+		<div class="row section-content">
+		</div>
+	</div> -->
+
+	<div class="footer-bottom">
+		<div class="contents-inner clearfix">
+			<p class="copy-left"></p>
+			<p class="copy-right">Copyright © Group T. All Rights Reserved.</p>
+		</div>
+	</div>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<!-- Use this local copy in case of any trouble with cdn
+	<script  src="js/jquery-3.2.1.min.js"></script>
+	-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- Use this local copy in case of any trouble with cdn
+	<script  src="js/bootstrap.min.js"></script>
+	-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha256-dsOXGNHAo/syFnazt+KTBsCQeRmlcW1XKL0bCK4Baec=" crossorigin="anonymous"></script>
+	<!-- Use this local copy in case of any trouble with cdn
+	<script  src="js/d3.v3.min.js"></script>
+	-->
+	<script  src="js/content.js"></script>
+	<script  src="js/home-app.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	<script type="text/javascript" src="https://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> 
+	<script>
+		//hide donation-target by default
+		$(".donation-target").each(function(){
+			$(this).hide();
+		});
+		//reveal on clicking respective buttons
+		$("#upi-donation-button").click(function(){
+			$("#upi-target").slideToggle();
+		});
+	</script>
+<script type="text/javascript">
+	var dom = document.getElementById("chart1");
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = null;
+	// myChart.showLoading();
+	$.get('json/charts.json', function (dd) {
+	//  myChart.hideLoading();
+	 option = {
+		 tooltip : {
+			 trigger: 'axis',
+			 axisPointer: {
+				 type: 'shadow',
+				 label: {
+					 show: true
+				 }
+			 }
+		 },
+		 toolbox: {
+			 show : true,
+			 feature : {
+				 mark : {show: true},
+				 dataView : {show: true, readOnly: false},
+				 magicType: {show: true, type: ['line', 'bar']},
+				 restore : {show: true},
+				 saveAsImage : {show: true}
+			 }
+		 },
+		 calculable : true,
+		 legend: {
+			 data:['Growth', 'twoweeks', 'history'],
+			 itemGap: 5
+		 },
+		 grid: {
+			 top: '20%',
+			 left: '10%',
+			 right: '10%',
+			 containLabel: true
+		 },
+		 xAxis: [
+			 {
+				 type : 'category',
+				 data : dd.name
+			 }
+		 ],
+		 yAxis: [
+			 {
+				 type : 'value',
+				 name : 'Budget (million USD)',
+				 axisLabel: {
+					 formatter: function (a) {
+						 a = +a;
+						 return isFinite(a)
+							 ? echarts.format.addCommas(+a / 1000)
+							 : '';
+					 }
+				 }
+			 }
+		 ],
+		 dataZoom: [
+			 {
+				 show: true,
+				 start: 94,
+				 end: 100
+			 },
+			 {
+				 type: 'inside',
+				 start: 94,
+				 end: 100
+			 },
+			 {
+				 show: true,
+				 yAxisIndex: 0,
+				 filterMode: 'empty',
+				 width: 30,
+				 height: '80%',
+				 showDataShadow: false,
+				 left: '93%'
+			 }
+		 ],
+		 series : [
+			 {
+				 name: 'twoweeks',
+				 type: 'bar',
+				 data: dd.twoweeks
+			 },
+			 {
+				 name: 'history',
+				 type: 'bar',
+				 data: dd.history
+			 }
+		 ]
+	 };
+	 myChart.setOption(option);
+	});;
+	if (option && typeof option === "object") {
+	 myChart.setOption(option, true);
+	}
+</script>
+<script type="text/javascript">
+	var dom = document.getElementById("chart2");
+	var myChart2 = echarts.init(dom);
+	var app = {};
+	option = null;
+	var base = +new Date(1968, 9, 3);
+	var oneDay = 24 * 3600 * 1000;
+	var date = [];
+	
+	var data = [Math.random() * 300];
+	
+	for (var i = 1; i < 20000; i++) {
+		var now = new Date(base += oneDay);
+		date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+		data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+	}
+	
+	$.get('json/charts1.json', function (dd) {
+	  var data = dd.data;
+	  var dt = [];
+	  var pl = [];
+	
+	  for (var i = 0; i < data.length; i++){
+		  dt.push(data[i].DateTime);
+		  pl.push(data[i].Players);
+	  }
+	
+	  option = {
+		  tooltip: {
+			  trigger: 'axis',
+			  position: function (pt) {
+				  return [pt[0], '10%'];
+			  }
+		  },
+		  title: {
+			  left: 'center',
+			  text: 'PUBG Player in history',
+		  },
+		  toolbox: {
+			  feature: {
+				  dataZoom: {
+					  yAxisIndex: 'none'
+				  },
+				  restore: {},
+				  saveAsImage: {}
+			  }
+		  },
+		  xAxis: {
+			  type: 'category',
+			  boundaryGap: false,
+			  data: dt
+		  },
+		  yAxis: {
+			  type: 'value',
+			  boundaryGap: [0, '100%']
+		  },
+		  dataZoom: [{
+			  type: 'inside',
+			  start: 0,
+			  end: 10
+		  }, {
+			  start: 0,
+			  end: 10,
+			  handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+			  handleSize: '80%',
+			  handleStyle: {
+				  color: '#fff',
+				  shadowBlur: 3,
+				  shadowColor: 'rgba(0, 0, 0, 0.6)',
+				  shadowOffsetX: 2,
+				  shadowOffsetY: 2
+			  }
+		  }],
+		  series: [
+			  {
+				  name:'Number of players',
+				  type:'line',
+				  smooth:true,
+				  symbol: 'none',
+				  sampling: 'average',
+				  itemStyle: {
+					  normal: {
+						  color: 'rgb(255, 70, 131)'
+					  }
+				  },
+				  areaStyle: {
+					  normal: {
+						  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							  offset: 0,
+							  color: 'rgb(255, 158, 68)'
+						  }, {
+							  offset: 1,
+							  color: 'rgb(255, 70, 131)'
+						  }])
+					  }
+				  },
+				  data: pl
+			  }
+		  ]
+	  };
+	  myChart2.setOption(option);
+	});
+	if (option && typeof option === "object") {
+		myChart2.setOption(option, true);
+	}
+</script>
+<script type="text/javascript">
+	var dom = document.getElementById("chart3");
+	var myChart3 = echarts.init(dom);
+	var app = {};
+	option = null;
+	var base = +new Date(1968, 9, 3);
+	var oneDay = 24 * 3600 * 1000;
+	var date = [];
+
+	var data = [Math.random() * 300];
+
+	for (var i = 1; i < 20000; i++) {
+		var now = new Date(base += oneDay);
+		date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+		data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+	}
+	$.get('json/charts2.json', function (dd4) {
+		data = dd4.data;
+		var dt = [];
+		var pl = [];
+
+		for (var i = 0; i < data.length; i++){
+			dt.push(data[i].DateTime);
+			pl.push(data[i].Owners);
+		}
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				position: function (pt) {
+					return [pt[0], '10%'];
+				}
+			},
+			title: {
+				left: 'center',
+				text: 'PUBG Owners Estimation',
+			},
+			toolbox: {
+				feature: {
+					dataZoom: {
+						yAxisIndex: 'none'
+					},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: dt
+			},
+			yAxis: {
+				type: 'value',
+				boundaryGap: [0, '100%']
+			},
+			dataZoom: [{
+				type: 'inside',
+				start: 0,
+				end: 10
+			}, {
+				start: 0,
+				end: 10,
+				handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+				handleSize: '80%',
+				handleStyle: {
+					color: '#fff',
+					shadowBlur: 3,
+					shadowColor: 'rgba(0, 0, 0, 0.6)',
+					shadowOffsetX: 2,
+					shadowOffsetY: 2
+				}
+			}],
+			series: [
+				{
+					name:'Owners',
+					type:'line',
+					smooth:true,
+					symbol: 'none',
+					sampling: 'average',
+					itemStyle: {
+						normal: {
+							color: 'rgb(0, 0, 0)'
+						}
+					},
+					markPoint: {
+						data: [
+							//flag
+							{name: 'PUBG Mobile Phone Game Released', value: "PUBG Mobile Phone Game Released", xAxis: "2018-02-09 00:00:00", yAxis: 29757321}
+						]
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgb(255, 168, 68)'
+							}, {
+								offset: 1,
+								color: 'rgb(14, 77, 146)'
+							}])
+						}
+					},
+					data: pl
+				}
+			]
+		};
+
+	if (option && typeof option === "object") {
+		myChart3.setOption(option, true);
+	}
+	})
+
+</script>
+<script type="text/javascript">
+	var dom = document.getElementById("chart4");
+	var myChart4 = echarts.init(dom);
+	var app = {};
+	option = null;
+	var base = +new Date(1968, 9, 3);
+	var oneDay = 24 * 3600 * 1000;
+	var date = [];
+
+	var data = [Math.random() * 300];
+
+	for (var i = 1; i < 20000; i++) {
+		var now = new Date(base += oneDay);
+		date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+		data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+	}
+	$.get('json/charts3.json', function (dd3) {
+		data = dd3.data;
+		var dt = [];
+		var dota2 = [];
+		var csgo = [];
+		var pubg = [];
+
+		for (var i = 0; i < data.length; i++){
+			dt.push(data[i].DateTime);
+			dota2.push(data[i].Dota2);
+			csgo.push(data[i].CSGO);
+			pubg.push(data[i].PUBG);
+		}
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				position: function (pt) {
+					return [pt[0], '10%'];
+				}
+			},
+			title: {
+				left: 'center',
+				text: 'Comparism with Top3 Game',
+			},
+			legend: {
+				data: ['PUBG', 'Dota2', 'CSGO'],
+				orient: 'vertical',
+				top: '30%',
+				left: 'right',
+				zlevel: 5
+			},
+			toolbox: {
+				feature: {
+					dataZoom: {
+						yAxisIndex: 'none'
+					},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: dt
+			},
+			yAxis: {
+				type: 'value',
+				boundaryGap: [0, '100%']
+			},
+			dataZoom: [{
+				type: 'inside',
+				start: 0,
+				end: 10
+			}, {
+				start: 0,
+				end: 10,
+				handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+				handleSize: '80%',
+				handleStyle: {
+					color: '#fff',
+					shadowBlur: 3,
+					shadowColor: 'rgba(0, 0, 0, 0.6)',
+					shadowOffsetX: 2,
+					shadowOffsetY: 2
+				}
+			}],
+			series: [
+				{
+					name:'PUBG',
+					type:'line',
+					smooth:true,
+					symbol: 'circle',
+					symbolSize: 5,
+					showSymbol: false,
+					animationDelay: 0,
+					sampling: 'average',
+					itemStyle: {
+						normal: {
+							color: 'rgb(0, 0, 0)'
+						}
+					},
+					markPoint: {
+						data: [
+							//flag
+							{name: 'PUBG Mobile Phone Game Released', value: "PUBG Mobile Phone Game Released", xAxis: "2018-02-09 00:00:00", yAxis: 2679866}
+						]
+					},
+					lineStyle: {
+					normal: {
+						width: 2,
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 0,
+							colorStops: [{
+								offset: 0, color: '#ffcc99' // 0% 处的颜色
+							}, {
+								offset: 1, color: '#ff0033' // 100% 处的颜色
+							}],
+							globalCoord: false // 缺省为 false
+						},
+						opacity: 0.9
+					}
+					},
+					areaStyle: {
+						normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgba(219, 50, 51, 0.3)'
+						}, {
+							offset: 0.8,
+							color: 'rgba(219, 50, 51, 0)'
+						}], false),
+						shadowColor: 'rgba(0, 0, 0, 0.1)',
+						shadowBlur: 10
+					}
+					},
+					itemStyle: {
+					normal: {
+
+						color: 'rgb(219,50,51)',
+						borderColor: 'rgba(219,50,51,0.2)',
+						borderWidth: 12
+					}
+					},
+					data: pubg
+				}
+				,{//Game 2
+					name:'Dota2',
+					type:'line',
+					smooth:true,
+					symbol: 'circle',
+					symbolSize: 5,
+					showSymbol: false,
+					animationDelay: 0,
+					sampling: 'average',
+					itemStyle: {
+						normal: {
+							color: 'rgb(0, 0, 0)'
+						}
+					},
+					lineStyle: {
+					normal: {
+						width: 2,
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 0,
+							colorStops: [{
+								offset: 0, color: '#33ffcc' // 0% 处的颜色
+							}, {
+								offset: 1, color: '#3300cc' // 100% 处的颜色
+							}],
+							globalCoord: false // 缺省为 false
+						},
+						opacity: 0.9
+					}
+					},
+					areaStyle: {
+						normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgba(0, 236, 212, 0.3)'
+						}, {
+							offset: 0.8,
+							color: 'rgba(0, 236, 212, 0)'
+						}], false),
+						shadowColor: 'rgba(0, 0, 0, 0.1)',
+						shadowBlur: 10
+					}
+					},
+					itemStyle: {
+					normal: {
+						color: 'rgb(0,136,212)',
+						borderColor: 'rgba(0,136,212,0.2)',
+						borderWidth: 12
+					}
+					},
+					data: dota2
+
+
+				},{//Game 3
+				name:'CSGO',
+					type:'line',
+					smooth:true,
+					symbol: 'circle',
+					symbolSize: 5,
+					showSymbol: false,
+					animationDelay: 0,
+					sampling: 'average',
+					itemStyle: {
+						normal: {
+							color: 'rgb(0, 0, 0)'
+						}
+					},
+					lineStyle: {
+					normal: {
+						width: 2,
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 0,
+							colorStops: [{
+								offset: 0, color: '#339933' // 0% 处的颜色
+							}, {
+								offset: 1, color: '#003300' // 100% 处的颜色
+							}],
+							globalCoord: false // 缺省为 false
+						},
+						opacity: 0.9
+					}
+					},
+					areaStyle: {
+						normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgba(137, 189, 27, 0.3)'
+						}, {
+							offset: 0.8,
+							color: 'rgba(137, 189, 27, 0)'
+						}], false),
+						shadowColor: 'rgba(0, 0, 0, 0.1)',
+						shadowBlur: 10
+					}
+					},
+					itemStyle: {
+					normal: {
+
+						color: 'rgb(137,189,27)',
+						borderColor: 'rgba(137,189,2,0.27)',
+						borderWidth: 12
+					}
+					},
+					data: csgo
+				},
+			]
+		};
+			myChart4.setOption(option, true);
+	})
+	if (option && typeof option === "object") {
+		myChart4.setOption(option, true);
+	}
+</script>
+<script type="text/javascript">
+	var dom = document.getElementById("chart5");
+	var myChart5 = echarts.init(dom);
+	var app = {};
+	option = null;
+	var base = +new Date(1968, 9, 3);
+	var oneDay = 24 * 3600 * 1000;
+	var date = [];
+
+	var data = [Math.random() * 300];
+
+	for (var i = 1; i < 20000; i++) {
+		var now = new Date(base += oneDay);
+		date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+		data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+	}
+	$.get('json/charts4.json', function (dd4) {
+		data = dd4.data;
+		var country = [];
+		var price = [];
+		var discount = [];
+
+		for (var i = 0; i < data.length; i++){
+			country.push(data[i].Country);
+			price.push(data[i].Price);
+			discount.push(data[i].Discount);
+		}
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				position: function (pt) {
+					return [pt[0], '10%'];
+				}
+			},
+			title: {
+				left: 'center',
+				text: 'PUBG Price in Different Contries',
+			},
+			toolbox: {
+				feature: {
+					dataZoom: {
+						yAxisIndex: 'none'
+					},
+					restore: {},
+					saveAsImage: {}
+				}
+			},
+			//May has problem.
+			legend:{
+			data:[country,discount,price]
+			},
+			xAxis: {
+				type: 'category',
+				//boundaryGap: false,
+				data:country,
+				axisPointer: {
+						type: 'shadow'
+					} 
+			},
+			yAxis: [
+			{
+				type: 'value',
+				//boundaryGap: [0, '100%']
+				name: 'Price',
+				axisLabel: {
+						formatter: '{value} USD($)'
+					}
+			},
+			{
+				type: 'value',
+				name: 'Discount',
+				min: -52,
+				max: 30,
+				//interval:0.1,
+				axisLabel: {
+						formatter: '{value} %'
+					}
+			}
+			],
+
+			series: [
+				{
+					name:'Price',
+					type:'bar',
+					smooth:true,
+					symbol: 'circle',
+					symbolSize: 5,
+					showSymbol: false,
+					animationDelay: 0,
+					sampling: 'average',
+					areaStyle: {
+						normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgba(219, 50, 51, 0.3)'
+						}, {
+							offset: 0.8,
+							color: 'rgba(219, 50, 51, 0)'
+						}], false),
+						shadowColor: 'rgba(0, 0, 0, 0.1)',
+						shadowBlur: 10
+					}
+					},
+					itemStyle: {
+					normal: {
+						color: '#00BFFF',
+						borderColor: '#ADD8E6',
+						borderWidth: 5,
+						label:{
+							show:true,
+							textStyle:{
+							color: '#27727B'
+							}
+						}
+					}
+					},
+					data: price
+				},
+				{//Game 2
+					name:'Discount(compare to USD)',
+					type:'line',
+					yAxisIndex: 1,
+					smooth:true,
+					symbol: 'circle',
+					symbolSize: 5,
+					showSymbol: false,
+					animationDelay: 0,
+					sampling: 'average',
+					itemStyle: {
+						normal: {
+							color: 'rgb(0, 0, 0)'
+						}
+					},
+					markPoint: {
+						data: [
+							//flag
+							{name: 'China Market', value: "China Market Discount", xAxis: "Chinese Yuan Renminbi", yAxis: -48.40}
+						]
+					},
+					lineStyle: {
+					normal: {
+						width: 2,
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 0,
+							colorStops: [{
+								offset: 0, color: '#33ffcc' // 0% 处的颜色
+							}, {
+								offset: 1, color: '#3300cc' // 100% 处的颜色
+							}],
+							globalCoord: false // 缺省为 false
+						},
+						opacity: 0.9
+					}
+					},
+					areaStyle: {
+						normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: 'rgba(0, 236, 212, 0.3)'
+						}, {
+							offset: 0.8,
+							color: 'rgba(0, 236, 212, 0)'
+						}], false),
+						shadowColor: 'rgba(0, 0, 0, 0.1)',
+						shadowBlur: 10
+					}
+					},
+					itemStyle: {
+					normal: {
+						color: 'rgb(0,136,212)',
+						borderColor: 'rgba(0,136,212,0.2)',
+						borderWidth: 12
+					}
+					},
+					data: discount
+				}
+			]
+		};
+	;
+	if (option && typeof option === "object") {
+		myChart5.setOption(option, true);
+	}
+});
+</script>
+<script type="text/javascript">
+var dom = document.getElementById("chart6");
+var myChart6 = echarts.init(dom);
+var app = {};
+option = null;
+var option = {
+    dataset: {
+        source: [
+        ['score', 'price', 'product'],
+  [54,2999,"PLAYERUNKNOWN'S BATTLEGROUNDS"  ],
+  [89,1499,"Counter-Strike: Global Offensive"  ],
+  [87,0,"Dota 2"  ],
+  [93,0,"Team Fortress 2"  ],
+  [82,1499,"Tom Clancy's Rainbow Six Siege"  ],
+  [67,5999,"Grand Theft Auto V"  ],
+  [57,0,"H1Z1"  ],
+  [92,1999,"Rocket League"  ],
+  [96,399,"Wallpaper Engine"  ],
+  [95,999,"Garry's Mod"  ],
+  [91,0,"Warframe"  ],
+  [83,0,"Paladins"  ],
+  [97,999,"Terraria"  ],
+  [82,0,"PAYDAY 2"  ],
+  [96,1999,"Left 4 Dead 2"  ],
+  [96,1999,"Euro Truck Simulator 2"  ],
+  [90,0,"Unturned"  ],
+  [74,5999,"Far Cry 5"  ],
+  [85,0,"Brawlhalla"  ],
+  [81,0,"War Thunder"  ],
+  [80,3499,"Rust"  ],
+  [86,0,"Battlerite"  ],
+  [78,2999,"Warhammer: Vermintide 2"  ],
+  [92,0,"Path of Exile"  ],
+  [93,2999,"Spec Ops: The Line"  ],
+  [96,2999,"Sid Meier's Civilization V"  ],
+  [45,3999,"F1 2015"  ],
+  [96,999,"Counter-Strike"  ],
+  [89,3999,"Arma 3"  ],
+  [73,0,"Black Squad"  ],
+  [93,1999,"The Elder Scrolls V: Skyrim"  ],
+  [77,1999,"Dead by Daylight"  ],
+  [68,2999,"Fallout 4"  ],
+  [68,5999,"ARK: Survival Evolved"  ],
+  [97,3999,"The Witcher 3: Wild Hunt"  ],
+  [95,1599,"Slay the Spire"  ],
+  [89,2999,"The Darkness II"  ],
+  [90,999,"Insurgency"  ],
+  [83,3999,"Hearts of Iron IV"  ],
+  [96,1999,"Borderlands 2"  ]
+
+
+]
+    },
+    grid: {containLabel: true},
+    xAxis: {name: 'score'},
+    yAxis: {type: 'category'},
+    visualMap: {
+        orient: 'horizontal',
+        left: 'center',
+        min: 0,
+        max: 10000,
+        text: ['High Price', 'Low Price'],
+        // Map the score column to color
+        dimension:1,
+        inRange: {
+            color: ['#D7DA8B', 'red']
+        }
+    },
+    series: [
+        {
+            type: 'bar',
+            encode: {
+                // Map the "amount" column to X axis.
+                x: 'score',
+                // Map the "product" column to Y axis
+                y: 'product'
+            }
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart6.setOption(option, true);
+}
+</script>
+</body>
+</html>
