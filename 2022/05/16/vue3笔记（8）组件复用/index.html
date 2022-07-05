@@ -16,24 +16,25 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口">
+    <meta name="description" content="一般来说，新增和编辑基本校验规则相同，我进行了组件复用。这篇记录组件复用过程中遇到的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不是所有应用都适合ajax处理">
-<meta property="og:url" content="http://guoningyan.com/2016/01/17/%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8%E9%83%BD%E9%80%82%E5%90%88ajax%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="vue3笔记（8）组件复用">
+<meta property="og:url" content="http://guoningyan.com/2022/05/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%E7%BB%84%E4%BB%B6%E5%A4%8D%E7%94%A8/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口">
+<meta property="og:description" content="一般来说，新增和编辑基本校验规则相同，我进行了组件复用。这篇记录组件复用过程中遇到的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/cs1.png">
-<meta property="og:image" content="http://guoningyan.com/img/cs2.png">
-<meta property="og:image" content="http://guoningyan.com/img/cs3.png">
-<meta property="article:published_time" content="2016-01-17T14:11:24.000Z">
-<meta property="article:modified_time" content="2022-05-07T06:19:46.254Z">
+<meta property="og:image" content="http://guoningyan.com/img/vue3-8-1.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue3-8-2.png">
+<meta property="article:published_time" content="2022-05-16T06:15:08.000Z">
+<meta property="article:modified_time" content="2022-05-16T08:28:08.841Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/cs1.png">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue3-8-1.png">
   
   
-  <title>不是所有应用都适合ajax处理 - ginny&#39;s blog</title>
+  <title>vue3笔记（8）组件复用 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -171,7 +172,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="不是所有应用都适合ajax处理">
+            <span class="h2" id="subtitle" title="vue3笔记（8）组件复用">
               
             </span>
 
@@ -181,8 +182,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2016-01-17 22:11" pubdate>
-        2016年1月17日 晚上
+      <time datetime="2022-05-16 14:15" pubdate>
+        2022年5月16日 下午
       </time>
     </span>
   
@@ -192,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      627 字
+      689 字
     </span>
   
 
@@ -230,27 +231,37 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">不是所有应用都适合ajax处理</h1>
+            <h1 style="display: none">vue3笔记（8）组件复用</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>这几日在学校生产实训，写基于<code>struts2</code>的web站点。<code>struct2</code>属于<code>拦截型</code>框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
+<p>一般来说，新增和编辑基本校验规则相同，我进行了组件复用。<br>这篇记录组件复用过程中遇到的问题</p>
 </blockquote>
 <span id="more"></span>
-
-<p><code>BS基本模型</code><br><img src="/img/cs1.png" srcset="/img/loading.gif" lazyload alt="BS基本模型">  </p>
-<p>java web中Servlet作用是接受浏览器传给服务端的请求，并将服务端处理完的响应返回给用户的浏览器。   </p>
-<p><code>java web基本处理模型</code>（红色部分为使用ajax的请求处理流向）<br><img src="/img/cs2.png" srcset="/img/loading.gif" lazyload alt="java web基本处理模型">      </p>
-<p>struts2这是一个非常不错的框架，作为前端，自然是希望后端提供接口（即RESTFulAPI这种），我通过ajax访问接口就可以实现请求。</p>
-<p><code>struts2处理模型</code>（红色部分为使用ajax的请求处理流向)<br><img src="/img/cs3.png" srcset="/img/loading.gif" lazyload alt="struts2处理模型">          </p>
-<p>但是我在使用过程中发现这种拦截并不适合处理ajax请求，所有的ajax请求都是action处理的，相当于原生java web中servlet处理一样，就失去的框架本身的意义（简化req,res除外）。     </p>
-<p>总结：不能因为学了前端就妄想所有的接口都是RESTFulAPI，有些时候后端渲染会更好，特别是当有了EL标签和JSTL标签之后，不需要用js访问大量DOM节点，这种时候当个小美工就可以啦～</p>
+<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在更新任务时，我复用了新建任务的组件，通过url携带参数，填充表单。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">router.<span class="hljs-title function_">push</span>(&#123;<br>  <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/taskcreate&#x27;</span>,<br>  <span class="hljs-attr">query</span>: &#123; <span class="hljs-attr">params</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(row) &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<p>新建任务拥有单独的侧栏，当处于更新任务状态时，若点击“新建任务”，url发生改变，但是组件状态没有变化。具体表现如下图所示：<br><img src="/../img/vue3-8-1.png" srcset="/img/loading.gif" lazyload alt="更新任务"><br><img src="/../img/vue3-8-2.png" srcset="/img/loading.gif" lazyload alt="新建任务"></p>
+<p>方法一：使用watch观察参数变化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  state.<span class="hljs-property">TaskForm</span> = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(emyptForm));<br>  <span class="hljs-title function_">getDataServer</span>();<br>  <span class="hljs-title function_">watch</span>(route.<span class="hljs-property">query</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">getDataServer</span>();<br>  &#125;, &#123; <span class="hljs-attr">immediate</span>: <span class="hljs-literal">true</span> &#125;)<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>此时点击“新建任务”，url发生改变，但是watch并没有监测到参数变化，此方法不管用。</p>
+<p>方法二：使用<code>onBeforeRouteUpdate</code>路由API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">onBeforeRouteUpdate</span>(<span class="hljs-function">(<span class="hljs-params">to</span>) =&gt;</span> &#123;<br>  state.<span class="hljs-property">TaskForm</span> = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(emyptForm));<br>  <span class="hljs-title function_">getDataServer</span>();<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<p>此时点击“新建任务”，url发生改变，<code>onBeforeRouteUpdate</code>执行，页面初始化成功。</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
                 
               </div>
               
@@ -265,9 +276,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2016/03/26/ife-task1-9-1/">
+                      <a href="/2022/07/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89scss%E9%85%8D%E7%BD%AE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ife task1.9</span>
+                        <span class="hidden-mobile">vue3笔记（9）scss配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -275,8 +286,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2015/12/26/%E4%B8%8A%E6%B5%B7%E5%AE%9E%E4%B9%A0/">
-                        <span class="hidden-mobile">上海实习</span>
+                      <a href="/2022/05/10/vue3%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%E7%9B%91%E5%90%AC/">
+                        <span class="hidden-mobile">vue3笔记（7）监听</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

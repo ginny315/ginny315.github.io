@@ -16,24 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口">
+    <meta name="description" content="有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。这篇记录scss样式引入及使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不是所有应用都适合ajax处理">
-<meta property="og:url" content="http://guoningyan.com/2016/01/17/%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8%E9%83%BD%E9%80%82%E5%90%88ajax%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="vue3笔记（9）scss配置">
+<meta property="og:url" content="http://guoningyan.com/2022/07/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89scss%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="这几日在学校生产实训，写基于struts2的web站点。struct2属于拦截型框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口">
+<meta property="og:description" content="有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。这篇记录scss样式引入及使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/cs1.png">
-<meta property="og:image" content="http://guoningyan.com/img/cs2.png">
-<meta property="og:image" content="http://guoningyan.com/img/cs3.png">
-<meta property="article:published_time" content="2016-01-17T14:11:24.000Z">
-<meta property="article:modified_time" content="2022-05-07T06:19:46.254Z">
+<meta property="article:published_time" content="2022-07-04T06:39:13.000Z">
+<meta property="article:modified_time" content="2022-07-04T07:10:49.983Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/cs1.png">
   
   
-  <title>不是所有应用都适合ajax处理 - ginny&#39;s blog</title>
+  <title>vue3笔记（9）scss配置 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -171,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="不是所有应用都适合ajax处理">
+            <span class="h2" id="subtitle" title="vue3笔记（9）scss配置">
               
             </span>
 
@@ -181,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2016-01-17 22:11" pubdate>
-        2016年1月17日 晚上
+      <time datetime="2022-07-04 14:39" pubdate>
+        2022年7月4日 下午
       </time>
     </span>
   
@@ -192,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      627 字
+      978 字
     </span>
   
 
@@ -201,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      9 分钟
     </span>
   
 
@@ -230,27 +228,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">不是所有应用都适合ajax处理</h1>
+            <h1 style="display: none">vue3笔记（9）scss配置</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>这几日在学校生产实训，写基于<code>struts2</code>的web站点。<code>struct2</code>属于<code>拦截型</code>框架，会将http请求拦截下来，进行自己对应的过滤处理（包括上传等一些基本请求），若框架本身不能处理的，则回调所写的action处理，因为请求中涉及http协议相关，若对协议不是很明了，可能会处理起来较为麻烦，struts2封装了这些请求，只需要在action中实现相关业务逻辑，同时action给出set和get接口作为数据的请求处理。让使用者只关心核心业务的开发，屏蔽原有技术跟业务无关的技术问题。</p>
+<p>有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。<br>这篇记录scss样式引入及使用。</p>
 </blockquote>
 <span id="more"></span>
+<h4 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h4><p>使用<code>vue-cli</code>创建项目时，可以选择使用scss，相关的配置会自动加入<code>package.json</code>，检查是否含有以下两项：</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;devDependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;sass&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^1.32.7&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;sass-loader&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^12.0.0&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></div></td></tr></table></figure>
 
-<p><code>BS基本模型</code><br><img src="/img/cs1.png" srcset="/img/loading.gif" lazyload alt="BS基本模型">  </p>
-<p>java web中Servlet作用是接受浏览器传给服务端的请求，并将服务端处理完的响应返回给用户的浏览器。   </p>
-<p><code>java web基本处理模型</code>（红色部分为使用ajax的请求处理流向）<br><img src="/img/cs2.png" srcset="/img/loading.gif" lazyload alt="java web基本处理模型">      </p>
-<p>struts2这是一个非常不错的框架，作为前端，自然是希望后端提供接口（即RESTFulAPI这种），我通过ajax访问接口就可以实现请求。</p>
-<p><code>struts2处理模型</code>（红色部分为使用ajax的请求处理流向)<br><img src="/img/cs3.png" srcset="/img/loading.gif" lazyload alt="struts2处理模型">          </p>
-<p>但是我在使用过程中发现这种拦截并不适合处理ajax请求，所有的ajax请求都是action处理的，相当于原生java web中servlet处理一样，就失去的框架本身的意义（简化req,res除外）。     </p>
-<p>总结：不能因为学了前端就妄想所有的接口都是RESTFulAPI，有些时候后端渲染会更好，特别是当有了EL标签和JSTL标签之后，不需要用js访问大量DOM节点，这种时候当个小美工就可以啦～</p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>在本项目中，<code>assets/scss/_variables.scss</code>文件中编写颜色样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">$text-yellow: yellow;<br></code></pre></div></td></tr></table></figure>
+
+<p>方法一：单组件引入<br>可用的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;style lang=<span class="hljs-string">&quot;scss&quot;</span> scoped&gt;<br>@<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;../../assets/scss/_variables.scss&quot;</span>;<br>span &#123;<br>  <span class="hljs-attr">color</span>: $text-yellow;<br>&#125;<br>&lt;/style&gt;<br></code></pre></div></td></tr></table></figure>
+<p>如果报错”Undefined variable. root stylesheet”，说明文件没有引入成功；<br>如果报错”Can’t find stylesheet to import. root stylesheet”，说明引入的文件路径有问题；<br>不知道为什么下面这个写法会报错，显示无法找到文件。</p>
+<p>方法二：整体引入<br>如果在每个组件中引入一次，稍微有点麻烦。按照我这里的设计，最好是整体引入，每个组件中都能使用。查阅一些资料后，发现可以在<code>vue.config.js</code>中这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; defineConfig &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@vue/cli-service&quot;</span>);<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title function_">defineConfig</span>(&#123;<br>  <span class="hljs-attr">css</span>: &#123;<br>    <span class="hljs-attr">loaderOptions</span>: &#123;<br>      <span class="hljs-attr">sass</span>: &#123;<br>        <span class="hljs-attr">additionalData</span>: <span class="hljs-string">`@import &quot;@/assets/scss/_variables.scss&quot;;`</span>,<br>      &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>重启项目，更改成功！</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
                 
               </div>
               
@@ -265,18 +276,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2016/03/26/ife-task1-9-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ife task1.9</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2015/12/26/%E4%B8%8A%E6%B5%B7%E5%AE%9E%E4%B9%A0/">
-                        <span class="hidden-mobile">上海实习</span>
+                      <a href="/2022/05/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%E7%BB%84%E4%BB%B6%E5%A4%8D%E7%94%A8/">
+                        <span class="hidden-mobile">vue3笔记（8）组件复用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
