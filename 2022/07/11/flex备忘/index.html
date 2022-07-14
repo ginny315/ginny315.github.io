@@ -16,22 +16,23 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。这篇记录scss样式引入及使用。">
+    <meta name="description" content="维护老代码很麻烦的一点就是布局，改来改去还是决定全部改成flex，这篇记录下flex的一般用法，以备以后使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（9）scss配置">
-<meta property="og:url" content="http://guoningyan.com/2022/07/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89scss%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="flex备忘">
+<meta property="og:url" content="http://guoningyan.com/2022/07/11/flex%E5%A4%87%E5%BF%98/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。这篇记录scss样式引入及使用。">
+<meta property="og:description" content="维护老代码很麻烦的一点就是布局，改来改去还是决定全部改成flex，这篇记录下flex的一般用法，以备以后使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-04T06:39:13.000Z">
-<meta property="article:modified_time" content="2022-07-04T07:10:49.983Z">
+<meta property="og:image" content="http://guoningyan.com/img/flex-1.png">
+<meta property="article:published_time" content="2022-07-11T06:28:41.000Z">
+<meta property="article:modified_time" content="2022-07-12T02:08:02.420Z">
 <meta property="article:author" content="Ningyan Guo">
-<meta property="article:tag" content="typescript">
-<meta property="article:tag" content="vue3">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/flex-1.png">
   
   
-  <title>vue3笔记（9）scss配置 - ginny&#39;s blog</title>
+  <title>flex备忘 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,7 +170,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（9）scss配置">
+            <span class="h2" id="subtitle" title="flex备忘">
               
             </span>
 
@@ -179,8 +180,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-07-04 14:39" pubdate>
-        2022年7月4日 下午
+      <time datetime="2022-07-11 14:28" pubdate>
+        2022年7月11日 下午
       </time>
     </span>
   
@@ -190,7 +191,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      978 字
+      2.1k 字
     </span>
   
 
@@ -199,7 +200,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      18 分钟
     </span>
   
 
@@ -228,25 +229,47 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（9）scss配置</h1>
+            <h1 style="display: none">flex备忘</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>有个需求是网页的整体配色需要和公司官网一致，在这里我使用scss写样式代码，需要全局引入颜色样式，以便在各个组件中使用。<br>这篇记录scss样式引入及使用。</p>
+<p>维护老代码很麻烦的一点就是布局，改来改去还是决定全部改成flex，这篇记录下flex的一般用法，以备以后使用。</p>
 </blockquote>
-<span id="more"></span>
-<h4 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h4><p>使用<code>vue-cli</code>创建项目时，可以选择使用scss，相关的配置会自动加入<code>package.json</code>，检查是否含有以下两项：</p>
-<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"><span class="hljs-attr">&quot;devDependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;sass&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^1.32.7&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;sass-loader&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^12.0.0&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></div></td></tr></table></figure>
+ <span id="more"></span>
+<h4 id="弹性盒子"><a href="#弹性盒子" class="headerlink" title="弹性盒子"></a>弹性盒子</h4><p> display:flex 是一种布局方式。它即可以应用于容器中，也可以应用于行内元素。</p>
+<p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。<br>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item）</p>
+<h4 id="container属性"><a href="#container属性" class="headerlink" title="container属性"></a>container属性</h4><ol>
+<li><p>flex-direction<br>定义主轴的方向（即项目的排列方向）<br>column-reverse：主轴为垂直方向，起点在下沿<br>column：主轴为垂直方向，起点在上沿<br>row（默认值）：主轴为水平方向，起点在左端<br>row-reverse：主轴为水平方向，起点在右端</p>
+</li>
+<li><p>flex-wrap<br>定义项目是否换行以及如何换行<br>nowrap：不换行<br>wrap：换行，第一行在上方<br>wrap-reverse：换行，第一行在下方</p>
+</li>
+<li><p>justify-content<br>定义项目在主轴上的对齐方式<br>flex-start（默认值）：左对齐<br>flex-end：右对齐<br>center：居中<br>space-between：两端对齐，项目之间的间隔都相等。<br>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍</p>
+</li>
+<li><p>align-items<br>定义项目在竖直方向上对齐方式<br>flex-start：交叉轴的起点对齐。<br>flex-end：交叉轴的终点对齐。<br>center：交叉轴的中点对齐。<br>baseline: 项目的第一行文字的基线对齐。<br>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度</p>
+</li>
+<li><p>align-content<br>定义多根轴线的对齐方式，如果项目只有一根轴线，该属性不起作用<br>flex-start：与交叉轴的起点对齐。<br>flex-end：与交叉轴的终点对齐。<br>center：与交叉轴的中点对齐。<br>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。<br>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。<br>stretch（默认值）：轴线占满整个交叉轴。</p>
+</li>
+</ol>
+<h4 id="item属性"><a href="#item属性" class="headerlink" title="item属性"></a>item属性</h4><ol>
+<li><p>order<br>定义项目的排列顺序。数值越小，排列越靠前，默认为0</p>
+</li>
+<li><p>flex-grow<br>定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大<br>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+</li>
+<li><p>flex-shrink<br>定义项目的缩小比例，默认为1，即如果空间不足，该项目将缩小<br>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br>负值对该属性无效。</p>
+</li>
+<li><p>flex-basis<br>定义了在分配多余空间之前，项目占据的主轴空间（main size）<br>浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。<br>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
+</li>
+<li><p>align-self<br>允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+</li>
+</ol>
+<h4 id="实战问题"><a href="#实战问题" class="headerlink" title="实战问题"></a>实战问题</h4><p>需要实现两个固定大小的盒子摆放，当页面宽度变小时，盒子自动垂直摆放。大概效果如下所示：<br><img src="/../img/flex-1.png" srcset="/img/loading.gif" lazyload alt="两个盒子排放"></p>
+<p>方案一：容器按照中间对齐，盒子分别与中轴线隔开一段距离。</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: center;<br>  <span class="hljs-attribute">flex-wrap</span>: wrap;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">0</span> <span class="hljs-number">1rem</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>在本项目中，<code>assets/scss/_variables.scss</code>文件中编写颜色样式。</p>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">$text-yellow: yellow;<br></code></pre></div></td></tr></table></figure>
+<p>方案二：容器按照左中右分隔。<br>如果直接使用space-between，则会出现中间是左右两边的2倍距，和设计稿差距较大，舍弃；<br>实验时发现一个神奇的space-evenly，可以实现左中右距离相等，但是查阅资料以后发现兼容性比较差（etc:iphone的SE上不支持），舍弃；<br>最后决定使用特殊方法模拟space-evenly。<br>出现问题：当垂直排列时，奇数盒子紧贴右侧，偶数盒子紧贴左侧。</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">flex-wrap</span>: wrap;<br>  <span class="hljs-attribute">align-items</span>: center;<br>  <span class="hljs-attribute">justify-content</span>: space-between;<br>    &amp;<span class="hljs-selector-pseudo">:before</span>,<br>    &amp;<span class="hljs-selector-pseudo">:after</span> &#123;<br>        <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;<br>        <span class="hljs-attribute">display</span>: block;<br>  &#125;<br>&#125;<br><span class="hljs-selector-class">.box</span><span class="hljs-selector-pseudo">:nth-child</span>(even) &#123;<br>  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">1rem</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span><span class="hljs-selector-pseudo">:nth-child</span>(odd) &#123;<br>  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">1rem</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>方法一：单组件引入<br>可用的写法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;style lang=<span class="hljs-string">&quot;scss&quot;</span> scoped&gt;<br>@<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;../../assets/scss/_variables.scss&quot;</span>;<br>span &#123;<br>  <span class="hljs-attr">color</span>: $text-yellow;<br>&#125;<br>&lt;/style&gt;<br></code></pre></div></td></tr></table></figure>
-<p>如果报错”Undefined variable. root stylesheet”，说明文件没有引入成功；<br>如果报错”Can’t find stylesheet to import. root stylesheet”，说明引入的文件路径有问题；<br>不知道为什么下面这个写法会报错，显示无法找到文件。</p>
-<p>方法二：整体引入<br>如果在每个组件中引入一次，稍微有点麻烦。按照我这里的设计，最好是整体引入，每个组件中都能使用。查阅一些资料后，发现可以在<code>vue.config.js</code>中这样写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; defineConfig &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@vue/cli-service&quot;</span>);<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title function_">defineConfig</span>(&#123;<br>  <span class="hljs-attr">css</span>: &#123;<br>    <span class="hljs-attr">loaderOptions</span>: &#123;<br>      <span class="hljs-attr">sass</span>: &#123;<br>        <span class="hljs-attr">additionalData</span>: <span class="hljs-string">`@import &quot;@/assets/scss/_variables.scss&quot;;`</span>,<br>      &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;);<br></code></pre></div></td></tr></table></figure>
-<p>重启项目，更改成功！</p>
+
 
             </div>
             <hr>
@@ -257,9 +280,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
-                    
-                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                      <a class="hover-with-bg" href="/tags/css/">css</a>
                     
                   </div>
                 
@@ -276,18 +297,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/11/flex%E5%A4%87%E5%BF%98/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">flex备忘</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%E7%BB%84%E4%BB%B6%E5%A4%8D%E7%94%A8/">
-                        <span class="hidden-mobile">vue3笔记（8）组件复用</span>
+                      <a href="/2022/07/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89scss%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">vue3笔记（9）scss配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
