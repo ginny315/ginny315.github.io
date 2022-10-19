@@ -16,25 +16,24 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这篇记录一下问题解决">
+    <meta name="description" content="简单记录一下微信小程序的学习。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题解决备忘">
-<meta property="og:url" content="http://guoningyan.com/2022/09/07/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%A4%87%E5%BF%98/index.html">
+<meta property="og:title" content="wx小程序（1）">
+<meta property="og:url" content="http://guoningyan.com/2022/09/26/wx%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="这篇记录一下问题解决">
+<meta property="og:description" content="简单记录一下微信小程序的学习。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/q-css1.png">
-<meta property="og:image" content="http://guoningyan.com/img/q-css2.png">
-<meta property="article:published_time" content="2022-09-07T06:38:29.000Z">
-<meta property="article:modified_time" content="2022-09-07T07:01:35.288Z">
+<meta property="og:image" content="http://guoningyan.com/img/wx1-pagelc.png">
+<meta property="article:published_time" content="2022-09-26T06:03:55.000Z">
+<meta property="article:modified_time" content="2022-09-28T08:07:16.353Z">
 <meta property="article:author" content="Ningyan Guo">
-<meta property="article:tag" content="typescript">
-<meta property="article:tag" content="css">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="wx">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/q-css1.png">
+<meta name="twitter:image" content="http://guoningyan.com/img/wx1-pagelc.png">
   
   
-  <title>问题解决备忘 - ginny&#39;s blog</title>
+  <title>wx小程序（1） - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -172,7 +171,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="问题解决备忘">
+            <span class="h2" id="subtitle" title="wx小程序（1）">
               
             </span>
 
@@ -182,8 +181,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-07 14:38" pubdate>
-        2022年9月7日 下午
+      <time datetime="2022-09-26 14:03" pubdate>
+        2022年9月26日 下午
       </time>
     </span>
   
@@ -193,7 +192,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      181 字
+      1.6k 字
     </span>
   
 
@@ -202,7 +201,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      13 分钟
     </span>
   
 
@@ -231,16 +230,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">问题解决备忘</h1>
+            <h1 style="display: none">wx小程序（1）</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>这篇记录一下问题解决</p>
+<p>简单记录一下微信小程序的学习。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><ol>
-<li>下拉列表显示模糊问题<br>项目里用了一个select组件，如下图所示，下拉时发现字体模糊了：<br><img src="/img/q-css1.png" srcset="/img/loading.gif" lazyload alt="blur1"><br>查看元素，发现去掉transform后字体模糊消失了：<br><img src="/img/q-css2.png" srcset="/img/loading.gif" lazyload alt="blur2"><br>查阅资料后发现，通过 <code>transform:translate(X,Y)</code> 偏移元素可以达到定位的效果，但是如果元素内部有字体的话，会出现模糊的问题。<br>解决方案：给translate的Y值偏移设为绝对单位。</li>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight 1c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 1c"><span class="hljs-comment">// 整个小程序只有一个App实例</span><br><span class="hljs-string">|-- app.json (整体配置：窗口样式、网络延迟...)</span><br><span class="hljs-string">|-- app.js (总体逻辑：onLaunch、onShow、onHide、onError)</span><br><span class="hljs-string">|-- app.wxss (公共样式)</span><br><span class="hljs-string">|-- pages</span><br>    <span class="hljs-string">|-- index</span><br>        <span class="hljs-string">|-- index.js (页面注册)</span><br>        <span class="hljs-string">|-- index.json</span><br>        <span class="hljs-string">|-- index.wxml</span><br>        <span class="hljs-string">|-- index.wxss</span><br><span class="hljs-string">|-- img 图片资源</span><br><span class="hljs-string">|-- utils</span><br>    <span class="hljs-string">|-- common.js (公用方法)</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ol>
+<li>小程序有appid</li>
+<li>可以使用<open-data>标签获取用户信息</li>
 </ol>
+<h3 id="关键思想-amp-设计写法"><a href="#关键思想-amp-设计写法" class="headerlink" title="关键思想 &amp; 设计写法"></a>关键思想 &amp; 设计写法</h3><ol>
+<li><p>响应式数据绑定，逻辑层（js）数据处理，视图层（view）自动更新，需要将页面的数据、方法、生命周期函数注册到框架中。</p>
+</li>
+<li><p>window、document等DOM和BOM的API不可用，可以调用微信环境提供的各种API，例如：地理定位，扫码，支付。</p>
+</li>
+<li><p>页面引用<code>behaviors</code>共享数据字段和方法。</p>
+</li>
+<li><p><code>Page</code>适用于简单的页面，<code>Component</code>用于复杂页面。</p>
+</li>
+<li><p>页面生命周期<br> <img src="/img/wx1-pagelc.png" srcset="/img/loading.gif" lazyload alt="页面生命周期"></p>
+</li>
+<li><p>不支持直接引入<code>node_modules</code>，可copy相关代码。</p>
+</li>
+<li><p><code>common.js</code>中抽取公共代码，使用<code>module.exports</code>导出，需要使用时通过<code>require</code>导入</p>
+</li>
+<li><p>监听事件触发，数据以参数形式传入回调函数.<br> <code>wx.onCompassChange(function (res) &#123;...&#125;)</code></p>
+</li>
+<li><p>同步API的执行结果可以通过函数返回值直接获取，如果执行出错会抛出异常；<br> 异步API接口接受一个Object类型的参数，Object对象中不包含<code>success/fail/complete</code>时将默认返回 promise，否则仍按回调方式执行，无返回值。</p>
+</li>
+<li><p>尺寸单位rpx（responsive pixel）:可以根据屏幕宽度进行自适应。</p>
+ <figure class="highlight nim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nim"> // 同步<br> <span class="hljs-keyword">try</span> &#123;<br>  wx.setStorageSync(&#x27;key&#x27;, &#x27;value&#x27;)<br> &#125; catch(e) <span class="hljs-meta">&#123;...&#125;</span><br><br>// 异步<br> wx.login(&#123;<br>  success(res) &#123;<br>    ...<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure></li>
+<li><figure class="highlight handlebars"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs handlebars"><span class="language-xml">// 单向数据绑定</span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">value</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> /&gt;</span></span><br><span class="language-xml">// 双向数据绑定</span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">model:value</span>=<span class="hljs-string">&quot;值为 </span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">value</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> /&gt;</span></span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>节点信息查询API可以用于获取节点属性、样式、在界面上的位置等信息</p>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">const query = wx<span class="hljs-selector-class">.createSelectorQuery</span>()<br>query<span class="hljs-selector-class">.select</span>(<span class="hljs-string">&#x27;#the-id&#x27;</span>)<span class="hljs-selector-class">.boundingClientRect</span>(<span class="hljs-built_in">function</span>(res)&#123;<br>  res<span class="hljs-selector-class">.top</span> <span class="hljs-comment">// #the-id 节点的上边界坐标（相对于显示区域）</span><br>&#125;)<br>query<span class="hljs-selector-class">.selectViewport</span>()<span class="hljs-selector-class">.scrollOffset</span>(<span class="hljs-built_in">function</span>(res)&#123;<br>  res<span class="hljs-selector-class">.scrollTop</span> <span class="hljs-comment">// 显示区域的竖直滚动位置</span><br>&#125;)<br>query<span class="hljs-selector-class">.exec</span>()<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h4 id="路阻且长，还得走"><a href="#路阻且长，还得走" class="headerlink" title="路阻且长，还得走"></a>路阻且长，还得走</h4><ol>
+<li>引入TDDesign，编译之后，出现<code>WAServiceMainContext.js:2 Error: module &quot;miniprogram_npm/tdesign-miniprogram/toast/props.js&quot; is not defined</code>，关闭重启dev tools即可。</li>
+</ol>
+<p><code>附录</code>学习资料<br><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/">wx官网</a><br><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/devtools/project.html#%E6%9C%AC%E5%9C%B0%E8%AE%BE%E7%BD%AE">wx开发者工具</a><br><a target="_blank" rel="noopener" href="https://tdesign.tencent.com/miniprogram/components/icon">tddesign</a></p>
 
             </div>
             <hr>
@@ -251,9 +282,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
                     
-                      <a class="hover-with-bg" href="/tags/css/">css</a>
+                      <a class="hover-with-bg" href="/tags/wx/">wx</a>
                     
                   </div>
                 
@@ -270,9 +301,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/15/MAC%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/">
+                      <a href="/2022/10/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%8B%86%E5%88%86/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MAC终端配置</span>
+                        <span class="hidden-mobile">vue3笔记（12）目录 & 文件拆分</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -280,8 +311,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/23/vue3%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A/">
-                        <span class="hidden-mobile">vue3笔记（11）加载更多</span>
+                      <a href="/2022/09/15/MAC%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">MAC终端配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

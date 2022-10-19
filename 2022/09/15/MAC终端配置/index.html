@@ -16,19 +16,39 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://guoningyan.com/archives/2022/08/index.html">
+    <meta name="description" content="用了7年MBP终于要准备退休了，新电脑到手重新配置一下开发环境，稍微做个记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAC终端配置">
+<meta property="og:url" content="http://guoningyan.com/2022/09/15/MAC%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="用了7年MBP终于要准备退休了，新电脑到手重新配置一下开发环境，稍微做个记录。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-15T05:23:03.000Z">
+<meta property="article:modified_time" content="2022-09-15T05:31:01.050Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>归档 - ginny&#39;s blog</title>
+  <title>MAC终端配置 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -59,7 +79,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -148,9 +168,43 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="MAC终端配置">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-15 13:23" pubdate>
+        2022年9月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      552 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -163,46 +217,102 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 50 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/2022/08/23/vue3%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">vue3笔记（11）加载更多</span>
-      <time style="float: right;">08-23</time>
-    </a>
-  
-    
-    <a href="/2022/08/10/egg%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">egg笔记（1）</span>
-      <time style="float: right;">08-10</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MAC终端配置</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>用了7年MBP终于要准备退休了，新电脑到手重新配置一下开发环境，稍微做个记录。</p>
+</blockquote>
+<span id="more"></span>
 
+<h3 id="git显示分支-amp-大小写补全"><a href="#git显示分支-amp-大小写补全" class="headerlink" title="git显示分支 &amp; 大小写补全"></a>git显示分支 &amp; 大小写补全</h3><p>zsh 终端设置</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.zshrc<br></code></pre></div></td></tr></table></figure>
 
+<p>写入以下语句</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># git显示分支</span><br><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">parse_git_branch</span></span>() &#123;<br>    git branch 2&gt; /dev/null | sed -n -e <span class="hljs-string">&#x27;s/^\* \(.*\)/[\1]/p&#x27;</span><br>&#125;<br><br><span class="hljs-built_in">setopt</span> PROMPT_SUBST<br><span class="hljs-built_in">export</span> PROMPT=<span class="hljs-string">&#x27;%F&#123;grey&#125;%n%f %F&#123;cyan&#125;%~%f %F&#123;green&#125;$(parse_git_branch)%f %F&#123;normal&#125;$%f &#x27;</span><br><br><span class="hljs-comment"># 大小写补全</span><br><span class="hljs-built_in">autoload</span> -Uz compinit &amp;&amp; compinit<br><span class="hljs-built_in">zstyle</span> <span class="hljs-string">&#x27;:completion:*&#x27;</span> matcher-list <span class="hljs-string">&#x27;m:&#123;a-z&#125;=&#123;A-Z&#125;&#x27;</span><br></code></pre></div></td></tr></table></figure>
 
+<p>重启终端或通过 source 命令生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">source ~/.zshrc<br></code></pre></div></td></tr></table></figure>
 
-              </div>
+<p><code>附录</code>资料<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39802884/article/details/121723889">MacOS 上 oh-my-zsh 安装与卸载</a><br><a target="_blank" rel="noopener" href="https://copyfuture.com/blogs-details/20210413165715428a">终端显示出git分支</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/sl285720967/article/details/122510493">大小写补全</a></p>
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/26/wx%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">wx小程序（1）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/07/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%A4%87%E5%BF%98/">
+                        <span class="hidden-mobile">问题解决备忘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -285,6 +395,19 @@
   
 
 
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
