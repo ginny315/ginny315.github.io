@@ -4,6 +4,61 @@
   
   
   <entry>
+    <title>作品集合</title>
+    <link href="/2023/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/"/>
+    <url>/2023/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>奇奇怪怪的东西有空整理在这里。</p></blockquote><span id="more"></span> <ol><li>朴素的工作</li></ol><p>1.1 opsdev前端搭建、迭代<br><img src="/../img/0-3.png" alt="opsdev"></p><p>1.2 N卡运行信息展示<br><img src="/../img/0-4.png" alt="nvidia"></p><p>1.3 model garden<br><img src="/../img/0-5.png" alt="garden"> </p><ol start="2"><li>读书脑洞</li></ol><p>2.1 基于Spark的分布式人脸识别系统-前世你可能是只猫<br><img src="/../img/0-1.png" alt="前世你可能是一只猫"></p><p>2.2 基于WebGL的森林渲染，使用WebGL进行森林渲染，并力图实现渲染最优。<br><img src="/../img/0-2.png" alt="基于WebGL的森林渲染"><br><a href="https://guoningyan.com/dissertation/">毕设进展</a></p><p>2.3 <a href="https://guoningyan.com/visual/">可视化课程网站</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MLOps实战（1）</title>
+    <link href="/2022/11/15/MLOps%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/"/>
+    <url>/2022/11/15/MLOps%E5%AE%9E%E6%88%98%EF%BC%881%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>2022年11月正式接触MLOps，本篇记录理论学习。</p></blockquote><span id="more"></span><h3 id="理论概念"><a href="#理论概念" class="headerlink" title="理论概念"></a>理论概念</h3><ol><li>传统系统模块化设计，松耦合；<br>ML系统牵一发动全身（数据、model、参数改变触发新版本）</li><li>ML技术可能适用的场景：<br>（1）无法通过经验给出规则；<br>（2）已有好数据，业务依赖数据作决策；<br>（3）目标问题不断发生变化；<br>（4）无法扩展；</li><li>业务需求是一个问题或者痛点，需要在冲突的需求之间找到合适的平衡点，并将其转化为模型的输入和输出、损失函数和性能指标的选择。</li><li>MLOps提供所有已部署模型以及所有经过A&#x2F;B测试的模型的性能的可见性。</li><li>ML实验跟踪<br>（1）简化从实验到生产的模型迁移<br>（2）模型投产后的版本控制<br>（3）在ML模型注册中心管理模型工件<br>（4）在生产中测试各种模型版本<br>（5）serving</li><li>A&#x2F;B test：统计技术，用于online模型评估<br>（1）确定商业目标的衡量指标（通常为代理指标）<br>（2）确定实验本身的参数（样本量、持续时间）</li><li>CI：持续集成，经常测试每个软件单元的代码库，以及通过单元测试、集成测试、系统测试来测试不同软件工件共同工作的完整性。在ML领域，需要：<br>（1）测试和验证模型代码及依赖组件的有效性<br>（2）测试和验证数据、数据模式、模型的性能<br>CD：持续部署，模型开发人员将更新后的模型、模型代码（含预测代码）上传至中央存储，然后部署到生产环境中。设计一个ML pipeline，将模型预测所涉及的流程和依赖自动部署或更新到一个ML服务。<br>建议：使用进程锁的单节点+基于Kubernetes的多节点部署方案。<br>交付：构建一个完全打包并经过验证的模型版本的过程，该版本可以部署到生产环境中。</li><li>模型衰退&#x2F;出错的原因：<br>（1）新训练集质量不高<br>（2）数据漂移P(X) or 概念漂移P(y|X)-持续、周期性出现<br>（3）特征修复<br>（4）依赖资源改变</li><li>版本控制：假设条件、随机性、数据、设定值、结果、执行、环境，将版本控制和再现性相关的基础文档任务自动化，通过集成平台进行设计和部署。</li><li>模型评估指标<br>   （1）统计：准确度、精准度、召回<br>   （2）计算：平均延迟、延迟的95百分位等</li><li>模型监控<br>   （1）资源层面：CPU、RAM、网络使用率和磁盘空间是否符合预期？请求是否以预期的速度得到处理？<br>   （2）性能层面：随着时间的推移，模型仍然是新输入数据模式的准确表示吗？性能和设计阶段一样好吗？</li></ol><h3 id="ML"><a href="#ML" class="headerlink" title="ML"></a>ML</h3><ol><li>监督学习：分类、回归；无监督学习：聚类</li><li>model choose –》algorithm + config + training;<br>error &amp; performance trade off</li><li>泛化：对新鲜样本进行准确预测的能力</li></ol><h3 id="Engineering"><a href="#Engineering" class="headerlink" title="Engineering"></a>Engineering</h3><ol><li>特征工程：对原始数据或中间特征进行一系列工程化处理，映射为一个更适合建模的新的表现形式，以降低原始数据的噪声和冗余。</li><li>基类（接口）：定义一个标准和基础功能，独立软件块之间的“边界”，定义不同组件的交流方式。</li><li>工件：可测试和可部署的项目包</li></ol><h3 id="MLOps"><a href="#MLOps" class="headerlink" title="MLOps"></a>MLOps</h3><ol><li>ML模型需要两个版本的管道：一个用于训练-history，一个用于服务-real time。<br>   将管道中的节点进行抽象，整个管道作为产品进行集中化开发和维护。<br>   可用于抽象的节点：<br>   （1）特征存储<br>   （2）训练过程各节点模块化<br>   （3）Maas，服务管道封装成通用的模型服务接口，一键生成模型服务</li><li>首先确定业务可以产生哪些数据，目标输出是什么，然后界定哪些模型适合加工这类输入和输出;<br>规划ML任务的步骤：<br>（1）将业务目标框定在一个ML范式中<br>（2）评估该任务的可行性，根据评估结果，重新调整ML框架和算法，直到获取满意的结果为止</li><li>数据准备-特征工程-模型开发-模型部署-模型监控    </li><li>评估指标<br>（1）模型表现（代理指标-模型侧指标）-模型目标-模型开发时期<br>（2）业务表现-业务目标-模型部署时期</li><li>ML项目生命周期<br>（1）定业务目标-行业专家和数据科学家合作<br>（2）数据准备：clean-feature engineering-sample<br>（3）模型实验：通过离线评估进行最佳模型的选择<br>（4）模型工程：对实验过程进行脚本封装并生成ML管道<br>（5）模型评估<br>（6）模型预测<br>（7）模型监控</li><li>模型部署<br>-生成代码&amp;模型的序列化：将代码、环境依赖、模型实例部署到中央存储，为后续模型的版本化及回溯使用。<br>-模型的服务化：通过数据库批量推理模式（offline）、推入式推理模式、单服务推理模式和微服务推理模式为应用提供服务。</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>ml</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>egg笔记（2）Mac配置使用mysql</title>
+    <link href="/2022/10/27/egg%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89Mac%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8mysql/"/>
+    <url>/2022/10/27/egg%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89Mac%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8mysql/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>我的egg.js项目中使用mysql数据库，先在本机做一个配置测试环境。<br>这篇记录Mac上本地配置数据库，以及代码编写。</p></blockquote><span id="more"></span><h3 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h3><p>安装见附录。</p><ol><li><p>登录查看数据库，操作指令如下：</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql -uroot -p***<br></code></pre></div></td></tr></table></figure></li><li><p>数据库交互操作</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">// 创建一个名字为<span class="hljs-built_in">test</span>数据库<br>create database <span class="hljs-built_in">test</span>;<br>// 查看所有数据库<br>show databases;<br>// 进入数据库<br>use <span class="hljs-built_in">test</span>;<br>// 查看该数据库中的表<br>show tables;<br></code></pre></div></td></tr></table></figure></li><li><p>手动创建表</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">create table aaa(<br>  <span class="hljs-built_in">id</span> int not null auto_increment,<br>  name varchar(100) not null,<br>  PRIMARY KEY ( <span class="hljs-built_in">id</span> )<br>)DEFAULT CHARSET=utf8;<br></code></pre></div></td></tr></table></figure><p>此时<code>show tables;</code>，会显示<code>1 row in set</code>，接下来就可以使用代码在表中插入数据啦～</p></li></ol><h3 id="egg-js配置"><a href="#egg-js配置" class="headerlink" title="egg.js配置"></a>egg.js配置</h3><p>在<code>/config/plugin.ts</code>中加入插件配置，<code>/config/config.default.ts</code>中配置mysql登录账户，见附录。</p><ol><li>插入数据<br>在表名为aaa的表中插入一条数据，要和初始化表中设定的数据结构相同。<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> item = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;ginny&#x27;</span> &#125;;<br><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">app</span>.<span class="hljs-property">mysql</span>.<span class="hljs-title function_">insert</span>(<span class="hljs-string">&#x27;aaa&#x27;</span>, item);<br></code></pre></div></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><br></code></pre></div></td></tr></table></figure></li></ol><p><code>附录</code></p><ol><li><a href="https://blog.csdn.net/guorenhao/article/details/124508441">Mac安装MySQL详细教程</a></li><li><a href="https://www.eggjs.org/tutorials/mysql">egg官方操作文档</a></li><li><a href="https://github.com/search?q=topic:egg-plugin&type=Repositories">egg插件</a></li><li><a href="https://downloads.mysql.com/archives/workbench/">可视化工具workbench下载</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>typescript</tag>
+      
+      <tag>egg</tag>
+      
+      <tag>mysql</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>vue3笔记（12）目录 &amp; 文件拆分</title>
     <link href="/2022/10/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%8B%86%E5%88%86/"/>
     <url>/2022/10/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%8B%86%E5%88%86/</url>
@@ -378,19 +433,6 @@
       <tag>工作实习</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>作品集合</title>
-    <link href="/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/"/>
-    <url>/2021/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>奇奇怪怪的东西有空整理在这里。</p></blockquote><span id="more"></span> <ol><li><p>基于Spark的分布式人脸识别系统-前世你可能是只猫<br><img src="/../img/0-1.png" alt="前世你可能是一只猫"></p></li><li><p>基于WebGL的森林渲染，使用WebGL进行森林渲染，并力图实现渲染最优。<br><img src="/../img/0-2.png" alt="基于WebGL的森林渲染"><br><a href="https://guoningyan.com/dissertation/">毕设进展</a><br><a href="https://v.youku.com/v_show/id_XMzkwNTE4NDQ1Mg==.html?spm=a2hzp.8244740.0.0">毕设效果视频展示</a></p></li><li><p><a href="https://guoningyan.com/visual/">可视化课程网站</a></p></li></ol>]]></content>
-    
-    
     
   </entry>
   
