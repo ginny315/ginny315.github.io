@@ -16,21 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这篇记录在项目中学到的产品知识。">
+    <meta name="description" content="遇到一个新需求，使用casdoor的登录入口，需要在我的项目中修改登录逻辑，这篇记录试用过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="产品笔记（1）">
-<meta property="og:url" content="http://guoningyan.com/2022/12/14/%E4%BA%A7%E5%93%81%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:title" content="vue3笔记（14）casdoor接入">
+<meta property="og:url" content="http://guoningyan.com/2023/01/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8814%EF%BC%89casdoor%E6%8E%A5%E5%85%A5/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="这篇记录在项目中学到的产品知识。">
+<meta property="og:description" content="遇到一个新需求，使用casdoor的登录入口，需要在我的项目中修改登录逻辑，这篇记录试用过程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-14T01:55:08.000Z">
-<meta property="article:modified_time" content="2023-01-18T07:50:56.056Z">
+<meta property="article:published_time" content="2023-01-18T06:14:45.000Z">
+<meta property="article:modified_time" content="2023-01-18T07:27:02.468Z">
 <meta property="article:author" content="Ningyan Guo">
-<meta property="article:tag" content="product">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>产品笔记（1） - ginny&#39;s blog</title>
+  <title>vue3笔记（14）casdoor接入 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -168,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="产品笔记（1）">
+            <span class="h2" id="subtitle" title="vue3笔记（14）casdoor接入">
               
             </span>
 
@@ -178,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-12-14 09:55" pubdate>
-        2022年12月14日 上午
+      <time datetime="2023-01-18 14:14" pubdate>
+        2023年1月18日 下午
       </time>
     </span>
   
@@ -189,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      998 字
     </span>
   
 
@@ -198,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      9 分钟
     </span>
   
 
@@ -227,212 +228,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">产品笔记（1）</h1>
+            <h1 style="display: none">vue3笔记（14）casdoor接入</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>这篇记录在项目中学到的产品知识。</p>
+<p>遇到一个新需求，使用casdoor的登录入口，需要在我的项目中修改登录逻辑，这篇记录试用过程。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="需求属性"><a href="#需求属性" class="headerlink" title="需求属性"></a>需求属性</h3><table>
-<thead>
-<tr>
-<th>需求属性</th>
-<th>属性说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>编号</td>
-<td>需求的顺序号，唯一性标识</td>
-</tr>
-<tr>
-<td>提交人(*)</td>
-<td>需求的录入PD，负责解释需求</td>
-</tr>
-<tr>
-<td>提交时间</td>
-<td>需求的录入时间，辅助信息</td>
-</tr>
-<tr>
-<td>模块(*)</td>
-<td>根据产品的模块划分</td>
-</tr>
-<tr>
-<td>名称(*)</td>
-<td>用简洁的短语描述需求</td>
-</tr>
-<tr>
-<td>描述(*)</td>
-<td>需求描述：无歧义、完整性、一致性、可测试等</td>
-</tr>
-<tr>
-<td>提出者</td>
-<td>即需求的原始提出者，有疑惑时便于追溯</td>
-</tr>
-<tr>
-<td>提出时间</td>
-<td>原始需求的获得时间，辅助信息</td>
-</tr>
-<tr>
-<td>Bug编号</td>
-<td>一些Bug视为需求，统一管理</td>
-</tr>
-<tr>
-<td>分类</td>
-<td>新增功能、功能改进、体验提升、Bug修复、内部需求等</td>
-</tr>
-<tr>
-<td>层次</td>
-<td>基础、扩展（期望需求）、增值（兴奋需求）</td>
-</tr>
-<tr>
-<td>重要性</td>
-<td>重要程度，辅助确定商业价值</td>
-</tr>
-<tr>
-<td>紧迫度</td>
-<td>紧急程度，辅助确定商业价值</td>
-</tr>
-<tr>
-<td>持续时间</td>
-<td>持续时间，辅助确定商业价值</td>
-</tr>
-<tr>
-<td>商业价值(*)</td>
-<td>商业优先级，不考虑实现难度，群体决策</td>
-</tr>
-<tr>
-<td>开发量(*)</td>
-<td>需求的开发工作量，表征实现难度</td>
-</tr>
-<tr>
-<td>性价比(*)</td>
-<td>“商业价值&#x2F;开发量”，用于决定先做哪个</td>
-</tr>
-<tr>
-<td>状态(*)</td>
-<td>需求生命周期：待讨论、暂缓、拒绝、需求中、开发中、已发布</td>
-</tr>
-<tr>
-<td>负责PD(*)</td>
-<td>状态进入“需求中”后确定</td>
-</tr>
-<tr>
-<td>开发工程师</td>
-<td>状态进入“开发中”后确定</td>
-</tr>
-<tr>
-<td>项目名称</td>
-<td>需求的发布项目</td>
-</tr>
-<tr>
-<td>发布时间</td>
-<td>需求的发布时间</td>
-</tr>
-<tr>
-<td>备注</td>
-<td>其它任何信息，如：1.被拒绝的理由 2.被暂缓的理由和重启条件 3.其它相关文档 ……</td>
-</tr>
-</tbody></table>
-<h3 id="需求文档"><a href="#需求文档" class="headerlink" title="需求文档"></a>需求文档</h3><p>管理台—登录&#x2F;个人中心需求文档</p>
-<table>
-<thead>
-<tr>
-<th>需求概要</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>部署方式</td>
-<td>私有化部署</td>
-</tr>
-<tr>
-<td>文档状态</td>
-<td>IN REVIEW</td>
-</tr>
-<tr>
-<td>产品负责人</td>
-<td>ginny</td>
-</tr>
-<tr>
-<td>产品版本</td>
-<td>v1.0</td>
-</tr>
-<tr>
-<td>产品名称</td>
-<td>我的产品</td>
-</tr>
-<tr>
-<td>原型 link</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>变更记录</p>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>版本</th>
-<th>变更人</th>
-<th>变更说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2023-1-1</td>
-<td>v1.0</td>
-<td>ginny</td>
-<td>初版需求文档</td>
-</tr>
-</tbody></table>
-<p>一、名词定义及方法论</p>
-<table>
-<thead>
-<tr>
-<th>名词</th>
-<th>定义</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>集群管理员</td>
-<td>拥有平台最高权限，能够登录集群管理平台。目前有且仅有一位，后续支持增加管理员</td>
-<td>admin用户</td>
-</tr>
-</tbody></table>
-<p>二、功能性需求</p>
-<table>
-<thead>
-<tr>
-<th>一级功能</th>
-<th>功能说明</th>
-<th>优先级</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>个人中心</td>
-<td>支持查看个人信息</td>
-<td>3</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>三、功能性需求详细说明</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>详细说明</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>XX管理列表</td>
-<td>列表字段包括：XXX</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>四、性能需求<br>支持最大管理X台机器。允许支持X个用户的创建。<br>五、产品边界与限制<br>六、附录</p>
-<h3 id="技术调研报告-前端"><a href="#技术调研报告-前端" class="headerlink" title="技术调研报告-前端"></a>技术调研报告-前端</h3><p>1.调研目的<br>2. 调研过程<br>下载后尝试运行，由于时间久远，nodejs各个包依赖变化较大，项目报错。后手动解决部分依赖问题，忽略部分错误后强制项目运行。*<strong>。后尝试直接阅读项目源码。<br>3. 结论<br>首先，该项目使用</strong>框架，代码组织形式较为复杂，拆分组件粒度细，阅读代码困难。<br>其次，由于前端package更新较快，该项目使用了大量外部package，部分package可能已经不维护了，依赖解决比较麻烦。<br>再者，该项目使用的UI组件 库较为小众(可能来自网易的内部)，查阅后发现可用资料非常少。<br>综上，该项目不太适合直接二次开发。<br>由于此项目的 功能与我方需要开发的功能点有部分相似，也有一定的参考价值，在外部组件使用上可以作为代码编写的学习示例。</p>
+<h3 id="调用逻辑"><a href="#调用逻辑" class="headerlink" title="调用逻辑"></a>调用逻辑</h3><p>我的设计思路是当前系统处于未登录状态（即获取不到token）时，跳转login页面；<br>当前系统处于已登录状态时，跳转redirect页面（默认为主页home）。<br>操作步骤如下：</p>
+<ol>
+<li>在login页面触发casdoor中的<code>getSigninUrl</code>方法，跳转casdoor登录；</li>
+<li>输入用户名密码，跳转已配置好的&#x2F;callback，本项目中为&#x2F;home。跳转时URL中携带有code；</li>
+<li>在home主页中请求后端验证接口，参数为URL中取到的code；</li>
+<li>后端验证接口返回res中携带token（JWT），home中使用cookie储存token；</li>
+<li><code>permission.ts</code>中使用路由守卫验证token</li>
+</ol>
+<h3 id="casdoor-vue用法"><a href="#casdoor-vue用法" class="headerlink" title="casdoor-vue用法"></a>casdoor-vue用法</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm i casdoor-vue-sdk<br></code></pre></div></td></tr></table></figure>
+<p>在<code>main.ts</code>中引入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Casdoor</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;casdoor-vue-sdk&quot;</span>;<br><span class="hljs-keyword">const</span> config = &#123;<br>  <span class="hljs-attr">serverUrl</span>: <span class="hljs-string">&quot;http://***&quot;</span>,<br>  <span class="hljs-attr">clientId</span>: <span class="hljs-string">&quot;***&quot;</span>,<br>  <span class="hljs-attr">organizationName</span>: <span class="hljs-string">&quot;teco&quot;</span>,<br>  <span class="hljs-attr">appName</span>: <span class="hljs-string">&quot;tecoai&quot;</span>,<br>  <span class="hljs-attr">redirectPath</span>: <span class="hljs-string">&quot;/home&quot;</span>,<br>&#125;;<br><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>(<span class="hljs-title class_">App</span>);<br>app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Casdoor</span>, config);<br></code></pre></div></td></tr></table></figure>
+<p>在<code>login.vue</code>中使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;script setup&gt;<br><span class="hljs-keyword">import</span> &#123; onMounted, getCurrentInstance &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; useCasdoor &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;casdoor-vue-sdk&quot;</span>;<br><br><span class="hljs-keyword">const</span> &#123; getSigninUrl, getSignupUrl &#125; = <span class="hljs-title function_">useCasdoor</span>();<br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-title function_">getSigninUrl</span>();<br>&#125;);<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://github.com/casdoor/casdoor-vue-sdk">casdoor-vue-sdk文档</a></p>
 
             </div>
             <hr>
@@ -443,7 +260,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/product/">product</a>
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
                     
                   </div>
                 
@@ -460,9 +279,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8813%EF%BC%89%E6%96%87%E4%BB%B6%E6%B5%81%E5%A4%84%E7%90%86/">
+                      <a href="/2023/02/10/vue3%E7%AC%94%E8%AE%B0%EF%BC%8815%EF%BC%89css%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（13）文件流处理</span>
+                        <span class="hidden-mobile">vue3笔记（15）css计算属性</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -470,8 +289,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/06/uniapp%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">
-                        <span class="hidden-mobile">uniapp学习（1）</span>
+                      <a href="/2023/01/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8813%EF%BC%89%E6%96%87%E4%BB%B6%E6%B5%81%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">vue3笔记（13）文件流处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
