@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本篇是上一篇的延伸，使用pinia作为状态管理，对项目进行了一次升级。使用setup语法糖进行组合式API的编写。  setup语法糖执行顺序：  创建组件实例 props解析 setup调用执行（一次） 组件创建beforeCreate  12345678&lt;script lang&#x3D;&quot;ts&quot; setup&gt;const dataList &#x3D; reactive(&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（1-2）基础写法">
+<meta property="og:url" content="http://guoningyan.com/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-2%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="本篇是上一篇的延伸，使用pinia作为状态管理，对项目进行了一次升级。使用setup语法糖进行组合式API的编写。  setup语法糖执行顺序：  创建组件实例 props解析 setup调用执行（一次） 组件创建beforeCreate  12345678&lt;script lang&#x3D;&quot;ts&quot; setup&gt;const dataList &#x3D; reactive(&amp;#12">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-26T02:18:09.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:05:31.953Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>vue3笔记（1-2）基础写法 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（1-2）基础写法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-26 10:18" pubdate>
+        2022年4月26日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（1-2）基础写法</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本篇是上一篇的延伸，使用pinia作为状态管理，对项目进行了一次升级。<br>使用setup语法糖进行组合式API的编写。</p>
+</blockquote>
+<h3 id="setup语法糖"><a href="#setup语法糖" class="headerlink" title="setup语法糖"></a>setup语法糖</h3><p>执行顺序：</p>
+<ol>
+<li>创建组件实例</li>
+<li>props解析</li>
+<li>setup调用执行（一次）</li>
+<li>组件创建beforeCreate</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> dataList = <span class="hljs-title function_">reactive</span>(&#123;</span><br><span class="language-javascript">  <span class="hljs-attr">tableData</span>: [],</span><br><span class="language-javascript">  <span class="hljs-attr">pageTotal</span>: <span class="hljs-number">0</span>,</span><br><span class="language-javascript">  <span class="hljs-attr">query</span>: &#123; <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">pagesize</span>: <span class="hljs-number">10</span> &#125;</span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> &#123; tableData, pageTotal, query &#125; = <span class="hljs-title function_">toRefs</span>(dataList)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<ol>
+<li>toRefs(dataList)，为对象属性添加响应式</li>
+<li>不需要return对象、方法等</li>
+<li>通过<code>defineProps</code>指定当前props类型，获得上下文props对象</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">show</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Boolean</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-literal">false</span><br>  &#125;<br>&#125;)<br><br><span class="hljs-comment">// 增加类型-不能使用default</span><br><span class="hljs-keyword">const</span> props = defineProps&lt;&#123;<br>  <span class="hljs-attr">show</span>: <span class="hljs-title class_">String</span><br>&#125;&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h3><p>需要对普通 DOM 元素进行底层操作，会用到自定义指令。</p>
+<ol>
+<li><p>全局自定义指令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">app.<span class="hljs-title function_">directive</span>(<span class="hljs-string">&#x27;focus&#x27;</span>,&#123;<br> <span class="hljs-title function_">mounted</span>(<span class="hljs-params">el</span>)&#123;<br>  el.<span class="hljs-title function_">focus</span>()<br> &#125;<br>&#125;)<br><br><span class="hljs-comment">//组件使用</span><br>&lt;input type=<span class="hljs-string">&quot;text&quot;</span> v-focus /&gt;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>局部自定义指令<br>binding是一个对象，包含该指令的所有信息。（arg 自定义指令的参数名；value 自定义指令绑定的值；oldValue 指令绑定的前一个值；dir 被执行的钩子函数；modifiers：一个包含修饰符的对象）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> defineDir = &#123;<br> <span class="hljs-attr">focus</span>: &#123;<br>  <span class="hljs-title function_">mounted</span>(<span class="hljs-params">el, binding</span>)&#123;<br>    el.<span class="hljs-title function_">focus</span>()<br>    el.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = binding.<span class="hljs-property">value</span>.<span class="hljs-property">left</span>+<span class="hljs-string">&#x27;px&#x27;</span><br>  &#125;<br> &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br> <span class="hljs-attr">directives</span>: defineDir,<br> <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-keyword">const</span> posData = &#123;<br>   <span class="hljs-attr">left</span>:<span class="hljs-number">20</span><br>  &#125;<br> &#125;<br>&#125;<br><br><span class="hljs-comment">//组件使用</span><br>&lt;input type=<span class="hljs-string">&quot;text&quot;</span> v-focus /&gt;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>自定义指令中的生命周期钩子函数<br>一个指令定义对象可以提供如下几个钩子函数（可选）:<br>created ：绑定元素属性或事件监听器被应用之前调用。(eg: 附加在 v-on 事件监听器前调用的事件监听器时)。<br>beforeMounted ：当指令第一次绑定到元素并且在挂载父组件之前执行。<br>mounted ：绑定元素的父组件被挂载之后调用。<br>beforeUpdate ：在更新包含组件的 VNode 之前调用。<br>updated ：在包含组件的 VNode 及其子组件的 VNode 更新后调用。<br>beforeUnmounted ：在卸载绑定元素的父组件之前调用<br>unmounted ：当指令与元素解除绑定且父组件已卸载时，只调用一次。</p>
+</li>
+</ol>
+<p><code>javascript</code><br><code>javascript</code></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-3%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（1-3）基础写法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-1%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/">
+                        <span class="hidden-mobile">vue3笔记（1-1）基础写法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

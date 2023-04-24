@@ -23,11 +23,14 @@
 <meta property="og:site_name" content="ginny&#39;s blog">
 <meta property="og:description" content="这篇记录在项目中学到的产品知识。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/pm-1.jpg">
+<meta property="og:image" content="http://guoningyan.com/img/pm-2.png">
 <meta property="article:published_time" content="2022-12-14T01:55:08.000Z">
-<meta property="article:modified_time" content="2023-01-18T07:50:56.056Z">
+<meta property="article:modified_time" content="2023-04-24T09:08:01.799Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="product">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/pm-1.jpg">
   
   
   <title>产品笔记（1） - ginny&#39;s blog</title>
@@ -189,7 +192,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      2k 字
     </span>
   
 
@@ -198,7 +201,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      17 分钟
     </span>
   
 
@@ -348,7 +351,7 @@
 </tr>
 <tr>
 <td>文档状态</td>
-<td>IN REVIEW</td>
+<td>IN REVIEW &#x2F; v0.1.0</td>
 </tr>
 <tr>
 <td>产品负责人</td>
@@ -356,7 +359,7 @@
 </tr>
 <tr>
 <td>产品版本</td>
-<td>v1.0</td>
+<td>v0.1.0</td>
 </tr>
 <tr>
 <td>产品名称</td>
@@ -379,7 +382,7 @@
 </thead>
 <tbody><tr>
 <td>2023-1-1</td>
-<td>v1.0</td>
+<td>v0.1.0</td>
 <td>ginny</td>
 <td>初版需求文档</td>
 </tr>
@@ -431,8 +434,147 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>四、性能需求<br>支持最大管理X台机器。允许支持X个用户的创建。<br>五、产品边界与限制<br>六、附录</p>
-<h3 id="技术调研报告-前端"><a href="#技术调研报告-前端" class="headerlink" title="技术调研报告-前端"></a>技术调研报告-前端</h3><p>1.调研目的<br>2. 调研过程<br>下载后尝试运行，由于时间久远，nodejs各个包依赖变化较大，项目报错。后手动解决部分依赖问题，忽略部分错误后强制项目运行。*<strong>。后尝试直接阅读项目源码。<br>3. 结论<br>首先，该项目使用</strong>框架，代码组织形式较为复杂，拆分组件粒度细，阅读代码困难。<br>其次，由于前端package更新较快，该项目使用了大量外部package，部分package可能已经不维护了，依赖解决比较麻烦。<br>再者，该项目使用的UI组件 库较为小众(可能来自网易的内部)，查阅后发现可用资料非常少。<br>综上，该项目不太适合直接二次开发。<br>由于此项目的 功能与我方需要开发的功能点有部分相似，也有一定的参考价值，在外部组件使用上可以作为代码编写的学习示例。</p>
+<p>四、性能需求<br>支持最大管理X台机器。允许支持X个用户的创建。<br>支持100人同时登录&#x2F;注册平台。支持2000人同时处于登录状态。</p>
+<p>五、产品边界与限制<br>六、附录</p>
+<h3 id="产品里程碑规划"><a href="#产品里程碑规划" class="headerlink" title="产品里程碑规划"></a>产品里程碑规划</h3><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>202X.3</th>
+<th>202X.6</th>
+<th>202X.12</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>商业化目标</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>产品目标</td>
+<td>产品功能：输出XXX</td>
+<td>产品功能：完成mvp版本，配备XXX，功能包括：XXX</td>
+<td>产品质量： 稳定性达到70%</td>
+</tr>
+<tr>
+<td>研发目标</td>
+<td>依赖环境搭建完成</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="竞品分析"><a href="#竞品分析" class="headerlink" title="竞品分析"></a>竞品分析</h3><p>一、调研背景<br>二、产品基本信息<br>  1.产品定位&#x2F;产品介绍&#x2F;产品价值<br>  2.面向用户&#x2F;适用行业<br>  3.产品优势<br>三、产品架构<br>四、功能分析</p>
+<h3 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h3><p>版本管理是对软件开发过程中特定功能的集合或特定代码构建结果进行管理。版本管理是为满足不同需求，对同一产品或系统进行局部的改进和改型所产生的产品或系统系列的变更情况进行记录、跟踪、维护和控制的过程。</p>
+<h4 id="版本号定义"><a href="#版本号定义" class="headerlink" title="版本号定义"></a>版本号定义</h4><p>A.B.C.D<br>A—主板本号：当发生大的版本迭代、如架构重构、页面重构或有颠覆性功能上线时，主版本号+1。<br>B—次版本号：相对于主版本号而言，次版本号的升级对应的只是局部的变动，但该局部的变动造成程序和以前版本不能兼容，或者对该程序以前的协作关系产生了破坏，或者是功能上有大的改进或增强。次版本号+1。<br>C—修订版本号：当每个次版本中规划出多个sprint时，每个sprint结束后，版本更为为修订版本更新，修订版本号+1.<br>D—日期版本号：当客户侧&#x2F;内测时出现bug需要紧急修改，并且临时发版时，使用日期版本号。</p>
+<h4 id="版本迭代节奏"><a href="#版本迭代节奏" class="headerlink" title="版本迭代节奏"></a>版本迭代节奏</h4><p>每个Q发布一个大版本，其中一个Q内再以两周为一个sprint周期进行迭代，每完成一个sprint，修订版本号+1</p>
+<h4 id="sprint内开发测试流程"><a href="#sprint内开发测试流程" class="headerlink" title="sprint内开发测试流程"></a>sprint内开发测试流程</h4><p><img src="/img/pm-1.jpg" srcset="/img/loading.gif" lazyload alt="开发测试流程"><br>每个Q最后一个sprint预留用于对本Q要上线功能的整体回归以及内部用户试用的内测阶段，并根据回归测试或内测时发现的bug进行修复，一般情况不进行功能开发。</p>
+<h3 id="git版本管理"><a href="#git版本管理" class="headerlink" title="git版本管理"></a>git版本管理</h3><p><img src="/img/pm-2.png" srcset="/img/loading.gif" lazyload alt="git版本管理"><br>master： 用于生产部署的版本，永远不会commit，只能由hotfix、release分支合并，并打tag<br>develop： 开发用的主分支<br>feature： 开发特性的分支，由develop分支创建，最终合并到develop<br>release： 当大版本中所有特性都完成开发后，由develop分支创建release分支，进行qa测试<br>hotfix： 线上出现bug时，从master生产一个bugfix版本，修复完成后，合并到master和develop分支并打tag</p>
+<h3 id="部署-amp-环境"><a href="#部署-amp-环境" class="headerlink" title="部署 &amp; 环境"></a>部署 &amp; 环境</h3><h4 id="环境资源需求"><a href="#环境资源需求" class="headerlink" title="环境资源需求"></a>环境资源需求</h4><table>
+<thead>
+<tr>
+<th>环境</th>
+<th>用途</th>
+<th>配置</th>
+<th>数量</th>
+<th>开始时间</th>
+<th>结束时间</th>
+<th>拥有者</th>
+<th>缺口</th>
+<th>缺口成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发环境</td>
+<td></td>
+<td>cpu:48核，内存512G，硬盘2T+8T</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>测试环境</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>运维开发</td>
+<td>公共组件、存储服务</td>
+<td>硬盘100T</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>网络设备及配件</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="环境清单"><a href="#环境清单" class="headerlink" title="环境清单"></a>环境清单</h4><table>
+<thead>
+<tr>
+<th>环境类型</th>
+<th>环境用途</th>
+<th>环境负责人</th>
+<th>环境配置</th>
+<th>环境数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发环境</td>
+<td>用于每个sprint功能开发</td>
+<td>研发</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>测试环境</td>
+<td>用于每个sprint功能测试</td>
+<td>QA</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>内部稳定环境</td>
+<td>作为内部正式使用的稳定环境</td>
+<td>PM</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>外部PoC&#x2F;Demo试用环境</td>
+<td>面向外部客户前期交流时，用户试用环境</td>
+<td>PM</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>客户私有环境</td>
+<td>客户签订合同后部署的正式使用环境</td>
+<td>客户联系人</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
@@ -460,9 +602,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8813%EF%BC%89%E6%96%87%E4%BB%B6%E6%B5%81%E5%A4%84%E7%90%86/">
+                      <a href="/2022/12/14/%E6%80%BB%E7%BB%93%E8%AF%AD%E8%A8%80%EF%BC%881%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（13）文件流处理</span>
+                        <span class="hidden-mobile">总结语言（1）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

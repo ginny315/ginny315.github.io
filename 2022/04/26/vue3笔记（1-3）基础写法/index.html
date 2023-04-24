@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制 1234.cell:empty::before &amp;#123;  content: &quot;--&quot;;  color: gray;&amp;#125;  table没有数据时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（1-3）基础写法">
+<meta property="og:url" content="http://guoningyan.com/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-3%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制 1234.cell:empty::before &amp;#123;  content: &quot;--&quot;;  color: gray;&amp;#125;  table没有数据时">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-26T02:19:09.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:05:38.272Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>vue3笔记（1-3）基础写法 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（1-3）基础写法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-26 10:19" pubdate>
+        2022年4月26日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（1-3）基础写法</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查</p>
+</blockquote>
+<h3 id="数据为空"><a href="#数据为空" class="headerlink" title="数据为空"></a>数据为空</h3><ol>
+<li><p>table-column中没有数据时，可以通过css控制</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.cell</span><span class="hljs-selector-pseudo">:empty</span><span class="hljs-selector-pseudo">::before</span> &#123;<br>  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;--&quot;</span>;<br>  <span class="hljs-attribute">color</span>: gray;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>table没有数据时，通过slot插槽控制UI</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span>/&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;empty&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: left;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-empty</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;div里面可以自定义空内容&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h3 id="el-table使用过的功能记录"><a href="#el-table使用过的功能记录" class="headerlink" title="el-table使用过的功能记录"></a>el-table使用过的功能记录</h3><ol>
+<li>表格序号自增</li>
+<li>路由跳转（外链+内部）<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;index&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;80&quot;</span> <span class="hljs-attr">:index</span>=<span class="hljs-string">&quot;startIndex&quot;</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;序号&quot;</span> /&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;客户&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">default</span>=<span class="hljs-string">&quot;scope&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">:to</span>=<span class="hljs-string">&quot;&#123; path: &#x27;/orderDetail&#x27;, query: &#123; detail: scope.row.id &#125; &#125;&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123; scope.row.name &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-table-column</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;地址&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">default</span>=<span class="hljs-string">&quot;scope&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">&quot;scope.row.url&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>&#123;&#123; scope.row.url &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-table-column</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> startIndex = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">return</span> (query.<span class="hljs-property">value</span>.<span class="hljs-property">page</span> - <span class="hljs-number">1</span>) * query.<span class="hljs-property">value</span>.<span class="hljs-property">pagesize</span> + <span class="hljs-number">1</span></span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="前端排序"><a href="#前端排序" class="headerlink" title="前端排序"></a>前端排序</h4><p><code>el-table-column</code>中添加 <code>sortable</code>即可。<br>要注意的是，这只是当前页面的排序，如果翻到下一页，排序还是默认的第二页的排序。如果需要全局排序，则由后端排序处理。</p>
+<h4 id="后端排序"><a href="#后端排序" class="headerlink" title="后端排序"></a>后端排序</h4><ol>
+<li><p>方法一</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-table</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;table&quot;</span> @<span class="hljs-attr">sort-change</span>=<span class="hljs-string">&quot;onSortChange&quot;</span> <span class="hljs-attr">:default-sort</span> =<span class="hljs-string">&quot;&#123;&#x27;prop&#x27;: prop,&#x27;order&#x27;:type&#125;&quot;</span> <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;tableData&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;parent_name&quot;</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;组织&quot;</span> <span class="hljs-attr">sortable</span>=<span class="hljs-string">&#x27;custom&#x27;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">&quot;scope&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123;scope.row.name ? scope.row.id: &#x27;&#x27;&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-table-column</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">el-table</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-title function_">onSortChange</span>(<span class="hljs-params">&#123; prop, order &#125;</span>) &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">let</span> orderF;</span><br><span class="language-javascript">  <span class="hljs-keyword">if</span>(order==<span class="hljs-string">&#x27;descending&#x27;</span>) &#123;</span><br><span class="language-javascript">    orderF = <span class="hljs-string">&#x27;desc&#x27;</span></span><br><span class="language-javascript">  &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( order==<span class="hljs-string">&#x27;ascending&#x27;</span>) &#123;</span><br><span class="language-javascript">    orderF = <span class="hljs-string">&#x27;asc&#x27;</span></span><br><span class="language-javascript">  &#125;<span class="hljs-keyword">else</span> &#123;&#125;</span><br><span class="language-javascript">    <span class="hljs-keyword">const</span> ordering = <span class="hljs-title function_">getSortOrdering</span>(prop, orderF);</span><br><span class="language-javascript">    <span class="hljs-title function_">getApi</span>(&#123;</span><br><span class="language-javascript">      <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">pagesize</span>: <span class="hljs-number">10</span>,</span><br><span class="language-javascript">      <span class="hljs-attr">ordering</span>: ordering</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">      dataList.<span class="hljs-property">tableData</span> = res.<span class="hljs-property">data</span>;</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 根据交互数据格式修改</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> getSortOrdering = (<span class="hljs-attr">prop</span>: string, <span class="hljs-attr">order</span>: string): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> prefix = order === <span class="hljs-string">&quot;asc&quot;</span> ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot;-&quot;</span>;</span><br><span class="language-javascript">  <span class="hljs-keyword">return</span> prefix + <span class="hljs-string">&quot;time&quot;</span>;</span><br><span class="language-javascript">&#125;;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>方法二</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"> <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">header</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123; item.label &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;item.prop === &#x27;time&#x27;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;icons&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sort-caret ascending&quot;</span></span><br><span class="hljs-tag">        @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;sortColumn(item.prop, &#x27;asc&#x27;)&quot;</span></span><br><span class="hljs-tag">      &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sort-caret descending&quot;</span></span><br><span class="hljs-tag">        @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;sortColumn(item.prop, &#x27;desc&#x27;)&quot;</span></span><br><span class="hljs-tag">      &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">sortColumn</span> = (<span class="hljs-params">prop: string, order: string</span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> ordering = <span class="hljs-title function_">getSortOrdering</span>(prop, order);</span><br><span class="language-javascript">  <span class="hljs-title function_">getApi</span>(&#123;</span><br><span class="language-javascript">    <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">pagesize</span>: <span class="hljs-number">10</span>,</span><br><span class="language-javascript">    <span class="hljs-attr">ordering</span>: ordering</span><br><span class="language-javascript">  &#125;)</span><br><span class="language-javascript">    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">      dataList.<span class="hljs-property">tableData</span> = res.<span class="hljs-property">data</span>;</span><br><span class="language-javascript">    &#125;)</span><br><span class="language-javascript">&#125;;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h3 id="自定义提示信息"><a href="#自定义提示信息" class="headerlink" title="自定义提示信息"></a>自定义提示信息</h3><p>tip采用拼接string字符串形式，换行使用<code>&lt;/br&gt;</code>，通过raw-content注入到组件中</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-tooltip</span> <span class="hljs-attr">:content</span>=<span class="hljs-string">&quot;tip&quot;</span> <span class="hljs-attr">placement</span>=<span class="hljs-string">&quot;top&quot;</span> <span class="hljs-attr">raw-content</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-icon</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">Warning</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">el-icon</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">el-tooltip</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="通过deep改变组件样式"><a href="#通过deep改变组件样式" class="headerlink" title="通过deep改变组件样式"></a>通过deep改变组件样式</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="language-css"></span><br><span class="language-css">:<span class="hljs-built_in">deep</span>(.el-tabs__header) &#123;</span><br><span class="language-css">  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="typescript忽略类型检查"><a href="#typescript忽略类型检查" class="headerlink" title="typescript忽略类型检查"></a>typescript忽略类型检查</h3><p>单行忽略(添加到特定行的行前来忽略这一行的错误)<br>&#x2F;&#x2F; @ts-ignore</p>
+<p>跳过对某些文件的检查 (添加到该文件的首行才起作用)<br>&#x2F;&#x2F; @ts-nocheck</p>
+<p>对某些文件的检查<br>&#x2F;&#x2F; @ts-check</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E6%89%93%E5%8C%85%20&amp;%20%E9%83%A8%E7%BD%B2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（2）打包 & 部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-2%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/">
+                        <span class="hidden-mobile">vue3笔记（1-2）基础写法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

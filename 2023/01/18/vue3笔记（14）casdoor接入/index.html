@@ -24,7 +24,7 @@
 <meta property="og:description" content="遇到一个新需求，使用casdoor的登录入口，需要在我的项目中修改登录逻辑，这篇记录试用过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-18T06:14:45.000Z">
-<meta property="article:modified_time" content="2023-01-18T07:27:02.468Z">
+<meta property="article:modified_time" content="2023-04-23T08:39:06.058Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      998 字
+      1.4k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      13 分钟
     </span>
   
 
@@ -250,6 +250,17 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;script setup&gt;<br><span class="hljs-keyword">import</span> &#123; onMounted, getCurrentInstance &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; useCasdoor &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;casdoor-vue-sdk&quot;</span>;<br><br><span class="hljs-keyword">const</span> &#123; getSigninUrl, getSignupUrl &#125; = <span class="hljs-title function_">useCasdoor</span>();<br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = <span class="hljs-title function_">getSigninUrl</span>();<br>&#125;);<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
 
 <p><code>附录</code><br><a target="_blank" rel="noopener" href="https://github.com/casdoor/casdoor-vue-sdk">casdoor-vue-sdk文档</a></p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>首页地址：<a target="_blank" rel="noopener" href="http://10.10.30.2:8000/">http://10.10.30.2:8000/</a></li>
+<li>登录首页：<a target="_blank" rel="noopener" href="http://10.10.30.2:8000/login">http://10.10.30.2:8000/login</a><br>登录组织：<a target="_blank" rel="noopener" href="http://10.10.30.2:8000/login/teco">http://10.10.30.2:8000/login/teco</a></li>
+</ol>
+<h3 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h3><p>UMS系统负责所有用户的登录，登录进系统后，可以选择应用进行访问，采用单点登录。用token进行用户认证。<br>假设有应用A、B、C，成功登录访问应用A之后，在浏览器中输入应用B的UR，原理上应该是可以直接访问的。<br>问题：应用B的token从哪里获取？<br>代码执行顺序：permisson-axios&#x2F;service，也就是先进行路由守卫，若无token，直接跳转应用的login。<br>现在需要实现：</p>
+<ol>
+<li>若无token，处于UMS未登录状态，跳转UMS的login</li>
+<li>若无token，处于UMS已登录状态，赋予token<br>解决方案：</li>
+<li>在permisson路由守卫中，判断无token，getAccount()请求新token，通过res判断处理上述实现</li>
+<li>使用微前端架构，实现应用间通信，共享token信息</li>
+</ol>
 
             </div>
             <hr>
