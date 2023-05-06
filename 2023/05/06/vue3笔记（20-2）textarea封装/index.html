@@ -16,18 +16,18 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在el-textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对el-textarea的处理。">
+    <meta name="description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对textarea的处理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（20-2）el-textarea封装">
+<meta property="og:title" content="vue3笔记（20-2）textarea处理">
 <meta property="og:url" content="http://guoningyan.com/2023/05/06/vue3%E7%AC%94%E8%AE%B0%EF%BC%8820-2%EF%BC%89textarea%E5%B0%81%E8%A3%85/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在el-textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对el-textarea的处理。">
+<meta property="og:description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对textarea的处理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue22-2.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue22-3.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue22-4.png">
 <meta property="article:published_time" content="2023-05-06T02:30:00.000Z">
-<meta property="article:modified_time" content="2023-05-06T02:01:34.946Z">
+<meta property="article:modified_time" content="2023-05-06T02:11:22.438Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="http://guoningyan.com/img/vue22-2.png">
   
   
-  <title>vue3笔记（20-2）el-textarea封装 - ginny&#39;s blog</title>
+  <title>vue3笔记（20-2）textarea处理 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -173,7 +173,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（20-2）el-textarea封装">
+            <span class="h2" id="subtitle" title="vue3笔记（20-2）textarea处理">
               
             </span>
 
@@ -232,11 +232,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（20-2）el-textarea封装</h1>
+            <h1 style="display: none">vue3笔记（20-2）textarea处理</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。<br>后端在存储时可以保留空格，但是换行会转译，在el-textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…<br>本篇是对el-textarea的处理。</p>
+<p>有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。<br>后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…<br>本篇是对textarea的处理。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="textarea输入框"><a href="#textarea输入框" class="headerlink" title="textarea输入框"></a>textarea输入框</h3><ol>
@@ -246,7 +246,7 @@
 <p>同时也加入正则校验，保证字数及输入字符满足需求。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> testRules = <span class="hljs-title function_">reactive</span>(&#123;<br> <span class="hljs-attr">remark</span>: [&#123; <span class="hljs-attr">validator</span>: validateText200, <span class="hljs-attr">trigger</span>: [<span class="hljs-string">&#x27;blur&#x27;</span>, <span class="hljs-string">&#x27;change&#x27;</span>] &#125;]<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="换行操作"><a href="#换行操作" class="headerlink" title="换行操作"></a>换行操作</h3><p>在el-textarea中空格、换行是算作一个字符的，后端在存储时可以保留空格，但是换行会转译，这就导致了新建时200个字符，编辑时变成了203个字符。但是如果我删除了最后一个字符，又变回了199个，说明用户操作会引起组件内部对换行的转译。<br><img src="/../img/vue22-2.png" srcset="/img/loading.gif" lazyload alt="输入200个字符"><br>这就需要前端在保存时将换行先转成<code>&lt;br/&gt;</code>,在编辑前将<code>&lt;br/&gt;</code>变回换行符。</p>
+<h3 id="换行操作"><a href="#换行操作" class="headerlink" title="换行操作"></a>换行操作</h3><p>在textarea中空格、换行是算作一个字符的，后端在存储时可以保留空格，但是换行会转译，这就导致了新建时200个字符，编辑时变成了203个字符。但是如果我删除了最后一个字符，又变回了199个，说明用户操作会引起组件内部对换行的转译。<br><img src="/../img/vue22-2.png" srcset="/img/loading.gif" lazyload alt="输入200个字符"><br>这就需要前端在保存时将换行先转成<code>&lt;br/&gt;</code>,在编辑前将<code>&lt;br/&gt;</code>变回换行符。</p>
 <p>这里使用<code>preText</code>作为保存时的转化，使用<code>afterText</code>作为编辑状态下的初始化。  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; preText, afterText &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/validate&#x27;</span><br><span class="hljs-comment">// 表格初始化</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">formInit</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> params = route.<span class="hljs-property">query</span><br>  <span class="hljs-keyword">if</span> (params &amp;&amp; params.<span class="hljs-property">detail</span>) &#123;<br>    state.<span class="hljs-property">pageOp</span> = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">let</span> detail = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(params.<span class="hljs-property">detail</span> <span class="hljs-keyword">as</span> string)<br>    detail.<span class="hljs-property">remark</span> = <span class="hljs-title function_">afterText</span>(detail.<span class="hljs-property">remark</span>)<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 提交API</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAdd</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  orderParams.<span class="hljs-property">remark</span> = <span class="hljs-title function_">preText</span>(orderParams.<span class="hljs-property">remark</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
