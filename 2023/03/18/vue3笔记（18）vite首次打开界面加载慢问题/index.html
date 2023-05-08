@@ -16,26 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对textarea的处理。">
+    <meta name="description" content="项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（20-2）textarea处理">
-<meta property="og:url" content="http://guoningyan.com/2023/05/06/vue3%E7%AC%94%E8%AE%B0%EF%BC%8820-2%EF%BC%89textarea%E5%B0%81%E8%A3%85/index.html">
+<meta property="og:title" content="vue3笔记（18-2）vite首次打开界面加载慢问题">
+<meta property="og:url" content="http://guoningyan.com/2023/03/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8818%EF%BC%89vite%E9%A6%96%E6%AC%A1%E6%89%93%E5%BC%80%E7%95%8C%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…本篇是对textarea的处理。">
+<meta property="og:description" content="项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/vue22-2.png">
-<meta property="og:image" content="http://guoningyan.com/img/vue22-3.png">
-<meta property="og:image" content="http://guoningyan.com/img/vue22-4.png">
-<meta property="article:published_time" content="2023-05-06T02:30:00.000Z">
-<meta property="article:modified_time" content="2023-05-06T02:59:47.731Z">
+<meta property="article:published_time" content="2023-03-18T08:37:15.000Z">
+<meta property="article:modified_time" content="2023-05-08T01:52:37.493Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/vue22-2.png">
   
   
-  <title>vue3笔记（20-2）textarea处理 - ginny&#39;s blog</title>
+  <title>vue3笔记（18-2）vite首次打开界面加载慢问题 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -173,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（20-2）textarea处理">
+            <span class="h2" id="subtitle" title="vue3笔记（18-2）vite首次打开界面加载慢问题">
               
             </span>
 
@@ -183,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-05-06 10:30" pubdate>
-        2023年5月6日 上午
+      <time datetime="2023-03-18 16:37" pubdate>
+        2023年3月18日 下午
       </time>
     </span>
   
@@ -194,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2.7k 字
     </span>
   
 
@@ -203,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      23 分钟
     </span>
   
 
@@ -232,32 +228,30 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（20-2）textarea处理</h1>
+            <h1 style="display: none">vue3笔记（18-2）vite首次打开界面加载慢问题</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>有一个备注框限制输入200个字符，要求是允许用户输入空格、换行，并且在详情中可以看到空格和换行组成的文字串儿。<br>后端在存储时可以保留空格，但是换行会转译，在textarea中换行是算作一个字符的，这就导致了新建时200个字符，编辑时变成了203个字符，OMG…<br>本篇是对textarea的处理。</p>
+<p>项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…<br>本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="textarea输入框"><a href="#textarea输入框" class="headerlink" title="textarea输入框"></a>textarea输入框</h3><ol>
-<li>可以通过maxlength限制字数</li>
-<li>可以通过rows控制显示行数，超过将出现滚动条<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-input</span></span><br><span class="hljs-tag">  <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;textarea&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;testForm.remark&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入备注&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:rows</span>=<span class="hljs-string">&quot;4&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">maxlength</span>=<span class="hljs-string">&quot;200&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">show-word-limit</span></span><br><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">el-input</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
+<li>vite开发环境下，模块以原生 ESModule 的形式（es6原生的模块加载机制）被浏览器加载；</li>
+<li>vite没有对代码进行打包压缩处理，所以服务启动很快；下载的文件是没有被处理过的源码，所以要比webpack处理过的文件大很多；</li>
+<li>项目启动后浏览器第一次加载才会慢；慢的主要原因是vite需要动态的解析依赖，并打包，引入；</li>
 </ol>
-<p>同时也加入正则校验，保证字数及输入字符满足需求。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> testRules = <span class="hljs-title function_">reactive</span>(&#123;<br> <span class="hljs-attr">remark</span>: [&#123; <span class="hljs-attr">validator</span>: validateText200, <span class="hljs-attr">trigger</span>: [<span class="hljs-string">&#x27;blur&#x27;</span>, <span class="hljs-string">&#x27;change&#x27;</span>] &#125;]<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<h3 id="浏览器调试工具waterfall"><a href="#浏览器调试工具waterfall" class="headerlink" title="浏览器调试工具waterfall"></a>浏览器调试工具waterfall</h3><p>waterfall性能检测详解详解:<br>Queueing：排队<br>Stalled：阻塞。请求访问该URL的主机是有并发和连接数限制，必须要等之前的执行完成才能执行之后的，stalled代表这段时间的耗时<br>DNS Lookup:域名解析所耗时间<br>Initial connection:初始化连接时间。这里一般是TCP 3次连接握手时间<br>SSL：https特有，是一种协议<br>Request sent：发送请求所消耗的时间<br>Waiting：等待响应时间（这里一般是最耗时的）<br>Content Download：下载内容所需要消耗的时间</p>
+<h3 id="vite首次加载慢的原因"><a href="#vite首次加载慢的原因" class="headerlink" title="vite首次加载慢的原因"></a>vite首次加载慢的原因</h3><p>在查看waterfall之后，发现首次加载中Waiting阶段时间耗费较长，等待响应时间就是vite在编译的时间。</p>
+<h3 id="解决方案一（未成功）"><a href="#解决方案一（未成功）" class="headerlink" title="解决方案一（未成功）"></a>解决方案一（未成功）</h3><p>这个方案是网上查阅资料后基本统一的解决方法，但是尝试后发现在vite4中并不适用，特别是推荐的安装的两个包，安装也没有成功，所以方案一仅仅是做一个记录。<br>在<code>vite.config.ts</code>中添加配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>   <span class="hljs-attr">optimizeDeps</span>: &#123;<br>      <span class="hljs-attr">include</span>: [<br>        <span class="hljs-string">&#x27;vue&#x27;</span>,<br>        <span class="hljs-string">&#x27;map-factory&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/form/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/radio-group/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/radio/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/checkbox/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/checkbox-group/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/switch/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/time-picker/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/date-picker/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/col/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/form-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/alert/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/breadcrumb/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/select/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/input/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/breadcrumb-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/tag/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/pagination/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/table/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/table-column/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/card/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/row/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/button/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/menu/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/sub-menu/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/menu-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/option/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;@element-plus/icons-vue&#x27;</span>,<br>        <span class="hljs-string">&#x27;pinia&#x27;</span>,<br>        <span class="hljs-string">&#x27;axios&#x27;</span>,<br>        <span class="hljs-string">&#x27;vue-request&#x27;</span>,<br>        <span class="hljs-string">&#x27;vue-router&#x27;</span>,<br>        <span class="hljs-string">&#x27;@vueuse/core&#x27;</span>,<br>      ],<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="换行操作"><a href="#换行操作" class="headerlink" title="换行操作"></a>换行操作</h3><p>在textarea中空格、换行是算作一个字符的，后端在存储时可以保留空格，但是换行会转译，这就导致了新建时200个字符，编辑时变成了203个字符。但是如果我删除了最后一个字符，又变回了199个，说明用户操作会引起组件内部对换行的转译。<br><img src="/../img/vue22-2.png" srcset="/img/loading.gif" lazyload alt="输入200个字符"><br>这就需要前端在保存时将换行先转成<code>&lt;br/&gt;</code>,在编辑前将<code>&lt;br/&gt;</code>变回换行符。</p>
-<p>这里使用<code>preText</code>作为保存时的转化，使用<code>afterText</code>作为编辑状态下的初始化。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; preText, afterText &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/validate&#x27;</span><br><span class="hljs-comment">// 表格初始化</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">formInit</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> params = route.<span class="hljs-property">query</span><br>  <span class="hljs-keyword">if</span> (params &amp;&amp; params.<span class="hljs-property">detail</span>) &#123;<br>    state.<span class="hljs-property">pageOp</span> = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">let</span> detail = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(params.<span class="hljs-property">detail</span> <span class="hljs-keyword">as</span> string)<br>    detail.<span class="hljs-property">remark</span> = <span class="hljs-title function_">afterText</span>(detail.<span class="hljs-property">remark</span>)<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 提交API</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAdd</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  orderParams.<span class="hljs-property">remark</span> = <span class="hljs-title function_">preText</span>(orderParams.<span class="hljs-property">remark</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>使用插件来进行上面一段的插入</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm i -D vite-plugin-optimize-persist vite-plugin-package-config<br></code></pre></div></td></tr></table></figure>
 
-<p><code>/utils/validate</code>中写转换方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">preText</span> = (<span class="hljs-params">pretext: string</span>) =&gt; &#123;<br>  <span class="hljs-keyword">return</span> pretext.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\r\n/g</span>, <span class="hljs-string">&#x27;&lt;br/&gt;&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\n/g</span>, <span class="hljs-string">&#x27;&lt;br/&gt;&#x27;</span>)<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">afterText</span> = (<span class="hljs-params">pretext: string</span>) =&gt; &#123;<br>  <span class="hljs-keyword">return</span> pretext.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/&lt;br\/&gt;/g</span>, <span class="hljs-string">&#x27;\n&#x27;</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>详情页中需要使用<code>v-html</code>来保证直接识别<code>&lt;br/&gt;</code>，通过css控制换行。</p>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;remark-break&quot;</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">&quot;item[&#x27;remark&#x27;]&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.remark-break</span> &#123;<br>  <span class="hljs-attribute">word-break</span>: break-all;<br>  <span class="hljs-attribute">white-space</span>: pre-line<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>新建、编辑、详情均显示正常<br><img src="/../img/vue22-3.png" srcset="/img/loading.gif" lazyload alt="新建/编辑状态"><br><img src="/../img/vue22-4.png" srcset="/img/loading.gif" lazyload alt="详情"></p>
+
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">Vite官方文档</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pzy_666/article/details/123017630">vite首次打开界面加载慢问题&#x2F;解决</a></p>
 
             </div>
             <hr>
@@ -287,9 +281,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                      <a href="/2023/04/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%8819-1%EF%BC%89%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">作品集合</span>
+                        <span class="hidden-mobile">vue3笔记（19-1）文件下载</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -297,8 +291,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%8820-1%EF%BC%89el-input%E8%B8%A9%E5%9D%91/">
-                        <span class="hidden-mobile">vue3笔记（20-1）el-input踩坑</span>
+                      <a href="/2023/03/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%8818-1%EF%BC%89%E4%BD%BF%E7%94%A8vite%E8%BF%9B%E8%A1%8C%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA/">
+                        <span class="hidden-mobile">vue3笔记（18）使用vite进行前端构建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
