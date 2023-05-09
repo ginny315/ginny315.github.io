@@ -16,22 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。">
+    <meta name="description" content="年前赶项目真累啊～这篇记录Hooks相关的定义、用法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（18-2）vite首次打开界面加载慢问题">
-<meta property="og:url" content="http://guoningyan.com/2023/03/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8818%EF%BC%89vite%E9%A6%96%E6%AC%A1%E6%89%93%E5%BC%80%E7%95%8C%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="vue3笔记（13）自定义Hooks">
+<meta property="og:url" content="http://guoningyan.com/2023/01/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8813%EF%BC%89%E8%87%AA%E5%AE%9A%E4%B9%89Hooks/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。">
+<meta property="og:description" content="年前赶项目真累啊～这篇记录Hooks相关的定义、用法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-18T08:37:15.000Z">
-<meta property="article:modified_time" content="2023-05-08T01:52:37.493Z">
+<meta property="article:published_time" content="2023-01-17T09:00:14.000Z">
+<meta property="article:modified_time" content="2023-05-09T03:29:13.612Z">
 <meta property="article:author" content="Ningyan Guo">
-<meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue3">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>vue3笔记（18-2）vite首次打开界面加载慢问题 - ginny&#39;s blog</title>
+  <title>vue3笔记（13）自定义Hooks - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（18-2）vite首次打开界面加载慢问题">
+            <span class="h2" id="subtitle" title="vue3笔记（13）自定义Hooks">
               
             </span>
 
@@ -179,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-03-18 16:37" pubdate>
-        2023年3月18日 下午
+      <time datetime="2023-01-17 17:00" pubdate>
+        2023年1月17日 下午
       </time>
     </span>
   
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      801 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      7 分钟
     </span>
   
 
@@ -228,30 +228,26 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（18-2）vite首次打开界面加载慢问题</h1>
+            <h1 style="display: none">vue3笔记（13）自定义Hooks</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>项目改用vite之后，启动确实特别快，但是首次打开界面加载慢的我想去刷一会儿微博（开玩笑）…<br>本篇记录我在熟悉项目之后对项目构建做的一些优化尝试。</p>
+<p>年前赶项目真累啊～<br>这篇记录Hooks相关的定义、用法。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
-<li>vite开发环境下，模块以原生 ESModule 的形式（es6原生的模块加载机制）被浏览器加载；</li>
-<li>vite没有对代码进行打包压缩处理，所以服务启动很快；下载的文件是没有被处理过的源码，所以要比webpack处理过的文件大很多；</li>
-<li>项目启动后浏览器第一次加载才会慢；慢的主要原因是vite需要动态的解析依赖，并打包，引入；</li>
+<li>Hooks 在JS里是 callback，事件驱动，集成定义一些可复用的方法；</li>
+<li>可以随时被引入和调用以实现高内聚低耦合的目标；</li>
+<li>自定义 Hooks，将代码通过功能分块写、响应变量和方法在一起定义和调用；每个Hooks显式暴露响应式变量和方法；</li>
+<li>将可复用功能抽离为外部JS文件；</li>
+<li>自定义 Hooks 可以灵活传递任何参数来改变它的逻辑，参数不限于其他hook的暴露出来的变量，这提高了Vue3在抽象逻辑方面的灵活性；</li>
+<li>利用ES6对象解构很轻松给变量重命名；</li>
+<li>自定义 Hooks 是属于组件下的函数作用域的；</li>
+<li>utils 的工具函数脱离框架也能使用，hooks 和框架耦合配合业务定义；</li>
 </ol>
-<h3 id="浏览器调试工具waterfall"><a href="#浏览器调试工具waterfall" class="headerlink" title="浏览器调试工具waterfall"></a>浏览器调试工具waterfall</h3><p>waterfall性能检测详解详解:<br>Queueing：排队<br>Stalled：阻塞。请求访问该URL的主机是有并发和连接数限制，必须要等之前的执行完成才能执行之后的，stalled代表这段时间的耗时<br>DNS Lookup:域名解析所耗时间<br>Initial connection:初始化连接时间。这里一般是TCP 3次连接握手时间<br>SSL：https特有，是一种协议<br>Request sent：发送请求所消耗的时间<br>Waiting：等待响应时间（这里一般是最耗时的）<br>Content Download：下载内容所需要消耗的时间</p>
-<h3 id="vite首次加载慢的原因"><a href="#vite首次加载慢的原因" class="headerlink" title="vite首次加载慢的原因"></a>vite首次加载慢的原因</h3><p>在查看waterfall之后，发现首次加载中Waiting阶段时间耗费较长，等待响应时间就是vite在编译的时间。</p>
-<h3 id="解决方案一（未成功）"><a href="#解决方案一（未成功）" class="headerlink" title="解决方案一（未成功）"></a>解决方案一（未成功）</h3><p>这个方案是网上查阅资料后基本统一的解决方法，但是尝试后发现在vite4中并不适用，特别是推荐的安装的两个包，安装也没有成功，所以方案一仅仅是做一个记录。<br>在<code>vite.config.ts</code>中添加配置</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&#123;<br>   <span class="hljs-attr">optimizeDeps</span>: &#123;<br>      <span class="hljs-attr">include</span>: [<br>        <span class="hljs-string">&#x27;vue&#x27;</span>,<br>        <span class="hljs-string">&#x27;map-factory&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/form/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/radio-group/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/radio/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/checkbox/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/checkbox-group/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/switch/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/time-picker/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/date-picker/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/col/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/form-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/alert/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/breadcrumb/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/select/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/input/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/breadcrumb-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/tag/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/pagination/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/table/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/table-column/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/card/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/row/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/button/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/menu/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/sub-menu/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/menu-item/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;element-plus/es/components/option/style/index&#x27;</span>,<br>        <span class="hljs-string">&#x27;@element-plus/icons-vue&#x27;</span>,<br>        <span class="hljs-string">&#x27;pinia&#x27;</span>,<br>        <span class="hljs-string">&#x27;axios&#x27;</span>,<br>        <span class="hljs-string">&#x27;vue-request&#x27;</span>,<br>        <span class="hljs-string">&#x27;vue-router&#x27;</span>,<br>        <span class="hljs-string">&#x27;@vueuse/core&#x27;</span>,<br>      ],<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<p>使用插件来进行上面一段的插入</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs hljs hljs hljs hljs hljs hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm i -D vite-plugin-optimize-persist vite-plugin-package-config<br></code></pre></div></td></tr></table></figure>
-
-
-
-
-<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">Vite官方文档</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pzy_666/article/details/123017630">vite首次打开界面加载慢问题&#x2F;解决</a></p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; ref, watch &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">useAdd</span> = (<span class="hljs-params">&#123; num1, num2 &#125;</span>)  =&gt;&#123;<br>    <span class="hljs-keyword">const</span> addNum = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-title function_">watch</span>([num1, num2], <span class="hljs-function">(<span class="hljs-params">[num1, num2]</span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">addFn</span>(num1, num2)<br>    &#125;)<br>    <span class="hljs-keyword">const</span> <span class="hljs-title function_">addFn</span> = (<span class="hljs-params">num1, num2</span>) =&gt; &#123;<br>      addNum.<span class="hljs-property">value</span> = num1 + num2<br>    &#125;<br>    <span class="hljs-keyword">return</span> &#123;<br>      addNum,<br>      addFn<br>    &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> useAdd<br></code></pre></div></td></tr></table></figure>
+<p>使用hook</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> useAdd <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./useAdd.js&#x27;</span>     <span class="hljs-comment">//引入hook</span><br><span class="hljs-keyword">const</span> num1 = <span class="hljs-title function_">ref</span>(<span class="hljs-number">2</span>)<br><span class="hljs-keyword">const</span> num2 = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1</span>)<br><br><span class="hljs-keyword">const</span> &#123; addNum, addFn &#125; = <span class="hljs-title function_">useAdd</span>(&#123; num1, num2 &#125;)<br><span class="hljs-title function_">addFn</span>(num1.<span class="hljs-property">value</span>, num2.<span class="hljs-property">value</span>)<br></code></pre></div></td></tr></table></figure>
 
             </div>
             <hr>
@@ -262,9 +258,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
-                    
                       <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
                     
                   </div>
                 
@@ -281,9 +277,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8818-2%EF%BC%89vite%E9%A6%96%E6%AC%A1%E6%89%93%E5%BC%80%E7%95%8C%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98/">
+                      <a href="/2023/01/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8814%EF%BC%89casdoor%E6%8E%A5%E5%85%A5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（18-2）vite首次打开界面加载慢问题</span>
+                        <span class="hidden-mobile">vue3笔记（14）casdoor接入</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -291,8 +287,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%8818-1%EF%BC%89%E4%BD%BF%E7%94%A8vite%E8%BF%9B%E8%A1%8C%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA/">
-                        <span class="hidden-mobile">vue3笔记（18-1）使用vite进行前端构建</span>
+                      <a href="/2022/12/14/%E6%80%BB%E7%BB%93%E8%AF%AD%E8%A8%80%EF%BC%881%EF%BC%89/">
+                        <span class="hidden-mobile">总结语言（1）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://guoningyan.com/img/vue_cards.png">
 <meta property="og:image" content="http://guoningyan.com/img/openfail.png">
 <meta property="article:published_time" content="2019-07-12T02:38:14.000Z">
-<meta property="article:modified_time" content="2022-04-29T05:19:03.477Z">
+<meta property="article:modified_time" content="2023-05-09T03:18:48.116Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="vue">
@@ -193,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.4k 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      27 分钟
+      29 分钟
     </span>
   
 
@@ -263,7 +263,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>     data () &#123;<br>      <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-attr">caseList</span>:[&#123;<br>          <span class="hljs-attr">link</span>:<span class="hljs-string">&#x27;/taxi&#x27;</span>,<br>          <span class="hljs-attr">text</span>:<span class="hljs-string">&#x27;Taxi tickets recognization --- quickly find out date, distance, price and so on. &#x27;</span>,<br>          <span class="hljs-attr">title</span>:<span class="hljs-string">&#x27;CV&#x27;</span>,<br>          <span class="hljs-attr">img</span>:<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../assets/taxi-icon.png&#x27;</span>),<br>          <span class="hljs-attr">isHoverCase</span>:<span class="hljs-literal">false</span><br>        &#125;,&#123;<br>          <span class="hljs-attr">link</span>:<span class="hljs-string">&#x27;/translate&#x27;</span>,<br>          <span class="hljs-attr">text</span>:<span class="hljs-string">&#x27;Chinese-English translation --- use our dictionary to translate your sentences.&#x27;</span>,<br>          <span class="hljs-attr">title</span>:<span class="hljs-string">&#x27;NLP&#x27;</span>,<br>          <span class="hljs-attr">img</span>:<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../assets/translate-icon.png&#x27;</span>),<br>          <span class="hljs-attr">isHoverCase</span>:<span class="hljs-literal">false</span><br>        &#125;],<br>      &#125;<br>     &#125;,<br>     <span class="hljs-attr">methods</span>: &#123;<br>       <span class="hljs-title function_">enterCase</span>(<span class="hljs-params">index</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">caseList</span>[index].<span class="hljs-property">isHoverCase</span> = <span class="hljs-literal">true</span>;<br>      &#125;,<br>      <span class="hljs-title function_">leaveCase</span>(<span class="hljs-params">index</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">caseList</span>[index].<span class="hljs-property">isHoverCase</span> = <span class="hljs-literal">false</span>;<br>      &#125;  <br>     &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="debug遇到问题"><a href="#debug遇到问题" class="headerlink" title="debug遇到问题"></a>debug遇到问题</h3><p>在适配手机样式时出现了一个小问题，我需要将手机链接电脑后用ip进行访问，但是当我将<code>vue-cli</code>起的服务<code>127.0.0.1:8080</code>改成本机<code>ip:8080</code>时，出现网页无法访问的情况。<br><img src="/img/openfail.png" srcset="/img/loading.gif" lazyload alt="网页无法访问"><br>查询资料后发现，需要在<code>build/webpack.dev.conf.js</code>中间修改host，将<code>host:127.0.0.1</code>修改为<code>host:0.0.0.0</code>，重启服务，通过ip可以正常访问。</p>
-
+<h3 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h3><p>mixin用于组件共用逻辑抽取<br>vue组件初始化时，会将引入的mixin对象与当前组件进行合并（组件本身优先级更高，会覆盖冲突）<br>生命周期钩子函数，会先触发mixin中的钩子，然后触发组件的钩子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs JavaScript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">mixin</span>: [<span class="hljs-title class_">MixinTest</span>] <span class="hljs-comment">// 数组，可以同时注册多个mixin</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
