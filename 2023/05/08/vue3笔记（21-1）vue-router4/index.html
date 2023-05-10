@@ -24,7 +24,7 @@
 <meta property="og:description" content="这篇详细记录下用到过的路由方法，基于vue-router4">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-08T07:14:19.000Z">
-<meta property="article:modified_time" content="2023-05-08T09:22:21.547Z">
+<meta property="article:modified_time" content="2023-05-09T05:21:31.015Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.3k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      27 分钟
+      28 分钟
     </span>
   
 
@@ -265,6 +265,8 @@
 <li>若返回 false ，取消当前的导航。如果浏览器的 URL 改变了(可能是用户手动或者浏览器后退按钮)，那么 URL 地址会重置到 from 路由对应的地址。</li>
 <li>若返回一个路由地址，跳转。</li>
 </ol>
+<h3 id="获取参数的js原生方法"><a href="#获取参数的js原生方法" class="headerlink" title="获取参数的js原生方法"></a>获取参数的js原生方法</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(<span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">search</span>)<br><span class="hljs-keyword">const</span> aaa = params.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;aaa&#x27;</span>) <span class="hljs-comment">// http://***/?aaa=1</span><br></code></pre></div></td></tr></table></figure>
+
 <p><code>附录</code><br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/">Vue Router | Vue.js 的官方路由</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lcl130/article/details/122800643">Vue Router 4 的使用</a></p>
 
             </div>

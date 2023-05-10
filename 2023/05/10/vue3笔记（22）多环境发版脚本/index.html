@@ -16,29 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="奇奇怪怪的东西有空整理在这里。">
+    <meta name="description" content="分了开发环境、测试环境、demo演示环境、生产环境四个环境，对应API不一样，vite打包一次接近5分钟，如果改个bug就要重新发版，那老夫就不能准时下班了。为了解决这个问题，写了个多环境一键发版脚本。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="作品集合">
-<meta property="og:url" content="http://guoningyan.com/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/index.html">
+<meta property="og:title" content="vue3笔记（22）多环境发版脚本">
+<meta property="og:url" content="http://guoningyan.com/2023/05/10/vue3%E7%AC%94%E8%AE%B0%EF%BC%8822%EF%BC%89%E5%A4%9A%E7%8E%AF%E5%A2%83%E5%8F%91%E7%89%88%E8%84%9A%E6%9C%AC/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="奇奇怪怪的东西有空整理在这里。">
+<meta property="og:description" content="分了开发环境、测试环境、demo演示环境、生产环境四个环境，对应API不一样，vite打包一次接近5分钟，如果改个bug就要重新发版，那老夫就不能准时下班了。为了解决这个问题，写了个多环境一键发版脚本。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/0-3.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-4.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-6.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-5.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-7.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-8.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-1.png">
-<meta property="og:image" content="http://guoningyan.com/img/0-2.png">
-<meta property="article:published_time" content="2024-01-01T02:47:05.000Z">
-<meta property="article:modified_time" content="2023-04-21T05:55:37.622Z">
+<meta property="article:published_time" content="2023-05-10T02:59:13.000Z">
+<meta property="article:modified_time" content="2023-05-10T03:30:51.826Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/0-3.png">
   
   
-  <title>作品集合 - ginny&#39;s blog</title>
+  <title>vue3笔记（22）多环境发版脚本 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -176,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="作品集合">
+            <span class="h2" id="subtitle" title="vue3笔记（22）多环境发版脚本">
               
             </span>
 
@@ -186,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-01-01 10:47" pubdate>
-        2024年1月1日 上午
+      <time datetime="2023-05-10 10:59" pubdate>
+        2023年5月10日 上午
       </time>
     </span>
   
@@ -197,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      177 字
+      1.8k 字
     </span>
   
 
@@ -206,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      16 分钟
     </span>
   
 
@@ -235,34 +228,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">作品集合</h1>
+            <h1 style="display: none">vue3笔记（22）多环境发版脚本</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>奇奇怪怪的东西有空整理在这里。</p>
+<p>分了开发环境、测试环境、demo演示环境、生产环境四个环境，对应API不一样，vite打包一次接近5分钟，如果改个bug就要重新发版，那老夫就不能准时下班了。<br>为了解决这个问题，写了个多环境一键发版脚本。</p>
 </blockquote>
-<span id="more"></span> 
-<ol>
-<li>朴素的工作</li>
-</ol>
-<p>1.1 opsdev前端搭建、迭代<br><img src="/../img/0-3.png" srcset="/img/loading.gif" lazyload alt="opsdev"></p>
-<p>1.2 N卡运行信息展示<br><img src="/../img/0-4.png" srcset="/img/loading.gif" lazyload alt="nvidia"></p>
-<p>1.3 维护卡卡运行信息展示<br><img src="/../img/0-6.png" srcset="/img/loading.gif" lazyload alt="nvidia"></p>
-<p>1.4 model garden<br><img src="/../img/0-5.png" srcset="/img/loading.gif" lazyload alt="garden"> </p>
-<p>1.5 AI管理台<br><img src="/../img/0-7.png" srcset="/img/loading.gif" lazyload alt="AI管理台"> </p>
-<p>1.6 数字化平台<br><img src="/../img/0-8.png" srcset="/img/loading.gif" lazyload alt="数字化平台"> </p>
-<ol start="2">
-<li>读书脑洞</li>
-</ol>
-<p>2.1 基于Spark的分布式人脸识别系统-前世你可能是只猫<br><img src="/../img/0-1.png" srcset="/img/loading.gif" lazyload alt="前世你可能是一只猫"></p>
-<p>2.2 基于WebGL的森林渲染，使用WebGL进行森林渲染，并力图实现渲染最优。<br><img src="/../img/0-2.png" srcset="/img/loading.gif" lazyload alt="基于WebGL的森林渲染"><br><a href="https://guoningyan.com/dissertation/">毕设进展</a></p>
-<p>2.3 <a href="https://guoningyan.com/visual/">可视化课程网站</a></p>
+<span id="more"></span>
+<h3 id="原方式"><a href="#原方式" class="headerlink" title="原方式"></a>原方式</h3><p><code>deploy.bash</code>脚本写了多个环境的发版，分别执行，虽然没啥问题，但是人力成本、时间成本略大。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># **环境</span><br>npm run build:<span class="hljs-built_in">test</span><br><span class="hljs-built_in">rm</span> -rf cardlc<br><span class="hljs-built_in">mv</span> dist cardlc<br>scp -r cardlc/  root@***:/data/<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="新方式"><a href="#新方式" class="headerlink" title="新方式"></a>新方式</h3><p>在<code>public/static/config.js</code>中写入全局变量，打包后通过脚本分别修改不同环境的请求API地址，然后发布到服务器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">g</span> = &#123;<br>  <span class="hljs-attr">apiUrl</span>: <span class="hljs-string">&quot;http://10.10.34.31:8087&quot;</span>,<br>  <span class="hljs-attr">tag</span>: <span class="hljs-string">&quot;1&quot;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><code>buildMultiEnv.js</code>脚本进行文件读写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;fs&quot;</span>);<br><br><span class="hljs-keyword">const</span> filePath = <span class="hljs-string">&#x27;./dist/static/config.js&#x27;</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">changeBuildUrl</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  fs.<span class="hljs-title function_">readFile</span>(filePath, <span class="hljs-keyword">function</span>(<span class="hljs-params">err, data</span>) &#123;<br>    <span class="hljs-keyword">if</span>(err) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(err)<br>      <span class="hljs-keyword">return</span><br>    &#125; <br>    <span class="hljs-keyword">let</span> str = data.<span class="hljs-title function_">toString</span>()<br>    <span class="hljs-keyword">const</span> tag = str.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;tag: &quot;&#x27;</span>)[<span class="hljs-number">1</span>].<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;&quot;&#x27;</span>)[<span class="hljs-number">0</span>]<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(tag)<br>    <span class="hljs-keyword">let</span> content = <span class="hljs-string">&#x27;&#x27;</span><br>    <span class="hljs-keyword">if</span>(tag == <span class="hljs-string">&#x27;1&#x27;</span>) &#123; <span class="hljs-comment">// 开发环境</span><br>      content = <span class="hljs-string">&#x27;window.g=&#123;apiUrl:&quot;http://***.31:8080&quot;,tag: &quot;2&quot;&#125;&#x27;</span><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tag == <span class="hljs-string">&#x27;2&#x27;</span>) &#123; <span class="hljs-comment">// 测试环境</span><br>      content = <span class="hljs-string">&#x27;window.g=&#123;apiUrl:&quot;http://***.32:8080&quot;,tag: &quot;3&quot;&#125;&#x27;</span><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tag == <span class="hljs-string">&#x27;3&#x27;</span>) &#123; <span class="hljs-comment">// demo环境</span><br>      content = <span class="hljs-string">&#x27;window.g=&#123;apiUrl:&quot;http://***.31:8089&quot;,tag: &quot;1&quot;&#125;&#x27;</span><br>    &#125;<span class="hljs-keyword">else</span> &#123;&#125;<br>    fs.<span class="hljs-title function_">writeFile</span>(filePath, content, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (err) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;写入失败&quot;</span>, err);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;写入成功。&quot;</span>);<br>      &#125;<br>    &#125;)<br>  &#125;)<br>&#125;;<br><span class="hljs-title function_">changeBuildUrl</span>();<br></code></pre></div></td></tr></table></figure>
+
+<p><code>deplay.bash</code> 最终脚本，生产环境涉及一些特殊处理，单独罗列</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 开发环境、测试环境、演示demo环境一键更新</span><br>npm run build:<span class="hljs-built_in">test</span><br>node ./buildMultiEnv.js <br><span class="hljs-built_in">cp</span> -r dist cardlc<br>scp -r cardlc/  root@***.31:/data/<br><span class="hljs-built_in">rm</span> -rf cardlc<br>node ./buildMultiEnv.js <br><span class="hljs-built_in">cp</span> -r dist cardlc<br>scp -r cardlc/  root@***.32:/data/<br><span class="hljs-built_in">rm</span> -rf cardlc<br>node ./buildMultiEnv.js <br><span class="hljs-built_in">cp</span> -r dist cardlc<br>scp -r cardlc/  root@***.31:/data/demo<br><br><span class="hljs-comment"># 生产环境</span><br>npm run build:prod<br><span class="hljs-built_in">rm</span> -rf cardlc<br><span class="hljs-built_in">mv</span> dist cardlc<br>scp -r cardlc/  root@***.33:/data/<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
                 
               </div>
               
@@ -277,12 +274,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">作品集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/10/vue3%E7%AC%94%E8%AE%B0%EF%BC%8822%EF%BC%89%E5%A4%9A%E7%8E%AF%E5%A2%83%E5%8F%91%E7%89%88%E8%84%9A%E6%9C%AC/">
-                        <span class="hidden-mobile">vue3笔记（22）多环境发版脚本</span>
+                      <a href="/2023/05/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8821-2%EF%BC%89%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/">
+                        <span class="hidden-mobile">vue3笔记（21-2）动态路由</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
