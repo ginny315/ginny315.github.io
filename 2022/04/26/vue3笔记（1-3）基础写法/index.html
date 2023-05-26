@@ -16,15 +16,15 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制 1234.cell:empty::before &amp;#123;  content: &quot;--&quot;;  color: gray;&amp;#125;  table没有数据时">
+    <meta name="description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制显示–当项目中只有部分表格需要此功能时，建议给需要的表格添加类名。注意：如果表格数据使用slot，也需要添加prop&#x3D;&quot;XXX&quot;，否则类似于开关（el-swi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（1-3）基础写法">
 <meta property="og:url" content="http://guoningyan.com/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-3%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制 1234.cell:empty::before &amp;#123;  content: &quot;--&quot;;  color: gray;&amp;#125;  table没有数据时">
+<meta property="og:description" content="本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查  数据为空 table-column中没有数据时，可以通过css控制显示–当项目中只有部分表格需要此功能时，建议给需要的表格添加类名。注意：如果表格数据使用slot，也需要添加prop&#x3D;&quot;XXX&quot;，否则类似于开关（el-swi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-26T02:19:09.000Z">
-<meta property="article:modified_time" content="2023-04-24T09:05:38.272Z">
+<meta property="article:modified_time" content="2023-05-26T02:23:23.001Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="vue3">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.8k 字
+      4k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32 分钟
+      34 分钟
     </span>
   
 
@@ -235,8 +235,8 @@
 <p>本篇记录使用过的功能，包括：表格数据为空、表格序号自增、表格内部点击实现路由跳转、表格排序；自定义提示信息；通过deep改变组件样式；ts忽略类型检查</p>
 </blockquote>
 <h3 id="数据为空"><a href="#数据为空" class="headerlink" title="数据为空"></a>数据为空</h3><ol>
-<li><p>table-column中没有数据时，可以通过css控制</p>
-<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.cell</span><span class="hljs-selector-pseudo">:empty</span><span class="hljs-selector-pseudo">::before</span> &#123;<br>  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;--&quot;</span>;<br>  <span class="hljs-attribute">color</span>: gray;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<li><p>table-column中没有数据时，可以通过css控制显示–<br>当项目中只有部分表格需要此功能时，建议给需要的表格添加类名。注意：如果表格数据使用slot，也需要添加<code>prop=&quot;XXX&quot;</code>，否则类似于开关（el-switch）按钮上会有–</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">// 所有表格<br><span class="hljs-selector-class">.cell</span><span class="hljs-selector-pseudo">:empty</span><span class="hljs-selector-pseudo">::before</span> &#123;<br>  <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;--&quot;</span>;<br>  <span class="hljs-attribute">color</span>: gray;<br>&#125;<br><br>// 自定义class的表格<br><span class="hljs-selector-class">.table-special</span> <span class="hljs-selector-pseudo">:empty</span><span class="hljs-selector-pseudo">::before</span> &#123;<br>  <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;--&#x27;</span> <span class="hljs-meta">!important</span>;<br>  <span class="hljs-attribute">color</span>: gray <span class="hljs-meta">!important</span>;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>table没有数据时，通过slot插槽控制UI</p>
 <figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span>/&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;empty&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align: left;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-empty</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;div里面可以自定义空内容&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
