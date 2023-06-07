@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（23-3）el-tree在父子节点的联动">
+<meta property="og:url" content="http://guoningyan.com/2023/05/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%8823-3%EF%BC%89el-tree%E4%B9%8B%E7%88%B6%E5%AD%90%E8%8A%82%E7%82%B9%E8%81%94%E5%8A%A8/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/vue23-4.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue23-1.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue23-3.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue23-2.png">
+<meta property="article:published_time" content="2023-05-26T05:23:47.000Z">
+<meta property="article:modified_time" content="2023-06-07T06:06:16.595Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue23-4.png">
+  
+  
+  <title>vue3笔记（23-3）el-tree在父子节点的联动 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（23-3）el-tree在父子节点的联动">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-05-26 13:23" pubdate>
+        2023年5月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（23-3）el-tree在父子节点的联动</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。<br>另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="菜单权限设计"><a href="#菜单权限设计" class="headerlink" title="菜单权限设计"></a>菜单权限设计</h3><p>业务需求：在菜单权限设计中，新增权限状态下，选择子级菜单，对应的父级菜单也应该被赋予权限。<br>编辑权限状态下，打开权限设置时，应将已有权限做一个勾选。</p>
+<h3 id="父子节点默认非严格关联"><a href="#父子节点默认非严格关联" class="headerlink" title="父子节点默认非严格关联"></a>父子节点默认非严格关联</h3><p><code>check-strictly</code> 属性表示在“显示复选框”的情况下，是否严格的遵循父子不互相关联的做法，默认为 false。此时，选择父级菜单，子级菜单会全部选中；选择子级菜单，父级前会有“-”标记：<br><img src="/../img/vue23-4.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择父级菜单"><br><img src="/../img/vue23-1.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择子级菜单"><br>当值设置为 true 时，选择父级菜单，子级菜单不会被选中：<br><img src="/../img/vue23-3.png" srcset="/img/loading.gif" lazyload alt="父子严格不互相关联"></p>
+<h3 id="方案一：非严格关联"><a href="#方案一：非严格关联" class="headerlink" title="方案一：非严格关联"></a>方案一：非严格关联</h3><p>在提交选择时，应该将子级菜单对应的父级也加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">getAllNodes</span>(treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getCheckedNodes</span>(<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>))<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">getAllNodes</span> = (<span class="hljs-params">arr: <span class="hljs-built_in">Array</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> list = []<br>  <span class="hljs-keyword">let</span> pidList = []<br>  arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    list.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">id</span>)<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">pid</span> !== <span class="hljs-number">0</span> &amp;&amp; list.<span class="hljs-title function_">indexOf</span>(item.<span class="hljs-property">pid</span>) == -<span class="hljs-number">1</span>) &#123;<br>      list.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">pid</span>)<br>      pidList.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">pid</span>)<br>    &#125;<br>  &#125;)<br>  <span class="hljs-comment">// menuTree 是树状图的数据源</span><br>  <span class="hljs-keyword">if</span> (state.<span class="hljs-property">menuTree</span> &amp;&amp; state.<span class="hljs-property">menuTree</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>    state.<span class="hljs-property">menuTree</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">sys</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (sys.<span class="hljs-property">children</span> &amp;&amp; sys.<span class="hljs-property">children</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        sys.<span class="hljs-property">children</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">i</span>) =&gt;</span> &#123;<br>          pidList.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">pid</span>) =&gt;</span> &#123;<br>            <span class="hljs-keyword">if</span> (i.<span class="hljs-property">level</span> !== <span class="hljs-number">0</span> &amp;&amp; i.<span class="hljs-property">id</span> == pid) &#123;<br>              list.<span class="hljs-title function_">push</span>(i.<span class="hljs-property">pid</span>)<br>            &#125;<br>          &#125;)<br>        &#125;)<br>      &#125;<br>    &#125;)<br>  &#125;<br>  <span class="hljs-keyword">return</span> list<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>提交时完美实现。<br>但是出现了一个之前欠考虑的问题，就是在编辑状态下（即新增时已有勾选，初始化时后端返回已勾选数组，需要前端在打开时勾选），因为父子非严格关联，导致父节点勾选时，对应所有子节点都被勾选。</p>
+<h3 id="方案二：严格关联"><a href="#方案二：严格关联" class="headerlink" title="方案二：严格关联"></a>方案二：严格关联</h3><p>使用 changeCheck 方法，在节点被勾选时，将其所有父节点勾选。level 为组件自带属性，可以基于此进行节点递归。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-tree</span></span><br><span class="hljs-tag">  <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;treeRef&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:data</span>=<span class="hljs-string">&quot;menuTree&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">show-checkbox</span></span><br><span class="hljs-tag">  <span class="hljs-attr">node-key</span>=<span class="hljs-string">&quot;id&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">:props</span>=<span class="hljs-string">&quot;defaultProps&quot;</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">check</span>=<span class="hljs-string">&quot;changeCheck&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:check-strictly</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag">/&gt;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">changeCheck</span> = (<span class="hljs-params">node</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> thisNode = treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getNode</span>(node.<span class="hljs-property">id</span>) <span class="hljs-comment">// 获取当前节点</span><br>  <span class="hljs-keyword">const</span> keys = treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getCheckedKeys</span>() <span class="hljs-comment">// 获取已勾选节点的key值</span><br>  <span class="hljs-keyword">if</span> (thisNode.<span class="hljs-property">checked</span>) &#123; <span class="hljs-comment">// 当前节点若被选中</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = thisNode.<span class="hljs-property">level</span>; i &gt; <span class="hljs-number">1</span>; i--) &#123; <span class="hljs-comment">// 判断是否有父级节点</span><br>      <span class="hljs-keyword">if</span> (!thisNode.<span class="hljs-property">parent</span>.<span class="hljs-property">checked</span>) &#123;<br>        <span class="hljs-comment">// 父级节点未被选中，则将父节点替换成当前节点，往上继续查询，并将此节点key存入keys数组</span><br>        thisNode = thisNode.<span class="hljs-property">parent</span><br>        keys.<span class="hljs-title function_">push</span>(thisNode.<span class="hljs-property">data</span>.<span class="hljs-property">id</span>)<br>      &#125;<br>    &#125;<br>  &#125;<br>  treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">setCheckedKeys</span>(keys) <span class="hljs-comment">// 将所有keys数组的节点全选</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><img src="/../img/vue23-2.png" srcset="/img/loading.gif" lazyload alt="父子严格不互相关联"><br>这个有个新问题就是，用户在操作时，可能将父节点取消勾选，在提交时就只剩下子节点了，所以需要在提交时再进行一次校验，将未加入（用户手动取消）的父节点再次加入。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddRoleMenu</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-title function_">getAllNodes</span>(treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getCheckedNodes</span>(<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>))<br>  <span class="hljs-keyword">const</span> nodeList = treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getCheckedKeys</span>(<span class="hljs-literal">false</span>)<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">getAllNodes</span> = (<span class="hljs-params">arr: <span class="hljs-built_in">Array</span></span>) =&gt; &#123;<br>  arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">changeCheck</span>(item)<br>  &#125;)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>提交时保证了所有被选择节点，及其父节点都被加入。</p>
+<h3 id="全选-x2F-全不选"><a href="#全选-x2F-全不选" class="headerlink" title="全选&#x2F;全不选"></a>全选&#x2F;全不选</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-switch</span></span><br><span class="hljs-tag">  <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;changeSelectV&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:active-value</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:inactive-value</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">change</span>=<span class="hljs-string">&quot;changeSelect&quot;</span></span><br><span class="hljs-tag">/&gt;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">changeSelect</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (changeSelectV.<span class="hljs-property">value</span> == <span class="hljs-literal">true</span>) &#123;<br>    treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">setCheckedNodes</span>(state.<span class="hljs-property">menuTree</span>)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">setCheckedNodes</span>([])<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="全部展开-x2F-收起"><a href="#全部展开-x2F-收起" class="headerlink" title="全部展开&#x2F;收起"></a>全部展开&#x2F;收起</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-switch</span></span><br><span class="hljs-tag">  <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;changeCollapseV&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:active-value</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:inactive-value</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">change</span>=<span class="hljs-string">&quot;changeCollapse&quot;</span></span><br><span class="hljs-tag">/&gt;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">changeCollapse</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-title function_">travelExpend</span>(state.<span class="hljs-property">menuTree</span>, changeCollapseV.<span class="hljs-property">value</span>)<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">travelExpend</span> = (<span class="hljs-params">branch: <span class="hljs-built_in">Array</span>, expend: boolean</span>) =&gt; &#123;<br>  branch.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    treeRef.<span class="hljs-property">value</span>!.<span class="hljs-property">store</span>.<span class="hljs-property">nodesMap</span>[item.<span class="hljs-property">id</span>].<span class="hljs-property">expanded</span> = expend<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">children</span>) &#123;<br>      <span class="hljs-title function_">travelExpend</span>(item.<span class="hljs-property">children</span>, expend)<br>    &#125;<br>  &#125;)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%8823-2%EF%BC%89el-tree%E4%B9%8B%E7%88%B6%E5%AD%90%E8%8A%82%E7%82%B9%E8%81%94%E5%8A%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（23-2）el-tree在父子节点的联动</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%8823-2%EF%BC%89el-tree%E4%B9%8Btable%E6%A0%91%E7%8A%B6%E5%B1%95%E5%BC%80/">
+                        <span class="hidden-mobile">vue3笔记（23-2）table树状展开</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
