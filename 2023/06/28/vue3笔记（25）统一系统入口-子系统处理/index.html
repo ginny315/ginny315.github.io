@@ -16,16 +16,16 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。">
+    <meta name="description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。基于Vue3 + Vue-router4 + pinia + vite 技术栈已经调试成功，老旧系统基于Vue3 + Vuex + vue-cli 另需调整。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（25）统一系统入口-子系统处理">
 <meta property="og:url" content="http://guoningyan.com/2023/06/28/vue3%E7%AC%94%E8%AE%B0%EF%BC%8825%EF%BC%89%E7%BB%9F%E4%B8%80%E7%B3%BB%E7%BB%9F%E5%85%A5%E5%8F%A3-%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。">
+<meta property="og:description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。基于Vue3 + Vue-router4 + pinia + vite 技术栈已经调试成功，老旧系统基于Vue3 + Vuex + vue-cli 另需调整。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue21-2.png">
 <meta property="article:published_time" content="2023-06-28T01:14:20.000Z">
-<meta property="article:modified_time" content="2023-06-28T02:39:46.099Z">
+<meta property="article:modified_time" content="2023-06-28T07:57:15.947Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -192,7 +192,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.5k 字
     </span>
   
 
@@ -201,7 +201,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      13 分钟
     </span>
   
 
@@ -234,7 +234,7 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。<br>本篇是统一迁移记录。</p>
+<p>原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。<br>本篇是统一迁移记录。基于Vue3 + Vue-router4 + pinia + vite 技术栈已经调试成功，老旧系统基于Vue3 + Vuex + vue-cli 另需调整。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><ol>
@@ -258,15 +258,21 @@
 </ol>
 <h4 id="跳转修改"><a href="#跳转修改" class="headerlink" title="跳转修改"></a>跳转修改</h4><ol>
 <li><code>config/axios/service.ts</code>中修改 401 跳转；</li>
+<li><code>store/modules/user.ts</code>中修改 resetToken；</li>
 </ol>
 <h4 id="业务相关代码修改"><a href="#业务相关代码修改" class="headerlink" title="业务相关代码修改"></a>业务相关代码修改</h4><ol>
-<li><code>components/BreadCrumb/index.vue</code> 中修改面包屑。一般导航可以直接使用该组件，特殊导航（例如：三级导航）需要传数据到组件中；</li>
+<li><code>components/BreadCrumb/index.vue</code> 中修改面包屑。一般导航可以直接使用该组件，特殊导航（例如：三级导航）需要传数据到组件中；具体用法见 readme.md</li>
 <li>若有 created_by、updated_by 相关代码，需要去除；</li>
 <li><code>views/layout/components/Navbar/avatar.vue</code>中修改个人信息 hover 下拉菜单，只留下 logout 功能，同时修改用户名展示；</li>
 </ol>
 <h4 id="上线修改"><a href="#上线修改" class="headerlink" title="上线修改"></a>上线修改</h4><ol>
 <li>若调试无问题，修改 API 获取真实菜单，<code>permission.ts</code> 路由守卫中放开 token；</li>
 <li>打包环境 <code>**.env</code> 中修改成 apisix 对应的后端路由；</li>
+</ol>
+<h3 id="基于Vuex-vue-cli"><a href="#基于Vuex-vue-cli" class="headerlink" title="基于Vuex + vue-cli"></a>基于Vuex + vue-cli</h3><ol>
+<li>注意各处导入 store 语法区别；</li>
+<li><code>store/modules/permission.ts</code>中不管是开发环境还是生产环境，都使用 <code>() =&gt;   import()</code>导入模块；getMenus 方法标记为 action</li>
+<li><code>vue.config.ts</code> proxy 代理修改成 apisix 对应的后端路由；publicPath 修改生产环境路径；</li>
 </ol>
 
             </div>
