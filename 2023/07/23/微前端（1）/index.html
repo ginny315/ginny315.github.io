@@ -19,12 +19,12 @@
     <meta name="description" content="本篇是微前端的学习记录。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微前端（1）">
-<meta property="og:url" content="http://guoningyan.com/2023/04/23/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:url" content="http://guoningyan.com/2023/07/23/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
 <meta property="og:description" content="本篇是微前端的学习记录。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-23T07:43:16.000Z">
-<meta property="article:modified_time" content="2023-04-23T08:16:54.428Z">
+<meta property="article:published_time" content="2023-07-23T07:43:16.000Z">
+<meta property="article:modified_time" content="2023-07-24T08:44:29.986Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary_large_image">
@@ -178,8 +178,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-04-23 15:43" pubdate>
-        2023年4月23日 下午
+      <time datetime="2023-07-23 15:43" pubdate>
+        2023年7月23日 下午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      307 字
+      582 字
     </span>
   
 
@@ -198,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      5 分钟
     </span>
   
 
@@ -234,14 +234,15 @@
 <p>本篇是微前端的学习记录。</p>
 </blockquote>
 <span id="more"></span>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ol>
+<li>微前端就是将一个大型前端应用拆分成多个模块（eg: 将项目根据业务模块拆分），每个模块可以由不同的团队进行管理，并可以自主选择框架、有自己的仓库，可以独立部署上线。</li>
+<li>主应用（基座）：主要负责集成所有的子应用，提供一个入口能访问你所需要的子应用。<br>  （1）一个系统只有一个<br>  （2）系统整体 Layout 的设计<br>  （3）所有微应用的配置与注册<br>  （4）尽量不写复杂业务逻辑<br>微应用：根据不同业务划分的模块，每个子应用都打包成umd模块的形式供主应用来加载。<br>  （1）通常是一个单页面应用（SPA），负责具体的业务逻辑<br>  （2）可以独立交付（开发、部署、运行），但是一般会集成到主应用中运行<br>  （3）如有必要，甚至能集成到不同的主应用中</li>
+</ol>
 <h3 id="适用业务场景"><a href="#适用业务场景" class="headerlink" title="适用业务场景"></a>适用业务场景</h3><ol>
 <li>需要将多个后台系统统一收口的一个系统内。</li>
 <li>庞大的单页面应用，开发&#x2F;构建时间长。<br>微前端可以实现各个微应用的独立开发和发版，主应用管理微应用的注册和渲染，将整个系统彻底解耦。</li>
 </ol>
-<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ol>
-<li>主应用：一个系统只有一个，系统整体 Layout 的设计，所有微应用的配置与注册。</li>
-<li>微应用：通常是一个单页面应用（SPA），可能包含一个或多个路由页面，一般情况下不存在多个微应用同时运行的场景。<br>本身是普通的前端应用，负责具体的业务逻辑；<br>可以独立交付（开发、部署、运行），但是一般会集成到主应用中运行；<br>如有必要，甚至能集成到不同的主应用中。</li>
-</ol>
+<h3 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h3><p>通过nginx代理来区分，同一个端口不同路由指向不同的前端项目，通讯可使用 sharedWorker。<br>不足：跨服务的组件无法嵌套，简单通讯可以使用会话存储，但需要比较复杂的封装，使用也不方便，有一层逻辑处理。适合业务分割清晰、跨服务组件之间关联少的项目，并且路由规划要严格。</p>
 <h3 id="icestark试用"><a href="#icestark试用" class="headerlink" title="icestark试用"></a>icestark试用</h3><p><code>附录</code><br><a target="_blank" rel="noopener" href="https://iceteam.gitee.io/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://micro-frontends.ice.work/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh/guide">乾坤</a><br><a target="_blank" rel="noopener" href="https://wujie-micro.github.io/doc/">无界</a><br><a target="_blank" rel="noopener" href="https://zeroing.jd.com/micro-app/docs.html#/">京东</a><br><a target="_blank" rel="noopener" href="https://zh-hans.single-spa.js.org/docs/getting-started-overview">single_spa</a></p>
 
             </div>
@@ -270,9 +271,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%8820-1%EF%BC%89el-input%E8%B8%A9%E5%9D%91/">
+                      <a href="/2023/07/28/vue3%E7%AC%94%E8%AE%B0%EF%BC%8827%EF%BC%89el-table%E4%B8%AD%E4%BD%BF%E7%94%A8el-input/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（20-1）el-input踩坑</span>
+                        <span class="hidden-mobile">vue3笔记（27）el-table中使用el-input</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -280,8 +281,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/21/vue3%E7%AC%94%E8%AE%B0%EF%BC%8819-3%EF%BC%89%E6%96%87%E4%BB%B6%E9%A2%84%E8%A7%88/">
-                        <span class="hidden-mobile">vue3笔记（19-3）文件预览</span>
+                      <a href="/2023/07/07/vue3%E7%AC%94%E8%AE%B0%EF%BC%8826%EF%BC%89%E9%A1%B5%E9%9D%A2%E8%BF%87%E6%B8%A1/">
+                        <span class="hidden-mobile">vue3笔记（26）页面过渡</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
