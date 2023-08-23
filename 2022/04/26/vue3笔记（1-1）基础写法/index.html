@@ -16,16 +16,16 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。最近使用Vue3+TS搭建了公司的服务平台，使用vue-cli5构建项目，UI使用了element-plus，记录一下代码写法和使用过程中的坑。">
+    <meta name="description" content="人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。最近使用 Vue3+TS 搭建了公司的服务平台，使用 vue-cli5 构建项目，UI 使用了 element-plus，记录一下代码写法和使用过程中的坑。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（1-1）基础写法">
 <meta property="og:url" content="http://guoningyan.com/2022/04/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%881-1%EF%BC%89%E5%9F%BA%E7%A1%80%E5%86%99%E6%B3%95/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。最近使用Vue3+TS搭建了公司的服务平台，使用vue-cli5构建项目，UI使用了element-plus，记录一下代码写法和使用过程中的坑。">
+<meta property="og:description" content="人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。最近使用 Vue3+TS 搭建了公司的服务平台，使用 vue-cli5 构建项目，UI 使用了 element-plus，记录一下代码写法和使用过程中的坑。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue2-1.png">
 <meta property="article:published_time" content="2022-04-26T02:17:09.000Z">
-<meta property="article:modified_time" content="2023-05-09T03:18:38.648Z">
+<meta property="article:modified_time" content="2023-08-16T08:40:59.535Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="vue3">
@@ -234,7 +234,7 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。<br>最近使用Vue3+TS搭建了公司的服务平台，使用vue-cli5构建项目，UI使用了element-plus，记录一下代码写法和使用过程中的坑。</p>
+<p>人生兜兜转转几年没更新，转眼从产品变到项目管理又变成了前端。<br>最近使用 Vue3+TS 搭建了公司的服务平台，使用 vue-cli5 构建项目，UI 使用了 element-plus，记录一下代码写法和使用过程中的坑。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="版本号对应"><a href="#版本号对应" class="headerlink" title="版本号对应"></a>版本号对应</h3><p>Vue CLI 4.5以下，对应的是Vue2。<br>Vue CLI 4.5及以上，对应的是Vue3，当然，创建项目的时候可以选择Vue2。</p>
@@ -242,8 +242,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-string">&quot;serve&quot;</span>: <span class="hljs-string">&quot;vue-cli-service serve  --host 0.0.0.0&quot;</span><br></code></pre></div></td></tr></table></figure>
 
 <h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><ol>
-<li>ref定义一个基本类型（包含一个数据）的响应式，创建一个包含响应式数据的引用对象。通过给value属性添加getter&#x2F;setter实现对数据的劫持。</li>
-<li>reactive定义对象（可以包含多个数据）的响应式，返回响应式代理对象（基于Proxy实现），会影响对象内部所有的嵌套属性–递归深度响应式。通过Proxy实现对对象内部所有数据的劫持，并通过Reflect操作对象内部的数据。</li>
+<li>ref 定义一个基本类型（包含一个数据）的响应式，创建一个包含响应式数据的引用对象。通过给 value 属性添加 getter&#x2F;setter 实现对数据的劫持。</li>
+<li>reactive 定义对象（可以包含多个数据）的响应式，返回响应式代理对象（基于 Proxy 实现），会影响对象内部所有的嵌套属性–递归深度响应式。通过 Proxy 实现对对象内部所有数据的劫持，并通过 Reflect 操作对象内部的数据。</li>
 </ol>
 <h3 id="组合式API"><a href="#组合式API" class="headerlink" title="组合式API"></a>组合式API</h3><ol>
 <li>Composition API 可以减少强耦合，避免方法之间互相 this 调用，方法之间互相共享变量，后期维护很麻烦。</li>

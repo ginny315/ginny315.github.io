@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://guoningyan.com/img/vue22-5.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue22-7.png">
 <meta property="article:published_time" content="2023-05-26T05:22:47.000Z">
-<meta property="article:modified_time" content="2023-06-07T01:15:04.686Z">
+<meta property="article:modified_time" content="2023-08-04T02:26:44.016Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -203,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37 分钟
+      38 分钟
     </span>
   
 
@@ -249,7 +249,7 @@
 <p>哦豁，居然完美实现了固定列和下拉展开！只是展开会有状态的延续性，点击下一级无法实现手风琴效果。<br>网上说添加<code>:expand-row-keys=&quot;expands&quot; @expand-change=&quot;expandSelect&quot;</code>可以控制展开，但是我添加之后发现连原始的小箭头都无法点击了，遂放弃。<br>在 fixed 和手风琴效果里面 trade-off，还是 fixed 更重要吧～<br><img src="/../img/vue22-5.png" srcset="/img/loading.gif" lazyload alt="tree-props实现效果"></p>
 <h3 id="进一步优化-按照层级对齐"><a href="#进一步优化-按照层级对齐" class="headerlink" title="进一步优化-按照层级对齐"></a>进一步优化-按照层级对齐</h3><p>展开多级以后，发现各层级之间查看较为眼花，最好能用缩进来展示层级，这里我设计了动态 style ，按照层级加一个 padding ，轻松搞定～</p>
 <figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span> <span class="hljs-attr">fixed</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;菜单名称&quot;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;220&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">default</span>=<span class="hljs-string">&quot;scope&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">&quot;&#123; &#x27;padding-left&#x27;: (scope.row.level - 1) * 8 + &#x27;px&#x27; &#125;&quot;</span>&gt;</span>&#123;&#123;<br>      scope.row.name<br>    &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">el-table-column</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<p><img src="/../img/vue22-7.png" srcset="/img/loading.gif" lazyload alt="tree-props按照层级对齐"></p>
+<p><img src="/../img/vue22-7.png" srcset="/img/loading.gif" lazyload alt="tree-props按照层级对齐"><br>【注意】在table里进行不要使用 <code>el-dropdown</code> 来折叠按钮，实测会卡顿（肉眼能感觉到的明显卡顿）</p>
 <p><code>附录</code><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/momoomom/article/details/108016148">element-ui table expand 展开树形菜单手风琴效果</a></p>
 
             </div>

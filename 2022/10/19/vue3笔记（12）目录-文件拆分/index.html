@@ -16,15 +16,15 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。">
+    <meta name="description" content="项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。也有一些实践中发现代码书写位置的问题，都记录在这篇里面。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（12）目录 &amp; 文件拆分">
+<meta property="og:title" content="vue3笔记（12）目录 &amp; 文件拆分 &amp; 代码位置记录">
 <meta property="og:url" content="http://guoningyan.com/2022/10/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%8B%86%E5%88%86/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。">
+<meta property="og:description" content="项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。也有一些实践中发现代码书写位置的问题，都记录在这篇里面。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-19T01:25:24.000Z">
-<meta property="article:modified_time" content="2022-10-19T01:52:31.575Z">
+<meta property="article:modified_time" content="2023-08-18T00:43:52.896Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="环境配置">
 <meta property="article:tag" content="typescript">
@@ -32,7 +32,7 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>vue3笔记（12）目录 &amp; 文件拆分 - ginny&#39;s blog</title>
+  <title>vue3笔记（12）目录 &amp; 文件拆分 &amp; 代码位置记录 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -170,7 +170,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（12）目录 &amp; 文件拆分">
+            <span class="h2" id="subtitle" title="vue3笔记（12）目录 &amp; 文件拆分 &amp; 代码位置记录">
               
             </span>
 
@@ -191,7 +191,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.5k 字
     </span>
   
 
@@ -200,7 +200,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      13 分钟
     </span>
   
 
@@ -229,11 +229,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（12）目录 &amp; 文件拆分</h1>
+            <h1 style="display: none">vue3笔记（12）目录 &amp; 文件拆分 &amp; 代码位置记录</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。</p>
+<p>项目有时候有部分代码可以复用，有时候需要整体修改（eg: API暴露），这篇记录一下实践中的感受。<br>也有一些实践中发现代码书写位置的问题，都记录在这篇里面。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="请求axios统一"><a href="#请求axios统一" class="headerlink" title="请求axios统一"></a>请求axios统一</h3><p><code>utils/request.ts</code>中封装axios，在<code>api/***.ts</code>中调用。</p>
@@ -260,6 +260,8 @@
 <p>编写<code>.env.prod</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">NODE_ENV = <span class="hljs-string">&#x27;prod&#x27;</span><br>VUE_APP_PRO = <span class="hljs-string">&#x27;true&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>运行<code>npm run prod</code>时，打包所有文件到dist，<code>./static/*</code>下文件将直接移动到dist目录下，后期修改<code>apiUrl</code>，也将直接改变请求地址。</p>
+</li>
+<li><p><code>App.vue</code> 是所有页面的入口，若项目中有和 token 有关的请求，不能放在 <code>App.vue</code> 中，可以放在 <code>layout/app-main.vue</code> 中。</p>
 </li>
 </ol>
 
