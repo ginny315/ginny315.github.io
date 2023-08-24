@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://guoningyan.com/img/vue32-1.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue32-2.png">
 <meta property="article:published_time" content="2023-08-22T01:18:49.000Z">
-<meta property="article:modified_time" content="2023-08-23T05:42:24.879Z">
+<meta property="article:modified_time" content="2023-08-24T06:20:06.942Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -193,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.8k 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21 分钟
+      24 分钟
     </span>
   
 
@@ -251,6 +251,19 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; debounce &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;lodash-es&#x27;</span><br><span class="hljs-keyword">const</span> handleClick = <span class="hljs-title function_">debounce</span>(<span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> &#123;&#125;, <span class="hljs-number">1000</span>)<br></code></pre></div></td></tr></table></figure>
 
 <p><code>javascript</code></p>
+<h3 id="交互优化点"><a href="#交互优化点" class="headerlink" title="交互优化点"></a>交互优化点</h3><ol>
+<li>按钮主次，高频使用按钮直接显示，低频使用按钮以 … 下拉列表隐藏，鼠标悬浮展示。好处：多留内容给主体部分。</li>
+<li>搜索内容主次，高频使用（一般为 name ）直接展示，低频使用以 filter 按钮隐藏，点击后展示。好处：多留内容给主体部分。</li>
+<li>搜索项 tag 展示，点击可删除，也可一键清空。好处：用户可以选择性搜索。</li>
+<li>按钮位置，基本在页面右侧。好处：强化用户习惯。</li>
+<li>按钮满足条件触发，初始化 disabled，使用 tooltip 包裹，提示用户操作。满足条件时按钮真实可用。好处：防止用户误操作，减少交互成本。</li>
+<li>用户操作（例如：选择）后对内容进行有选择性提示（例如：总数）。好处：帮助用户更容易进行下一步操作。</li>
+<li>页面跳转增加互相联系。</li>
+<li>增加页面主体内容比重（例如：使用多栏展示）。好处：用户在有限视线范围内获取更多信息。</li>
+<li>页面主体部分尽量不使用警告色（例如：删除按钮不用红色）</li>
+<li>提示语尽量不使用感叹号</li>
+<li></li>
+</ol>
 
             </div>
             <hr>
@@ -280,9 +293,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                      <a href="/2023/08/24/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%883%EF%BC%89%E4%B9%BE%E5%9D%A4/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">作品集合</span>
+                        <span class="hidden-mobile">微前端（3）乾坤</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
