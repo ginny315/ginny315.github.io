@@ -16,25 +16,25 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="业务中分为测试环境和生产环境，对应API地址不同，我分别做了打包配置。当前vue项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用nginx代理。">
+    <meta name="description" content="本篇基于技术栈 vue2 + vue-cli + webpack。业务中分为测试环境和生产环境，对应 API 地址不同，我分别做了打包配置。当前 vue 项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用 nginx 代理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（2）打包 &amp; 部署">
-<meta property="og:url" content="http://guoningyan.com/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E6%89%93%E5%8C%85%20&%20%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:title" content="vue3笔记（2-1）打包 &amp; 部署">
+<meta property="og:url" content="http://guoningyan.com/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%882-1%EF%BC%89%E6%89%93%E5%8C%85%20&%20%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="业务中分为测试环境和生产环境，对应API地址不同，我分别做了打包配置。当前vue项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用nginx代理。">
+<meta property="og:description" content="本篇基于技术栈 vue2 + vue-cli + webpack。业务中分为测试环境和生产环境，对应 API 地址不同，我分别做了打包配置。当前 vue 项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用 nginx 代理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue3-2.png">
 <meta property="article:published_time" content="2022-04-29T01:29:58.000Z">
-<meta property="article:modified_time" content="2023-01-18T07:03:20.240Z">
+<meta property="article:modified_time" content="2023-08-28T05:43:45.735Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="环境配置">
 <meta property="article:tag" content="typescript">
-<meta property="article:tag" content="vue3">
+<meta property="article:tag" content="vue2">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://guoningyan.com/img/vue3-2.png">
   
   
-  <title>vue3笔记（2）打包 &amp; 部署 - ginny&#39;s blog</title>
+  <title>vue3笔记（2-1）打包 &amp; 部署 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -172,7 +172,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（2）打包 &amp; 部署">
+            <span class="h2" id="subtitle" title="vue3笔记（2-1）打包 &amp; 部署">
               
             </span>
 
@@ -231,11 +231,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（2）打包 &amp; 部署</h1>
+            <h1 style="display: none">vue3笔记（2-1）打包 &amp; 部署</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>业务中分为测试环境和生产环境，对应API地址不同，我分别做了打包配置。<br>当前vue项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用nginx代理。</p>
+<p>本篇基于技术栈 vue2 + vue-cli + webpack。<br>业务中分为测试环境和生产环境，对应 API 地址不同，我分别做了打包配置。<br>当前 vue 项目配置和之前的略有不同，记录一下打包上线配置。代码上传到服务器中，使用 nginx 代理。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="按照环境模式区分"><a href="#按照环境模式区分" class="headerlink" title="按照环境模式区分"></a>按照环境模式区分</h3><p><code>package.json</code>中配置命令，其中<code>--host</code>可以在dev模式下，使用本机IP访问系统。</p>
@@ -280,7 +280,7 @@
                     
                       <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
                     
-                      <a class="hover-with-bg" href="/tags/vue3/">vue3</a>
+                      <a class="hover-with-bg" href="/tags/vue2/">vue2</a>
                     
                   </div>
                 
@@ -297,9 +297,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%883-1%EF%BC%89%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">
+                      <a href="/2022/04/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%882-2%EF%BC%89%E6%89%93%E5%8C%85%20&amp;%20%E9%83%A8%E7%BD%B2/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（3-1）通信 父子组件通信</span>
+                        <span class="hidden-mobile">vue3笔记（2-2）打包 & 部署</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

@@ -24,7 +24,7 @@
 <meta property="og:description" content="本篇是微前端的学习记录。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-23T07:43:16.000Z">
-<meta property="article:modified_time" content="2023-08-18T00:46:11.612Z">
+<meta property="article:modified_time" content="2023-08-30T05:51:08.678Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="微前端">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      1.6k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      14 分钟
     </span>
   
 
@@ -281,17 +281,6 @@
 <h3 id="主要实现方式"><a href="#主要实现方式" class="headerlink" title="主要实现方式"></a>主要实现方式</h3><h4 id="路由分发"><a href="#路由分发" class="headerlink" title="路由分发"></a>路由分发</h4><p>JavaScript的模块化来实现导入导出，可以使用importmap（eg: SystemJS），使变量名和其相应的地址一一映射，允许在非导入上下文中重用这个映射，避免重复书写地址。</p>
 <h4 id="隔离"><a href="#隔离" class="headerlink" title="隔离"></a>隔离</h4><p>css隔离： css Module或者namespace，可以采用webpack的postcss插件，在打包时添加特定的前缀；<br>js隔离：采用沙箱机制（局部的js运行不影响外部对象），对于浏览器需要结合with关键字和window.Proxy对象来实现。</p>
 <h4 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h4><p>子应用之间不直接通信，采用消息订阅（pub&#x2F;sub）模式，在基座应用中定义事件中心Event，子应用注册事件，当事件被触发时，事件中心统一分发。</p>
-<h3 id="框架对比"><a href="#框架对比" class="headerlink" title="框架对比"></a>框架对比</h3><p>|  框架   | 实现思想  |  优点   | 不足  |<br>|  single-spa  | 在主应用中注册子应用的配置信息，主应用运行时根据配置信息去请求子应用的manifest.json配置文件（子应用打包出的入口js和js文件的依赖关系），主应用通过动态的构造script标签去加载这些js文件。主应用检测路由命中子应用的规则之后就会触发其渲染函数，把子应用挂载到相应的dom下。<br>  |  —-  | 上手有难度，不能开箱即用。  |<br>|  qiankun | single-spa+sandbox+import-html-entry  |  开箱即用  | 如果不是用严格沙盒模式，主应用与子应用定义全局样式时会产生样式污染；版本管理、应用部署、公共依赖需要自己实现，无法支持 vite 等 esm 脚本运行  |</p>
-<table>
-<thead>
-<tr>
-<th>飞冰</th>
-<th>—-</th>
-<th>可视化开发，配置化能力</th>
-<th>主应用必须是React</th>
-</tr>
-</thead>
-</table>
 <h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
 <li>registerApplication：注册微应用</li>
 <li>bootstrap：第一次挂载应用执行，只会被执行一次</li>
@@ -304,12 +293,7 @@
 <li>主从通信？子应用之间通信？</li>
 <li>部署问题？</li>
 </ol>
-<h3 id="icestark试用"><a href="#icestark试用" class="headerlink" title="icestark试用"></a>icestark试用</h3><h3 id="qiankun"><a href="#qiankun" class="headerlink" title="qiankun"></a>qiankun</h3><ol>
-<li>实现了js沙箱以及微应用和主应用的样式隔离，样式的隔离还可以选择严格模式即shadow DOM，天然的样式隔离；增加了html入口文件的解析</li>
-<li>提供了通信方案：onGlobalStateChange实现主应用与微应用、微应用之间的通信 主应用初始化全局状态同时监听statechange；微应用同样也可以监听statechange和设置state，但必须在mount中设置</li>
-<li>使用qiankun的时候需要注意必须创建一个public-path.js文件，否则所有的静态资源都不能正常获取到</li>
-</ol>
-<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://iceteam.gitee.io/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://micro-frontends.ice.work/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh/guide">乾坤</a><br><a target="_blank" rel="noopener" href="https://wujie-micro.github.io/doc/">无界（基于iframe）</a><br><a target="_blank" rel="noopener" href="https://zeroing.jd.com/micro-app/docs.html#/">京东</a><br><a target="_blank" rel="noopener" href="https://zh-hans.single-spa.js.org/docs/getting-started-overview">Single-Spa最早的微前端框架</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/141530392">微前端-最容易看懂的微前端知识</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/492152857">微前端究竟是什么？微前端核心技术揭秘！</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7122031820006227981">微前端框架qiankun、ice比较</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7201282972967944250">真的有必要用微前端框架么</a></p>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://iceteam.gitee.io/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://micro-frontends.ice.work/docs/guide">飞冰</a><br><a target="_blank" rel="noopener" href="https://zeroing.jd.com/micro-app/docs.html#/">京东</a><br><a target="_blank" rel="noopener" href="https://zh-hans.single-spa.js.org/docs/getting-started-overview">Single-Spa最早的微前端框架</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/141530392">微前端-最容易看懂的微前端知识</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/492152857">微前端究竟是什么？微前端核心技术揭秘！</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7122031820006227981">微前端框架qiankun、ice比较</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7201282972967944250">真的有必要用微前端框架么</a></p>
 
             </div>
             <hr>
