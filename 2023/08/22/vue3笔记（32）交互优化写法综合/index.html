@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://guoningyan.com/img/vue32-1.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue32-2.png">
 <meta property="article:published_time" content="2023-08-22T01:18:49.000Z">
-<meta property="article:modified_time" content="2023-08-24T06:57:43.521Z">
+<meta property="article:modified_time" content="2023-09-07T02:42:38.790Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -193,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      3k 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24 分钟
+      25 分钟
     </span>
   
 
@@ -251,18 +251,51 @@
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; debounce &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;lodash-es&#x27;</span><br><span class="hljs-keyword">const</span> handleClick = <span class="hljs-title function_">debounce</span>(<span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> &#123;&#125;, <span class="hljs-number">1000</span>)<br></code></pre></div></td></tr></table></figure>
 
 <p><code>javascript</code></p>
+<h3 id="交互优化目标"><a href="#交互优化目标" class="headerlink" title="交互优化目标"></a>交互优化目标</h3><ol>
+<li>产品目标：优先完成功能开发，设计优先配合功能开发</li>
+<li>体验目标：各个角色的使用故事线完整、且清晰顺畅</li>
+</ol>
 <h3 id="交互优化点-管理系统相关"><a href="#交互优化点-管理系统相关" class="headerlink" title="交互优化点-管理系统相关"></a>交互优化点-管理系统相关</h3><ol>
-<li>按钮主次，高频使用按钮直接显示，低频使用按钮以 … 下拉列表隐藏，鼠标悬浮展示。好处：多留内容给主体部分。</li>
-<li>搜索内容主次，高频使用（一般为 name ）直接展示，低频使用以 filter 按钮隐藏，点击后展示。好处：多留内容给主体部分。</li>
-<li>搜索项 tag 展示，点击可删除，也可一键清空。好处：用户可以选择性搜索。</li>
-<li>按钮位置，基本在页面右侧。好处：强化用户习惯。</li>
-<li>按钮满足条件触发，初始化 disabled，使用 tooltip 包裹，提示用户操作。满足条件时按钮真实可用。好处：防止用户误操作，减少交互成本。</li>
-<li>用户操作（例如：选择）后对内容进行有选择性提示（例如：总数）。好处：帮助用户更容易进行下一步操作。</li>
-<li>页面跳转增加互相联系。</li>
-<li>增加页面主体内容比重（例如：使用多栏展示）。好处：用户在有限视线范围内获取更多信息。</li>
-<li>页面主体部分尽量不使用警告色（例如：删除按钮不用红色）</li>
-<li>提示语尽量不使用感叹号</li>
-<li></li>
+<li><p>信息归类、主次分级</p>
+</li>
+<li><p>按钮主次，高频使用按钮直接显示，低频使用按钮以 … （鼠标悬浮展示隐藏的下拉列表）。好处：多留内容给主体部分。</p>
+</li>
+<li><p>增加页面主体内容比重（例如：使用多栏展示）。好处：用户在有限视线范围内获取更多信息。</p>
+</li>
+<li><p>区分高&#x2F;低频操作，降低操作链路</p>
+</li>
+<li><p>搜索内容主次，高频使用（一般为 name ）直接展示，低频使用以 filter 按钮隐藏，点击后展示。</p>
+</li>
+<li><p>降低操作难度、防止误操作</p>
+</li>
+<li><p>搜索项 tag 展示，点击可删除，也可一键清空。好处：用户可以选择性搜索。</p>
+</li>
+<li><p>按钮满足条件触发，初始化 disabled，使用 tooltip 包裹，提示用户操作。满足条件时按钮真实可用。好处：防止用户误操作，减少交互成本。</p>
+</li>
+<li><p>用户操作（例如：选择）后对内容进行有选择性提示（例如：总数）。好处：帮助用户更容易进行下一步操作。</p>
+</li>
+<li><p>布局规范统一</p>
+</li>
+<li><p>按钮位置，基本在页面右侧。好处：强化用户习惯。</p>
+</li>
+<li><p>多内容区域卡片分级展示。</p>
+</li>
+<li><p>调整色彩识别性、增强区分度</p>
+</li>
+<li><p>不同状态使用不同颜色 tag 表示，各个页面保持一致</p>
+</li>
+<li><p>业务流程图&#x2F;功能全景图可视化</p>
+</li>
+<li><p>使用图表代替文字</p>
+</li>
+<li><p>页面跳转增加互相联系。</p>
+</li>
+<li><p>提示优化 </p>
+</li>
+<li><p>提示语尽量不使用感叹号 </p>
+</li>
+<li><p>页面主体部分尽量不使用警告色（例如：删除按钮不用红色）</p>
+</li>
 </ol>
 
             </div>

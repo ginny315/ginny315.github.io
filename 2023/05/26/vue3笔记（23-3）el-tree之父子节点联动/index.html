@@ -16,19 +16,19 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
+    <meta name="description" content="el-tree 在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究 API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（23-3）el-tree在父子节点的联动">
 <meta property="og:url" content="http://guoningyan.com/2023/05/26/vue3%E7%AC%94%E8%AE%B0%EF%BC%8823-3%EF%BC%89el-tree%E4%B9%8B%E7%88%B6%E5%AD%90%E8%8A%82%E7%82%B9%E8%81%94%E5%8A%A8/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
+<meta property="og:description" content="el-tree 在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究 API，导致出现了好多问题，本篇是踩坑记录。另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue23-4.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue23-1.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue23-3.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue23-2.png">
 <meta property="article:published_time" content="2023-05-26T05:23:47.000Z">
-<meta property="article:modified_time" content="2023-06-13T07:41:02.208Z">
+<meta property="article:modified_time" content="2023-09-05T06:55:07.807Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -195,7 +195,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      3.6k 字
     </span>
   
 
@@ -237,11 +237,11 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>el-tree在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究API，导致出现了好多问题，本篇是踩坑记录。<br>另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。</p>
+<p>el-tree 在父子节点的联动上有点小麻烦，在刚开始设计时我并没有仔细研究 API，导致出现了好多问题，本篇是踩坑记录。<br>另有全选&#x2F;全不选，全部展开&#x2F;收起操作，本篇也做一个记录。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="菜单权限设计"><a href="#菜单权限设计" class="headerlink" title="菜单权限设计"></a>菜单权限设计</h3><p>业务需求：在菜单权限设计中，新增权限状态下，选择子级菜单，对应的父级菜单也应该被赋予权限。<br>编辑权限状态下，打开权限设置时，应将已有权限做一个勾选。</p>
-<h3 id="父子节点默认非严格关联"><a href="#父子节点默认非严格关联" class="headerlink" title="父子节点默认非严格关联"></a>父子节点默认非严格关联</h3><p><code>check-strictly</code> 属性表示在“显示复选框”的情况下，是否严格的遵循父子不互相关联的做法，默认为 false。此时，选择父级菜单，子级菜单会全部选中；选择子级菜单，父级前会有“-”标记：<br><img src="/../img/vue23-4.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择父级菜单"><br><img src="/../img/vue23-1.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择子级菜单"><br>当值设置为 true 时，选择父级菜单，子级菜单不会被选中：<br><img src="/../img/vue23-3.png" srcset="/img/loading.gif" lazyload alt="父子严格不互相关联"></p>
+<h3 id="父子节点默认非严格关联"><a href="#父子节点默认非严格关联" class="headerlink" title="父子节点默认非严格关联"></a>父子节点默认非严格关联</h3><p><code>check-strictly</code> 属性表示在“显示复选框”的情况下，是否“严格的遵循父子不互相关联”的做法，默认为 false。此时，选择父级菜单，子级菜单会全部选中；选择子级菜单，父级前会有“-”标记：<br><img src="/../img/vue23-4.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择父级菜单"><br><img src="/../img/vue23-1.png" srcset="/img/loading.gif" lazyload alt="父子非严格不互相关联选择子级菜单"><br>当值设置为 true 时，选择父级菜单，子级菜单不会被选中：<br><img src="/../img/vue23-3.png" srcset="/img/loading.gif" lazyload alt="父子严格不互相关联"></p>
 <h3 id="方案一：非严格关联"><a href="#方案一：非严格关联" class="headerlink" title="方案一：非严格关联"></a>方案一：非严格关联</h3><p>在提交选择时，应该将子级菜单对应的父级也加入</p>
 <figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">getAllNodes</span>(treeRef.<span class="hljs-property">value</span>!.<span class="hljs-title function_">getCheckedNodes</span>(<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>))<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">getAllNodes</span> = (<span class="hljs-params">arr: <span class="hljs-built_in">Array</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> list = []<br>  <span class="hljs-keyword">let</span> pidList = []<br>  arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    list.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">id</span>)<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">pid</span> !== <span class="hljs-number">0</span> &amp;&amp; list.<span class="hljs-title function_">indexOf</span>(item.<span class="hljs-property">pid</span>) == -<span class="hljs-number">1</span>) &#123;<br>      list.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">pid</span>)<br>      pidList.<span class="hljs-title function_">push</span>(item.<span class="hljs-property">pid</span>)<br>    &#125;<br>  &#125;)<br>  <span class="hljs-comment">// menuTree 是树状图的数据源</span><br>  <span class="hljs-keyword">if</span> (state.<span class="hljs-property">menuTree</span> &amp;&amp; state.<span class="hljs-property">menuTree</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>    state.<span class="hljs-property">menuTree</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">sys</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (sys.<span class="hljs-property">children</span> &amp;&amp; sys.<span class="hljs-property">children</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        sys.<span class="hljs-property">children</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">i</span>) =&gt;</span> &#123;<br>          pidList.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">pid</span>) =&gt;</span> &#123;<br>            <span class="hljs-keyword">if</span> (i.<span class="hljs-property">level</span> !== <span class="hljs-number">0</span> &amp;&amp; i.<span class="hljs-property">id</span> == pid) &#123;<br>              list.<span class="hljs-title function_">push</span>(i.<span class="hljs-property">pid</span>)<br>            &#125;<br>          &#125;)<br>        &#125;)<br>      &#125;<br>    &#125;)<br>  &#125;<br>  <span class="hljs-keyword">return</span> list<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>提交时完美实现。<br>但是出现了一个之前欠考虑的问题，就是在编辑状态下（即新增时已有勾选，初始化时后端返回已勾选数组，需要前端在打开时勾选），因为父子非严格关联，导致父节点勾选时，对应所有子节点都被勾选。</p>
