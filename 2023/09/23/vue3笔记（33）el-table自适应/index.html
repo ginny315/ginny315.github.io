@@ -16,22 +16,25 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇是实际业务的思考，previous 代表选型前期，基于目前的框架使用和业务发展的预测，可能后期会推翻，暂时先做一个记录。">
+    <meta name="description" content="el-table 表格长度自适应是交互优化中很重要的一环，本次做了很多尝试，记录一下写法和出现的问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微前端（2）基于实际业务的思考-previous">
-<meta property="og:url" content="http://guoningyan.com/2023/08/18/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%882%EF%BC%89%E5%9F%BA%E4%BA%8E%E5%AE%9E%E9%99%85%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83previous/index.html">
+<meta property="og:title" content="vue3笔记（33）el-table自适应">
+<meta property="og:url" content="http://guoningyan.com/2023/09/23/vue3%E7%AC%94%E8%AE%B0%EF%BC%8833%EF%BC%89el-table%E8%87%AA%E9%80%82%E5%BA%94/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="本篇是实际业务的思考，previous 代表选型前期，基于目前的框架使用和业务发展的预测，可能后期会推翻，暂时先做一个记录。">
+<meta property="og:description" content="el-table 表格长度自适应是交互优化中很重要的一环，本次做了很多尝试，记录一下写法和出现的问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-18T00:45:41.000Z">
-<meta property="article:modified_time" content="2023-09-13T05:38:52.573Z">
+<meta property="og:image" content="http://guoningyan.com/img/vue33-1.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue33-2.png">
+<meta property="article:published_time" content="2023-09-23T00:11:35.000Z">
+<meta property="article:modified_time" content="2023-09-23T02:28:55.345Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
-<meta property="article:tag" content="微前端">
+<meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue33-1.png">
   
   
-  <title>微前端（2）基于实际业务的思考-previous - ginny&#39;s blog</title>
+  <title>vue3笔记（33）el-table自适应 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,7 +172,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="微前端（2）基于实际业务的思考-previous">
+            <span class="h2" id="subtitle" title="vue3笔记（33）el-table自适应">
               
             </span>
 
@@ -179,8 +182,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-18 08:45" pubdate>
-        2023年8月18日 早上
+      <time datetime="2023-09-23 08:11" pubdate>
+        2023年9月23日 早上
       </time>
     </span>
   
@@ -190,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.9k 字
     </span>
   
 
@@ -199,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      16 分钟
     </span>
   
 
@@ -228,44 +231,29 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微前端（2）基于实际业务的思考-previous</h1>
+            <h1 style="display: none">vue3笔记（33）el-table自适应</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>本篇是实际业务的思考，previous 代表选型前期，基于目前的框架使用和业务发展的预测，可能后期会推翻，暂时先做一个记录。</p>
+<p>el-table 表格长度自适应是交互优化中很重要的一环，本次做了很多尝试，记录一下写法和出现的问题。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="当前业务"><a href="#当前业务" class="headerlink" title="当前业务"></a>当前业务</h3><p>用户管理系统（UMS）：用户管理、系统管理、菜单管理、权限管理、监控日志<br>产品追溯系统（PTS）：产品生命周期追溯、客户管理、产品管理<br>订单管理系统（OMS）：订单管理、对接出入库明细<br>出入库管理系统（WMS）：仓库管理、产品入库管理<br>质量管理系统（QDS）：竞品管理、产品对比、属性管理、运行环境管理、产品数据管理、标准体系、问题清单</p>
-<h3 id="当前框架"><a href="#当前框架" class="headerlink" title="当前框架"></a>当前框架</h3><p>基于 Vue3 + Vite (库使用 Element Plus + Pinia) ，除 UMS 外基本样式统一（Navbar、Sidebar），组件基本保持一致。</p>
-<h3 id="主要痛点"><a href="#主要痛点" class="headerlink" title="主要痛点"></a>主要痛点</h3><ol>
-<li>目前不同项目采用手动替换文件，需要统一样式、共享组件、共享通用方法；</li>
-<li>运行时构建时间过长；(初步估计为编译&#x2F;转化文件过多导致)</li>
-<li>基于 chrome ，暂时未使用 polyfill 之类的通用浏览器支持；</li>
-<li>PLCS 用户登录后，直接输入其他子系统 URL ，无法触发首次登录修改密码。（操作概率非常非常小）</li>
-<li>子系统之间不方便横跳，因为子系统通过动态菜单获取本系统权限，无法得知其他系统权限，UMS 首页也仅可获知是否有子系统进入权限，无法细节到具体菜单权限。(来自用户需求，可通过教育用户解决)</li>
-</ol>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>若使用微前端，需要对以下部分做一个抽离：</p>
-<ol>
-<li>src&#x2F;assets 中公用images（logo, 404, icon）、公用css（ common, element-variables, transition, index部分）</li>
-<li>src&#x2F;components 中 公用组件（Breadcrumb, Hamburger, File…）这部分内容应该是各个系统沉淀的，在业务发展过程中根据设计要求改写的组件，复用到其他系统</li>
-<li>config&#x2F;axios 这部分待考量，因为涉及到实际业务改写。</li>
-<li>hooks&#x2F; 这部分还没有完善</li>
-<li>store&#x2F; 虽然代码差不多，感觉还是各个系统独立维护</li>
-<li>types&#x2F; 这里是自动导入的，不确定</li>
-<li>utils&#x2F; 部分公用工具逻辑需要</li>
-<li>views&#x2F;layout 公用样式需要</li>
-</ol>
-<p>公用部分应该在一个服务器的存储空间里，前端保持维护，运维定期备份。</p>
-<h3 id="需要实现（基于现有基础）"><a href="#需要实现（基于现有基础）" class="headerlink" title="需要实现（基于现有基础）"></a>需要实现（基于现有基础）</h3><ol>
-<li>UMS 负责整体布局、Navbar（导航可以在 Navbar 最左侧），登录页面等通用页面</li>
-<li>UMS 负责子应用的注册引入和管理</li>
-<li>使用 common 公用方法库</li>
-<li>使用 components 共用组件库</li>
-</ol>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
-<li>分开打包时关于组件、样式的引用怎么写？项目中没找到报错？</li>
-<li>先设计子系统和 UMS 通信，再考虑子系统之间通信？</li>
-<li>“UMS 作为基座，负责加载公用逻辑，其他子系统共享。”这样不就是 monorepo 形式？不方便让其他系统单独开发了。</li>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当前给表格固定了列宽，前后分别设定了部分固定栏（例如：左侧的序号列，右侧的操作列），container 不设置 width，只有一个 min-width，保证页面缩小时内容依然保持一定样式不重叠，页面拉长时表格可以跟随拉长，直至平铺。<br>这对于长表格（列数多）来说没有问题，但对于短表格（列数少），会出现右侧空白，影响整体美观。<br><img src="/../img/vue33-1.png" srcset="/img/loading.gif" lazyload alt="右侧空白"></p>
+<h3 id="修改方案：按照-width-系数-计算实时列宽"><a href="#修改方案：按照-width-系数-计算实时列宽" class="headerlink" title="修改方案：按照 width * 系数 计算实时列宽"></a>修改方案：按照 width * 系数 计算实时列宽</h3><p>计划采用百分比布局，使其自适应，尝试后发现 el-table-column 并不能识别。所以尝试手动修改比例系数。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-table-column</span></span><br><span class="hljs-tag">  <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;create_by_name&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;创建人&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:width</span>=<span class="hljs-string">&quot;100 * scaleRate&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">show-overflow-tooltip</span></span><br><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">el-table-column</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>页面初始化时做一次计算，挂载定时器，页面销毁时，卸载定时器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">calcRate</span>()<br>  <span class="hljs-title function_">windowDraw</span>()<br>&#125;)<br><span class="hljs-title function_">onUnmounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  loadingTable.<span class="hljs-property">value</span> = <span class="hljs-literal">false</span><br>  <span class="hljs-title function_">unWindowDraw</span>()<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<p>计算系数如下，其中 totalWidth 为列宽的长度总和，64px 为侧栏收起时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> totalWidth = <span class="hljs-number">1000</span><br><span class="hljs-comment">// 改变窗口大小重新绘制</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">windowDraw</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;resize&#x27;</span>, resize)<br>&#125;<br><br><span class="hljs-comment">// 改变窗口大小重新绘制</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">unWindowDraw</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&#x27;resize&#x27;</span>, resize)<br>&#125;<br><span class="hljs-comment">// * 定时函数</span><br><span class="hljs-keyword">const</span> timer = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>)<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">resize</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-built_in">clearTimeout</span>(timer.<span class="hljs-property">value</span>)<br>  timer.<span class="hljs-property">value</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">calcRate</span>()<br>  &#125;, <span class="hljs-number">200</span>)<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">calcRate</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> innerWidth = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span> <span class="hljs-comment">//视口的宽</span><br>  <span class="hljs-keyword">const</span> sidebar = appStore.<span class="hljs-property">getSidebar</span><br>  <span class="hljs-keyword">const</span> isCollapse = !sidebar.<span class="hljs-property">opened</span><br>  <span class="hljs-keyword">let</span> currentWidth<br>  <span class="hljs-keyword">if</span> (isCollapse) &#123;<br>    currentWidth = innerWidth - <span class="hljs-number">64</span> - <span class="hljs-number">96</span> <br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    currentWidth = innerWidth - <span class="hljs-number">208</span> - <span class="hljs-number">96</span><br>  &#125;<br>  <span class="hljs-keyword">if</span> (currentWidth &gt;= totalWidth) &#123;<br>    <span class="hljs-keyword">const</span> rate = currentWidth / totalWidth + <span class="hljs-string">&#x27;&#x27;</span><br>    state.<span class="hljs-property">scaleRate</span> = <span class="hljs-title class_">Number</span>(rate.<span class="hljs-title function_">substring</span>(<span class="hljs-number">0</span>, rate.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;.&#x27;</span>) + <span class="hljs-number">3</span>))<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>最终效果如下：<br><img src="/../img/vue33-2.png" srcset="/img/loading.gif" lazyload alt="页面拉长后"><br>基本满足需求，但是因为 js 计算不是很精确，部分表格右侧出现一点空隙，container 的两侧 padding 肉眼可见不一样。</p>
+<h3 id="修改方案：设置-min-width"><a href="#修改方案：设置-min-width" class="headerlink" title="修改方案：设置 min-width"></a>修改方案：设置 min-width</h3><p>思路是放开所有列宽，使其天然自适应，但是发现部分列的比例分配不对，文字容易折行，最好是还是能按照现有比例进行分配。<br>查阅资料后发现有 min-width 这个属性，并且需要所有列宽都设置 min-width，能实现表格拉长时自适应。</p>
+<h3 id="列宽规则总结"><a href="#列宽规则总结" class="headerlink" title="列宽规则总结"></a>列宽规则总结</h3><ol>
+<li>el-table-column 不设置 width 与 minwidth,每一列自适应，宽度一致</li>
+<li>el-table-column 设置 width&#x3D;30%，无效。会被当成 width&#x3D;30px</li>
+<li>每一列都设置 min-width 才能实现每一列的百分比配置</li>
+<li>.el-table-column 同时设置 min-width 和 width 后，该列表格就会按照 width 来设置，相当于 width 就是一个最大宽度</li>
 </ol>
 
             </div>
@@ -279,7 +267,7 @@
                     
                       <a class="hover-with-bg" href="/tags/vue/">vue</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端</a>
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
                     
                   </div>
                 
@@ -296,9 +284,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/22/vue3%E7%AC%94%E8%AE%B0%EF%BC%8832%EF%BC%89%E4%BA%A4%E4%BA%92%E4%BC%98%E5%8C%96%E5%86%99%E6%B3%95%E7%BB%BC%E5%90%88/">
+                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（32）交互优化写法综合</span>
+                        <span class="hidden-mobile">作品集合</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -306,8 +294,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/14/vue3%E7%AC%94%E8%AE%B0%EF%BC%8831%EF%BC%89%E5%9B%BE%E5%BD%A2%E9%AA%8C%E8%AF%81%E7%A0%81/">
-                        <span class="hidden-mobile">vue3笔记（31）图形验证码</span>
+                      <a href="/2023/08/28/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%884%EF%BC%89wujie/">
+                        <span class="hidden-mobile">微前端（4）wujie</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
