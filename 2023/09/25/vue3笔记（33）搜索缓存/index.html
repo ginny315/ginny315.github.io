@@ -16,26 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="el-cascader这个组件使用起来坑好多啊！本篇记录项目中el-cascader使用。">
+    <meta name="description" content="当列表项较多时，用户输入一些搜索条件、改变页数、改变页码获取到需要的搜索条目A，当对该搜索条目A进行操作（例如：编辑、查看等需要打开新页面），点击面包屑或者返回时，需要对之前的搜索项做一个缓存，以保证用户返回时能快速定位到之前的搜索条目A。搜索缓存也遇到一些坑，本篇做一个记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（29）el-cascader 联级选择使用">
-<meta property="og:url" content="http://guoningyan.com/2023/08/03/vue3%E7%AC%94%E8%AE%B0%EF%BC%8829%EF%BC%89el-cascader%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="vue3笔记（33）搜索缓存">
+<meta property="og:url" content="http://guoningyan.com/2023/09/25/vue3%E7%AC%94%E8%AE%B0%EF%BC%8833%EF%BC%89%E6%90%9C%E7%B4%A2%E7%BC%93%E5%AD%98/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="el-cascader这个组件使用起来坑好多啊！本篇记录项目中el-cascader使用。">
+<meta property="og:description" content="当列表项较多时，用户输入一些搜索条件、改变页数、改变页码获取到需要的搜索条目A，当对该搜索条目A进行操作（例如：编辑、查看等需要打开新页面），点击面包屑或者返回时，需要对之前的搜索项做一个缓存，以保证用户返回时能快速定位到之前的搜索条目A。搜索缓存也遇到一些坑，本篇做一个记录。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/vue29-1.png">
-<meta property="og:image" content="http://guoningyan.com/img/vue29-2.png">
-<meta property="og:image" content="http://guoningyan.com/img/vue29-3.png">
-<meta property="article:published_time" content="2023-08-03T02:58:05.000Z">
-<meta property="article:modified_time" content="2023-08-23T06:05:38.487Z">
+<meta property="article:published_time" content="2023-09-25T01:31:27.000Z">
+<meta property="article:modified_time" content="2023-10-08T01:29:06.371Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/vue29-1.png">
   
   
-  <title>vue3笔记（29）el-cascader 联级选择使用 - ginny&#39;s blog</title>
+  <title>vue3笔记（33）搜索缓存 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -173,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（29）el-cascader 联级选择使用">
+            <span class="h2" id="subtitle" title="vue3笔记（33）搜索缓存">
               
             </span>
 
@@ -183,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-03 10:58" pubdate>
-        2023年8月3日 上午
+      <time datetime="2023-09-25 09:31" pubdate>
+        2023年9月25日 上午
       </time>
     </span>
   
@@ -194,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      352 字
     </span>
   
 
@@ -203,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      3 分钟
     </span>
   
 
@@ -232,28 +228,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（29）el-cascader 联级选择使用</h1>
+            <h1 style="display: none">vue3笔记（33）搜索缓存</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>el-cascader这个组件使用起来坑好多啊！本篇记录项目中el-cascader使用。</p>
+<p>当列表项较多时，用户输入一些搜索条件、改变页数、改变页码获取到需要的搜索条目A，当对该搜索条目A进行操作（例如：编辑、查看等需要打开新页面），点击面包屑或者返回时，需要对之前的搜索项做一个缓存，以保证用户返回时能快速定位到之前的搜索条目A。<br>搜索缓存也遇到一些坑，本篇做一个记录。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="联级多选"><a href="#联级多选" class="headerlink" title="联级多选"></a>联级多选</h3><p>设置 <code>props</code> 可是实现联级多选，鼠标悬浮展开后一项用户体验更好，具体配置如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> props = &#123; <span class="hljs-attr">multiple</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">expandTrigger</span>: <span class="hljs-string">&#x27;hover&#x27;</span>, <span class="hljs-attr">checkStrictly</span>: <span class="hljs-literal">true</span> &#125;<br></code></pre></div></td></tr></table></figure>
-<p><img src="/../img/vue29-1.png" srcset="/img/loading.gif" lazyload alt="联级多选"></p>
-<h3 id="自定义选项展示"><a href="#自定义选项展示" class="headerlink" title="自定义选项展示"></a>自定义选项展示</h3><p>原始需求：选项为一行，后面加入一些关于选项的详情，但是详情内容可能过多，所以最好能换行展示，猜想是否能通过自定义展示来实现。<br>使用 <code>#default</code> 插入自定义选项展示。</p>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-form-item</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;功能模块：&quot;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-cascader</span></span><br><span class="hljs-tag">    <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;CascaderRef&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;moduleChosen&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:options</span>=<span class="hljs-string">&quot;moduleOptions&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:props</span>=<span class="hljs-string">&quot;props&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:show-all-levels</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请选择功能模块&quot;</span></span><br><span class="hljs-tag">    @<span class="hljs-attr">change</span>=<span class="hljs-string">&quot;handleModuleChoose&quot;</span></span><br><span class="hljs-tag">  /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">default</span>=<span class="hljs-string">&quot;&#123; node, data &#125;&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;&#123; data.label &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;node.isLeaf&quot;</span>&gt;</span> &#123;&#123; data.value &#125;&#125; <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">el-form-item</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-<p>实验发现，原始选项高度是不变的，使用 <code>p</code> 标签不会撑开容器，会使内容重叠，强制改 css 比较麻烦且不好看，故放弃。使用选中选项后，在输入框下面一块区域显示详情的方式。</p>
-<h3 id="只能选中最后一级（单选）"><a href="#只能选中最后一级（单选）" class="headerlink" title="只能选中最后一级（单选）"></a>只能选中最后一级（单选）</h3><p>在本项目中，一级、二级可能存在没有子集的情况，这时候其自身为叶子结点，在组件中是可以作为叶子结点被选择的，所以需要禁用。通过添加属性 <code>disabled</code> 可实现。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">moduleOptions.<span class="hljs-property">value</span> = <span class="hljs-title function_">formatModule</span>(data)<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">formatModule</span> = (<span class="hljs-params">arr: <span class="hljs-built_in">Array</span></span>) =&gt; &#123;<br>  arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">children</span>) &#123;<br>      item.<span class="hljs-property">children</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">child</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (!child.<span class="hljs-property">children</span>) &#123;<br>          child.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span><br>        &#125;<br>      &#125;)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      arr.<span class="hljs-property">children</span> = []<br>      item.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span><br>    &#125;<br>  &#125;)<br>  <span class="hljs-keyword">return</span> arr<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="只能选中最后一级（多选）"><a href="#只能选中最后一级（多选）" class="headerlink" title="只能选中最后一级（多选）"></a>只能选中最后一级（多选）</h3><p>需要设置 <code>props</code> 如下，若第一级&#x2F;第二级不可选，同时使用上述 formatModule 方法，添加disabled。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> props = &#123; <span class="hljs-attr">expandTrigger</span>: <span class="hljs-string">&#x27;hover&#x27;</span>, <span class="hljs-attr">multiple</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">checkStrictly</span>: <span class="hljs-literal">true</span> &#125;<br></code></pre></div></td></tr></table></figure>
-<h3 id="默认选中"><a href="#默认选中" class="headerlink" title="默认选中"></a>默认选中</h3><p>当给 <code>v-model</code> 直接赋值为每级组合的数组时，可以实现默认选中，例如默认选中第一级，v-model&#x3D;”[1]”(1为OMS的value值)<br><img src="/../img/vue29-2.png" srcset="/img/loading.gif" lazyload alt="第一级默认选中"></p>
-<p>默认选中第三级，v-model&#x3D;”[1, 2, 3]”<br><img src="/../img/vue29-3.png" srcset="/img/loading.gif" lazyload alt="第三级默认选中"></p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li><code>:show-all-levels=&quot;false&quot;</code> 可以保持显示选中的那一项（不然会显示从头到尾一串儿），选中后输入框里使用 el-tag 展示选中项，注意样式可能会污染，需要覆盖 tag 的width，这种有污染的最好不要使用 collapse-tags 和 collapse-tags-tooltip，否则又要多写一层覆盖样式污染</li>
-</ol>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p><code>detail.vue</code> 页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">watch</span>(route, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> path = route.<span class="hljs-property">path</span><br>  <span class="hljs-keyword">if</span> (path.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;traceChip&#x27;</span>) &lt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">removeItem</span>(<span class="hljs-string">&#x27;traceChip&#x27;</span>)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<p>不足：每个页面都要判断，很麻烦。若是有新需求要增加新页面，必须要再次加上。</p>
 
             </div>
             <hr>
@@ -283,9 +267,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8830%EF%BC%89%E5%AF%B9%E6%8E%A5%E9%92%89%E9%92%89%E7%99%BB%E5%BD%95/">
+                      <a href="/2023/09/26/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%885%EF%BC%89ice/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（30）对接钉钉登录</span>
+                        <span class="hidden-mobile">微前端（5）ice</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -293,8 +277,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/28/vue3%E7%AC%94%E8%AE%B0%EF%BC%8828%EF%BC%89%E6%BB%9A%E5%8A%A8%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A/">
-                        <span class="hidden-mobile">vue3笔记（28）滚动加载更多</span>
+                      <a href="/2023/09/23/vue3%E7%AC%94%E8%AE%B0%EF%BC%8827-4%EF%BC%89el-table%E8%87%AA%E9%80%82%E5%BA%94/">
+                        <span class="hidden-mobile">vue3笔记（27-4）el-table自适应</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
