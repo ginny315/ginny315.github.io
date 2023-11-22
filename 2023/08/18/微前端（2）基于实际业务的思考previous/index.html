@@ -24,7 +24,7 @@
 <meta property="og:description" content="本篇是实际业务的思考，previous 代表选型前期，基于目前的框架使用和业务发展的预测，可能后期会推翻，暂时先做一个记录。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-18T00:45:41.000Z">
-<meta property="article:modified_time" content="2023-10-08T07:54:02.122Z">
+<meta property="article:modified_time" content="2023-10-23T07:09:49.130Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="微前端">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.6k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      14 分钟
     </span>
   
 
@@ -268,6 +268,18 @@
 <li>“UMS 作为基座，负责加载公用逻辑，其他子系统共享。”这样不就是 monorepo 形式？不方便让其他系统单独开发了。</li>
 </ol>
 <h3 id="10-8更新"><a href="#10-8更新" class="headerlink" title="10.8更新"></a>10.8更新</h3><p>若只把 UMS 作为一个框架，不考虑组件复用、样式复用问题，应该也可行。<br>UMS 顶部导航作为消息共享区域，用户信息、子系统访问权限、消息推送（若有）、文档等其他功能。<br>子系统只需要专注于主体部分，可能涉及子系统之间跳转（例如：根据订单号跳转到订单管理系统，前提是有权限）。</p>
+<h3 id="10-23更新"><a href="#10-23更新" class="headerlink" title="10.23更新"></a>10.23更新</h3><p>当前测试 ice 框架可实现最基本需求，若进一步修改，涉及以下部分：<br>UMS：</p>
+<ol>
+<li>Navbar 中根据 URL 替换标题、图标（子系统的 Navbar 都需要在 UMS 中写一份）</li>
+<li>判断是 UMS 本系统，渲染其他功能入口（首页、控制台、消息管理、操作日志、个人中心、修改密码）</li>
+<li>设置共享状态（token、userInfo、sysAccess）<br>子系统：</li>
+<li>判断在当前系统中，渲染 Navbar（SimpleLayout&#x2F;OtherLayout）</li>
+<li>获取共享状态<br>优化项：预加载<br>需要保证：</li>
+<li>单独系统按照之前模式可以正常运行</li>
+<li>改造后不会引入新 bug</li>
+<li>就只有最初简单的改造成本，后续开发成本不会增加</li>
+<li>系统运行效率有一定提升（加分项）</li>
+</ol>
 
             </div>
             <hr>
