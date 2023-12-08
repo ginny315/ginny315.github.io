@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="新需求，报价管理中每个报价单的明细需要转换成 pdf 导出，调研后完美实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（37）页面转 pdf 导出">
+<meta property="og:url" content="http://guoningyan.com/2023/12/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8837%EF%BC%89%E9%A1%B5%E9%9D%A2%E8%BD%ACpdf%E5%AF%BC%E5%87%BA/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="新需求，报价管理中每个报价单的明细需要转换成 pdf 导出，调研后完美实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/vue37-1.png">
+<meta property="article:published_time" content="2023-12-08T07:55:41.000Z">
+<meta property="article:modified_time" content="2023-12-08T08:02:45.863Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue37-1.png">
+  
+  
+  <title>vue3笔记（37）页面转 pdf 导出 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（37）页面转 pdf 导出">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-12-08 15:55" pubdate>
+        2023年12月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（37）页面转 pdf 导出</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>新需求，报价管理中每个报价单的明细需要转换成 pdf 导出，调研后完美实现。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm i html2canvas<br>npm i jspdf<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="html-转-pdf"><a href="#html-转-pdf" class="headerlink" title="html 转 pdf"></a>html 转 pdf</h3><p>在<code>utils</code>文件夹下新建<code>html2pdf.ts</code>文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> html2canvas <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;html2canvas&#x27;</span>;<br><span class="hljs-keyword">import</span> jsPDF <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;jspdf&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">htmlToPDF</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">htmlId: string, title: string = <span class="hljs-string">&quot;报表&quot;</span>, bgColor = <span class="hljs-string">&quot;#fff&quot;</span></span>) =&gt; &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-attr">pdfDom</span>: <span class="hljs-title class_">HTMLElement</span> | <span class="hljs-literal">null</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(htmlId) <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span><br>    pdfDom.<span class="hljs-property">style</span>.<span class="hljs-property">padding</span> = <span class="hljs-string">&#x27;0 10px !important&#x27;</span><br>    <span class="hljs-keyword">const</span> A4Width = <span class="hljs-number">595.28</span>;<br>    <span class="hljs-keyword">const</span> A4Height = <span class="hljs-number">841.89</span>;<br>    <span class="hljs-keyword">let</span> canvas = <span class="hljs-keyword">await</span> <span class="hljs-title function_">html2canvas</span>(pdfDom, &#123;<br>        <span class="hljs-attr">scale</span>: <span class="hljs-number">2</span>,<br>        <span class="hljs-attr">useCORS</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-attr">backgroundColor</span>: bgColor,<br>    &#125;);<br>    <span class="hljs-keyword">let</span> pageHeight = (canvas.<span class="hljs-property">width</span> / A4Width) * A4Height;<br>    <span class="hljs-keyword">let</span> leftHeight = canvas.<span class="hljs-property">height</span>;<br>    <span class="hljs-keyword">let</span> position = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> imgWidth = A4Width;<br>    <span class="hljs-keyword">let</span> imgHeight = (A4Width / canvas.<span class="hljs-property">width</span>) * canvas.<span class="hljs-property">height</span>;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">     自定义水印代码</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-keyword">const</span> <span class="hljs-attr">ctx</span>: any = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&#x27;2d&#x27;</span>);<br>    ctx.<span class="hljs-property">textAlign</span> = <span class="hljs-string">&#x27;center&#x27;</span>;<br>    ctx.<span class="hljs-property">textBaseline</span> = <span class="hljs-string">&#x27;middle&#x27;</span>;<br>    ctx.<span class="hljs-title function_">rotate</span>((<span class="hljs-number">20</span> * <span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span>) / <span class="hljs-number">180</span>);<br>    ctx.<span class="hljs-property">font</span> = <span class="hljs-string">&#x27;20px Microsoft Yahei&#x27;</span>;<br>    ctx.<span class="hljs-property">fillStyle</span> = <span class="hljs-string">&#x27;rgba(184, 184, 184, 0.8)&#x27;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = canvas.<span class="hljs-property">width</span> * -<span class="hljs-number">1</span>; i &lt; canvas.<span class="hljs-property">width</span>; i += <span class="hljs-number">240</span>) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = canvas.<span class="hljs-property">height</span> * -<span class="hljs-number">1</span>; j &lt; canvas.<span class="hljs-property">height</span>; j += <span class="hljs-number">200</span>) &#123;<br>            <span class="hljs-comment">// 填充文字，x 间距, y 间距</span><br>            ctx.<span class="hljs-title function_">fillText</span>(<span class="hljs-string">&#x27;水印名&#x27;</span>, i, j);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">     自定义水印代码</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">let</span> pageData = canvas.<span class="hljs-title function_">toDataURL</span>(<span class="hljs-string">&quot;image/jpeg&quot;</span>, <span class="hljs-number">1.0</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable constant_">PDF</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_">jsPDF</span>(<span class="hljs-string">&quot;p&quot;</span>, <span class="hljs-string">&#x27;pt&#x27;</span>, <span class="hljs-string">&#x27;a4&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (leftHeight &lt; pageHeight) &#123;<br>        <span class="hljs-variable constant_">PDF</span>.<span class="hljs-title function_">addImage</span>(pageData, <span class="hljs-string">&quot;JPEG&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, imgWidth, imgHeight);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">while</span> (leftHeight &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-variable constant_">PDF</span>.<span class="hljs-title function_">addImage</span>(pageData, <span class="hljs-string">&quot;JPEG&quot;</span>, <span class="hljs-number">0</span>, position, imgWidth, imgHeight);<br>            leftHeight -= pageHeight;<br>            position -= A4Height;<br>            <span class="hljs-keyword">if</span> (leftHeight &gt; <span class="hljs-number">0</span>) <span class="hljs-variable constant_">PDF</span>.<span class="hljs-title function_">addPage</span>();<br>        &#125;<br>    &#125;<br>    <span class="hljs-variable constant_">PDF</span>.<span class="hljs-title function_">save</span>(title + <span class="hljs-string">&quot;.pdf&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="项目中使用"><a href="#项目中使用" class="headerlink" title="项目中使用"></a>项目中使用</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;quote&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;test-id&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 这里是导出内容 --&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleExport&quot;</span>&gt;</span>导出<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> &#123; htmlToPDF &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/html2pdf&#x27;</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleExport</span> = (<span class="hljs-params"></span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-title function_">htmlToPDF</span>(<span class="hljs-string">&#x27;test-id&#x27;</span>, state.<span class="hljs-property">quote</span>.<span class="hljs-property">quotation_number</span>)</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>点击按钮触发导出功能，最终效果如下：<br><img src="/../img/vue37-1.png" srcset="/img/loading.gif" lazyload alt="预览效果"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">作品集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8836%EF%BC%89%E9%A1%B5%E9%9D%A2%E5%88%87%E6%8D%A2%E6%8F%90%E7%A4%BA/">
+                        <span class="hidden-mobile">vue3笔记（36）页面切换提示</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

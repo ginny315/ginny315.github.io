@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue18-1.png">
 <meta property="article:published_time" content="2023-03-19T08:37:15.000Z">
-<meta property="article:modified_time" content="2023-09-05T02:26:14.569Z">
+<meta property="article:modified_time" content="2023-12-04T08:15:08.724Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -192,7 +192,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      3k 字
     </span>
   
 
@@ -201,7 +201,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24 分钟
+      25 分钟
     </span>
   
 
@@ -250,7 +250,8 @@
 <p>使用插件来进行上面一段的插入</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm i -D vite-plugin-optimize-persist vite-plugin-package-config<br></code></pre></div></td></tr></table></figure>
 <p><img src="/../img/vue18-1.png" srcset="/img/loading.gif" lazyload alt="包引入失败"><br>git主页有这句话 <code>You no longer need this plugin since Vite 2.9.1</code><br>按照提示加了 <code>--legacy</code> 强制装上了，然后手动删除了 node_modules&#x2F;.vite 文件夹，重新运行代码，速度略微提高。可能还有其他原因，或者是我自己的配置问题，在以后实验后继续更新。</p>
-<h3 id="解决方案二（待调研…）"><a href="#解决方案二（待调研…）" class="headerlink" title="解决方案二（待调研…）"></a>解决方案二（待调研…）</h3><p><code>附录</code><br><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">Vite官方文档</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pzy_666/article/details/123017630">vite首次打开界面加载慢问题&#x2F;解决</a></p>
+<h3 id="解决方案二（待调研…）"><a href="#解决方案二（待调研…）" class="headerlink" title="解决方案二（待调研…）"></a>解决方案二（待调研…）</h3><h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p>“no such file or directory, rename ‘&#x2F;node_modules&#x2F;.vite&#x2F;deps_temp’ -&gt; ‘&#x2F;node_modules&#x2F;.vite&#x2F;deps’”<br>升级vite</p>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">Vite官方文档</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pzy_666/article/details/123017630">vite首次打开界面加载慢问题&#x2F;解决</a></p>
 
             </div>
             <hr>
