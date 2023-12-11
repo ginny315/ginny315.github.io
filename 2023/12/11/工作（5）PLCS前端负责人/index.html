@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在某国企背景的创业公司里，在团队里只有一个初级工技师和一个外包工程师的情况下，我从一个前端杂役承担起了前端负责人的职责，从零到一搭建了产品追溯平台（PLCS）一整个系列。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作（5）PLCS 前端负责人">
+<meta property="og:url" content="http://guoningyan.com/2023/12/11/%E5%B7%A5%E4%BD%9C%EF%BC%885%EF%BC%89PLCS%E5%89%8D%E7%AB%AF%E8%B4%9F%E8%B4%A3%E4%BA%BA/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="在某国企背景的创业公司里，在团队里只有一个初级工技师和一个外包工程师的情况下，我从一个前端杂役承担起了前端负责人的职责，从零到一搭建了产品追溯平台（PLCS）一整个系列。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-11T02:52:11.000Z">
+<meta property="article:modified_time" content="2023-12-11T03:29:17.529Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="工作实习">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>工作（5）PLCS 前端负责人 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="工作（5）PLCS 前端负责人">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-12-11 10:52" pubdate>
+        2023年12月11日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">工作（5）PLCS 前端负责人</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>在某国企背景的创业公司里，在团队里只有一个初级工技师和一个外包工程师的情况下，我从一个前端杂役承担起了前端负责人的职责，从零到一搭建了产品追溯平台（PLCS）一整个系列。 </p>
+</blockquote>
+<span id="more"></span>
+<h3 id="工作内容简介"><a href="#工作内容简介" class="headerlink" title="工作内容简介"></a>工作内容简介</h3><p>具体技术细节已经在前面的文章里分析过了，这个前端项目系列基于 Vue.js 搭建，使用 Element Plus 组件库，并在 UI 团队的支持下，对部分组件进行了二次封装。</p>
+<p>这篇文章主要讲一下业务细节。</p>
+<ol>
+<li><p>UMS （用户管理系统）<br>UMS 作为 PLCS 整个的支撑，我负责了用户管理、系统管理、菜单管理、角色管理、通知管理等所有模块的开发工作。通过 UMS 的配置，可实现不同用户对系统整体的访问控制和整体消息分发。</p>
+</li>
+<li><p>PTS（产品追溯系统）<br>跟踪和记录产品生命周期信息，对公司产品（芯片、加速卡、一体机及软件产品）全生命周期的管理和追溯闭环。我负责了产品追溯台账、硬件产品信息、软件产品信息、供应商、客户模块的开发工作。</p>
+</li>
+<li><p>OMS（订单管理系统）<br>用于销售订单的管理，我负责了订单管理模块的开发工作。</p>
+</li>
+<li><p>维护卡（元维监测系统）<br>与硬件部合作，进行 web 端维护卡硬件数据展示。我负责了数据监测可视化展示及版本固件升级修复功能开发。</p>
+</li>
+<li><p>CPQ（报价管理系统）<br>用来配置报价的子系统，帮助公司销售人员对复杂和可配置产品（如一体机、POD等）进行报价。我负责了客户模块、产品货架、价格及可售管理、报价测算模块的开发工作。</p>
+</li>
+</ol>
+<h3 id="工作价值总结"><a href="#工作价值总结" class="headerlink" title="工作价值总结"></a>工作价值总结</h3><ol>
+<li><p>保持稳定的产出<br>我在短时间内快速完成开发任务，任务紧急的情况下加班加点，最终保证任务圆满完成。在各种情况下勇于担当，尽全力减轻项目风险。</p>
+</li>
+<li><p>串联团队的协作<br>在前端开发工作中，我快速理解产品经理提出的需求，和后端工程师讨论交流数据传输设计，和UI设计师评估交互优化的实现，作为一个粘合剂，我和团队的每一部分都紧密协作，共同完成目标。</p>
+</li>
+<li><p>交付可靠的系统<br>我能保证代码质量，交付运行稳定、准确性高的系统及操作文档。</p>
+</li>
+</ol>
+<h3 id="工作感悟"><a href="#工作感悟" class="headerlink" title="工作感悟"></a>工作感悟</h3><p>上面的都是 PPT 总结，聊两句自己的感受。<br>从零到一搭建一个系统确实不是一件容易的事儿，特别是需求不断变化。产品姐姐也是疲于应对各方站在个人角度提出的奇怪需求。她周末都在加班，就是为了整理出一条明确的思路，虽然文档一直在修改，为了 ddl 我和后端同学也只能边开发边跟着 PRD 变，有些时候刚开发完需求又变了，我又要重构一部分，重复的工作让我心力交瘁，但是看到最后的成果时，又觉得这些努力都是值得的。<br>在 Q3 老板又要求对整体交互做一个大的提升，对系统的修改量还是很大的。带的两个小朋友又需要在我的指导下进行系统的修改，我觉得自己扛了个大山，先要自己试错，然后带着大家往前，好在我电商出身，像素级还原交互稿的本事还在，加上一些逻辑性的东西，最终还是顺利完成了。<br>我觉得设计系统需要一个好的底子（经验的积累），加上一点想象力（部分需求的实现需要自己脑子里想象出一个可能的解决方案再做尝试），还需要一点运气（有时候预留的空间正好和下一个需求匹配了），天时地利人和，才能在预期完成任务。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/">工作实习</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">作品集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8837%EF%BC%89%E9%A1%B5%E9%9D%A2%E8%BD%ACpdf%E5%AF%BC%E5%87%BA/">
+                        <span class="hidden-mobile">vue3笔记（37）页面转 pdf 导出</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
