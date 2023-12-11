@@ -16,17 +16,17 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖、">
+    <meta name="description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（32）交互优化写法综合">
 <meta property="og:url" content="http://guoningyan.com/2023/08/22/vue3%E7%AC%94%E8%AE%B0%EF%BC%8832%EF%BC%89%E4%BA%A4%E4%BA%92%E4%BC%98%E5%8C%96%E5%86%99%E6%B3%95%E7%BB%BC%E5%90%88/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖、">
+<meta property="og:description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/vue32-1.png">
 <meta property="og:image" content="http://guoningyan.com/img/vue32-2.png">
 <meta property="article:published_time" content="2023-08-22T01:18:49.000Z">
-<meta property="article:modified_time" content="2023-09-07T02:42:38.790Z">
+<meta property="article:modified_time" content="2023-12-11T09:15:12.461Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -235,7 +235,7 @@
             
             <div class="markdown-body">
               <blockquote>
-<p>本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖、</p>
+<p>本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。</p>
 </blockquote>
 <span id="more"></span>
 <h3 id="页面停留时间超过一小时跳转登录页"><a href="#页面停留时间超过一小时跳转登录页" class="headerlink" title="页面停留时间超过一小时跳转登录页"></a>页面停留时间超过一小时跳转登录页</h3><p>设计思路：页面打开时设置定时器，每 3分钟 轮询一次，获取当前时间和初始时间的时间差，若轮询多次后时间差超过1小时，则跳转登录页面。<br>时间差计算函数如下：</p>
