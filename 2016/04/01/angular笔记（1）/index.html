@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。架构是大师姐搭建的，比较符合范式要求，讲一下我作为一个angular初学者、公司内部平台维护者的一些学习以及实践经验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular笔记（1）">
+<meta property="og:url" content="http://guoningyan.com/2016/04/01/angular%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这两周我参与了一个angular项目的迭代，说一下我的使用心得。架构是大师姐搭建的，比较符合范式要求，讲一下我作为一个angular初学者、公司内部平台维护者的一些学习以及实践经验。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/ng1-error1.png">
+<meta property="article:published_time" content="2016-04-01T11:57:44.000Z">
+<meta property="article:modified_time" content="2022-04-29T05:24:59.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="angular">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/ng1-error1.png">
+  
+  
+  
+  <title>angular笔记（1） - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="angular笔记（1）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2016-04-01 19:57" pubdate>
+          2016年4月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">angular笔记（1）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>这两周我参与了一个angular项目的迭代，说一下我的使用心得。<br>架构是大师姐搭建的，比较符合范式要求，讲一下我作为一个angular初学者、公司内部平台维护者的一些学习以及实践经验。</p>
+</blockquote>
+ <span id="more"></span>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-app</span><br><span class="line"></span><br><span class="line">	-css //预处理器编译后的css文件</span><br><span class="line"></span><br><span class="line">	-data //模拟数据</span><br><span class="line"></span><br><span class="line">	-js</span><br><span class="line"></span><br><span class="line">		-app.js(项目主入口)</span><br><span class="line"></span><br><span class="line">		-common.js(路由、过滤)</span><br><span class="line"></span><br><span class="line">		-main.js(依赖关系，js入口文件)</span><br><span class="line"></span><br><span class="line">		-routes.js(状态切换)</span><br><span class="line"></span><br><span class="line">	-less</span><br><span class="line"></span><br><span class="line">		-lib(reset之类)</span><br><span class="line"></span><br><span class="line">		-index.less</span><br><span class="line"></span><br><span class="line">	-lib(js库文件包，在main.js中引入)</span><br><span class="line"></span><br><span class="line">	-modules</span><br><span class="line"></span><br><span class="line">		-子模块中html、js文件写在一起</span><br><span class="line"></span><br><span class="line">	-host.js(开发测试生产环境对应路由，当有新的URL时，需要对应三个环境)</span><br><span class="line"></span><br><span class="line">	-index.html(默认首页)</span><br></pre></td></tr></table></figure>
+
+<p><code>下拉列表选项</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span> <span class="attr">name</span>=<span class="string">&quot;必填，用于表单校验&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-model</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-options</span>=<span class="string">&quot;item.id as item.name for item in List&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-init</span>=<span class="string">&quot;设置初始值，慎用，尽量在js中设置&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-change</span>=<span class="string">&quot;func()&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-disabled</span>=<span class="string">&quot;满足条件时不可用&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">required</span>&gt;</span>        </span><br></pre></td></tr></table></figure>
+<p><code>注意</code></p>
+<p>ng-options :key as value，这样在<code>&lt;option value=&quot;value&quot;&gt;</code>中保存的是value，显示的是key .         </p>
+<p>ng-change挂载在$scope.func ＝ function()上      </p>
+<p><code>输入框选项</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">&quot;inputName&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-model</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">ng-pattern</span>=<span class="string">&quot;/此处需要正则表达式，用于检验表单的填写/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-show</span>=<span class="string">&quot;formName.inputName.$dirty &amp;&amp; formName.inputName.$invalid&quot;</span>&gt;</span></span><br><span class="line">  当表单检验不通过时显示提示语，dirty表示表单获得焦点，即表单初始化时提示语不现实，invalid表示满足表单非法状态下显示提示语<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>表格</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">ng-table</span>=<span class="string">&quot;tableParams&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">&quot;item in $data&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>  <span class="attr">class</span>=<span class="string">&quot;&quot;</span>  <span class="attr">data-header</span>=<span class="string">&quot;&#x27;checkBoxHeader.html&#x27;&quot;</span> &gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">ng-model</span>=<span class="string">&quot;checkBoxes.items[item.id]&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-title</span>=<span class="string">&quot;&#x27;任务一级分类&#x27;&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>  <span class="attr">class</span>=<span class="string">&quot;text-center&quot;</span> <span class="attr">bo-bind</span>=<span class="string">&quot;item.firstCategoryName  | demoLimit:15&quot;</span> <span class="attr">uib-tooltip</span>=<span class="string">&quot;&#123;&#123;item.firstCategoryName&#125;&#125;&quot;</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">     <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>  <span class="title function_">checkBox</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$scope.<span class="property">checkBoxes</span> = &#123; <span class="string">&#x27;checked&#x27;</span>: <span class="literal">false</span>, <span class="attr">items</span>: &#123;&#125; &#125;;</span><br><span class="line">	$scope.$watch(<span class="string">&#x27;checkBoxes.checked&#x27;</span>, <span class="keyword">function</span>(<span class="params">value</span>) &#123;</span><br><span class="line"> 	angular.<span class="title function_">forEach</span>(list, <span class="keyword">function</span>(<span class="params">item</span>) &#123;</span><br><span class="line"> 		<span class="keyword">if</span> (angular.<span class="title function_">isDefined</span>(item.<span class="property">id</span>)) &#123;</span><br><span class="line"> 			$scope.<span class="property">checkBoxes</span>.<span class="property">items</span>[item.<span class="property">id</span>] = value;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getTableParams</span>(<span class="params"></span>) &#123;</span><br><span class="line">     $scope.<span class="property">tableParams</span> = <span class="keyword">new</span> <span class="title class_">NgTableParams</span>(&#123;</span><br><span class="line">           <span class="attr">count</span>: <span class="variable constant_">PAGESIZE</span></span><br><span class="line">     &#125;, &#123;</span><br><span class="line">       <span class="attr">getData</span>: <span class="keyword">function</span>(<span class="params">params</span>) &#123;</span><br><span class="line">         <span class="keyword">var</span> pageIndex = params.<span class="title function_">page</span>();</span><br><span class="line">         <span class="keyword">return</span> httpData.<span class="title function_">getThemeList</span>(&#123;</span><br><span class="line">           <span class="attr">pageIndex</span>: pageIndex,</span><br><span class="line">           <span class="attr">pageSize</span>: <span class="variable constant_">PAGESIZE</span>,</span><br><span class="line">         &#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">           params.<span class="title function_">total</span>(response.<span class="property">totalNum</span>);</span><br><span class="line">           $scope.<span class="property">tableCount</span> = response.<span class="property">totalNum</span>;</span><br><span class="line">           list = response.<span class="property">list</span>;</span><br><span class="line">           <span class="title function_">checkBox</span>();</span><br><span class="line">           <span class="keyword">return</span> response.<span class="property">list</span>;</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>字符长度过滤</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.<span class="title function_">filter</span>(<span class="string">&quot;demoLimit&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">string,num</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(string &amp;&amp; string.<span class="property">length</span> &gt; num)&#123;</span><br><span class="line">           <span class="keyword">return</span> string.<span class="title function_">slice</span>(<span class="number">0</span>,num) + <span class="string">&quot;...&quot;</span> ;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> string;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>注意</code></p>
+<p>NgTableParams插件获取表单新数据，存入$data中在页面中使用，bindonce插件表示数据同步一次，bo前缀有自己的html语法，区别ng前缀，在加载图片是bo可能会有问题。</p>
+<p><code>数据实时校验</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>数据one<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span> <span class="attr">name</span>=<span class="string">&quot;entryFee&quot;</span> <span class="attr">ng-model</span>=<span class="string">&quot;Item.dataone&quot;</span>/&gt;</span></span><br><span class="line">    &lt;divng-show=&quot;dataoneError==0&quot; &gt;数据1不能超过数据2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>数据two<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">name</span>=<span class="string">&quot;challengeReward&quot;</span> <span class="attr">ng-model</span>=<span class="string">&quot;Item.datatwo&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text-danger&quot;</span> <span class="attr">ng-show</span>=<span class="string">&quot;dataoneError==0&quot;</span>&gt;</span>数据1不能超过数据2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$scope.$watch(<span class="string">&#x27;Item.dataone&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(+$scope.<span class="property">dataone</span> &lt; +$scope.<span class="property">datatwo</span>)</span><br><span class="line">        $scope.<span class="property">dataoneError</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        $scope.<span class="property">dataoneError</span> = <span class="number">1</span>;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line">$scope.$watch(<span class="string">&#x27;Item.datatwo&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="keyword">if</span>(+$scope.<span class="property">dataone</span> &lt; +$scope.<span class="property">datatwo</span>)</span><br><span class="line">        $scope.<span class="property">dataoneError</span> = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">        $scope.<span class="property">dataoneError</span> = <span class="number">1</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>注意</code></p>
+<p>我写了两个<code>watch</code>来同步监视数据变化，若只有一个<code>watch</code>，则可能导致两个数据之一改变另一数据不能检测到，页面中<code>watch</code>过多可能有性能问题，建议有更好的解决方案。</p>
+<p><code>项目启动</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//app目录下</span><br><span class="line">fone s</span><br></pre></td></tr></table></figure>
+<p><code>项目打包</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//index.html打tag</span><br><span class="line">//app目录下</span><br><span class="line">fis3 release -d ../dist</span><br><span class="line">//root目录下</span><br><span class="line">git add/commit/push</span><br></pre></td></tr></table></figure>
+<p><code>附录一</code></p>
+<p>当页面中出现除了提交表单以外的按钮时，当在input输入框填写文字时键盘触发回车，会导致距离输入框最近的按钮触发，解决方式如下：添加不可用的按钮，则回车触发不可用按钮，完美解决。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">&quot;true&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span> <span class="attr">ng-click</span>=<span class="string">&quot;doChooseAdvice()&quot;</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-disabled</span>=<span class="string">&quot;true&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>附录二</code><br>需要掌握的资料<br><a target="_blank" rel="noopener" href="http://showcase.ngnice.com/#/home/home">angular&amp;bootstrap插件合集</a><br><a target="_blank" rel="noopener" href="http://angular-ui.github.io/bootstrap/#/datepicker">angular&amp;bootstrap插件</a><br><a target="_blank" rel="noopener" href="http://chensd.com/2015-06/AngularJS-popular-Plugins-and-Directive.html">angular常用插件与指令收集</a><br><a target="_blank" rel="noopener" href="https://github.com/angular-ui">angularui</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/yjf512/p/3796229.html">javascript时间戳和日期字符串相互转换</a>  </p>
+<p><code>附录三</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: [$compile:tplrt] Template for directive &#x27;AAA&#x27; must have exactly one root element. </span><br></pre></td></tr></table></figure>
+<p>指令error:这个错误表示指令编译成标签的时候出现问题，可能的解决方式：</p>
+<ul>
+<li>外层包裹一个div</li>
+<li>指令内有标签未闭合，检查代码</li>
+</ul>
+<p><code>附录四</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cannot set property &#x27;visiblecolumncount&#x27; of undefined</span><br></pre></td></tr></table></figure>
+<p><img src="/img/ng1-error1.png" srcset="/img/loading.gif" lazyload alt="angular-error"><br> 当时看到这个问题觉得很奇怪，后来发现是接口没有取到数据的问题，检查接口返回。</p>
+<p><code>友情链接</code><br><a target="_blank" rel="noopener" href="http://www.zhouxianbao.cn/">@XB</a>同学改造的<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/fone-angular">angular项目目录生成</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/angular/">#angular</a>
+      
+        <a href="/tags/javascript/">#javascript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>angular笔记（1）</div>
+      <div>http://guoningyan.com/2016/04/01/angular笔记（1）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ningyan Guo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2016年4月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/04/10/%E5%BE%AE%E4%BF%A1SDK%E5%BC%80%E5%8F%91/" title="微信SDK开发">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微信SDK开发</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/03/26/ife-task1-9-1/" title="ife task1.9">
+                        <span class="hidden-mobile">ife task1.9</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

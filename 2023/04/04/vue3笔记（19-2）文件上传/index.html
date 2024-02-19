@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="原来的项目都是直接使用el-upload组件，结果遇到个新项目一个form里面可能需要使用多个el-upload，数据多了以后显得代码臃肿。本篇做一个文件上传抽取处理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（19-2）文件上传">
+<meta property="og:url" content="http://guoningyan.com/2023/04/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%8819-2%EF%BC%89%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="原来的项目都是直接使用el-upload组件，结果遇到个新项目一个form里面可能需要使用多个el-upload，数据多了以后显得代码臃肿。本篇做一个文件上传抽取处理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-04T07:33:28.000Z">
+<meta property="article:modified_time" content="2023-06-05T05:28:00.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>vue3笔记（19-2）文件上传 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="vue3笔记（19-2）文件上传"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-04 15:33" pubdate>
+          2023年4月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（19-2）文件上传</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>原来的项目都是直接使用el-upload组件，结果遇到个新项目一个form里面可能需要使用多个el-upload，数据多了以后显得代码臃肿。<br>本篇做一个文件上传抽取处理。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="文件上传公用方法"><a href="#文件上传公用方法" class="headerlink" title="文件上传公用方法"></a>文件上传公用方法</h3><p><code>file.ts</code>中写一些公用方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取文件后缀</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getFileType</span> = (<span class="hljs-params">name</span>) =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (name) &#123;<br>    <span class="hljs-keyword">if</span> (name.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&#x27;.&#x27;</span>) &gt; -<span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-keyword">return</span> name.<span class="hljs-title function_">slice</span>(name.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&#x27;.&#x27;</span>) + <span class="hljs-number">1</span>)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> acceptList = [<span class="hljs-string">&#x27;.pdf&#x27;</span>,<span class="hljs-string">&#x27;.doc&#x27;</span>,<span class="hljs-string">&#x27;.docx&#x27;</span>,<span class="hljs-string">&#x27;.jpg&#x27;</span>,<span class="hljs-string">&#x27;.png&#x27;</span>,<span class="hljs-string">&#x27;.xls&#x27;</span>,<span class="hljs-string">&#x27;.xlsx&#x27;</span>]<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> suffixList = [<span class="hljs-string">&#x27;pdf&#x27;</span>, <span class="hljs-string">&#x27;doc&#x27;</span>, <span class="hljs-string">&#x27;docx&#x27;</span>, <span class="hljs-string">&#x27;jpg&#x27;</span>, <span class="hljs-string">&#x27;png&#x27;</span>, <span class="hljs-string">&#x27;xlsx&#x27;</span>, <span class="hljs-string">&#x27;xls&#x27;</span>]<br></code></pre></td></tr></table></figure>
+
+<h3 id="文件上传组件编写"><a href="#文件上传组件编写" class="headerlink" title="文件上传组件编写"></a>文件上传组件编写</h3><p><code>uploadAttachment.vue</code>中将el-upload做一个封装，并把fileList暴露出去，这里获取的attachmentInfo是已经上传成功的文件列表（只有编辑状态下可能出现）。</p>
+<ol>
+<li>设置可上传文件格式，通过组件accept属性判断</li>
+<li>设置单文件不能超过10M，通过组件绑定on-change函数判断；</li>
+<li>设置最大可上传10个文件，通过动态控制组件limit属性和upload按钮判断；</li>
+<li>通过设置<code>auto-upload=&quot;false&quot;</code>可实现手动上传；</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-upload</span></span><br><span class="hljs-tag">    <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;upload&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">multiple</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:auto-upload</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">v-model:file-list</span>=<span class="hljs-string">&quot;fileList&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:on-remove</span>=<span class="hljs-string">&quot;handleFileRemove&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:on-change</span>=<span class="hljs-string">&quot;handleFileChange&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:accept</span>=<span class="hljs-string">&quot;acceptList&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:limit</span>=<span class="hljs-string">&quot;maxNum&quot;</span></span><br><span class="hljs-tag">  &gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;Upload&quot;</span> <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;maxNum - chooseNum == 0&quot;</span>&gt;</span>上传文件<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">tip</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;el-upload__tip&quot;</span>&gt;</span> 支持扩展名：.doc .docx .pdf .jpg .png .xlsx .xls<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-upload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;props.attachmentInfo &amp;&amp; props.attachmentInfo.length &gt; 0&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;attachmentList&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>已上传文件如下：<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(file, idx) in props.attachmentInfo&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;idx&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">el-tooltip</span> <span class="hljs-attr">placement</span>=<span class="hljs-string">&quot;top&quot;</span> <span class="hljs-attr">:content</span>=<span class="hljs-string">&quot;file.name&quot;</span>&gt;</span><br>          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;format-file-name2&quot;</span>&gt;</span>&#123;&#123; file.name &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">el-tooltip</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">text</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;danger&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleFileDelete(file.id)&quot;</span>&gt;</span>删除<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> &#123; acceptList &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/file&#x27;</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> props = defineProps&lt;&#123;</span><br><span class="language-javascript">  attachmentInfo?: <span class="hljs-title class_">Array</span>&lt;any&gt;</span><br><span class="language-javascript">  refName?: string</span><br><span class="language-javascript">&#125;&gt;()</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> myEmit = <span class="hljs-title function_">defineEmits</span>([<span class="hljs-string">&#x27;handleEmitDel&#x27;</span>])</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> fileList = <span class="hljs-title function_">ref</span>([])</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> disUpload = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">false</span>)</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 最多上传10个文件</span></span><br><span class="language-javascript"><span class="hljs-keyword">let</span> maxNum = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> num1 = (props.<span class="hljs-property">attachmentInfo</span> &amp;&amp; props.<span class="hljs-property">attachmentInfo</span>.<span class="hljs-property">length</span>) || <span class="hljs-number">0</span></span><br><span class="language-javascript">  <span class="hljs-keyword">return</span> <span class="hljs-number">10</span> - num1</span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 已选择文件数量</span></span><br><span class="language-javascript"><span class="hljs-keyword">let</span> chooseNum = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> num2 = (fileList.<span class="hljs-property">value</span> &amp;&amp; fileList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span>) || <span class="hljs-number">0</span></span><br><span class="language-javascript">  <span class="hljs-keyword">return</span> num2</span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 已选择文件删除</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFileRemove</span> = (<span class="hljs-params">uploadFile, uploadFiles</span>) =&gt; &#123;</span><br><span class="language-javascript">  fileList.<span class="hljs-property">value</span> = <span class="hljs-title function_">toRaw</span>(uploadFiles)</span><br><span class="language-javascript">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;remove   &#x27;</span>, fileList.<span class="hljs-property">value</span>)</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 已上传文件删除-可自定义组件refName</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFileDelete</span> = (<span class="hljs-params">id</span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">if</span> (props.<span class="hljs-property">refName</span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">myEmit</span>(<span class="hljs-string">&#x27;handleEmitDel&#x27;</span>, &#123; <span class="hljs-attr">id</span>: id, <span class="hljs-attr">name</span>: props.<span class="hljs-property">refName</span> &#125;)</span><br><span class="language-javascript">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">myEmit</span>(<span class="hljs-string">&#x27;handleEmitDel&#x27;</span>, id)</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-comment">// 文件改变时触发-判断文件大小、判断文件格式</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFileChange</span> = (<span class="hljs-params">file, fileList</span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(file, fileList)</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> fileType = <span class="hljs-title function_">getFileType</span>(file.<span class="hljs-property">name</span>)</span><br><span class="language-javascript">  <span class="hljs-keyword">if</span> (suffixList.<span class="hljs-title function_">indexOf</span>(fileType) &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&#x27;文件格式不符合要求&#x27;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">const</span> currIdx = fileList.<span class="hljs-title function_">indexOf</span>(file)</span><br><span class="language-javascript">    fileList.<span class="hljs-title function_">splice</span>(currIdx, <span class="hljs-number">1</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">return</span></span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> isLt10M = file.<span class="hljs-property">size</span> / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span> &lt;= <span class="hljs-number">10</span></span><br><span class="language-javascript">  <span class="hljs-keyword">if</span> (!isLt10M) &#123;</span><br><span class="language-javascript">    <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&#x27;文件大小不能超过10M&#x27;</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">const</span> currIdx = fileList.<span class="hljs-title function_">indexOf</span>(file)</span><br><span class="language-javascript">    fileList.<span class="hljs-title function_">splice</span>(currIdx, <span class="hljs-number">1</span>)</span><br><span class="language-javascript">    <span class="hljs-keyword">return</span></span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-title function_">onUnmounted</span>(<span class="hljs-function">() =&gt;</span> &#123;&#125;)</span><br><span class="language-javascript"><span class="hljs-title function_">defineExpose</span>(&#123; fileList &#125;)</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="文件上传组件使用"><a href="#文件上传组件使用" class="headerlink" title="文件上传组件使用"></a>文件上传组件使用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">upload-attachment</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:attachmentInfo</span>=<span class="hljs-string">&quot;testForm.attachment_info&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;uploadRef&quot;</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">handleEmitDel</span>=<span class="hljs-string">&quot;handleEmitDel&quot;</span></span><br><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">upload-attachment</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span> <span class="hljs-attr">setup</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> &#123; fdWithFiles &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/file&#x27;</span></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> uploadAttachment <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/File/uploadAttachment.vue&#x27;</span></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> emyptForm = &#123;</span><br><span class="language-javascript">  <span class="hljs-attr">attachment_info</span>: []</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"><span class="hljs-keyword">const</span> state = <span class="hljs-title function_">reactive</span>(&#123;</span><br><span class="language-javascript">  <span class="hljs-attr">testForm</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(emyptForm)),</span><br><span class="language-javascript">&#125;)</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAdd</span> = (<span class="hljs-params">formEl: <span class="hljs-keyword">typeof</span> FormInstance</span>) =&gt; &#123;</span><br><span class="language-javascript">  formEl.<span class="hljs-title function_">validate</span>(<span class="hljs-function">(<span class="hljs-params">valid: boolean</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">if</span> (valid) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">const</span> params = &#123; ...state.<span class="hljs-property">testForm</span> &#125;</span><br><span class="language-javascript">      <span class="hljs-keyword">const</span> fd = <span class="hljs-title function_">fdWithFiles</span>(uploadRef.<span class="hljs-property">value</span>.<span class="hljs-property">fileList</span>, params)</span><br><span class="language-javascript">      <span class="hljs-comment">// add API，传入fd</span></span><br><span class="language-javascript">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span></span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;)</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEmitDel</span> = (<span class="hljs-params">params</span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> preFiles = state.<span class="hljs-property">testForm</span>[params.<span class="hljs-property">name</span>]</span><br><span class="language-javascript">  <span class="hljs-keyword">let</span> currentFiles = []</span><br><span class="language-javascript">  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;preFiles=&#x27;</span>, preFiles)</span><br><span class="language-javascript">  preFiles.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">id</span> != params.<span class="hljs-property">id</span>) &#123;</span><br><span class="language-javascript">      currentFiles.<span class="hljs-title function_">push</span>(item)</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;)</span><br><span class="language-javascript">  state.<span class="hljs-property">testForm</span>[params.<span class="hljs-property">name</span>] = currentFiles</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="文件上传公用方法-交互数据处理"><a href="#文件上传公用方法-交互数据处理" class="headerlink" title="文件上传公用方法-交互数据处理"></a>文件上传公用方法-交互数据处理</h3><p>和后端约定和上传文件有关的接口以formdata形式交互，在<code>/utils/file</code>中抽取数据转换方法。因为formdata可能将空字符串转为null，这里添加一层空值过滤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 文件files，其他参数params</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">fdWithFiles</span> = (<span class="hljs-params">fileList: <span class="hljs-built_in">Array</span>&lt;any&gt;, params: <span class="hljs-built_in">Object</span>, fileName?: string</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> fd = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>()<br>  <span class="hljs-keyword">if</span> (fileList.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>    fileList.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;item.raw=&#x27;</span>, item.<span class="hljs-property">raw</span>)<br>      <span class="hljs-keyword">const</span> name = fileName ? fileName : <span class="hljs-string">&#x27;files&#x27;</span><br>      fd.<span class="hljs-title function_">append</span>(name, item.<span class="hljs-property">raw</span>)<br>    &#125;)<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> params) &#123;<br>    <span class="hljs-comment">// 参数为数组，数组为空不传</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(params[key])) &#123;<br>      <span class="hljs-keyword">if</span> (params[key].<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) fd.<span class="hljs-title function_">append</span>(key, params[key])<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 参数为对象，对象为空不传</span><br>      <span class="hljs-keyword">if</span> (params[key]) fd.<span class="hljs-title function_">append</span>(key, params[key])<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> fd<br>&#125;<br><br><span class="hljs-comment">// 多组文件+参数 params=[&#123;fileList:[], fileName:&#x27;&#x27;&#125;]</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">fdWithMultiFiles</span> = (<span class="hljs-params">filesAll: <span class="hljs-built_in">Array</span>&lt;any&gt;, params: <span class="hljs-built_in">Object</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> fd = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>()<br>  filesAll.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">i</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (i.<span class="hljs-property">fileList</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>      i.<span class="hljs-property">fileList</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">const</span> name = i.<span class="hljs-property">fileName</span> ? i.<span class="hljs-property">fileName</span> : <span class="hljs-string">&#x27;files&#x27;</span><br>        fd.<span class="hljs-title function_">append</span>(name, item.<span class="hljs-property">raw</span>)<br>      &#125;)<br>    &#125;<br>  &#125;)<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> params) &#123;<br>    <span class="hljs-comment">// 参数为数组</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(params[key])) &#123;<br>      <span class="hljs-keyword">if</span> (params[key].<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) fd.<span class="hljs-title function_">append</span>(key, params[key])<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (params[key]) fd.<span class="hljs-title function_">append</span>(key, params[key])<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> fd<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="解决上传文件按钮在选取文件按钮禁用后仍可点击问题"><a href="#解决上传文件按钮在选取文件按钮禁用后仍可点击问题" class="headerlink" title="解决上传文件按钮在选取文件按钮禁用后仍可点击问题"></a>解决上传文件按钮在选取文件按钮禁用后仍可点击问题</h3><p>这个问题测试同学提出之前，我是万万没想到…<br>按照要最多可以上传10个文件，我通过maxNum - chooseNum &#x3D;&#x3D; 0来实现判断，问题是按钮已经置灰，但是居然还可以点击，出现文件选择框，虽然选了不会上传，依然影响用户体验。<br>查阅资料后，发现有个slot的改变可以防止这个现象出现，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"> <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">trigger</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;!(maxNum - chooseNum == 0)&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;Upload&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;maxNum - chooseNum == 0&quot;</span></span><br><span class="hljs-tag">  &gt;</span>上传文件<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">tip</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">disabled</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;maxNum - chooseNum == 0&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;Upload&quot;</span>&gt;</span> 上传文件<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Oscrazy/article/details/125315916">让element-ui的el-upload组件文件列表中文件图标自定义显示</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/typescript/">#typescript</a>
+      
+        <a href="/tags/vue/">#vue</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>vue3笔记（19-2）文件上传</div>
+      <div>http://guoningyan.com/2023/04/04/vue3笔记（19-2）文件上传/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ningyan Guo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/21/vue3%E7%AC%94%E8%AE%B0%EF%BC%8819-3%EF%BC%89%E6%96%87%E4%BB%B6%E9%A2%84%E8%A7%88/" title="vue3笔记（19-3）文件预览">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（19-3）文件预览</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/04/vue3%E7%AC%94%E8%AE%B0%EF%BC%8819-1%EF%BC%89%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/" title="vue3笔记（19-1）文件下载">
+                        <span class="hidden-mobile">vue3笔记（19-1）文件下载</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

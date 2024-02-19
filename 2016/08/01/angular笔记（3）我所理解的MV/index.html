@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular笔记（3）我所理解的MV*">
+<meta property="og:url" content="http://guoningyan.com/2016/08/01/angular%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84MV/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/angular3-mvc.png">
+<meta property="article:published_time" content="2016-08-01T14:44:06.000Z">
+<meta property="article:modified_time" content="2022-04-29T05:22:03.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="angular">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/angular3-mvc.png">
+  
+  
+  
+  <title>angular笔记（3）我所理解的MV* - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="angular笔记（3）我所理解的MV*"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2016-08-01 22:44" pubdate>
+          2016年8月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">angular笔记（3）我所理解的MV*</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>大学里写java web，用过struct2和Hibernate框架，接触了后端MVC；<br>大四实习的时候自学了nodejs的express框架，并且在此基础上做了我的毕业设计，这也是一个基于MVC的后端框架；<br>近期工作的这段时间，也在做基于angular的后台的开发和维护。angualr是基于MVVM的前端框架，MVVM是MVC的衍生，把C用VM来替代，但是MVC的原理依旧是可以解释地通的（作者研究过前端设计模式，也有自己的观点，有疑惑请在评论里讨论）。</p>
+</blockquote>
+<span id="more"></span>
+
+<p><code>java开篇</code><br>这里的java的设计模式和目前在做java开发的<a target="_blank" rel="noopener" href="http://blog.csdn.net/yiluxiangqian7715">@组长ZJP同学</a>讨论过，用一张图简单地描述下。</p>
+<p><img src="/img/angular3-mvc.png" srcset="/img/loading.gif" lazyload alt="java中的MVC"></p>
+<p>相信了解过MVC的朋友都知道，Model代表数据存储，用来处理数据库相关操作，一般会使用<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=jdLF0XztJUiIqHYzJONBdJYeHO7ZS_dWsRuTP1hVdvZWz_wAZsgHUaWtMWLeHeDgwV_j5VmbYLYvq0BCy2NCnK">ORM</a>进行封装，降低藕合度。<br>View代表视图层，在后端渲染的情况下一般是jsp页面，而在前端渲染的情况下，可能是web端或者是客户端的某些页面，用户操作致使View发送request请求。<br>Control代表控制器，顾名思义，整个流程依赖Control进行控制，所以View中的请求会经过Control处理，然后返回response给View，而view处理的业务逻辑对客户端是不透明的，用户也不用去理会数据库是怎样的操作，所以这些“黑盒”操作都是由后端程序员完成。Control返回的response也有两种方式，像structs2采用的是action跳转，这是一种可以直接返回jsp页面的方式，还有一种是我们熟悉的后端返回json数据的方式。<br>图中关于Model，引申出了service，在一些不算复杂的框架中，可能就模糊了Model的概念，直接由service处理业务逻辑，框架的选型还是结合业务相关，这里不再赘述。</p>
+<p><code>Nodejs express框架深入</code><br>这里选用了我毕设用的目录结构做说明。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- db</span><br><span class="line">  - admin.js</span><br><span class="line">  - user.js</span><br><span class="line">- routers</span><br><span class="line">  - loginServer.js（require(<span class="string">&#x27;../db/user.js&#x27;</span>)）</span><br><span class="line">  - adminServer.js（require(<span class="string">&#x27;../db/admin.js&#x27;</span>)）</span><br><span class="line">- app.js</span><br></pre></td></tr></table></figure>
+<p>我选用了mongoose包作为中间层，所以很明显可以看出db文件夹下就是ORM，每个单独的js文件代表数据库中的一张表，将数据类型相关以及CRUD操作进行封装，和Model类似，每个单独的js文件类似一个service实现类。<br>而router是一种路由的概念，每个**Server.js文件代表一个操作，需要调用db中的方法（类似于control调用service完成某个功能）。再划分细一点，router可以把不同请求对应到不同的方法中进行处理，此时router相当于一个过滤器和领路的作用，扩大了control的功能。而这些js文件会返回处理后的response。<br>app.js是项目启动文件，数据库连接，调用router方法等等，前端所有的请求request都需要经过app.js后，调用模块中的方法进行处理。</p>
+<p><code>终于回到了重点angular</code><br>首先也先进行项目目录结构划分</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">－ js</span><br><span class="line">  - app.js(root作用，调用service中的数据)</span><br><span class="line">  - common.js(factory、service、provider)</span><br><span class="line">  - main.js</span><br><span class="line">  - router.js(可以直接写路由，也可以通过ui-router这种插件根据状态来改变页面渲染)</span><br><span class="line">－ moudules</span><br><span class="line">  - moduleName</span><br><span class="line">    - ***.html</span><br><span class="line">    - ***.js(controller)</span><br></pre></td></tr></table></figure>
+<p>这里将页面划分为组件，每个contrller控制一个视图模型。<br>app.js起到root作用，包含了所有的controller。即这是一个总控制器。<br>common.js起Modul作用，在angular中有factory、service、contrller三个分类，service通过“构造器”（构造函数）创建，这个构造器即factory，而这些service又可以称为factory的实例化对象（实现类），以对象的形式存在。provider是一种更高级（可以通过config进行配置）的factory，作用也类似。<br>解释了这么多，再说一下angular的范式要求。在写angular的时候，尽量要将业务逻辑处理放在controller中，尽量不要在controller直接获取数据后处理，应该让service获取接口数据，此时的service相当于Model，这样angular的设计模式就完全和java对应了。</p>
+<p><code>总结</code><br>都说angular适合后端程序员，确实总结时候发现了其中的相似之处非常多，当然，学好设计模式，框架什么的都是套路！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/angular/">#angular</a>
+      
+        <a href="/tags/javascript/">#javascript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>angular笔记（3）我所理解的MV*</div>
+      <div>http://guoningyan.com/2016/08/01/angular笔记（3）我所理解的MV/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ningyan Guo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2016年8月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/08/21/canvas%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" title="canvas实践笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">canvas实践笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/07/31/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%881%EF%BC%89/" title="移动端开发总结（1）">
+                        <span class="hidden-mobile">移动端开发总结（1）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

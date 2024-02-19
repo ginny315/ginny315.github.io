@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇记录一下问题解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="问题解决备忘">
+<meta property="og:url" content="http://guoningyan.com/2022/09/07/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%A4%87%E5%BF%98/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这篇记录一下问题解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/q-css1.png">
+<meta property="og:image" content="http://guoningyan.com/img/q-css2.png">
+<meta property="og:image" content="http://guoningyan.com/img/q-deploy1.jpg">
+<meta property="article:published_time" content="2022-09-07T06:38:29.000Z">
+<meta property="article:modified_time" content="2024-01-22T02:00:57.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/q-css1.png">
+  
+  
+  
+  <title>问题解决备忘 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="问题解决备忘"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-07 14:38" pubdate>
+          2022年9月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">问题解决备忘</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>这篇记录一下问题解决</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><ol>
+<li><p>下拉列表显示模糊问题<br>项目里用了一个select组件，如下图所示，下拉时发现字体模糊了：<br><img src="/img/q-css1.png" srcset="/img/loading.gif" lazyload alt="blur1"><br>查看元素，发现去掉transform后字体模糊消失了：<br><img src="/img/q-css2.png" srcset="/img/loading.gif" lazyload alt="blur2"><br>查阅资料后发现，通过 <code>transform:translate(X,Y)</code> 偏移元素可以达到定位的效果，但是如果元素内部有字体的话，会出现模糊的问题。<br>解决方案：给translate的Y值偏移设为绝对单位。</p>
+</li>
+<li></li>
+</ol>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><ol>
+<li>0 &#x3D;&#x3D; ‘’ 返回true，在detail为空显示‘–’一定要注意要使用&#x3D;&#x3D;&#x3D;</li>
+</ol>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><ol>
+<li>UMS 中同步了新配置，结果本地运行没问题，打包时候报错了如下：<code>FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory</code> 居然还有爆栈这种操作。<br><img src="/img/q-deploy1.jpg" srcset="/img/loading.gif" lazyload alt="out of memory"><br>解决方案：去掉 legacy 插件。</li>
+</ol>
+<h3 id="vue3-写法"><a href="#vue3-写法" class="headerlink" title="vue3 写法"></a>vue3 写法</h3><ol>
+<li>页面跳转需要刷新才能显示<br>解决方案：只有一个根标签，不能有并排的el-dialog</li>
+<li>首次进入 el-tree 指定节点没有高亮<br>解决方案：数据加载完成之后使用 setCurrentKey ，若还有问题，加上 nextTick()</li>
+</ol>
+<h3 id="AI平台代码学习"><a href="#AI平台代码学习" class="headerlink" title="AI平台代码学习"></a>AI平台代码学习</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p>|– console-frontend<br>    |– .env.dev                # 开发环境配置<br>    |– .env.prod               # 生产环境配置<br>    |– .env.test               # 测试环境配置<br>    |– .eslintrc.js            # eslint配置<br>    |– .prettierignore<br>    |– .stylelintignore<br>    |– .gitignore<br>    |– README.md<br>    |– buildVersion.js         # 打包更新package.json版本、时间<br>    |– commitlint.config.js    # git提交规则<br>    |– index.html<br>    |– package.json            # package.json 依赖<br>    |– postcss.config.js       # postcss配置<br>    |– prettier.config.js      # prettier配置<br>    |– stylelint.config.js     # stylelint配置<br>    |– vite.config.ts          # vite配置<br>    |– tsconfig.json           # typescript配置<br>    |– public                  # 静态资源 (会被直接复制)<br>    |   |– favicon.ico         # favicon图标<br>    |   |– config.js           # casdoor全局配置（根据环境）<br>    |– src<br>    |   |– App.vue             # 入口页面（设置背景色、主题色）<br>    |   |– main.ts             # 入口文件（加载组件、casdoor配置、初始化等）<br>    |   |– permission.ts       # 路由守卫（权限跳转）<br>    |   |– api                 # 所有请求（分模块-部分请求数据处理也在这部分）<br>    |   |– assets              # 静态资源<br>    |   |– config              # 全局配置<br>    |       |– axios           # axios封装（请求头部、请求参数编码、返回值错误）<br>    |   |– components          # 全局组件<br>    |       |– breadcrumb      # 导航面包屑<br>    |       |– echart          # 封装图表<br>    |       |– form            # 封装表单（对checkbox、radio、select做了二次封装）<br>    |           |– src<br>    |               |– components  # 表单中使用到的组件二开<br>    |               |– component-map.ts  # 引入自定义组件（types&#x2F;components.d.ts添加组件名称）<br>    |           |– index.ts    # 方法导出<br>    |       |– table           # 表格组件（文件结构同form）<br>    |       |– search          # 搜索组件<br>    |   |– hooks<br>    |       |– events          # 事件钩子（scroll）<br>    |       |– web             # 页面钩子<br>    |            |– use-form.ts  # form组件的使用<br>    |            |– use-table.ts # table组件的使用<br>    |            |– use-draw.ts  # 绘图（窗口改变重绘）<br>    |   |– router              # 路由<br>    |   |– store               # 全局 vuex store<br>    |   |– utils<br>    |       |– date-format.ts  # 日期规范<br>    |       |– cookies.ts      # token使用封装<br>    |   |– views               # 所有页面<br>    |       |– layout          # 主要样式<br>    |            |– components # 包含main、footer、sidebar<br>    |            |– basic.vue  # 基本样式<br>    |            |– simple.vue # 简单样式<br>    |            |– preview.vue# fullscreen全屏模式<br>    |            |– index.ts   # 样式导出<br>    |       |– manage          # 根据模块分文件夹编写页面，页面中切组件加入文件夹下的components中<br>    |       |– login           # 登录页面</p>
+<h3 id="接口压测"><a href="#接口压测" class="headerlink" title="接口压测"></a>接口压测</h3><p>i.   安装python 版本3.9 或3.8<br>ii.  安装pip插件 (有些自带)<br>iii. 使用pip安装locust 命令：pip install locust。 <br>iv.  执行脚本：locust -f xxx.py <br>    （每个脚本对应一个服务，一个脚本中有多个接口，每个task是一个接口的，每次只解开一个接口的注释，压测一个接口）<br>v.   注意环境变量（mac,和win的处理方式不同）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">vi ~/.bash_profile<br>source ~/.bash_profile<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/typescript/">#typescript</a>
+      
+        <a href="/tags/css/">#css</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>问题解决备忘</div>
+      <div>http://guoningyan.com/2022/09/07/问题解决备忘/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ningyan Guo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/15/MAC%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/" title="MAC终端配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MAC终端配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/23/vue3%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A/" title="vue3笔记（11）加载更多">
+                        <span class="hidden-mobile">vue3笔记（11）加载更多</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

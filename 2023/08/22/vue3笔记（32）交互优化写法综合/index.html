@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（32）交互优化写法综合">
+<meta property="og:url" content="http://guoningyan.com/2023/08/22/vue3%E7%AC%94%E8%AE%B0%EF%BC%8832%EF%BC%89%E4%BA%A4%E4%BA%92%E4%BC%98%E5%8C%96%E5%86%99%E6%B3%95%E7%BB%BC%E5%90%88/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/vue32-1.png">
+<meta property="og:image" content="http://guoningyan.com/img/vue32-2.png">
+<meta property="article:published_time" content="2023-08-22T01:18:49.000Z">
+<meta property="article:modified_time" content="2023-12-11T09:15:12.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/vue32-1.png">
+  
+  
+  
+  <title>vue3笔记（32）交互优化写法综合 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="vue3笔记（32）交互优化写法综合"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-22 09:18" pubdate>
+          2023年8月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（32）交互优化写法综合</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>本篇记录涉及到的交互优化，包括：页面停留时间超过一小时跳转登录页、“请求过于频繁，建议5分钟后再试”、按钮防抖。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="页面停留时间超过一小时跳转登录页"><a href="#页面停留时间超过一小时跳转登录页" class="headerlink" title="页面停留时间超过一小时跳转登录页"></a>页面停留时间超过一小时跳转登录页</h3><p>设计思路：页面打开时设置定时器，每 3分钟 轮询一次，获取当前时间和初始时间的时间差，若轮询多次后时间差超过1小时，则跳转登录页面。<br>时间差计算函数如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 返回true-停留时间已满1小时</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">timeDiffStay</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> timeOut = <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span> <span class="hljs-comment">// 设置超时时间</span><br>  <span class="hljs-keyword">const</span> lastTime = <span class="hljs-title class_">Number</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;comeTime&#x27;</span>))<br>  <span class="hljs-keyword">const</span> currentTime = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>()<br>  <span class="hljs-keyword">let</span> diff = currentTime - lastTime<br>  <span class="hljs-keyword">if</span> (diff &gt; timeOut) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>页面初始化存入初始时间，开启定时器；卸载时清除定时器；</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;comeTime&#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>().<span class="hljs-title function_">toString</span>())<br>  state.<span class="hljs-property">pageInterval</span> = <span class="hljs-built_in">setInterval</span>(checkTimeout, <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)<br>&#125;)<br><span class="hljs-title function_">onUnmounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">removeItem</span>(<span class="hljs-string">&#x27;comeTime&#x27;</span>)<br>  state.<span class="hljs-property">pageInterval</span> &amp;&amp; <span class="hljs-built_in">clearInterval</span>(state.<span class="hljs-property">pageInterval</span>)<br>&#125;)<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">checkTimeout</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">timeDiffStay</span>()) &#123;<br>    <span class="hljs-built_in">clearInterval</span>(state.<span class="hljs-property">pageInterval</span>)<br>    <span class="hljs-title function_">toLogin</span>()<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="请求过于频繁，建议5分钟后再试"><a href="#请求过于频繁，建议5分钟后再试" class="headerlink" title="请求过于频繁，建议5分钟后再试"></a>请求过于频繁，建议5分钟后再试</h3><p>设置5分钟内点击4次为频繁操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSendCode</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  state.<span class="hljs-property">disCode</span> = <span class="hljs-literal">true</span> <span class="hljs-comment">// 防止点击两次</span><br>  state.<span class="hljs-property">sendCount</span> = state.<span class="hljs-property">sendCount</span> + <span class="hljs-number">1</span><br>  <span class="hljs-keyword">if</span> (state.<span class="hljs-property">sendCount</span> == <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">removeItem</span>(<span class="hljs-string">&#x27;lastClickTime&#x27;</span>)<br>        <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;lastClickTime&#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>().<span class="hljs-title function_">toString</span>())<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (state.<span class="hljs-property">sendCount</span> == <span class="hljs-number">4</span>) &#123;<br>        <span class="hljs-keyword">const</span> diffMin = <span class="hljs-title function_">timeDifference</span>()<br>        <span class="hljs-keyword">if</span> (diffMin &lt;= <span class="hljs-number">5</span>) &#123;<br>          <span class="hljs-title class_">ElMessage</span>(<span class="hljs-string">&#x27;请求过于频繁，建议5分钟后再试&#x27;</span>)<br>          state.<span class="hljs-property">sendCount</span> = <span class="hljs-number">0</span><br>          state.<span class="hljs-property">disCode5Min</span> = <span class="hljs-literal">true</span><br>          <span class="hljs-keyword">const</span> times = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;禁止时间到了&#x27;</span>)<br>            <span class="hljs-title function_">nextTick</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>              state.<span class="hljs-property">disCode5Min</span> = <span class="hljs-literal">false</span><br>              state.<span class="hljs-property">disCode</span> = <span class="hljs-literal">false</span><br>            &#125;)<br>            <span class="hljs-built_in">clearInterval</span>(times)<br>          &#125;, <span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">5</span>)<br>          <span class="hljs-keyword">return</span><br>        &#125;<br>      &#125;<br>      <span class="hljs-comment">// 触发倒计时</span><br>      state.<span class="hljs-property">notSend</span> = <span class="hljs-literal">false</span><br>      <span class="hljs-title function_">handleCountDownTimeSendCode</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">el-form-item</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;邮箱：&quot;</span> <span class="hljs-attr">prop</span>=<span class="hljs-string">&quot;email&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">el-input</span></span><br><span class="hljs-tag">      <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;emailForm.email&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入绑定的邮箱&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;emailInputRef&quot;</span></span><br><span class="hljs-tag">    &gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">suffix</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span></span><br><span class="hljs-tag">          <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;notSend&quot;</span></span><br><span class="hljs-tag">          <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;disCode || disCode5Min&quot;</span></span><br><span class="hljs-tag">          @<span class="hljs-attr">click.stop</span>=<span class="hljs-string">&quot;handleSendCode&quot;</span></span><br><span class="hljs-tag">          <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-sendcode&quot;</span></span><br><span class="hljs-tag">          &gt;</span>获取验证码&lt;/el-button<br>        &gt;<br>        <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">v-else</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn-sendcode&quot;</span> <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;disCode&quot;</span>&gt;</span><br>          &#123;&#123; countDownTimeSendCode &#125;&#125;s后再获取<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">el-input</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-form-item</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/../img/vue32-1.png" srcset="/img/loading.gif" lazyload alt="获取验证码-原始"><br><img src="/../img/vue32-2.png" srcset="/img/loading.gif" lazyload alt="获取验证码-发送"></p>
+<h3 id="按钮防抖"><a href="#按钮防抖" class="headerlink" title="按钮防抖"></a>按钮防抖</h3><p>项目中使用_lodash，设计一秒钟只能点击一次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; debounce &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;lodash-es&#x27;</span><br><span class="hljs-keyword">const</span> handleClick = <span class="hljs-title function_">debounce</span>(<span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> &#123;&#125;, <span class="hljs-number">1000</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>javascript</code></p>
+<h3 id="交互优化目标"><a href="#交互优化目标" class="headerlink" title="交互优化目标"></a>交互优化目标</h3><ol>
+<li>产品目标：优先完成功能开发，设计优先配合功能开发</li>
+<li>体验目标：各个角色的使用故事线完整、且清晰顺畅</li>
+</ol>
+<h3 id="交互优化点-管理系统相关"><a href="#交互优化点-管理系统相关" class="headerlink" title="交互优化点-管理系统相关"></a>交互优化点-管理系统相关</h3><ol>
+<li><p>信息归类、主次分级</p>
+</li>
+<li><p>按钮主次，高频使用按钮直接显示，低频使用按钮以 … （鼠标悬浮展示隐藏的下拉列表）。好处：多留内容给主体部分。</p>
+</li>
+<li><p>增加页面主体内容比重（例如：使用多栏展示）。好处：用户在有限视线范围内获取更多信息。</p>
+</li>
+<li><p>区分高&#x2F;低频操作，降低操作链路</p>
+</li>
+<li><p>搜索内容主次，高频使用（一般为 name ）直接展示，低频使用以 filter 按钮隐藏，点击后展示。</p>
+</li>
+<li><p>降低操作难度、防止误操作</p>
+</li>
+<li><p>搜索项 tag 展示，点击可删除，也可一键清空。好处：用户可以选择性搜索。</p>
+</li>
+<li><p>按钮满足条件触发，初始化 disabled，使用 tooltip 包裹，提示用户操作。满足条件时按钮真实可用。好处：防止用户误操作，减少交互成本。</p>
+</li>
+<li><p>用户操作（例如：选择）后对内容进行有选择性提示（例如：总数）。好处：帮助用户更容易进行下一步操作。</p>
+</li>
+<li><p>布局规范统一</p>
+</li>
+<li><p>按钮位置，基本在页面右侧。好处：强化用户习惯。</p>
+</li>
+<li><p>多内容区域卡片分级展示。</p>
+</li>
+<li><p>调整色彩识别性、增强区分度</p>
+</li>
+<li><p>不同状态使用不同颜色 tag 表示，各个页面保持一致</p>
+</li>
+<li><p>业务流程图&#x2F;功能全景图可视化</p>
+</li>
+<li><p>使用图表代替文字</p>
+</li>
+<li><p>页面跳转增加互相联系。</p>
+</li>
+<li><p>提示优化 </p>
+</li>
+<li><p>提示语尽量不使用感叹号 </p>
+</li>
+<li><p>页面主体部分尽量不使用警告色（例如：删除按钮不用红色）</p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/typescript/">#typescript</a>
+      
+        <a href="/tags/vue/">#vue</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>vue3笔记（32）交互优化写法综合</div>
+      <div>http://guoningyan.com/2023/08/22/vue3笔记（32）交互优化写法综合/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ningyan Guo</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/24/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%883%EF%BC%89qiankun/" title="微前端（3）qiankun">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微前端（3）qiankun</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/18/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%882%EF%BC%89%E5%9F%BA%E4%BA%8E%E5%AE%9E%E9%99%85%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%80%9D%E8%80%83previous/" title="微前端（2）基于实际业务的思考-previous">
+                        <span class="hidden-mobile">微前端（2）基于实际业务的思考-previous</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
