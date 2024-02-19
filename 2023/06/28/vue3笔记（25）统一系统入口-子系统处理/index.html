@@ -19,18 +19,18 @@
     <meta name="description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。基于Vue3 + Vue-router4 + pinia + vite 技术栈已经调试成功，老旧系统基于Vue3 + Vuex + vue-cli 另需调整。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（25）统一系统入口-子系统处理">
-<meta property="og:url" content="http://guoningyan.com/2023/06/28/vue3%E7%AC%94%E8%AE%B0%EF%BC%8825%EF%BC%89%E7%BB%9F%E4%B8%80%E7%B3%BB%E7%BB%9F%E5%85%A5%E5%8F%A3-%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%A4%84%E7%90%86/index.html">
+<meta property="og:url" content="https://guoningyan.com/2023/06/28/vue3%E7%AC%94%E8%AE%B0%EF%BC%8825%EF%BC%89%E7%BB%9F%E4%B8%80%E7%B3%BB%E7%BB%9F%E5%85%A5%E5%8F%A3-%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
 <meta property="og:description" content="原版各子系统相互独立，有单独的登录入口，对应不同的后端 token 鉴权；新版系统有统一的入口，各子系统共享 token，走统一的 apisix 鉴权；同时菜单及可访问路由的配置统一由 UMS 系统（用户信息管理）处理。本篇是统一迁移记录。基于Vue3 + Vue-router4 + pinia + vite 技术栈已经调试成功，老旧系统基于Vue3 + Vuex + vue-cli 另需调整。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://guoningyan.com/img/vue21-2.png">
+<meta property="og:image" content="https://guoningyan.com/img/vue21-2.png">
 <meta property="article:published_time" content="2023-06-28T01:14:20.000Z">
 <meta property="article:modified_time" content="2023-06-29T05:57:16.000Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://guoningyan.com/img/vue21-2.png">
+<meta name="twitter:image" content="https://guoningyan.com/img/vue21-2.png">
   
   
   
@@ -345,7 +345,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>vue3笔记（25）统一系统入口-子系统处理</div>
-      <div>http://guoningyan.com/2023/06/28/vue3笔记（25）统一系统入口-子系统处理/</div>
+      <div>https://guoningyan.com/2023/06/28/vue3笔记（25）统一系统入口-子系统处理/</div>
     </div>
     <div class="license-meta">
       
