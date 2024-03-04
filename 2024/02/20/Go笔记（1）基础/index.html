@@ -16,15 +16,15 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。">
+    <meta name="description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go笔记（1）基础">
 <meta property="og:url" content="https://guoningyan.com/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。">
+<meta property="og:description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-20T01:41:41.000Z">
-<meta property="article:modified_time" content="2024-02-28T01:50:01.012Z">
+<meta property="article:modified_time" content="2024-03-04T02:25:34.991Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
@@ -213,7 +213,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          2k 字
         
       </span>
     
@@ -225,7 +225,7 @@
         
         
           <!-- compatible with older versions-->
-          12 分钟
+          17 分钟
         
       </span>
     
@@ -269,10 +269,9 @@
               <div class="markdown-body">
                 
                 <blockquote>
-<p>组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。</p>
+<p>组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。<br>本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。</p>
 </blockquote>
 <span id="more"></span>
-
 <h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
 <li>Go 语言主要为了解决：多核硬件架构、超大规模分布式计算集群<br>（上万+）、Web 模式导致的前所未有的开发规模和更新速度。</li>
 <li>并发支持、垃圾回收机制。编译的静态类型语言，尽管有 GC，依然可以通过指针去访问内存。</li>
@@ -280,21 +279,27 @@
 <h3 id="学习路径"><a href="#学习路径" class="headerlink" title="学习路径"></a>学习路径</h3><p>语法 –&gt; 并发任务的实现 –&gt; 常见架构模式（pipe-filter, micro-kernel）–&gt; 性能优化 –&gt; 高可用服务</p>
 <h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">运行</span><br>go run ***.go<br><span class="hljs-meta prompt_"># </span><span class="language-bash">编译-独立的二进制文件（命令行./***即可运行），可通过容器部署</span><br>go build ***.go  <br></code></pre></td></tr></table></figure>
 
-<h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> ( <span class="hljs-comment">// 快速设置连续值</span><br> Open = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-literal">iota</span><br> Close<br> Pending<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123; <span class="hljs-comment">// main中无法传入参数</span><br>    fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)<br>    os.Exit(<span class="hljs-number">0</span>) <span class="hljs-comment">// 返回</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> ( <span class="hljs-comment">// 快速设置连续值</span><br> Open = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-literal">iota</span><br> Close<br> Pending<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123; <span class="hljs-comment">// main中无法传入参数</span><br>    fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)<br>    os.Exit(<span class="hljs-number">0</span>) <span class="hljs-comment">// 返回</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h4 id="编写测试程序"><a href="#编写测试程序" class="headerlink" title="编写测试程序"></a>编写测试程序</h4><ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><ol>
 <li>源码⽂件以 _test 结尾：xxx_test.go</li>
 <li>测试⽅法名以 Test 开头：func TestXXX(t *testing.T) {…}</li>
+<li>内置单元测试框架：Fail, Error：该测试失败，该测试继续，其他测试继续执行；FailNow, Fatal：该测试失败，该测试中止，其他测试继续执行<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -v 打印 t.Log 内容</span><br>go <span class="hljs-built_in">test</span> -v -cover<br></code></pre></td></tr></table></figure></li>
 </ol>
+<h4 id="benchmark"><a href="#benchmark" class="headerlink" title="benchmark"></a>benchmark</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BenchmarkConcatStringByAdd</span><span class="hljs-params">(b *testing.B)</span></span> &#123;<br>	<span class="hljs-comment">//与性能测试⽆关的代码</span><br>	b.ResetTimer()<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; b.N; i++ &#123;<br>	<span class="hljs-comment">//测试代码</span><br>	&#125;<br>	b.StopTimer()<br>	<span class="hljs-comment">//与性能测试⽆关的代码</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行benchmark，-bench&#x3D;&lt;相关benchmark测试&gt;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">go <span class="hljs-built_in">test</span> -bench=.<br><span class="hljs-comment"># 输出更多信息，分析性能原因</span><br>go <span class="hljs-built_in">test</span> -bench=. -benchmem <br><span class="hljs-comment"># cpu 调优示例</span><br>go <span class="hljs-built_in">test</span> -bench=. -cpuprofile=cpu.prof<br>go tool pprof cpu.prof<br></code></pre></td></tr></table></figure>
+
 <h3 id="Atom-离线安装-go-plus-插件（适用于mac）"><a href="#Atom-离线安装-go-plus-插件（适用于mac）" class="headerlink" title="Atom 离线安装 go-plus 插件（适用于mac）"></a>Atom 离线安装 go-plus 插件（适用于mac）</h3><p>Atom 自带的 install packages 安装失败，查阅资料发现有离线安装教程。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/.atom/packages<br>git <span class="hljs-built_in">clone</span> https://github.com/joefitzgerald/go-plus.git<br><span class="hljs-built_in">cd</span> go-plus<br>npm install<br></code></pre></td></tr></table></figure>
 <p>Q1：atom 保存时出现“go: cannot find main module, but found .git&#x2F;config in &#x2F;Users&#x2F;<em><strong>&#x2F;go_learning<br>    to create a module there, run:<br>    cd ..&#x2F;..&#x2F;.. &amp;&amp; go mod init”<br>实验：执行该语句没用，报错“go: cannot determine module path for source directory &#x2F;Users&#x2F;</strong></em>&#x2F;go_learning (outside GOPATH, module path must be specified)”<br>A1：出错原因：出错原因是开启了 go mod，但是没有初使化生成 go.mod 文件。GO111MODULE 是 Go 1.11 引入的新版模块管理方式，快速解决方式是将其设置为 auto（具体实现见笔记5）。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">go <span class="hljs-built_in">env</span> -w GO111MODULE=auto<br></code></pre></td></tr></table></figure>
-<p>这种解决方式可能会影响其他。</p>
+<p>Atom 中可以看到 GO111MODULE 已经变化，这种解决方式可能会影响其他。</p>
 <p>Q2：go mod init 报错 go: cannot determine module path for source directory<br>A2：在GOPATH之外，必须指定模块路径</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">go mod init 文件夹名<br></code></pre></td></tr></table></figure>
 
-<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://www.jb51.net/article/262013.htm">VS Code安装go插件失败原因分析以及解决方案</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cqx6388/p/17719864.html">VSCode安装go插件失败的解决方案</a></p>
+<p>Q3：t.Log打印不出内容了，只会显示运行时间？<br>A3：Atom中需要安装Go plus插件，然后在Preferences..-&gt;Packages. 找到对应的Installed Packages “go-plus”。Settings 把 Run Tests With Verbose Flag Set 勾选上</p>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://www.jb51.net/article/262013.htm">VS Code安装go插件失败原因分析以及解决方案</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cqx6388/p/17719864.html">VSCode安装go插件失败的解决方案</a><br><a target="_blank" rel="noopener" href="https://github.com/stretchr/testify">断⾔</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/a384843262/article/details/125032482">Atom Vscode Go test测试无法显示t.Log的打印日志内容</a></p>
 
                 
               </div>
