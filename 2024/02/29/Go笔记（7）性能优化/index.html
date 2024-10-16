@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇记录 go 中的并发编程中的性能优化。buffered channel 对象池、sync.Pool。安装使用性能分析工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go笔记（7）性能优化">
+<meta property="og:url" content="http://guoningyan.com/2024/02/29/Go%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这篇记录 go 中的并发编程中的性能优化。buffered channel 对象池、sync.Pool。安装使用性能分析工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-29T01:59:10.000Z">
+<meta property="article:modified_time" content="2024-03-04T02:59:50.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Go笔记（7）性能优化 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Go笔记（7）性能优化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-02-29 09:59" pubdate>
+        2024年2月29日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go笔记（7）性能优化</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>这篇记录 go 中的并发编程中的性能优化。buffered channel 对象池、sync.Pool。<br>安装使用性能分析工具。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="对象池"><a href="#对象池" class="headerlink" title="对象池"></a>对象池</h3><p>对于创建时代价比较高的对象（如：网络连接），通常将对象进行池化以避免重复创建。<br>可以使用 buffered channel 实现对象池。采用 lock 机制，需要考虑同步机制对性能的影响，可用 benchmark 进行评估是否真的性能得到优化。<br>一般使用不同的池缓存不同类型的对象。</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">type</span> ReusableObj <span class="hljs-keyword">struct</span> &#123;&#125; <span class="hljs-comment">// 为了实例使用了空结构</span><br><br><span class="hljs-keyword">type</span> ObjPool <span class="hljs-keyword">struct</span> &#123;<br>	bufChan <span class="hljs-keyword">chan</span> *ReusableObj <span class="hljs-comment">// 用于缓冲可重用对象</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewObjPool</span><span class="hljs-params">(numOfObj <span class="hljs-type">int</span>)</span></span> *ObjPool &#123;<br>	objPool := ObjPool&#123;&#125;<br>	objPool.bufChan = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> *ReusableObj, numOfObj) <span class="hljs-comment">// 创建对象池</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; numOfObj; i++ &#123;<br>		objPool.bufChan &lt;- &amp;ReusableObj&#123;&#125; <span class="hljs-comment">// 在对象池中加入结构（比如：连接，一些难以创建的对象）</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> &amp;objPool<br>&#125;<br><span class="hljs-comment">// 定义在对象池的指针上（创建时非必须，get时必须）</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *ObjPool)</span></span> GetObj(timeout time.Duration) (*ReusableObj, <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-keyword">select</span> &#123;<br>	<span class="hljs-keyword">case</span> ret := &lt;-p.bufChan:<br>		<span class="hljs-keyword">return</span> ret, <span class="hljs-literal">nil</span><br>	<span class="hljs-keyword">case</span> &lt;-time.After(timeout): <span class="hljs-comment">// 超时控制</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">&quot;time out&quot;</span>)<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *ObjPool)</span></span> ReleaseObj(obj *ReusableObj) <span class="hljs-type">error</span> &#123;<br>	<span class="hljs-keyword">select</span> &#123;<br>	<span class="hljs-keyword">case</span> p.bufChan &lt;- obj:<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>	<span class="hljs-keyword">default</span>: <span class="hljs-comment">// 无法放入对象池（如：超出size），产生阻塞</span><br>		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">&quot;overflow&quot;</span>)<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestObjPool</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	pool := NewObjPool(<span class="hljs-number">10</span>)<br>	<span class="hljs-comment">// if err := pool.ReleaseObj(&amp;ReusableObj&#123;&#125;); err != nil &#123; //尝试放置超出池大小的对象</span><br>	<span class="hljs-comment">// 	t.Error(err)</span><br>	<span class="hljs-comment">// &#125;</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">11</span>; i++ &#123;<br>		<span class="hljs-keyword">if</span> v, err := pool.GetObj(time.Second * <span class="hljs-number">1</span>); err != <span class="hljs-literal">nil</span> &#123;<br>			t.Error(err)<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;%T\n&quot;</span>, v)<br>			<span class="hljs-keyword">if</span> err := pool.ReleaseObj(v); err != <span class="hljs-literal">nil</span> &#123;<br>				t.Error(err)<br>			&#125;<br>		&#125;<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;Done&quot;</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="sync-Pool"><a href="#sync-Pool" class="headerlink" title="sync.Pool"></a>sync.Pool</h3><p>进程中包含私有对象（协程安全）和共享池（协程不安全）。sync.Pool 对象获取顺序：</p>
+<ol>
+<li>尝试从私有对象获取</li>
+<li>私有对象不存在，则从当前Processor 的共享池获取（需要 lock）</li>
+<li>如果当前 Processor 共享池也是空的，那么就尝试去其他<br>Processor 的共享池获取</li>
+<li>如果所有池都是空的，最后就用用户指定的 New 函数产生一个新的对象返回</li>
+</ol>
+<p>sync.Pool 对象的放回顺序：</p>
+<ol>
+<li>如果私有对象不存在则保存为私有对象</li>
+<li>如果私有对象存在，放入当前 Processor 子池的共享池中</li>
+</ol>
+<p>sync.Pool 对象的生命周期<br>• GC 会清除 sync.pool 缓存的对象<br>• 对象的缓存有效期为下一次 GC 之前</p>
+<p>sync.Pool 适合于通过复用，降低复杂对象的创建和 GC 代价；协程安全，会有锁的开销；生命周期受GC 影响，不适合于做连接池等，需自己管理生命周期的资源的池化。</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestSyncPool</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	pool := &amp;sync.Pool&#123;<br>		New: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123; <span class="hljs-comment">// 所有池都是空的，产生一个新的对象返回</span><br>			fmt.Println(<span class="hljs-string">&quot;Create a new object.&quot;</span>)<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">100</span><br>		&#125;,<br>	&#125;<br>	v := pool.Get().(<span class="hljs-type">int</span>)<br>	fmt.Println(v)<br>	pool.Put(<span class="hljs-number">3</span>)<br>	runtime.GC() <span class="hljs-comment">//GC 会清除sync.pool中缓存的对象</span><br>	v1, _ := pool.Get().(<span class="hljs-type">int</span>)<br>	fmt.Println(v1)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="性能分析工具"><a href="#性能分析工具" class="headerlink" title="性能分析工具"></a>性能分析工具</h3><h4 id="文件输出"><a href="#文件输出" class="headerlink" title="文件输出"></a>文件输出</h4><p>适用于短时间批量运行、细粒度的程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装 graphviz </span><br>brew install graphviz<br><span class="hljs-comment"># 将 $GOPATH/bin 加⼊ $PATH (Mac: 在 .bash_profile 中修改路径)</span><br><span class="hljs-comment"># 安装 go-torch，1.11已内置 </span><br>go get github.com/uber/go-torch <br><span class="hljs-comment"># 下载并复制 flamegraph.pl （https://github.com/brendangregg/FlameGraph）⾄ $GOPATH/bin 路径下</span><br><span class="hljs-comment"># 将 $GOPATH/bin 加⼊ $PATH</span><br></code></pre></div></td></tr></table></figure>
+<p>使用 pprof 进行交互式查看，cpu</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># go tool pprof 二进行文件名 生成的prof</span><br>go tool pprof prof cpu.prof<br>	top<br>	list ***<br>	svg <span class="hljs-comment"># 生成一张图</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="通过-HTTP-方式输出-Profile"><a href="#通过-HTTP-方式输出-Profile" class="headerlink" title="通过 HTTP 方式输出 Profile"></a>通过 HTTP 方式输出 Profile</h4><p>适合于持续性运行的应用。</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (_ <span class="hljs-string">&quot;net/http/pprof&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+<p>访问：http:&#x2F;&#x2F;<host>:<port>&#x2F;debug&#x2F;pprof&#x2F;</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">go tool pprof http://&lt;host&gt;:&lt;port&gt;/debug/pprof/profile?seconds=10 <span class="hljs-comment">#默认值为30秒</span><br>go-torch -seconds 10 http://&lt;host&gt;:&lt;port&gt;/debug/pprof/profile<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="性能调优过程"><a href="#性能调优过程" class="headerlink" title="性能调优过程"></a>性能调优过程</h3><p>设定优化目标-〉分析系统瓶颈点-〉优化瓶颈点</p>
+<h4 id="常见分析指标"><a href="#常见分析指标" class="headerlink" title="常见分析指标"></a>常见分析指标</h4><p>• Wall Time：挂钟时间（函数运行的绝对时间，包括外部阻塞）<br>• CPU Time<br>• Block Time<br>• Memory allocation：内存分配<br>• GC times&#x2F;time spent：GC次数、GC耗时<br>可以通过笔记（1）中测试相关分析瓶颈。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><ol>
+<li>减少 lock 使用，写多读少-ConcurrentMap，读多写少-sync.Map</li>
+<li>复杂对象尽量传递引用（避免内存分配和复制）</li>
+<li>切片初始化至合适大小</li>
+</ol>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://golang.org/src/runtime/pprof/pprof.go">Go 支持的多种 Profile</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/go/">go</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/01/Go%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go笔记（9）编程模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/28/Go%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%E6%9C%8D%E5%8A%A1/">
+                        <span class="hidden-mobile">Go笔记（8）服务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

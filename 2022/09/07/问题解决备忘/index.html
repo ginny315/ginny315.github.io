@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://guoningyan.com/img/q-css2.png">
 <meta property="og:image" content="http://guoningyan.com/img/q-deploy1.jpg">
 <meta property="article:published_time" content="2022-09-07T06:38:29.000Z">
-<meta property="article:modified_time" content="2023-09-07T01:39:20.094Z">
+<meta property="article:modified_time" content="2024-06-20T07:13:12.716Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="typescript">
 <meta property="article:tag" content="css">
@@ -194,7 +194,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      486 字
+      2.8k 字
     </span>
   
 
@@ -203,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      24 分钟
     </span>
   
 
@@ -253,6 +253,30 @@
 <h3 id="vue3-写法"><a href="#vue3-写法" class="headerlink" title="vue3 写法"></a>vue3 写法</h3><ol>
 <li>页面跳转需要刷新才能显示<br>解决方案：只有一个根标签，不能有并排的el-dialog</li>
 <li>首次进入 el-tree 指定节点没有高亮<br>解决方案：数据加载完成之后使用 setCurrentKey ，若还有问题，加上 nextTick()</li>
+</ol>
+<h3 id="AI平台代码学习"><a href="#AI平台代码学习" class="headerlink" title="AI平台代码学习"></a>AI平台代码学习</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p>|– console-frontend<br>    |– .env.dev                # 开发环境配置<br>    |– .env.prod               # 生产环境配置<br>    |– .env.test               # 测试环境配置<br>    |– .eslintrc.js            # eslint配置<br>    |– .prettierignore<br>    |– .stylelintignore<br>    |– .gitignore<br>    |– README.md<br>    |– buildVersion.js         # 打包更新package.json版本、时间<br>    |– commitlint.config.js    # git提交规则<br>    |– index.html<br>    |– package.json            # package.json 依赖<br>    |– postcss.config.js       # postcss配置<br>    |– prettier.config.js      # prettier配置<br>    |– stylelint.config.js     # stylelint配置<br>    |– vite.config.ts          # vite配置<br>    |– tsconfig.json           # typescript配置<br>    |– public                  # 静态资源 (会被直接复制)<br>    |   |– favicon.ico         # favicon图标<br>    |   |– config.js           # casdoor全局配置（根据环境）<br>    |– src<br>    |   |– App.vue             # 入口页面（设置背景色、主题色）<br>    |   |– main.ts             # 入口文件（加载组件、casdoor配置、初始化等）<br>    |   |– permission.ts       # 路由守卫（权限跳转）<br>    |   |– api                 # 所有请求（分模块-部分请求数据处理也在这部分）<br>    |   |– assets              # 静态资源<br>    |   |– config              # 全局配置<br>    |       |– axios           # axios封装（请求头部、请求参数编码、返回值错误）<br>    |   |– components          # 全局组件<br>    |       |– breadcrumb      # 导航面包屑<br>    |       |– echart          # 封装图表<br>    |       |– form            # 封装表单（对checkbox、radio、select做了二次封装）<br>    |           |– src<br>    |               |– components  # 表单中使用到的组件二开<br>    |               |– component-map.ts  # 引入自定义组件（types&#x2F;components.d.ts添加组件名称）<br>    |           |– index.ts    # 方法导出<br>    |       |– table           # 表格组件（文件结构同form）<br>    |       |– search          # 搜索组件<br>    |   |– hooks<br>    |       |– events          # 事件钩子（scroll）<br>    |       |– web             # 页面钩子<br>    |            |– use-form.ts  # form组件的使用<br>    |            |– use-table.ts # table组件的使用<br>    |            |– use-draw.ts  # 绘图（窗口改变重绘）<br>    |   |– router              # 路由<br>    |   |– store               # 全局 vuex store<br>    |   |– utils<br>    |       |– date-format.ts  # 日期规范<br>    |       |– cookies.ts      # token使用封装<br>    |   |– views               # 所有页面<br>    |       |– layout          # 主要样式<br>    |            |– components # 包含main、footer、sidebar<br>    |            |– basic.vue  # 基本样式<br>    |            |– simple.vue # 简单样式<br>    |            |– preview.vue# fullscreen全屏模式<br>    |            |– index.ts   # 样式导出<br>    |       |– manage          # 根据模块分文件夹编写页面，页面中切组件加入文件夹下的components中<br>    |       |– login           # 登录页面</p>
+<h3 id="接口压测"><a href="#接口压测" class="headerlink" title="接口压测"></a>接口压测</h3><p>i.   安装python 版本3.9 或3.8<br>ii.  安装pip插件 (有些自带)<br>iii. 使用pip安装locust 命令：pip install locust。 <br>iv.  执行脚本：locust -f xxx.py <br>    （每个脚本对应一个服务，一个脚本中有多个接口，每个task是一个接口的，每次只解开一个接口的注释，压测一个接口）<br>v.   注意环境变量（mac,和win的处理方式不同）</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.bash_profile<br>source ~/.bash_profile<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ol>
+<li>项目整体启动较慢，暂时无法解决。<h4 id="vscode-插件问题"><a href="#vscode-插件问题" class="headerlink" title="vscode 插件问题"></a>vscode 插件问题</h4>背景：一年前配置环境时，出现了插件冲突，导致无法正常使用，由于加入了现在的团队，要继续开发，所以现在想重新配置环境。<br>项目采用动态导入的方式，可以按需加载组件，运行至当前模块时，vite-plugin-eslint 报错格式错误，但是重启时又相当浪费时间。<code>npm run lint:format</code>比较适合于全局格式化代码，简单修改就启动成本较高。最好能在保存时自动格式化。<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm run lint:format<br>npm run dev --fix<br></code></pre></div></td></tr></table></figure>
+解决方案：启用“eslint”“prettier”，右键“使用…格式化文档”，选择“prettier:format”，启用后右键“格式化文档”即可保证当前文件格式化。<br>Q：已经配置了formatOnSave，但是没有生效。</li>
+</ol>
+<h4 id="代码记录"><a href="#代码记录" class="headerlink" title="代码记录"></a>代码记录</h4><ol>
+<li>select单选选中选项为黑色：计费中心-商品列表-编辑商品-规格选择</li>
+<li>表单中有正常项（使用schema）和表格选择：计费中心-产品列表-创建产品，其中表格选择写成单独的组件，expose validate 和 resetFields 方法，在整个表单 validator 之后调用。注意 defineEmits ，组件表格变化时，触发父组件的事件。</li>
+<li>下拉列表可输入：数据集管理-标签</li>
+<li>下拉列表+输入：计费中心-产品列表</li>
+<li>批量操作：告警规则</li>
+<li>点击复制：模型开发调试-环境详情，SSH登录命令</li>
+<li>联级选择：模型开发调试-最上方右侧</li>
+<li>数字选择：集群概览-存储配置</li>
+<li>折线图：集群概览；饼图：集群概览、租户管理；</li>
+<li>xterm：train&#x2F;log&#x2F;index.vue；</li>
+<li>websock：train&#x2F;log&#x2F;index.vue；</li>
+<li>导出：操作审计</li>
+<li>下载中弹窗硬控几秒：推理详情</li>
+<li>表格的另一种写法：数据集管理-数据集详情-文件列表</li>
 </ol>
 
             </div>

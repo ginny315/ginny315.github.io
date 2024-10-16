@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="新需求，项目需要换肤和多语言支持。本篇介绍如何在vue3项目中实现换肤功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（38-1）vue3项目换肤">
+<meta property="og:url" content="http://guoningyan.com/2024/05/27/vue3%E7%AC%94%E8%AE%B0%EF%BC%8838-1%EF%BC%89vue3%E9%A1%B9%E7%9B%AE%E6%8D%A2%E8%82%A4/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="新需求，项目需要换肤和多语言支持。本篇介绍如何在vue3项目中实现换肤功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-27T07:00:52.000Z">
+<meta property="article:modified_time" content="2024-08-22T02:10:56.473Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>vue3笔记（38-1）vue3项目换肤 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（38-1）vue3项目换肤">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-05-27 15:00" pubdate>
+        2024年5月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      59 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（38-1）vue3项目换肤</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>新需求，项目需要换肤和多语言支持。本篇介绍如何在vue3项目中实现换肤功能。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>通常，前端一键换肤功能需要通过使用 CSS 样式表来定义不同的主题样式，然后通过 JavaScript 来控制切换不同的样式表，以达到换肤的效果。用户在点击换肤按钮或者选择不同的主题选项后，页面会立即应用新的样式，从而改变界面的外观。这种功能在很多网站、应用中都有广泛的应用，特别是一些内容丰富、用户群体广泛的平台，以满足不同用户对于外观风格的偏好。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>切换主题和皮肤，主要是背景色、字体颜色的替换。分别设置黑暗和明亮两个主题文件夹，当触发主题变化时，调用不同的样式文件。<br>当前项目中，文件结构如下：<br>|– assets&#x2F;scss<br>    |– dark<br>        |– index.scss<br>        |– element-variables.scss<br>    |– light<br>        |– index.scss<br>        |– element-variables.scss<br>    |– common.scss<br>    |– common-ev.scss<br>    |– transition.scss</p>
+<p>其中，<code>common.scss</code> 用于全局样式，<code>common-ev.scss</code>用于全局 element 组件样式修改配置，<code>transition.scss</code> 用于动画效果。dark 和 light 目录下分别存放了黑暗和明亮主题样式和变量文件。<code>index.scss</code> 用于主题样式，<code>element-variables.scss</code>  用于对应主题 element 组件特殊配置。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
+<li><p>分别按照设计图设置黑暗和明亮主题的颜色，在 dark 文件下的所有样式都用 <code>.dark</code> 作为最外层包裹。</p>
+<figure class="highlight scss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scss"><span class="hljs-selector-class">.dark</span> &#123;<br>  <span class="hljs-selector-pseudo">:root</span> &#123;<br>    <span class="hljs-attr">--el-text-color-primary</span>: <span class="hljs-number">#ffffff</span>;<br>    <span class="hljs-attr">--el-text-color-regular</span>: <span class="hljs-number">#ffffff</span>;<br>    <span class="hljs-attr">--el-table-text-color</span>: <span class="hljs-number">#ffffff</span>;<br>  &#125;<br>  <span class="hljs-selector-class">.el-table</span> &#123;<br>    <span class="hljs-attr">--el-table-header-text-color</span>: rgba(<span class="hljs-number">173</span>, <span class="hljs-number">202</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.8</span>) <span class="hljs-meta">!important</span>;<br>    <span class="hljs-attr">--el-table-header-bg-color</span>: <span class="hljs-number">#2a3144</span> <span class="hljs-meta">!important</span>;<br>    <span class="hljs-attr">--el-table-row-hover-bg-color</span>: <span class="hljs-number">#1f202f</span> <span class="hljs-meta">!important</span>;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>分别在<code>index.scss</code>中引入对应的主题变量</p>
+<figure class="highlight scss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;./element-variables.scss&#x27;</span> as *;<br></code></pre></div></td></tr></table></figure>
+<p><code>common.scss</code>中引入其他全局样式文件</p>
+<figure class="highlight scss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;./common-ev.scss&#x27;</span> as *;<br><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;./transition.scss&#x27;</span> as *;<br></code></pre></div></td></tr></table></figure>
+<p>在<code>main.ts</code>中引入通用样式文件和两个主题样式文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@/assets/scss/common.scss&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@/assets/scss/dark/index.scss&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@/assets/scss/light/index.scss&#x27;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p><code>App.vue</code>中初始化主题，本项目初始化为明亮。主题色会影响到全局样式（侧栏导航）和element组件样式（el-tabs、el-tabs、el-pagination）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; handleBackgroundStyle, handleThemeStyle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./utils/theme&#x27;</span><br><br><span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#EEEEEE&#x27;</span>, <span class="hljs-string">&#x27;#cccccc&#x27;</span>, <span class="hljs-string">&#x27;#bbbbbb&#x27;</span>])<br><span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#2196f3&#x27;</span>)<br><br></code></pre></div></td></tr></table></figure>
+<p><code>/utils/theme.ts</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 处理背景色</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleBackgroundStyle</span>(<span class="hljs-params">background: any</span>) &#123;<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">style</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-string">&#x27;--el-bg-color&#x27;</span>, background[<span class="hljs-number">0</span>])<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">style</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-string">&#x27;--el-bg-color-1&#x27;</span>, background[<span class="hljs-number">1</span>])<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">style</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-string">&#x27;--el-bg-color-2&#x27;</span>, background[<span class="hljs-number">2</span>])<br>&#125;<br><br><span class="hljs-comment">// 处理主题样式</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-params">theme: any</span>) &#123;<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">style</span>.<span class="hljs-title function_">setProperty</span>(<span class="hljs-string">&#x27;--el-color-primary&#x27;</span>, theme)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p><code>document.documentElement</code>代表的是文档对象模型（DOM）中的根元素，即 HTML 文档中的元素。<code>style.setProperty</code>用于在 JavaScript 中设置元素样式。 具体来说，<code>document.documentElement.style.setProperty</code> 方法可以用于动态地设置根元素的 CSS 样式属性。它接受两个参数：<br>属性名： 第一个参数是要设置的 CSS 属性名称，例如 “color”, “font-size”, “background-color” 等等。<br>属性值： 第二个参数是要为属性设置的值，可以是字符串或者变量，表示对应样式属性的值。<br>这种方法可以用于动态改变页面的整体样式，在实现一键换肤功能时非常有用。通过 JavaScript 动态地调用<code>setProperty</code>方法，可以实现在用户操作后改变整个页面的外观，从而实现换肤的效果。</p>
+</li>
+<li><p>设置一个按钮，点击切换主题。通过在body标签上添加class&#x3D;“dark”或“”来切换主题。<br><code>layout/components/navbar/ThemeSwitch.vue</code></p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">button</span></span><br><span class="hljs-tag">    <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;switch&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;切换深色模式&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">aria-checked</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">    @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;toggleDarkMode&quot;</span></span><br><span class="hljs-tag">  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">import</span> &#123; handleBackgroundStyle, handleThemeStyle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/theme&#x27;</span></span><br><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">toggleDarkMode</span> = (<span class="hljs-params"></span>) =&gt; &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> body = <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span></span><br><span class="language-javascript">  <span class="hljs-keyword">const</span> classValue = body.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>)</span><br><span class="language-javascript">  <span class="hljs-keyword">if</span> (classValue === <span class="hljs-string">&#x27;dark&#x27;</span>) &#123;</span><br><span class="language-javascript">    body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)</span><br><span class="language-javascript">    <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#EEEEEE&#x27;</span>, <span class="hljs-string">&#x27;#cccccc&#x27;</span>, <span class="hljs-string">&#x27;#000000&#x27;</span>])</span><br><span class="language-javascript">    <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#000000&#x27;</span>)</span><br><span class="language-javascript">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="language-javascript">    body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;dark&#x27;</span>)</span><br><span class="language-javascript">    <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#151723&#x27;</span>, <span class="hljs-string">&#x27;#2a3144&#x27;</span>, <span class="hljs-string">&#x27;#313955&#x27;</span>])</span><br><span class="language-javascript">    <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#ff7f02&#x27;</span>)</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>其他替换项目<br>（1）所有的按钮图标需要替换，深色模式为白色，明亮模式为黑色。<br>（2）tooltip、dialog、message等组件的样式需要替换。.el-button–primary<br>（3）图表颜色替换。components&#x2F;echart&#x2F;src&#x2F;template&#x2F;index.ts 中，修改getEchartsColor判断</p>
+</li>
+</ol>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>每次点击时切换主题，同时要在页面刷新时保持原有主题，所以我们做一个简单的缓存优化。<br><code>utils/cookie.ts</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> themeKey = <span class="hljs-string">`<span class="hljs-subst">$&#123;casdoor.appName&#125;</span>-theme`</span><br><span class="hljs-comment">// 设置主题</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">setTheme</span> = (<span class="hljs-params">theme: string</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> expires = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>() + <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)<br>  <span class="hljs-keyword">if</span> (theme) <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">set</span>(themeKey, theme, &#123; <span class="hljs-attr">expires</span>: expires &#125;)<br>&#125;<br><span class="hljs-comment">// 获取主题</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getTheme</span> = (<span class="hljs-params"></span>) =&gt; <span class="hljs-title class_">Cookies</span>.<span class="hljs-title function_">get</span>(themeKey)<br></code></pre></div></td></tr></table></figure>
+<p><code>src/store/modules/app.ts</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useAppStore = <span class="hljs-title function_">defineStore</span>(<span class="hljs-string">&#x27;app&#x27;</span>, &#123;<br>  <span class="hljs-attr">state</span>: (): <span class="hljs-function"><span class="hljs-params">IAppState</span> =&gt;</span> (&#123;<br>    <span class="hljs-attr">theme</span>: <span class="hljs-title function_">getTheme</span>() || <span class="hljs-string">&#x27;&#x27;</span><br>  &#125;),<br>  <span class="hljs-attr">getters</span>: &#123;<br>    <span class="hljs-title function_">getTheme</span>(): string &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">theme</span><br>    &#125;<br>  &#125;,<br>  <span class="hljs-attr">actions</span>: &#123;<br>    <span class="hljs-title function_">toggleTheme</span>(<span class="hljs-params">theme: string</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">theme</span> = theme<br>      <span class="hljs-title function_">setTheme</span>(theme)<br>    &#125;<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+<p><code>layout/components/navbar/ThemeSwitch.vue</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; useAppStoreWithOut &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/store/modules/app&#x27;</span><br><br><span class="hljs-keyword">const</span> appStore = <span class="hljs-title function_">useAppStoreWithOut</span>()<br><span class="hljs-keyword">const</span> <span class="hljs-title function_">toggleDarkMode</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> body = <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span><br>  <span class="hljs-keyword">const</span> classValue = body.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>)<br>  <span class="hljs-keyword">if</span> (classValue === <span class="hljs-string">&#x27;dark&#x27;</span>) &#123;<br>    appStore.<span class="hljs-title function_">toggleTheme</span>(<span class="hljs-string">&#x27;light&#x27;</span>)<br>    body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#EEEEEE&#x27;</span>, <span class="hljs-string">&#x27;#cccccc&#x27;</span>, <span class="hljs-string">&#x27;#bbbbbb&#x27;</span>])<br>    <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#2196f3&#x27;</span>)<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    appStore.<span class="hljs-title function_">toggleTheme</span>(<span class="hljs-string">&#x27;dark&#x27;</span>)<br>    body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;dark&#x27;</span>)<br>    <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#151723&#x27;</span>, <span class="hljs-string">&#x27;#2a3144&#x27;</span>, <span class="hljs-string">&#x27;#313955&#x27;</span>])<br>    <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#ff7f02&#x27;</span>)<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><code>App.vue</code>中从缓存中获取初始化主题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; handleBackgroundStyle, handleThemeStyle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./utils/theme&#x27;</span><br><br><span class="hljs-keyword">const</span> appStore = <span class="hljs-title function_">useAppStoreWithOut</span>()<br><span class="hljs-keyword">const</span> currentTheme = appStore.<span class="hljs-property">theme</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;currentTheme=&#x27;</span>, currentTheme)<br><span class="hljs-keyword">const</span> body = <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span> <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span><br><span class="hljs-keyword">if</span> (currentTheme === <span class="hljs-string">&#x27;dark&#x27;</span>) &#123;<br>  body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;dark&#x27;</span>)<br>  <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#151723&#x27;</span>, <span class="hljs-string">&#x27;#2a3144&#x27;</span>, <span class="hljs-string">&#x27;#313955&#x27;</span>])<br>  <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#ff7f02&#x27;</span>)<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  body.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>  <span class="hljs-title function_">handleBackgroundStyle</span>([<span class="hljs-string">&#x27;#EEEEEE&#x27;</span>, <span class="hljs-string">&#x27;#cccccc&#x27;</span>, <span class="hljs-string">&#x27;#bbbbbb&#x27;</span>])<br>  <span class="hljs-title function_">handleThemeStyle</span>(<span class="hljs-string">&#x27;#2196f3&#x27;</span>)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>echarts 图表在切换主题时需要重绘，这里尝试了<code>components/echart/src/echart.vue</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">watch</span>(<br>  <span class="hljs-function">() =&gt;</span> appStore.<span class="hljs-property">theme</span>,<br>  <span class="hljs-function">(<span class="hljs-params">theme</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">initChart</span>(theme) <br>  &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+<p>没有成功，感觉这个theme和颜色不是同一个。</p>
+</li>
+<li><p>在<code>components/echart/src/template/index.ts</code>中，观察 theme 变化，修改<code>getEchartsColor</code>判断，切换主题时，图表颜色也会变化。但是仔细一看，变化只是跟着背景变了，实际的颜色配置还是没获取成功。。。原因是图表色卡或者失败。。。<br>若将 lineOptions: any &#x3D; ref({})，colors.value 改变时，背景颜色无法跟着变。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> colors = ref&lt;<span class="hljs-title class_">EchartsTheme</span>&gt;()<br><span class="hljs-title function_">watch</span>(<br>  <span class="hljs-function">() =&gt;</span> appStore.<span class="hljs-property">theme</span>,<br>  <span class="hljs-function">(<span class="hljs-params">theme</span>) =&gt;</span> &#123;<br>    colors.<span class="hljs-property">value</span> = <span class="hljs-title function_">getEchartsColor</span>(theme === <span class="hljs-string">&#x27;dark&#x27;</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<br>      colors.<span class="hljs-property">value</span>.<span class="hljs-property">bgColor</span>,<br>      lineOptions.<span class="hljs-property">value</span>.<span class="hljs-property">backgroundColor</span><br>    ) <span class="hljs-comment">// 颜色变化，但是背景颜色没有变化</span><br>  &#125;<br>)<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h3 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a>按需加载</h3><p>对于需要按需加载的项目，尝试直接将<code>dark</code>和<code>light</code>文件夹引入，原<code>vite.config.ts</code>配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">css</span>: &#123;<br>      <span class="hljs-attr">preprocessorOptions</span>: &#123;<br>        <span class="hljs-attr">scss</span>: &#123;<br>          <span class="hljs-attr">additionalData</span>: <span class="hljs-string">`@import &quot;@/assets/scss/index.scss&quot;;`</span><br>        &#125;<br>      &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<p>执行后，有如下报错<code>[sass] This module was already loaded, so it can&#39;t be configured using &quot;with&quot;.</code><br>当只引入一个文件夹内容时，报错消失，初步判断是有重复调用。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>为了避免后期改动麻烦，建议在项目初始阶段（或任一新模块开发初期）就按照配色规范来编写 css 代码。</li>
+<li>避免在 html 中直接编写 style&#x3D;”” 此类代码，以防止后期修改样式时出现问题。</li>
+<li>模块中尽量不写和颜色相关的 !important，以防止样式修改时造成意想不到的问题。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><br>:root &#123;<br>  --el-color-<span class="hljs-attr">primary</span>: #ff7f02;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7155439519204900900#">vue3如何实现换肤效果（精简版）</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2401315#">两种最简单的方式教会你如何实现前端一键换肤！</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903672162304013">CSS — BEM 命名规范</a><br><a target="_blank" rel="noopener" href="https://element-plus.org/zh-CN/guide/theming.html">element-plus 主题色配置</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/22/vue3%E7%AC%94%E8%AE%B0%EF%BC%8838-2%EF%BC%89vue3%E9%A1%B9%E7%9B%AE%E5%9B%BD%E9%99%85%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（38-2）vue3项目国际化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/27/JS%E5%9B%9E%E9%A1%BE%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">
+                        <span class="hidden-mobile">JS回顾笔记（1）内置对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

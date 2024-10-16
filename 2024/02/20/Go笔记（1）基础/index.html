@@ -16,22 +16,21 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本系统的初始登录对接了casdoor，内置可配置的第三方登录。后期开发中，经过成本效益分析，去掉casdoor，自己进行功能开发更合适，所以需要前后端自己对接钉钉。本篇记录前端 vue3 对接钉钉实践。">
+    <meta name="description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（30）对接钉钉登录">
-<meta property="og:url" content="http://guoningyan.com/2023/08/08/vue3%E7%AC%94%E8%AE%B0%EF%BC%8830%EF%BC%89%E5%AF%B9%E6%8E%A5%E9%92%89%E9%92%89%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:title" content="Go笔记（1）基础">
+<meta property="og:url" content="http://guoningyan.com/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="本系统的初始登录对接了casdoor，内置可配置的第三方登录。后期开发中，经过成本效益分析，去掉casdoor，自己进行功能开发更合适，所以需要前后端自己对接钉钉。本篇记录前端 vue3 对接钉钉实践。">
+<meta property="og:description" content="组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-08T02:48:11.000Z">
-<meta property="article:modified_time" content="2023-08-16T01:27:47.748Z">
+<meta property="article:published_time" content="2024-02-20T01:41:41.000Z">
+<meta property="article:modified_time" content="2024-03-04T02:25:34.000Z">
 <meta property="article:author" content="Ningyan Guo">
-<meta property="article:tag" content="vue">
-<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="go">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>vue3笔记（30）对接钉钉登录 - ginny&#39;s blog</title>
+  <title>Go笔记（1）基础 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,7 +168,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（30）对接钉钉登录">
+            <span class="h2" id="subtitle" title="Go笔记（1）基础">
               
             </span>
 
@@ -179,8 +178,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-08 10:48" pubdate>
-        2023年8月8日 上午
+      <time datetime="2024-02-20 09:41" pubdate>
+        2024年2月20日 上午
       </time>
     </span>
   
@@ -190,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2k 字
     </span>
   
 
@@ -199,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      17 分钟
     </span>
   
 
@@ -228,31 +227,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（30）对接钉钉登录</h1>
+            <h1 style="display: none">Go笔记（1）基础</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>本系统的初始登录对接了casdoor，内置可配置的第三方登录。后期开发中，经过成本效益分析，去掉casdoor，自己进行功能开发更合适，所以需要前后端自己对接钉钉。<br>本篇记录前端 vue3 对接钉钉实践。 </p>
+<p>组织架构调整之后，公司的后端由 python 变成了 go，作为一个全栈工程师，自然是需要了解一下这个语言，Go笔记是初级学习的第一阶段。<br>本篇包含基础、运行指令、编写测试程序、benchmark。IDE 插件相关。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h3><p>系统通过OAuth授权机制可实现钉钉单点登录（SSO登录）。</p>
-<h3 id="前期调研"><a href="#前期调研" class="headerlink" title="前期调研"></a>前期调研</h3><ol>
-<li>casdoor 原生配置的钉钉登录采用跳转第三方网页形式（<a target="_blank" rel="noopener" href="https://login.dingtalk.com/oauth2/challenge.htm?client_id=***&amp;redirect_uri=https://door.casdoor.com/callback&amp;scope=openid&amp;response_type=code&amp;prompt=consent&amp;state=***=%EF%BC%89%EF%BC%8C%E6%89%AB%E7%A0%81%E5%90%8E%E5%87%BA%E7%8E%B0%E5%85%81%E8%AE%B8%E7%99%BB%E5%BD%95%E6%8F%90%E7%A4%BA%E3%80%82">https://login.dingtalk.com/oauth2/challenge.htm?client_id=***&amp;redirect_uri=https://door.casdoor.com/callback&amp;scope=openid&amp;response_type=code&amp;prompt=consent&amp;state=***=），扫码后出现允许登录提示。</a></li>
-<li>通过 casdoor 自带的钉钉登录可以获取到用户的邮箱，通过邮箱地址在公司全量钉钉数据中找到对应用户（姓名、手机号、部门），映射到系统中，与系统用户进行关联；若用户不存在，则引导用户联系系统管理员手动添加进系统。</li>
-<li>使用钉钉登录可以跳钉钉的登录页面，也可以自己生成二维码。</li>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
+<li>Go 语言主要为了解决：多核硬件架构、超大规模分布式计算集群<br>（上万+）、Web 模式导致的前所未有的开发规模和更新速度。</li>
+<li>并发支持、垃圾回收机制。编译的静态类型语言，尽管有 GC，依然可以通过指针去访问内存。</li>
 </ol>
-<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ol>
-<li>引入 ddLogin.js 依赖包</li>
-<li>接口拿到配置的 appId 实例化钉钉对象并挂载到 window 上</li>
-<li>通过监听回调方法先拿到 authcode，通过 authcode 拿到可以跟后端通信的 code</li>
-<li>调用后端接口通过 code 拿到前端需要的用户信息&#x2F;token</li>
+<h3 id="学习路径"><a href="#学习路径" class="headerlink" title="学习路径"></a>学习路径</h3><p>语法 –&gt; 并发任务的实现 –&gt; 常见架构模式（pipe-filter, micro-kernel）–&gt; 性能优化 –&gt; 高可用服务</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">运行</span><br>go run ***.go<br><span class="hljs-meta prompt_"># </span><span class="language-bash">编译-独立的二进制文件（命令行./***即可运行），可通过容器部署</span><br>go build ***.go  <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> ( <span class="hljs-comment">// 快速设置连续值</span><br> Open = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-literal">iota</span><br> Close<br> Pending<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123; <span class="hljs-comment">// main中无法传入参数</span><br>    fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)<br>    os.Exit(<span class="hljs-number">0</span>) <span class="hljs-comment">// 返回</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><ol>
+<li>源码⽂件以 _test 结尾：xxx_test.go</li>
+<li>测试⽅法名以 Test 开头：func TestXXX(t *testing.T) {…}</li>
+<li>内置单元测试框架：Fail, Error：该测试失败，该测试继续，其他测试继续执行；FailNow, Fatal：该测试失败，该测试中止，其他测试继续执行<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># -v 打印 t.Log 内容</span><br>go <span class="hljs-built_in">test</span> -v -cover<br></code></pre></div></td></tr></table></figure></li>
 </ol>
-<h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3><ol>
-<li>在 index.html 页面中引入钉钉扫码登录JSSDK<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://g.alicdn.com/dingding/h5-dingtalk-login/0.21.0/ddlogin.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure></li>
-<li>调用钉钉 SDK，这里需要注意获取到DOM id需要在DOM渲染之后，不要使用 <code>v-if</code>，不然会报错找不到id<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">ddConfig</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-variable language_">window</span>.<span class="hljs-title class_">DTFrameLogin</span>(<br>    <span class="hljs-comment">// DOM包裹容器相关参数</span><br>    &#123;<br>      <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;showDD&#x27;</span>,<br>      <span class="hljs-attr">width</span>: <span class="hljs-number">300</span>,<br>      <span class="hljs-attr">height</span>: <span class="hljs-number">300</span><br>    &#125;,<br>    <span class="hljs-comment">// 统一登录参数</span><br>    &#123;<br>      <span class="hljs-attr">redirect_uri</span>: <span class="hljs-built_in">encodeURIComponent</span>(<span class="hljs-string">&#x27;http://www.aaaaa.com/a/b/&#x27;</span>),<br>      <span class="hljs-attr">client_id</span>: <span class="hljs-string">&#x27;dingxxxxxxxxxxxx&#x27;</span>,<br>      <span class="hljs-attr">scope</span>: <span class="hljs-string">&#x27;openid&#x27;</span>,<br>      <span class="hljs-attr">response_type</span>: <span class="hljs-string">&#x27;code&#x27;</span>,<br>      <span class="hljs-attr">state</span>: <span class="hljs-string">&#x27;xxxxxxxxx&#x27;</span>,<br>      <span class="hljs-attr">prompt</span>: <span class="hljs-string">&#x27;consent&#x27;</span><br>    &#125;,<br>    <span class="hljs-function">(<span class="hljs-params">loginResult</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 登录成功后的回调函数</span><br>      <span class="hljs-keyword">const</span> &#123; redirectUrl, authCode, state &#125; = loginResult<br>      <span class="hljs-comment">// 这里可以直接进行重定向</span><br>      <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span> = redirectUrl<br>      <span class="hljs-comment">// 也可以在不跳转页面的情况下，使用code进行授权</span><br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(authCode)<br>    &#125;,<br>    <span class="hljs-function">(<span class="hljs-params">errorMsg</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 登录失败后的回调函数</span><br>      <span class="hljs-comment">// 这里一般需要展示登录失败的具体原因</span><br>      <span class="hljs-title function_">alert</span>(<span class="hljs-string">`Login Error: <span class="hljs-subst">$&#123;errorMsg&#125;</span>`</span>)<br>    &#125;<br>  )<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
-</ol>
-<p><code>html</code><br><code>html</code><br><code>javascript</code><br><code>javascript</code><br><code>javascript</code></p>
-<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7070409140916453389">Vue3接入钉钉扫码登录</a><br><a target="_blank" rel="noopener" href="https://open.dingtalk.com/document/orgapp/tutorial-obtaining-user-personal-information?spm=ding_open_doc.document.0.0.4d964791LaSnju">实现登录第三方网站</a></p>
+<h4 id="benchmark"><a href="#benchmark" class="headerlink" title="benchmark"></a>benchmark</h4><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BenchmarkConcatStringByAdd</span><span class="hljs-params">(b *testing.B)</span></span> &#123;<br>	<span class="hljs-comment">//与性能测试⽆关的代码</span><br>	b.ResetTimer()<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; b.N; i++ &#123;<br>	<span class="hljs-comment">//测试代码</span><br>	&#125;<br>	b.StopTimer()<br>	<span class="hljs-comment">//与性能测试⽆关的代码</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>运行benchmark，-bench&#x3D;&lt;相关benchmark测试&gt;</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">go <span class="hljs-built_in">test</span> -bench=.<br><span class="hljs-comment"># 输出更多信息，分析性能原因</span><br>go <span class="hljs-built_in">test</span> -bench=. -benchmem <br><span class="hljs-comment"># cpu 调优示例</span><br>go <span class="hljs-built_in">test</span> -bench=. -cpuprofile=cpu.prof<br>go tool pprof cpu.prof<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Atom-离线安装-go-plus-插件（适用于mac）"><a href="#Atom-离线安装-go-plus-插件（适用于mac）" class="headerlink" title="Atom 离线安装 go-plus 插件（适用于mac）"></a>Atom 离线安装 go-plus 插件（适用于mac）</h3><p>Atom 自带的 install packages 安装失败，查阅资料发现有离线安装教程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/.atom/packages<br>git <span class="hljs-built_in">clone</span> https://github.com/joefitzgerald/go-plus.git<br><span class="hljs-built_in">cd</span> go-plus<br>npm install<br></code></pre></div></td></tr></table></figure>
+<p>Q1：atom 保存时出现“go: cannot find main module, but found .git&#x2F;config in &#x2F;Users&#x2F;<em><strong>&#x2F;go_learning<br>    to create a module there, run:<br>    cd ..&#x2F;..&#x2F;.. &amp;&amp; go mod init”<br>实验：执行该语句没用，报错“go: cannot determine module path for source directory &#x2F;Users&#x2F;</strong></em>&#x2F;go_learning (outside GOPATH, module path must be specified)”<br>A1：出错原因：出错原因是开启了 go mod，但是没有初使化生成 go.mod 文件。GO111MODULE 是 Go 1.11 引入的新版模块管理方式，快速解决方式是将其设置为 auto（具体实现见笔记5）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">go <span class="hljs-built_in">env</span> -w GO111MODULE=auto<br></code></pre></div></td></tr></table></figure>
+<p>Atom 中可以看到 GO111MODULE 已经变化，这种解决方式可能会影响其他。</p>
+<p>Q2：go mod init 报错 go: cannot determine module path for source directory<br>A2：在GOPATH之外，必须指定模块路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">go mod init 文件夹名<br></code></pre></div></td></tr></table></figure>
+
+<p>Q3：t.Log打印不出内容了，只会显示运行时间？<br>A3：Atom中需要安装Go plus插件，然后在Preferences..-&gt;Packages. 找到对应的Installed Packages “go-plus”。Settings 把 Run Tests With Verbose Flag Set 勾选上</p>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://www.jb51.net/article/262013.htm">VS Code安装go插件失败原因分析以及解决方案</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cqx6388/p/17719864.html">VSCode安装go插件失败的解决方案</a><br><a target="_blank" rel="noopener" href="https://github.com/stretchr/testify">断⾔</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/a384843262/article/details/125032482">Atom Vscode Go test测试无法显示t.Log的打印日志内容</a></p>
 
             </div>
             <hr>
@@ -263,9 +272,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
-                    
-                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                      <a class="hover-with-bg" href="/tags/go/">go</a>
                     
                   </div>
                 
@@ -282,9 +289,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/11/vue3%E7%AC%94%E8%AE%B0%EF%BC%8827-2%EF%BC%89el-table%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/">
+                      <a href="/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（27-2）el-table中使用批量操作</span>
+                        <span class="hidden-mobile">Go笔记（2）数据类型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -292,8 +299,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/03/vue3%E7%AC%94%E8%AE%B0%EF%BC%8829%EF%BC%89el-cascader%E8%81%94%E7%BA%A7%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8/">
-                        <span class="hidden-mobile">vue3笔记（29）el-cascader 联级选择使用</span>
+                      <a href="/2024/01/24/%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%882%EF%BC%89cypress/">
+                        <span class="hidden-mobile">前端自动化测试（2）cypress</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

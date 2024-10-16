@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇记录语法。包含数据类型，数组、切片、string、map、map实现set功能、函数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go笔记（2）数据类型">
+<meta property="og:url" content="http://guoningyan.com/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这篇记录语法。包含数据类型，数组、切片、string、map、map实现set功能、函数。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/go-1.jpg">
+<meta property="article:published_time" content="2024-02-20T08:01:27.000Z">
+<meta property="article:modified_time" content="2024-03-04T02:38:59.000Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/go-1.jpg">
+  
+  
+  <title>Go笔记（2）数据类型 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Go笔记（2）数据类型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-02-20 16:01" pubdate>
+        2024年2月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go笔记（2）数据类型</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>这篇记录语法。包含数据类型，数组、切片、string、map、map实现set功能、函数。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><img src="/img/go-1.jpg" srcset="/img/loading.gif" lazyload alt="基本数据类型"></p>
+<ol>
+<li>Go 语⾔不允许隐式类型转换，别名和原有类型也不能进⾏隐式类型转换。</li>
+<li>类型的预定义值: math.MaxInt64, math.MaxFloat64, math.MaxUint32</li>
+<li>不⽀持指针运算。</li>
+<li>string 是值类型，其默认的初始化值为空字符串。string 是只读的 byte 切片，len(str)&#x3D;所包含的 byte 数。string 的 byte 数组可以存放任何数据。</li>
+<li>函数可以有多个返回值，所有参数都是值传递（slice&#x2F;map&#x2F;channel会有传引用的错觉）</li>
+<li>【解释5】切片本身是一个数据结构，背后对应一个数组，数据结构包含指向数组的指针，在传值的情况下，结构被复制到函数里，通过指针操作具体的值，操作的是同一块空间。</li>
+<li>slice 只能和[], nil 比较；map 只能和 nil 比较。可以使用 relect.DeepEqual。</li>
+</ol>
+<h3 id="简单语法示例"><a href="#简单语法示例" class="headerlink" title="简单语法示例"></a>简单语法示例</h3><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go">a := [...]<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125; <span class="hljs-comment">// 数组初始化</span><br>b := [<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]<span class="hljs-type">int</span>&#123;&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;, &#123;<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;&#125; <span class="hljs-comment">//多维数组</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestArrayTravel</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	arr := [...]<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125; <span class="hljs-comment">// [len]使用...自动识别数组长度</span><br>	<span class="hljs-keyword">for</span> _, e := <span class="hljs-keyword">range</span> arr3 &#123; <span class="hljs-comment">// _/idx 表示索引值，_表示并不关心这个值的结果，返回值占位</span><br>		t.Log(e)<br>	&#125;<br>    <span class="hljs-comment">// 相同维度的数组可以比较</span><br>    t.Log(arr[<span class="hljs-number">1</span>:<span class="hljs-built_in">len</span>(arr)]==arr[<span class="hljs-number">1</span>:]) <span class="hljs-comment">// true, 返回值均为[3,4,5]</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestSlice</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	s := []<span class="hljs-type">int</span>&#123;&#125; <span class="hljs-comment">// 切片，容量可伸缩，只能和[], nil比较</span><br>    s2 := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>) <span class="hljs-comment">//len=3，默认初始化为0</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>		s = <span class="hljs-built_in">append</span>(s, i) <span class="hljs-comment">// 用*2的方式创建新的连续存储空间，把值copy过去</span><br>		t.Log(<span class="hljs-built_in">len</span>(s), <span class="hljs-built_in">cap</span>(s))<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestMap</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	m := <span class="hljs-keyword">map</span>[<span class="hljs-type">int</span>]<span class="hljs-type">int</span>&#123;&#125;<br>	t.Log(m[<span class="hljs-number">1</span>]) <span class="hljs-comment">// 0，默认初始化为0</span><br>	m[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span><br>	t.Log(m[<span class="hljs-number">2</span>]) <span class="hljs-comment">// 0</span><br>	m[<span class="hljs-number">3</span>] = <span class="hljs-number">0</span> <span class="hljs-comment">// 判断 map 中 key不存在/值为0必须使用 if 语句</span><br>	<span class="hljs-keyword">if</span> v, ok := m[<span class="hljs-number">3</span>]; ok &#123;<br>		t.Logf(<span class="hljs-string">&quot;Key 3&#x27;s value is %d&quot;</span>, v)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		t.Log(<span class="hljs-string">&quot;key 3 is not existing.&quot;</span>)<br>	&#125;<br>	m2 := <span class="hljs-keyword">map</span>[<span class="hljs-type">int</span>]<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span>&#123;&#125; <span class="hljs-comment">// map的值可以是方法</span><br>	m2[<span class="hljs-number">1</span>] = <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123; <span class="hljs-keyword">return</span> op &#125;<br>	m2[<span class="hljs-number">2</span>] = <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123; <span class="hljs-keyword">return</span> op*op&#125;<br>	t.Log(m2[<span class="hljs-number">1</span>](<span class="hljs-number">2</span>), m2[<span class="hljs-number">2</span>](<span class="hljs-number">2</span>))<br>&#125;<br><br><span class="hljs-comment">// go语言没有set（元素唯一性），用map来实现相同的特性。添加元素、判断元素是否存在、删除元素、元素个数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestMapForSet</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	mySet := <span class="hljs-keyword">map</span>[<span class="hljs-type">int</span>]<span class="hljs-type">bool</span>&#123;&#125;<br>	mySet[<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span><br>	n := <span class="hljs-number">3</span><br>	<span class="hljs-keyword">if</span> mySet[n] &#123;<br>		t.Logf(<span class="hljs-string">&quot;%d is existing&quot;</span>, n)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		t.Logf(<span class="hljs-string">&quot;%d is not existing&quot;</span>, n)<br>	&#125;<br>	mySet[<span class="hljs-number">3</span>] = <span class="hljs-literal">true</span><br>	t.Log(<span class="hljs-built_in">len</span>(mySet))<br>	<span class="hljs-built_in">delete</span>(mySet, <span class="hljs-number">1</span>)  <span class="hljs-comment">// 删除</span><br>	n = <span class="hljs-number">1</span><br>	<span class="hljs-keyword">if</span> mySet[n] &#123;<br>		t.Logf(<span class="hljs-string">&quot;%d is existing&quot;</span>, n)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		t.Logf(<span class="hljs-string">&quot;%d is not existing&quot;</span>, n)<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestString</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> s <span class="hljs-type">string</span><br>	t.Log(s) <span class="hljs-comment">//初始化为默认零值“”</span><br>	s = <span class="hljs-string">&quot;hello&quot;</span><br>	t.Log(<span class="hljs-built_in">len</span>(s)) <span class="hljs-comment">// 5</span><br>	<span class="hljs-comment">//s[1] = &#x27;3&#x27; // string是不可变的byte slice</span><br>	s = <span class="hljs-string">&quot;\xE4\xB8\xA5&quot;</span> <span class="hljs-comment">// 可以存储任何二进制数据</span><br>	t.Log(<span class="hljs-built_in">len</span>(s)) <span class="hljs-comment">// 3</span><br>	s = <span class="hljs-string">&quot;中&quot;</span> <span class="hljs-comment">// len(s)=3 [0xE4, 0xB8, 0xAD]</span><br>	c := []<span class="hljs-type">rune</span>(s) <span class="hljs-comment">// 取出unicode，len(c)=1</span><br>	t.Logf(<span class="hljs-string">&quot;中 unicode %x&quot;</span>, c[<span class="hljs-number">0</span>]) <span class="hljs-comment">// 中 unicode 4e2d</span><br>	t.Logf(<span class="hljs-string">&quot;中 UTF8 %x&quot;</span>, s) <span class="hljs-comment">// 中 UTF8 e4b8ad（物理存储）</span><br><br>	s := <span class="hljs-string">&quot;A,B,C&quot;</span><br>	parts := strings.Split(s, <span class="hljs-string">&quot;,&quot;</span>) <span class="hljs-comment">// 字符串分割</span><br>	<span class="hljs-keyword">for</span> _, part := <span class="hljs-keyword">range</span> parts &#123;<br>		t.Log(part)<br>	&#125;<br>	t.Log(strings.Join(parts, <span class="hljs-string">&quot;-&quot;</span>)) <br><br>	s := strconv.Itoa(<span class="hljs-number">10</span>)<br>	t.Log(<span class="hljs-string">&quot;str&quot;</span> + s) <span class="hljs-comment">// 整数转字符串</span><br>	<span class="hljs-keyword">if</span> i, err := strconv.Atoi(<span class="hljs-string">&quot;10&quot;</span>); err == <span class="hljs-literal">nil</span> &#123; <span class="hljs-comment">// 字符串转整数需要用特殊写法</span><br>		t.Log(<span class="hljs-number">10</span> + i)<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="字符串连接-高效"><a href="#字符串连接-高效" class="headerlink" title="字符串连接-高效"></a>字符串连接-高效</h4><p>尽量不使用 StringAdd，String 是个不可变对象，每次 add 之后需要生成一个新对象、开辟新的存储空间。<br>1.10 之前使用bytes.Buffer；1.10 以后可以使用 strings.Builder。</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BenchmarkStringBuilder</span><span class="hljs-params">(b *testing.B)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> builder strings.Builder<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; numbers; i++ &#123;<br>		builder.WriteString(strconv.Itoa(i))<br><br>	&#125;<br>	_ = builder.String()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BenchmarkBytesBuf</span><span class="hljs-params">(b *testing.B)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> buf bytes.Buffer<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; numbers; i++ &#123;<br>		buf.WriteString(strconv.Itoa(i))<br>	&#125;<br>	_ = buf.String()<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>条件判断</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-comment">// if-else</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestMultiSec</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>    <span class="hljs-keyword">if</span> v, err:=someFunc() ; err==<span class="hljs-literal">nil</span> &#123; <span class="hljs-comment">// someFunc本来的返回值v，返回的错误err</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;&#125;<br>&#125;<br><span class="hljs-comment">// switch</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestSwitch</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++ &#123;<br>		<span class="hljs-keyword">switch</span> &#123; <br>		<span class="hljs-keyword">case</span> i%<span class="hljs-number">2</span> == <span class="hljs-number">0</span>: <span class="hljs-comment">// 可以直接使用i的表达式</span><br>			t.Log(<span class="hljs-string">&quot;Even&quot;</span>) <span class="hljs-comment">// 不用加break</span><br>		<span class="hljs-keyword">case</span> i%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>:<br>			t.Log(<span class="hljs-string">&quot;Odd&quot;</span>)<br>		<span class="hljs-keyword">default</span>:<br>			t.Log(<span class="hljs-string">&quot;unknow&quot;</span>)<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>函数可变参数</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Sum</span><span class="hljs-params">(ops ...<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123; <br>	ret := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> _, op := <span class="hljs-keyword">range</span> ops &#123;<br>		ret += op<br>	&#125;<br>	<span class="hljs-keyword">return</span> ret<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>函数式编程，传入一个函数，输出一个函数。<br>类似于装饰模式，给一个函数套一层，返回依旧是这个函数，作为功能的扩展。</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">timeSpent</span><span class="hljs-params">(inner <span class="hljs-keyword">func</span>(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span>) <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(n <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>		start := time.Now()<br>		ret := inner(n)<br>		fmt.PrintIn(<span class="hljs-string">&quot;time spent:&quot;</span>, time.Since(start).Seconds())<br>		<span class="hljs-keyword">return</span> ret<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">slowFun</span><span class="hljs-params">(op <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123; time.Sleep(time.Second * <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> op&#125; <span class="hljs-comment">// 表示一个函数的运行</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestFn</span><span class="hljs-params">(t *testing.T)</span></span> &#123; tsSF := timeSpent(slowFun) t.Log(tsSF(<span class="hljs-number">10</span>))&#125; <span class="hljs-comment">// 调用装饰函数</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><ol>
+<li>strconv 包提供了字符串与简单数据类型之间的类型转换功能。可以将简单类型转换为字符串，也可以将字符串转换为其它简单类型。<br>字符串转int：Atoi()<br>int转字符串：Itoa()<br>ParseTP类函数将string转换为TP类型：ParseBool()、ParseFloat()、ParseInt()、ParseUint()。因为string转其它类型可能会失败，所以这些函数都有第二个返回值表示是否转换成功<br>FormatTP类函数将其它类型转string：FormatBool()、FormatFloat()、FormatInt()、FormatUint()<br>AppendTP类函数用于将TP转换成字符串后 append 到一个 slice 中：AppendBool()、AppendFloat()、AppendInt()、AppendUint()</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/go/">go</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/23/Go%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go笔记（3）面向对象编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">Go笔记（1）基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

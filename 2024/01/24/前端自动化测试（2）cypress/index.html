@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇记录一下 cypress 的学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端自动化测试（2）cypress">
+<meta property="og:url" content="http://guoningyan.com/2024/01/24/%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%882%EF%BC%89cypress/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="这篇记录一下 cypress 的学习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/test-2.png">
+<meta property="og:image" content="http://guoningyan.com/img/test-3.png">
+<meta property="og:image" content="http://guoningyan.com/img/cypress-1.jpg">
+<meta property="article:published_time" content="2024-01-24T07:27:07.000Z">
+<meta property="article:modified_time" content="2024-03-21T02:15:48.697Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="测试">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/test-2.png">
+  
+  
+  <title>前端自动化测试（2）cypress - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端自动化测试（2）cypress">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-01-24 15:27" pubdate>
+        2024年1月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端自动化测试（2）cypress</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>这篇记录一下 cypress 的学习。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>Cypress 基于 JavaScript，不依赖外部依赖项，直接运行在浏览器中，并利用浏览器提供的原生 API 来模拟用户操作，提供了一套完整的端到端测试体验，可以对浏览器中运行的任何内容进行快速，简单和可靠的测试。<br>允许用户快速的创建、编写、运行、测试用例，并且针对每一步操作均支持回看。<br><img src="/../img/test-2.png" srcset="/img/loading.gif" lazyload alt="cypress"><br>下面一张图可以看出，cypress 相当于过去一些工具的整合。<br><img src="/../img/test-3.png" srcset="/img/loading.gif" lazyload alt="cypress"></p>
+<h3 id="Cypress-元素定位"><a href="#Cypress-元素定位" class="headerlink" title="Cypress 元素定位"></a>Cypress 元素定位</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// id选择器</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;#account&#x27;</span>).<span class="hljs-title function_">click</span>()<br><span class="hljs-title class_">Cypress</span>.$(<span class="hljs-string">&#x27;#account&#x27;</span>)  <span class="hljs-comment">// Cypress.$定位器</span><br><span class="hljs-comment">// class类选择器</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;.form-control&#x27;</span>).<span class="hljs-title function_">click</span>()<br><span class="hljs-comment">// attributes属性选择器</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;[input[id = &quot;account&quot;]]&#x27;</span>).<span class="hljs-title function_">click</span>()<br><span class="hljs-comment">// :nth-child(n)选择器</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;tbody &gt; tr:nth-child(1) &gt; th&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Cypress-页面元素基本操作方式"><a href="#Cypress-页面元素基本操作方式" class="headerlink" title="Cypress 页面元素基本操作方式"></a>Cypress 页面元素基本操作方式</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 搜索定位元素</span><br>.<span class="hljs-title function_">get</span>(selector) <br>.<span class="hljs-title function_">contains</span>(selector) <br>.<span class="hljs-title function_">find</span>(selector) <br><br><span class="hljs-comment">// 获取DON元素的子元素</span><br>.<span class="hljs-title function_">children</span>() <br><span class="hljs-comment">// 获取DOM元素的所有父元素</span><br>.<span class="hljs-title function_">parents</span>() <br><span class="hljs-comment">// 获取DOM元素第一层元素</span><br>.<span class="hljs-title function_">parent</span>() <br><span class="hljs-comment">// 获取DOM元素的所有同级元素</span><br>.<span class="hljs-title function_">siblings</span>() <br><br><span class="hljs-comment">// 获取指定DOM对象的第一个元素</span><br>.<span class="hljs-title function_">first</span>() <br><span class="hljs-comment">// 获取指定DOM对象的最后一个元素</span><br>.<span class="hljs-title function_">last</span>() <br><span class="hljs-comment">// 用来匹配DOM对象紧跟着的下一个同级元素</span><br>.<span class="hljs-title function_">next</span>() <br><span class="hljs-comment">// 用来匹配给定的DOM对象的所有同级元素</span><br>.<span class="hljs-title function_">nextAll</span>() <br><span class="hljs-comment">// 用来匹配给定DOM对象之后的所有同级元素直到遇到Until里定义的元素为止</span><br>.<span class="hljs-title function_">nextUntil</span>() <br><span class="hljs-comment">// 用来匹配给定DOM对象紧跟着的上一个同级元素</span><br>.<span class="hljs-title function_">prev</span>() <br><span class="hljs-comment">// 用来匹配给定的DOM对象之前的所有同级元素</span><br>.<span class="hljs-title function_">prevAll</span>() <br><span class="hljs-comment">// 用来匹配给定DOM对象之后的所有同级元素直到遇到Until里定义的元素为止</span><br>.<span class="hljs-title function_">prevUntil</span>() <br><br><span class="hljs-comment">// 用来遍历数组及其类似结果</span><br>.<span class="hljs-title function_">each</span>() <br><span class="hljs-comment">// 用来在元素或者数组中的特定索引处获取DOM元素。类似于Jquery中nth:child()</span><br>.<span class="hljs-title function_">eq</span>() <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Cypress-常见操作"><a href="#Cypress-常见操作" class="headerlink" title="Cypress 常见操作"></a>Cypress 常见操作</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 访问某个 link</span><br>cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&#x27;httpf://www.baidu.com&#x27;</span>)<br><span class="hljs-comment">// 获取当前页面 URL</span><br>cy.<span class="hljs-title function_">url</span>()<br>cy.<span class="hljs-title function_">url</span>().<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;contain&quot;</span>, <span class="hljs-string">&quot;baidu&quot;</span>)<br><br><span class="hljs-comment">// 刷新页面</span><br>cy.<span class="hljs-title function_">reaload</span>() <span class="hljs-comment">// 等同于 F5</span><br>cy.<span class="hljs-title function_">radload</span>(<span class="hljs-literal">true</span>) <span class="hljs-comment">// 等同于 ctrl+F5 强制刷新</span><br><br><span class="hljs-comment">// 设置窗口</span><br>&#123; <span class="hljs-comment">//在 cypress.json 中添加</span><br><span class="hljs-string">&#x27;viewportWidth&#x27;</span>:<span class="hljs-string">&#x27;1000&#x27;</span>,<br><span class="hljs-string">&#x27;viewportHeight&#x27;</span>:<span class="hljs-string">&#x27;600&#x27;</span><br>&#125;<br>cy.<span class="hljs-title function_">viewpoint</span>(<span class="hljs-number">1024</span>,<span class="hljs-number">768</span>) <span class="hljs-comment">//运行中设置</span><br><br><span class="hljs-comment">// 前进后退</span><br>cy.<span class="hljs-title function_">go</span>(<span class="hljs-string">&#x27;back&#x27;</span>)<br>cy.<span class="hljs-title function_">go</span>(-<span class="hljs-number">1</span>)<br>cy.<span class="hljs-title function_">go</span>(<span class="hljs-string">&#x27;forward&#x27;</span>)<br>cy.<span class="hljs-title function_">go</span>(<span class="hljs-number">1</span>)<br><br><span class="hljs-comment">// 判断元素是否存在</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;.check-box&#x27;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&#x27;be.visible&#x27;</span>) <span class="hljs-comment">// 是否可见</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;.check-box&#x27;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&#x27;exist&#x27;</span>)<br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;.check-box&#x27;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&#x27;no exist&#x27;</span>)<br><br><span class="hljs-comment">// 条件判断</span><br><span class="hljs-keyword">const</span> btn = <span class="hljs-string">&#x27;#btn&#x27;</span><br><span class="hljs-title class_">Cypress</span>.$(btn).<span class="hljs-property">length</span>&gt;<span class="hljs-number">0</span>&#123;<br>  cy.<span class="hljs-title function_">get</span>(btn).<span class="hljs-title function_">click</span>()<br>&#125;<br><br><span class="hljs-comment">// 获取元素属性值</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#btn&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> btnTxt = $btn.<span class="hljs-title function_">text</span>()<br>  cy.<span class="hljs-title function_">log</span>(btnTxt)<br>&#125;)<br><br><span class="hljs-comment">// 清除文本</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;div&gt;a&quot;</span>).<span class="hljs-title function_">clear</span>();<br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;div&gt;a&quot;</span>).<span class="hljs-title function_">clear</span>().<span class="hljs-title function_">type</span>();<br><br><span class="hljs-comment">// 操作单选/多选按钮</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;radio&quot;</span>).<span class="hljs-title function_">check</span>(<span class="hljs-string">&quot;us&quot;</span>) <span class="hljs-comment">// 选中</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;radio&quot;</span>).<span class="hljs-title function_">uncheck</span>(<span class="hljs-string">&quot;us&quot;</span>) <span class="hljs-comment">// 取消选中</span><br><br><span class="hljs-comment">// 操作下拉菜单</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;select&quot;</span>).<span class="hljs-title function_">select</span>(<span class="hljs-string">&quot;下拉选项的值&quot;</span>)<br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;li&quot;</span>).<span class="hljs-title function_">eq</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">click</span>()<br><br><span class="hljs-comment">// 操作弹出框</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;iframe&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">$iframe</span>) &#123;<br>  <span class="hljs-keyword">const</span> $body = $iframe.<span class="hljs-title function_">contents</span>().<span class="hljs-title function_">find</span>(<span class="hljs-string">&quot;body&quot;</span>)<br>  cy.<span class="hljs-title function_">wrap</span>($body).<span class="hljs-title function_">find</span>(<span class="hljs-string">&quot;#bin&quot;</span>).<span class="hljs-title function_">click</span>();<br>&#125;)<br><br><span class="hljs-comment">// 操作被覆盖的元素</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#btn&quot;</span>).<span class="hljs-title function_">click</span>(&#123; <span class="hljs-attr">force</span>: <span class="hljs-literal">true</span> &#125;)<br><br><span class="hljs-comment">// 模拟键盘操作</span><br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;input&quot;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;111&quot;</span>)<br>cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;input&quot;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;&#123;enter&#125;&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="初步方案"><a href="#初步方案" class="headerlink" title="初步方案"></a>初步方案</h2><ol>
+<li>在现有项目上安装 cypress 环境</li>
+<li>手动编写模拟操作，完成运行测试</li>
+<li>尝试使用 AI 编写模拟操作，节约时间（当前使用 Fitten Code）</li>
+</ol>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>安装 cypress 环境<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm install cypress --save-dev<br></code></pre></div></td></tr></table></figure></li>
+<li>创建测试文件（从项目根目录打开）<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npx cypress open<br></code></pre></div></td></tr></table></figure></li>
+<li>编写测试用例<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;My First Test&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;passes&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&#x27;https://***&#x27;</span>)<br>    cy.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&#x27;type&#x27;</span>).<span class="hljs-title function_">click</span>()<br>    cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;#email&#x27;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&#x27;&lt;EMAIL&gt;&#x27;</span>)<br>    cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;#password&#x27;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&#x27;password&#x27;</span>)<br>    cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;#login&#x27;</span>).<span class="hljs-title function_">click</span>()<br>    cy.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&#x27;Welcome to Cypress!&#x27;</span>)<br>  &#125;)<br>&#125;)<br></code></pre></div></td></tr></table></figure></li>
+<li>运行测试用例<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npx cypress run<br></code></pre></div></td></tr></table></figure>
+<img src="/../img/cypress-1.jpg" srcset="/img/loading.gif" lazyload alt="cypress测试结果"><br>也可以修改后直接在 cypress 控制的浏览器中运行，实时查看结果</li>
+<li>编写测试用例<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 通过添加 data-cy 属性来定位元素，能防止 tag/class/id 被他人修改 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-cy</span>=<span class="hljs-string">&quot;counter&quot;</span>&gt;</span>&#123;count&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+it 代表一个独立的测试用例，第一个参数是一个简要描述，第二个包含测试代码<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;Test&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;stepper should default to 0&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;[data-cy=counter]&#x27;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&#x27;have.text&#x27;</span>, <span class="hljs-string">&#x27;0&#x27;</span>)<br>  &#125;)<br>&#125;)<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h4 id="cypress-目录结构"><a href="#cypress-目录结构" class="headerlink" title="cypress 目录结构"></a>cypress 目录结构</h4><p>安装之后，会在项目根目录下生成 cypress 文件夹，包含以下文件：<br>|– cypress<br>    |– e2e                # 测试代码<br>    |– fixtures           # 测试数据、账号<br>    |– integration        # 集成测试（所有自动化测试用例-cypress代码）<br>    |– plugins            # 模块、依赖、插件<br>    |– support            # 自定义命令</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>“Cypress is currently automating this browser.” Cypress 自动控制了当前浏览器，建议新开一个浏览器窗口运行项目。实验时发现 cookie 不能共享给 Cypress 控制的页面（自动使用无痕模式登录），必须写一段登录的代码。</li>
+<li>直接运行不走 vue 的接口代理，会请求失败</li>
+</ol>
+<p><code>附录</code>：<br><a target="_blank" rel="noopener" href="https://www.cypress.io/">官网</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7051405917832609828">前端自动化测试框架cypress</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/459612488233">Vue项目采用Cypress做e2e自动化测试</a></p>
+<h4 id="后续思考"><a href="#后续思考" class="headerlink" title="后续思考"></a>后续思考</h4><ol>
+<li>Q：是否可以用来自动化做一些事情，例如：资料整理<br>A：暂时有问题，聊天机器人都是使用一些长连接？URL 较长且中带有一些特殊信息，不太方便用来模拟打开网站。</li>
+<li>Q：有 apisix 验证的接口，怎么绕过登录？<br>A：自己写 cookie（过期需要手动改）</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B5%8B%E8%AF%95/">测试</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/20/Go%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go笔记（1）基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/15/%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%881%EF%BC%89%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">
+                        <span class="hidden-mobile">前端自动化测试（1）框架对比</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="接收代码时发现了一些以前没用过的写法，查阅后发现是一些内置对象，这篇记录一下 JS 内置对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS回顾笔记（1）内置对象">
+<meta property="og:url" content="http://guoningyan.com/2024/03/27/JS%E5%9B%9E%E9%A1%BE%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="接收代码时发现了一些以前没用过的写法，查阅后发现是一些内置对象，这篇记录一下 JS 内置对象。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-27T07:04:06.000Z">
+<meta property="article:modified_time" content="2024-03-27T09:31:55.274Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>JS回顾笔记（1）内置对象 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JS回顾笔记（1）内置对象">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-03-27 15:04" pubdate>
+        2024年3月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JS回顾笔记（1）内置对象</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>接收代码时发现了一些以前没用过的写法，查阅后发现是一些内置对象，这篇记录一下 JS 内置对象。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><p>全局函数可以直接调用，不需要在调用时指定所属对象，执行结束后会将结果直接返回给调用者。<br>isFinite()<br>isNaN()<br>parseFloat() 解析一个参数（必要时先转换为字符串）并返回一个浮点数。<br>parseInt(string, radix) 解析一个字符串并返回指定基数的十进制整数，radix 是 2-36 之间的整数，表示被解析字符串的基数。<br>encodeURIComponent() 函数通过将特定字符的每个实例替换成代表字符的 UTF-8 编码的一个、两个、三个或四个转义序列来编码 URI（只有由两个“代理”字符组成的字符会被编码为四个转义序列）。与 encodeURI() 相比，此函数会编码更多的字符，包括 URI 语法的一部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> uri = <span class="hljs-string">&#x27;https://mozilla.org/?x=шеллы&#x27;</span>;<br><span class="hljs-keyword">const</span> encoded = <span class="hljs-built_in">encodeURI</span>(uri) <span class="hljs-comment">// 对?后进行编码</span><br><span class="hljs-keyword">const</span> a = <span class="hljs-built_in">encodeURIComponent</span>(<span class="hljs-string">&#x27;test&#x27;</span>)<br><span class="hljs-keyword">try</span> &#123; <span class="hljs-comment">// 对编码后的字符串进行解码</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-built_in">decodeURI</span>(encoded)) <br>&#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="基本对象"><a href="#基本对象" class="headerlink" title="基本对象"></a>基本对象</h3><p>基本对象是定义或使用其他对象的基础，包括：Object、Function、Boolean、Symbol</p>
+<h3 id="错误对象"><a href="#错误对象" class="headerlink" title="错误对象"></a>错误对象</h3><p>错误对象是一种特殊的基本对象。它们拥有基本的 Error 类型，同时也有多种具体的错误类型，包括：Error、AggregateError、EvalError、RangeError、ReferenceError、SyntaxError、TypeError、URIError</p>
+<h3 id="数字和日期对象"><a href="#数字和日期对象" class="headerlink" title="数字和日期对象"></a>数字和日期对象</h3><p>用来表示数字、日期和执行数学计算的对象。包括：Number、BigInt、Math、Date。<br>BigInt 可以表示任意大的整数。用 Number 表示的最大数字 2^53 - 1，大于这个数值可以用 BigInt 表示。</p>
+<h3 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h3><p>用来表示和操作文本的对象。包括：String、RegExp。</p>
+<h3 id="可索引的集合对象"><a href="#可索引的集合对象" class="headerlink" title="可索引的集合对象"></a>可索引的集合对象</h3><p>这些对象表示按照索引值来排序的数据集合，包括数组和类型数组，以及类数组结构的对象。包括：Array、Int8Array、Uint8Array、Uint8ClampedArray、Int16Array、Uint16Array、Int32Array、Uint32Array、Float32Array、Float64Array、BigInt64Array、BigUint64Array</p>
+<h3 id="使用键的集合对象"><a href="#使用键的集合对象" class="headerlink" title="使用键的集合对象"></a>使用键的集合对象</h3><p>这些集合对象在存储数据时会使用到键，包括可迭代的 Map 和 Set，支持<code>按照插入顺序</code>来迭代元素。另有 WeakMap、WeakSet 两个特殊的集合对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> map1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>()<br>map1.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-number">1</span>)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(map1.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;a&#x27;</span>), map1.<span class="hljs-property">size</span>, map1.<span class="hljs-title function_">has</span>(<span class="hljs-string">&#x27;a&#x27;</span>)) <span class="hljs-comment">// 1, 1, true</span><br>map1.<span class="hljs-title function_">delete</span>(<span class="hljs-string">&#x27;a&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="结构化数据对象"><a href="#结构化数据对象" class="headerlink" title="结构化数据对象"></a>结构化数据对象</h3><p>这些对象用来表示和操作结构化的缓冲区数据，或使用 JSON（JavaScript Object Notation）编码的数据。包括：<br>ArrayBuffer：用来表示通用的原始二进制数据缓冲区，不能直接操作，需要通过类型化数组对象或 DataView 对象来操作，它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。<br>SharedArrayBuffer：用来表示通用的原始二进制数据缓冲区，不是可转移对象。<br>Atomics：命名空间对象包含对 SharedArrayBuffer 和 ArrayBuffer 对象执行原子操作的静态方法。<br>DataView：是一个可以从二进制 ArrayBuffer 对象中读写多种数值类型的底层接口，使用它时，不用考虑不同平台的字节序（endianness）问题。<br>JSON：将值转换为 JSON 字符串的静态方法。不是一个构造函数。不能将它与 new 运算符 一起使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> littleEndian = (<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayBuffer</span>(<span class="hljs-number">2</span>);<br>  <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataView</span>(buffer).<span class="hljs-title function_">setInt16</span>(<span class="hljs-number">0</span>, <span class="hljs-number">256</span>, <span class="hljs-literal">true</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Int16Array</span>(buffer)[<span class="hljs-number">0</span>] === <span class="hljs-number">256</span>;<br>&#125;)();<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="内存管理对象"><a href="#内存管理对象" class="headerlink" title="内存管理对象"></a>内存管理对象</h3><p>这些对象会与垃圾回收机制产生交互。包括：WeakRef、FinalizationRegistr</p>
+<h3 id="控制抽象对象"><a href="#控制抽象对象" class="headerlink" title="控制抽象对象"></a>控制抽象对象</h3><p>控件抽象对象可以帮助构造代码，尤其是异步代码（例如不使用深度嵌套的回调）。例如：Iterator、AsyncIterator、Promise、GeneratorFunction、AsyncGeneratorFunction、Generator、AsyncGenerator、AsyncFunction。</p>
+<h3 id="反射对象"><a href="#反射对象" class="headerlink" title="反射对象"></a>反射对象</h3><p>包括：Reflect、Proxy。</p>
+<h3 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h3><p>ECMAScript 核心的附加功能，用于支持多语言处理。例如：Intl<br>Intl 对象是 ECMAScript 国际化 API 的一个命名空间，它提供了精确的字符串对比、数字格式化，和日期时间格式化。Collator，NumberFormat 和 DateTimeFormat 对象的构造函数是 Intl 对象的属性。本页文档内容包括了这些属性，以及国际化使用的构造器和其他语言的方法等常见的功能。</p>
+<h3 id="原始值"><a href="#原始值" class="headerlink" title="原始值"></a>原始值</h3><p>原始值（原始数据类型）是一种<code>既非对象也无方法或属性</code>的数据。有 7 种原始数据类型：string、number、bigint、boolean、undefined、symbol、null。<br>当在原始值上访问属性时，JavaScript 自动将值装入包装对象中，并访问该对象上的属性。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/05/27/vue3%E7%AC%94%E8%AE%B0%EF%BC%8838-1%EF%BC%89vue3%E9%A1%B9%E7%9B%AE%E6%8D%A2%E8%82%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue3笔记（38-1）vue3项目换肤</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/01/Go%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">Go笔记（9）编程模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
