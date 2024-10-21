@@ -16,19 +16,23 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="近期需要实现项目的 docker 部署，服务器中已实现 docker 环境，本文记录如何在服务器上用容器部署 vue3 项目。  部署指令 个人根目录下应有三个文件，项目打包文件dist、nginx.conf、Dockerfile。  1.1 创建 nginx.conf 文件，主要用于配置端口号和请求转发地址，若以微前端方式部署，需要添加允许跨域配置，内容如下： 1234567891011121">
+    <meta name="description" content="近期需要实现项目的 docker 部署，服务器中已实现 docker 环境，本文记录如何在服务器上用容器部署 vue3 项目。  docker 环境准备给了一台全新阿里云机器，里面没有docker环境，需要安装。机器环境如下：同事建议安装 docker-ce，安装命令如下： 12apt-get install docker-ceapt install docker-ce 但是发现有这样的报错：原">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3笔记（39-1）docker部署">
 <meta property="og:url" content="http://guoningyan.com/2024/10/09/vue3%E7%AC%94%E8%AE%B0%EF%BC%8839-1%EF%BC%89docker%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="近期需要实现项目的 docker 部署，服务器中已实现 docker 环境，本文记录如何在服务器上用容器部署 vue3 项目。  部署指令 个人根目录下应有三个文件，项目打包文件dist、nginx.conf、Dockerfile。  1.1 创建 nginx.conf 文件，主要用于配置端口号和请求转发地址，若以微前端方式部署，需要添加允许跨域配置，内容如下： 1234567891011121">
+<meta property="og:description" content="近期需要实现项目的 docker 部署，服务器中已实现 docker 环境，本文记录如何在服务器上用容器部署 vue3 项目。  docker 环境准备给了一台全新阿里云机器，里面没有docker环境，需要安装。机器环境如下：同事建议安装 docker-ce，安装命令如下： 12apt-get install docker-ceapt install docker-ce 但是发现有这样的报错：原">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://guoningyan.com/img/docker1.jpg">
+<meta property="og:image" content="http://guoningyan.com/img/docker2.jpg">
+<meta property="og:image" content="http://guoningyan.com/img/docker3.jpg">
 <meta property="article:published_time" content="2024-10-09T03:05:52.000Z">
-<meta property="article:modified_time" content="2024-10-16T09:03:35.569Z">
+<meta property="article:modified_time" content="2024-10-21T02:58:04.416Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://guoningyan.com/img/docker1.jpg">
   
   
   <title>vue3笔记（39-1）docker部署 - ginny&#39;s blog</title>
@@ -190,7 +194,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      3.6k 字
     </span>
   
 
@@ -199,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20 分钟
+      30 分钟
     </span>
   
 
@@ -234,6 +238,16 @@
               <blockquote>
 <p>近期需要实现项目的 docker 部署，服务器中已实现 docker 环境，本文记录如何在服务器上用容器部署 vue3 项目。</p>
 </blockquote>
+<h3 id="docker-环境准备"><a href="#docker-环境准备" class="headerlink" title="docker 环境准备"></a>docker 环境准备</h3><p>给了一台全新阿里云机器，里面没有docker环境，需要安装。机器环境如下：<br><img src="/../img/docker1.jpg" srcset="/img/loading.gif" lazyload alt="无docker环境"><br>同事建议安装 docker-ce，安装命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">apt-get install docker-ce<br>apt install docker-ce<br></code></pre></div></td></tr></table></figure>
+<p>但是发现有这样的报错：<br><img src="/../img/docker2.jpg" srcset="/img/loading.gif" lazyload alt="报错"><br>原因是源里面没有docker-ce的包，需要添加源：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">sudo add-apt-repository &quot;deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;<br></code></pre></div></td></tr></table></figure>
+<p>这时又出现了这个报错：<br><img src="/../img/docker3.jpg" srcset="/img/loading.gif" lazyload alt="报错2"><br>原因是没有证书，需要导入证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg<br></code></pre></div></td></tr></table></figure>
+<p>结果又报错<code>gpg: no valid OpenPGP data found.</code>，整个大无语了。。。</p>
+<h3 id="docker-环境安装全指令"><a href="#docker-环境安装全指令" class="headerlink" title="docker 环境安装全指令"></a>docker 环境安装全指令</h3><p>重启机器，再次从头安装，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">sudo apt-get update<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">安装让 APT 可以通过 HTTPS 使用存储库(repository)的包</span><br>sudo apt-get install \<br>    apt-transport-https \<br>    ca-certificates \<br>    curl \<br>    gnupg \<br>    lsb-release<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">添加Docker的官方GPG密钥：</span><br>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">使用下面的命令设置稳定的仓库：</span><br>echo \<br>  &quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \<br><span class="hljs-meta prompt_">  $</span><span class="language-bash">(lsb_release -cs) stable<span class="hljs-string">&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">再次更新包索引：</span></span><br>sudo apt-get update<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">安装Docker CE：</span></span><br>sudo apt-get install docker-ce docker-ce-cli containerd.io<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="部署指令"><a href="#部署指令" class="headerlink" title="部署指令"></a>部署指令</h3><ol>
 <li>个人根目录下应有三个文件，项目打包文件<code>dist</code>、<code>nginx.conf</code>、<code>Dockerfile</code>。</li>
 </ol>
@@ -247,7 +261,7 @@
 <li>个人根目录下</li>
 </ol>
 <p>2.1 创建镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">项目名:tag</span><br>docker build --no-cache -f dockerfile -t ai-sys:20241016-3 .<br>docker build --no-cache -f dockerfile -t ai-controller:20241016-3 .<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">项目名:tag</span><br>docker build --no-cache -f dockerfile -t ai-sys:20241017-1 .<br>docker build --no-cache -f dockerfile -t ai-controller:20241017-1 .<br></code></pre></div></td></tr></table></figure>
 <p>2.2 运行容器</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看镜像</span><br>docker images<br><span class="hljs-meta prompt_"># </span><span class="language-bash">-d: 后台运行容器并返回容器 ID</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">-p: 端口映射 外部访问端口:内部容器端口</span><br>docker run -d -p 51888:51888 imageID/imageName<br>docker run -d -p 51999:51999 imageID/imageName<br></code></pre></div></td></tr></table></figure>
 
@@ -257,6 +271,7 @@
 <li><p>修改文件后重启<br>删除容器时，容器必须是停止状态，否则删除失败。</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看正在运行的容器</span><br>docker ps <br>docker kill containerID<br>docker rm containerID <br>docker rmi imageID<br></code></pre></div></td></tr></table></figure></li>
 </ol>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2377835">深入理解Docker：docker、podman-docker、docker.io和docker-ce的区别</a></p>
 
             </div>
             <hr>
@@ -296,7 +311,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%8841-1%EF%BC%89chatbot/">
+                      <a href="/2024/09/29/vue3%E7%AC%94%E8%AE%B0%EF%BC%8841-1%EF%BC%89AIGC-chatbot/">
                         <span class="hidden-mobile">vue3笔记（41-1）chatbot</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
