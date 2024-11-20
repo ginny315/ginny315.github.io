@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://guoningyan.com/img/docker4.jpg">
 <meta property="article:published_time" content="2024-08-22T02:58:07.000Z">
-<meta property="article:modified_time" content="2024-10-21T02:55:47.624Z">
+<meta property="article:modified_time" content="2024-10-21T05:44:47.967Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="typescript">
@@ -192,7 +192,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      4k 字
     </span>
   
 
@@ -201,7 +201,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35 分钟
+      34 分钟
     </span>
   
 
@@ -288,9 +288,9 @@
 
 <h4 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h4><p>docker 拉取镜像报错：<br><img src="/../img/docker4.jpg" srcset="/img/loading.gif" lazyload alt="报错"><br>解决方式一：修改 docker 镜像源【暂时验证不成功】</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vi /etc/docker/daemon.json<br></code></pre></div></td></tr></table></figure>
-<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-string">&quot;https://0dj0t5fb.mirror.aliyuncs.com&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://6kx4zyno.mirror.aliyuncs.com&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json"> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://6kx4zyno.mirror.aliyuncs.com&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></div></td></tr></table></figure>
 <p>修改完毕后，重启 docker 服务：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vi /etc/docker/daemon.json<br>systemctl daemon-reload<br>systemctl restart docker<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl restart docker<br></code></pre></div></td></tr></table></figure>
 <p> 问题出现了，这个修改没有起作用，依旧是原来的报错。。。有待keep looking。。。</p>
 <p><code>附录</code><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Que_art/article/details/135192479">Docker Compose - 安装和基本使用</a><br><a target="_blank" rel="noopener" href="https://www.modb.pro/db/173705?_refluxos=a10">docker-compose部署Vue项目</a><br><a target="_blank" rel="noopener" href="https://www.json.cn/yaml-editor/">YAML、YML在线编辑(校验)器</a></p>
 <h4 id="记录AF3部署"><a href="#记录AF3部署" class="headerlink" title="记录AF3部署"></a>记录AF3部署</h4><p>|– nginx.conf<br>|– docker-compose.yml<br>|– default-shenwei.conf<br>|– default-metastone.conf<br>|– dist-dev<br>|   |– index.html<br>|– dist-metastone<br>|   |– index.html<br><code>docker-compose.yml</code>中添加两个服务：</p>

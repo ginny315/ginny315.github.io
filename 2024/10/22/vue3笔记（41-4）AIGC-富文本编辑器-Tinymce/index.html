@@ -16,18 +16,22 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="vue3笔记（41-3）AIGC-富文本编辑器">
-<meta property="og:url" content="http://guoningyan.com/2024/10/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8841-3%EF%BC%89AIGC-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/index.html">
+    <meta name="description" content="TinyMCE 高阶使用插件要付费，本来看到付费就想舍弃，但是有看到说免费部分可以满足基本需求，界面也挺不错，就决定试试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（41-4）AIGC-富文本编辑器-Tinymce">
+<meta property="og:url" content="http://guoningyan.com/2024/10/22/vue3%E7%AC%94%E8%AE%B0%EF%BC%8841-4%EF%BC%89AIGC-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8-Tinymce/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="TinyMCE 高阶使用插件要付费，本来看到付费就想舍弃，但是有看到说免费部分可以满足基本需求，界面也挺不错，就决定试试。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-17T09:10:52.000Z">
-<meta property="article:modified_time" content="2024-10-17T09:10:52.477Z">
+<meta property="article:published_time" content="2024-10-22T09:26:59.000Z">
+<meta property="article:modified_time" content="2024-11-20T07:51:04.608Z">
 <meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>vue3笔记（41-3）AIGC-富文本编辑器 - ginny&#39;s blog</title>
+  <title>vue3笔记（41-4）AIGC-富文本编辑器-Tinymce - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -165,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="vue3笔记（41-3）AIGC-富文本编辑器">
+            <span class="h2" id="subtitle" title="vue3笔记（41-4）AIGC-富文本编辑器-Tinymce">
               
             </span>
 
@@ -175,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-10-17 17:10" pubdate>
-        2024年10月17日 下午
+      <time datetime="2024-10-22 17:26" pubdate>
+        2024年10月22日 下午
       </time>
     </span>
   
@@ -186,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      220 字
     </span>
   
 
@@ -195,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      2 分钟
     </span>
   
 
@@ -224,15 +228,39 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue3笔记（41-3）AIGC-富文本编辑器</h1>
+            <h1 style="display: none">vue3笔记（41-4）AIGC-富文本编辑器-Tinymce</h1>
             
             <div class="markdown-body">
-              
+              <blockquote>
+<p>TinyMCE 高阶使用插件要付费，本来看到付费就想舍弃，但是有看到说免费部分可以满足基本需求，界面也挺不错，就决定试试。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="Demo-过程"><a href="#Demo-过程" class="headerlink" title="Demo 过程"></a>Demo 过程</h3><p>这里使用了 wangEditor 5 作为富文本编辑器。</p>
+<ol>
+<li><p>安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">npm i tinymce<br>npm i @tinymce/tinymce-vue<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>在 node_modules 文件夹中找到 tinymce 复制到项目public文件夹中.</p>
+</li>
+<li><p>在 <a target="_blank" rel="noopener" href="https://www.tiny.cloud/get-tiny/language-packages/?login=from_csdn">tinymce官网</a> 中下载中文包，并放在刚刚创建的tinymce文件夹中.</p>
+</li>
+</ol>
+<p><code>附录</code><br><a target="_blank" rel="noopener" href="http://tinymce.ax-z.cn/search/">中文文档-不在维护</a></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
                 
               </div>
               
@@ -247,9 +275,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/01/01/%E4%BD%9C%E5%93%81%E9%9B%86%E5%90%88/">
+                      <a href="/2024/10/23/AlphaFold3/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">作品集合</span>
+                        <span class="hidden-mobile">AlphaFold3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -257,8 +285,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/16/vue3%E7%AC%94%E8%AE%B0%EF%BC%8830-2%EF%BC%89%E5%AF%B9%E6%8E%A5%E9%A3%9E%E4%B9%A6%E7%99%BB%E5%BD%95/">
-                        <span class="hidden-mobile">vue3笔记（30-2）对接飞书登录</span>
+                      <a href="/2024/10/17/vue3%E7%AC%94%E8%AE%B0%EF%BC%8841-3%EF%BC%89AIGC-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8-WangEditor/">
+                        <span class="hidden-mobile">vue3笔记（41-3）AIGC-富文本编辑器-WangEditor</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
