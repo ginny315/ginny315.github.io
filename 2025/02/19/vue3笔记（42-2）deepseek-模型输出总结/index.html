@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="大模型输出流式数据，前后端约定 SSE 形式通信。【3.3更新】新需求，增加文件输入。【3.10更新】新需求，大模型的回答要支持语音播放。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3笔记（42-2）deepseek-模型输出总结">
+<meta property="og:url" content="http://guoningyan.com/2025/02/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8842-2%EF%BC%89deepseek-%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="大模型输出流式数据，前后端约定 SSE 形式通信。【3.3更新】新需求，增加文件输入。【3.10更新】新需求，大模型的回答要支持语音播放。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-19T07:06:48.000Z">
+<meta property="article:modified_time" content="2025-03-11T08:41:01.418Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>vue3笔记（42-2）deepseek-模型输出总结 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue3笔记（42-2）deepseek-模型输出总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2025-02-19 15:06" pubdate>
+        2025年2月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue3笔记（42-2）deepseek-模型输出总结</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>大模型输出流式数据，前后端约定 SSE 形式通信。<br>【3.3更新】新需求，增加文件输入。<br>【3.10更新】新需求，大模型的回答要支持语音播放。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="流式数据处理"><a href="#流式数据处理" class="headerlink" title="流式数据处理"></a>流式数据处理</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">interface <span class="hljs-title class_">ChatProps</span> &#123;<br>  <span class="hljs-attr">role</span>: string<br>  message?: string <span class="hljs-comment">// 原始信息</span><br>  message1?: string<br>  message2?: string<br>  loading?: boolean<br>  preview?: any<br>  thinkText?: string<br>  showThink?: boolean<br>  searchResult?: any[]<br>&#125;<br><br><span class="hljs-keyword">const</span> userInput = <span class="hljs-title function_">ref</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br><br><span class="hljs-comment">// 发送用户消息</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChat</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">text: string, fileIds?: <span class="hljs-built_in">Array</span>&lt;any&gt;</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> params = &#123;<br>    <span class="hljs-attr">user_id</span>: userStore.<span class="hljs-property">userInfo</span>?.<span class="hljs-property">project_id</span>,<br>    <span class="hljs-attr">conversation_id</span>: currentId.<span class="hljs-property">value</span>,<br>    <span class="hljs-attr">message</span>: text,<br>    <span class="hljs-attr">model_id</span>: props.<span class="hljs-property">modelDetail</span>.<span class="hljs-property">model_id</span>,<br>    <span class="hljs-attr">send_time</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>(),<br>    <span class="hljs-attr">is_deep_think</span>: chooseThink.<span class="hljs-property">value</span>,<br>    <span class="hljs-attr">is_internet_search</span>: chooseOnline.<span class="hljs-property">value</span><br>  &#125;<br>  <span class="hljs-keyword">const</span> assistantInput = &#123;<br>    <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;assistant&#x27;</span>,<br>    <span class="hljs-attr">loading</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>    <span class="hljs-attr">message1</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>    <span class="hljs-attr">message2</span>: <span class="hljs-string">&#x27;&#x27;</span><br>  &#125;<br>  chatList.<span class="hljs-property">value</span>.<span class="hljs-title function_">push</span>(assistantInput)<br>  <span class="hljs-title function_">scrollToBottom</span>()<br>  botChating.<span class="hljs-property">value</span> = <span class="hljs-literal">true</span><br>  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/chatApi/v1/****&#x27;</span>, &#123;<br>    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>    <span class="hljs-attr">headers</span>: &#123;<br>      <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>    &#125;,<br>    <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(params)<br>  &#125;)<br>  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">loading</span> = <span class="hljs-literal">false</span><br>  <span class="hljs-title function_">waitReceive</span>(res)<br>&#125;<br><br><span class="hljs-comment">// 返回流式数据处理</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">waitReceive</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">response</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> prefix = <span class="hljs-string">&#x27;data:&#x27;</span> <span class="hljs-comment">// 前缀</span><br>  <span class="hljs-keyword">const</span> suffix = <span class="hljs-string">&#x27;\n\n&#x27;</span> <span class="hljs-comment">// 后缀</span><br>  <span class="hljs-keyword">const</span> stream = response.<span class="hljs-property">body</span>.<span class="hljs-title function_">pipeThrough</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TextDecoderStream</span>())<br>  <span class="hljs-keyword">const</span> reader = stream.<span class="hljs-title function_">getReader</span>()<br>  <span class="hljs-keyword">let</span> done<br>  <span class="hljs-keyword">let</span> linestext = <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-comment">// const MAX_TIME = 60 * 1000 // 最大等待时间-6秒</span><br>  <span class="hljs-comment">// const startTime = Date.now()</span><br>  <span class="hljs-keyword">do</span> &#123;<br>    <span class="hljs-comment">// 检查是否被中止</span><br>    <span class="hljs-keyword">if</span> (abortController.<span class="hljs-property">signal</span>.<span class="hljs-property">aborted</span>) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据读取被用户手动中断&#x27;</span>)<br>      <span class="hljs-keyword">break</span><br>    &#125;<br>    <span class="hljs-comment">// if (Date.now() - startTime &gt; MAX_TIME) &#123;</span><br>    <span class="hljs-comment">//   console.log(&#x27;数据读取超时&#x27;)</span><br>    <span class="hljs-comment">//   break</span><br>    <span class="hljs-comment">// &#125;</span><br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> reader.<span class="hljs-title function_">read</span>()<br>    done = result.<span class="hljs-property">done</span><br>    <span class="hljs-keyword">const</span> chunk = result.<span class="hljs-property">value</span><br>    <span class="hljs-keyword">if</span> (chunk) &#123;<br>      linestext += chunk<br>      <span class="hljs-keyword">if</span> (chunk.<span class="hljs-title function_">endsWith</span>(suffix)) &#123;<br>        <span class="hljs-keyword">const</span> lines = linestext.<span class="hljs-title function_">split</span>(suffix)<br>        linestext = <span class="hljs-string">&#x27;&#x27;</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> line <span class="hljs-keyword">of</span> lines) &#123;<br>          <span class="hljs-keyword">if</span> (line.<span class="hljs-title function_">startsWith</span>(prefix)) &#123;<br>            <span class="hljs-keyword">const</span> event = line.<span class="hljs-title function_">slice</span>(prefix.<span class="hljs-property">length</span>)<br>            <span class="hljs-keyword">try</span> &#123;<br>              <span class="hljs-keyword">const</span> data = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(event)<br>              <span class="hljs-comment">// 联网搜索结果</span><br>              <span class="hljs-keyword">if</span> (data.<span class="hljs-property">search_results</span>) &#123;<br>                chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">searchResult</span> = data.<span class="hljs-property">search_results</span><br>              &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 深度思考-thinkText展示</span><br>                <span class="hljs-keyword">if</span> (data.<span class="hljs-property">is_deep_think</span>) &#123;<br>                  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">message1</span> += data.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;&#x27;</span><br>                  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">thinkText</span> = <span class="hljs-title function_">toHtml</span>(<br>                    chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">message1</span><br>                  )<br>                  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">showThink</span> = <span class="hljs-literal">true</span><br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                  <span class="hljs-comment">// 回答-preview展示</span><br>                  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">message2</span> += data.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;&#x27;</span><br>                  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">preview</span> = <span class="hljs-title function_">toHtml</span>(<br>                    chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">message2</span><br>                  )<br>                &#125;<br>              &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>              <span class="hljs-keyword">if</span> (abortController.<span class="hljs-property">signal</span>.<span class="hljs-property">aborted</span>) &#123;<br>                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据解析被用户手动中断&#x27;</span>)<br>                <span class="hljs-comment">// 如果是因为手动中止导致的错误，这里可以不做额外处理</span><br>              &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event)<br>                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error)<br>                <span class="hljs-keyword">break</span><br>              &#125;<br>            &#125;<br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;no chunk&#x27;</span>)<br>    &#125;<br>  &#125; <span class="hljs-keyword">while</span> (!done)<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;数据读取完毕&#x27;</span>)<br>  <span class="hljs-comment">// 释放读取器</span><br>  reader.<span class="hljs-title function_">releaseLock</span>()<br>  botChating.<span class="hljs-property">value</span> = <span class="hljs-literal">false</span><br>&#125;<br><br><span class="hljs-comment">// 用户手动终止-原始loading去除</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">abortDataReading</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;abortDataReading&#x27;</span>)<br>  abortController.<span class="hljs-title function_">abort</span>()<br>  botChating.<span class="hljs-property">value</span> = <span class="hljs-literal">false</span><br>  chatList.<span class="hljs-property">value</span>[chatList.<span class="hljs-property">value</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>].<span class="hljs-property">loading</span> = <span class="hljs-literal">false</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="文件输入"><a href="#文件输入" class="headerlink" title="文件输入"></a>文件输入</h3><p>上传组件负责选择文件，作为组件注入到输入框中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 在输入框里的上传组件，fileList是上传文件列表，clearUploadFiles是清空上传文件列表的方法</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">UploadFilled</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@element-plus/icons-vue&#x27;</span><br><span class="hljs-keyword">import</span> &#123; acceptList, suffixList, getFileType &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/file&#x27;</span><br><br><span class="hljs-keyword">const</span> maxNum = <span class="hljs-number">5</span> <span class="hljs-comment">// 最大上传文件数量</span><br><span class="hljs-keyword">const</span> uploadTip =<br>  <span class="hljs-string">&#x27;1. 请上传 100MB 以下文件，最多支持上传 &#x27;</span> +<br>  maxNum +<br>  <span class="hljs-string">&#x27; 个文件。&lt;/br&gt; 2. 支持文件格式：pdf, txt, csv, docx, doc, jpg, jpeg, png, xlsx, xls, ppt, pptx, epub, py, java, js, ts, md, json, sh等。&lt;/br&gt; 3. 仅在非联网搜索状态下使用。&lt;/br&gt; 4. 仅可识别文字。&#x27;</span><br><span class="hljs-keyword">const</span> fileList = <span class="hljs-title function_">ref</span>([])<br><span class="hljs-keyword">const</span> uploadFileRef = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">null</span>)<br><span class="hljs-keyword">const</span> myEmit = <span class="hljs-title function_">defineEmits</span>([<span class="hljs-string">&#x27;handleFileShow&#x27;</span>])<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleExceed</span> = (<span class="hljs-params">files, fileList</span>) =&gt; &#123;<br>  <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">warning</span>(<span class="hljs-string">`单次最多只能上传 <span class="hljs-subst">$&#123;maxNum&#125;</span> 个文件`</span>)<br>&#125;<br><br><span class="hljs-comment">// 文件改变时触发-判断文件大小、数量超出限制上传按钮隐藏</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFileChange</span> = (<span class="hljs-params">file, fileList</span>) =&gt; &#123;<br>  <span class="hljs-comment">// console.log(file, fileList)</span><br>  <span class="hljs-keyword">const</span> fileType = <span class="hljs-title function_">getFileType</span>(file.<span class="hljs-property">name</span>)<br>  <span class="hljs-keyword">if</span> (suffixList.<span class="hljs-title function_">indexOf</span>(fileType) &lt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&#x27;文件格式不符合要求&#x27;</span>)<br>    <span class="hljs-keyword">const</span> currIdx = fileList.<span class="hljs-title function_">indexOf</span>(file)<br>    fileList.<span class="hljs-title function_">splice</span>(currIdx, <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;<br>  <span class="hljs-keyword">const</span> isLt100M = file.<span class="hljs-property">size</span> / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span> &lt;= <span class="hljs-number">100</span><br>  <span class="hljs-keyword">if</span> (!isLt100M) &#123;<br>    <span class="hljs-title class_">ElMessage</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&#x27;文件大小不能超过100M&#x27;</span>)<br>    <span class="hljs-keyword">const</span> currIdx = fileList.<span class="hljs-title function_">indexOf</span>(file)<br>    fileList.<span class="hljs-title function_">splice</span>(currIdx, <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;<br>  <span class="hljs-title function_">myEmit</span>(<span class="hljs-string">&#x27;handleFileShow&#x27;</span>, fileList, file)<br>&#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">clearUploadFiles</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  uploadFileRef.<span class="hljs-property">value</span>?.<span class="hljs-title function_">clearFiles</span>()<br>&#125;<br><br><span class="hljs-comment">// 已选择文件删除</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">removeFileOrigin</span> = (<span class="hljs-params">index: number</span>) =&gt; &#123;<br>  fileList.<span class="hljs-property">value</span>.<span class="hljs-title function_">splice</span>(index, <span class="hljs-number">1</span>)<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;removeOrigin   &#x27;</span>, fileList.<span class="hljs-property">value</span>)<br>&#125;<br><br><span class="hljs-title function_">defineExpose</span>(&#123; fileList, clearUploadFiles, removeFileOrigin &#125;)<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-tooltip</span> <span class="hljs-attr">popper-class</span>=<span class="hljs-string">&quot;tooltip-width&quot;</span> <span class="hljs-attr">placement</span>=<span class="hljs-string">&quot;top&quot;</span> <span class="hljs-attr">effect</span>=<span class="hljs-string">&quot;dark&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> #<span class="hljs-attr">content</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">&quot;uploadTip&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">el-upload</span></span><br><span class="hljs-tag">      <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;uploadFileRef&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">v-model:file-list</span>=<span class="hljs-string">&quot;fileList&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">multiple</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:limit</span>=<span class="hljs-string">&quot;maxNum&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:on-exceed</span>=<span class="hljs-string">&quot;handleExceed&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:accept</span>=<span class="hljs-string">&quot;acceptList&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:auto-upload</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:on-change</span>=<span class="hljs-string">&quot;handleFileChange&quot;</span></span><br><span class="hljs-tag">    &gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;icon-upload&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;24&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">el-upload</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-tooltip</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br></code></pre></div></td></tr></table></figure>
+<p>在输入框下方处理文件上传的状态刷新</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;fileListShow &amp;&amp; fileListShow.length &gt; 0&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-list&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(file, index) in fileListShow&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;index&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-item&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;close-icon&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleRemoveFile(index)&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;file?.analyseStatus === &#x27;FAILED&#x27;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;icon-del&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;18&quot;</span> /&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">v-else</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;icon-del2&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;18&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-item-icon&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span></span><br><span class="hljs-tag">        <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;file?.analyseStatus === &#x27;PENDING&#x27; || file?.analyseStatus === &#x27;PARSING&#x27;&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;loader&quot;</span></span><br><span class="hljs-tag">      &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">fileIcon</span> <span class="hljs-attr">v-else</span> <span class="hljs-attr">:name</span>=<span class="hljs-string">&quot;file?.fileName&quot;</span> <span class="hljs-attr">:size</span>=<span class="hljs-string">&quot;40&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-item-info&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-item-name&quot;</span>&gt;</span>&#123;&#123; file?.fileName &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;file-item-size&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;!file?.analyseStatus?.includes(&#x27;FAILED&#x27;)&quot;</span>&gt;</span>&#123;&#123;<br>          formatSize1000(file?.fileSize)<br>        &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">v-else-if</span>=<span class="hljs-string">&quot;file?.analyseStatus == &#x27;FAILED&#x27;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-red-500&quot;</span></span><br><span class="hljs-tag">          &gt;</span>解析失败，请删除&lt;/span<br>        &gt;<br>        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">v-else</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-red-500&quot;</span>&gt;</span>上传失败，请删除<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 定义文件状态类型</span><br>type <span class="hljs-title class_">FileStatus</span> = <span class="hljs-string">&#x27;PENDING&#x27;</span> | <span class="hljs-string">&#x27;PARSING&#x27;</span> | <span class="hljs-string">&#x27;SUCCESS&#x27;</span> | <span class="hljs-string">&#x27;FAILED&#x27;</span> | <span class="hljs-string">&#x27;CONTENT_EMPTY&#x27;</span> | <span class="hljs-string">&#x27;UPLOAD_FAILED&#x27;</span><br><br><span class="hljs-comment">// 轮询定时器</span><br><span class="hljs-keyword">const</span> pollTimer = ref&lt;number | <span class="hljs-literal">null</span>&gt;(<span class="hljs-literal">null</span>)<br><span class="hljs-comment">// 轮询文件状态的函数</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">startPolling</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">poll</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-keyword">const</span> pendingFiles = fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">filter</span>(<br>      <span class="hljs-function">(<span class="hljs-params">fileItem</span>) =&gt;</span> fileItem.<span class="hljs-property">analyseStatus</span> === <span class="hljs-string">&#x27;PENDING&#x27;</span> || fileItem.<span class="hljs-property">analyseStatus</span> === <span class="hljs-string">&#x27;PARSING&#x27;</span><br>    )<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;pendingFiles&#x27;</span>, pendingFiles)<br>    <span class="hljs-keyword">if</span> (pendingFiles.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-comment">// 没有待处理的文件，停止轮询</span><br>      <span class="hljs-built_in">clearTimeout</span>(pollTimer.<span class="hljs-property">value</span>)<br>      pollTimer.<span class="hljs-property">value</span> = <span class="hljs-literal">null</span><br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;所有文件状态不为PENDING/PARSING，轮询结束&#x27;</span>)<br>      <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-keyword">const</span> fileIds = pendingFiles<br>      .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">fileItem</span>) =&gt;</span> fileItem?.<span class="hljs-property">fileId</span> !== <span class="hljs-string">&#x27;&#x27;</span>)<br>      .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">fileItem</span>) =&gt;</span> fileItem?.<span class="hljs-property">fileId</span>)<br>    <span class="hljs-keyword">if</span> (fileIds.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getFileStatus</span>(&#123; <span class="hljs-attr">file_ids</span>: fileIds &#125;)<br>      <span class="hljs-comment">// 后端返回文件状态，前端更新显示</span><br>      <span class="hljs-keyword">if</span> (res?.<span class="hljs-property">files</span> &amp;&amp; res?.<span class="hljs-property">files</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-title function_">updateStatus</span>(fileListShow.<span class="hljs-property">value</span>, res?.<span class="hljs-property">files</span>)<br>        fileListShow.<span class="hljs-property">value</span> = [...fileListShow.<span class="hljs-property">value</span>] <span class="hljs-comment">// 为了确保响应式更新，创建一个新数组</span><br>        pollTimer.<span class="hljs-property">value</span> = <span class="hljs-built_in">setTimeout</span>(poll, <span class="hljs-number">2000</span>)<br>      &#125;<br>    &#125;<br>  &#125;<br>  pollTimer.<span class="hljs-property">value</span> = <span class="hljs-built_in">setTimeout</span>(poll, <span class="hljs-number">2000</span>)<br>&#125;<br><br><span class="hljs-comment">// 状态更新 map</span><br><span class="hljs-keyword">const</span> updateStatus = (<span class="hljs-attr">arrA</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">FileInfo</span>&gt;, <span class="hljs-attr">arrB</span>: <span class="hljs-title class_">Array</span>&lt;any&gt;): <span class="hljs-title class_">Array</span>&lt;<span class="hljs-title class_">FileInfo</span>&gt; =&gt; &#123;<br>  <span class="hljs-keyword">const</span> statusMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>&lt;string, string&gt;()<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> arrB) &#123;<br>    statusMap.<span class="hljs-title function_">set</span>(item.<span class="hljs-property">file_id</span>, item.<span class="hljs-property">status</span>)<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> arrA) &#123;<br>    <span class="hljs-keyword">if</span> (statusMap.<span class="hljs-title function_">has</span>(item?.<span class="hljs-property">fileId</span>)) &#123;<br>      item.<span class="hljs-property">analyseStatus</span> = statusMap.<span class="hljs-title function_">get</span>(item?.<span class="hljs-property">fileId</span>)!<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> arrA<br>&#125;<br><br><span class="hljs-comment">// 选择文件后，出现在对话框下面</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleFileShow</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">fileList: File[], file: File</span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> uid = file?.<span class="hljs-property">uid</span><br>  fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">push</span>(&#123;<br>    <span class="hljs-attr">uid</span>: uid,<br>    <span class="hljs-attr">fileName</span>: file?.<span class="hljs-property">name</span>,<br>    <span class="hljs-attr">fileId</span>: <span class="hljs-string">&#x27;&#x27;</span>,<br>    <span class="hljs-attr">fileSize</span>: file?.<span class="hljs-property">size</span>,<br>    <span class="hljs-attr">analyseStatus</span>: <span class="hljs-string">&#x27;PENDING&#x27;</span><br>  &#125; <span class="hljs-keyword">as</span> <span class="hljs-title class_">FileInfo</span>)<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;handleFileShow&#x27;</span>, fileList, fileListShow.<span class="hljs-property">value</span>)<br>  analyseFile.<span class="hljs-property">value</span> = <span class="hljs-literal">true</span> <span class="hljs-comment">// 开始分析文件</span><br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>()<br>    formData.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;file&#x27;</span>, file?.<span class="hljs-property">raw</span>)<br>    formData.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;file_name&#x27;</span>, file?.<span class="hljs-property">name</span>)<br>    formData.<span class="hljs-title function_">append</span>(<span class="hljs-string">&#x27;conversation_id&#x27;</span>, currentId.<span class="hljs-property">value</span>)<br>    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">uploadFile</span>(formData)<br>    fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">fileItem</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (fileItem.<span class="hljs-property">uid</span> === uid) &#123;<br>        fileItem.<span class="hljs-property">fileId</span> = res?.<span class="hljs-property">file_id</span><br>      &#125;<br>    &#125;)<br><br>    <span class="hljs-comment">// 开始轮询</span><br>    <span class="hljs-keyword">if</span> (!pollTimer.<span class="hljs-property">value</span>) &#123;<br>      <span class="hljs-title function_">startPolling</span>()<br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;文件上传过程中出错&#x27;</span>, error)<br>    fileListShow.<span class="hljs-property">value</span> = fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (item.<span class="hljs-property">uid</span> === uid) &#123;<br>        <span class="hljs-keyword">return</span> &#123; ...item, <span class="hljs-attr">analyseStatus</span>: <span class="hljs-string">&#x27;UPLOAD_FAILED&#x27;</span> &#125;<br>      &#125;<br>      <span class="hljs-keyword">return</span> item<br>    &#125;)<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 删除文件，仅在解析失败时展示</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleRemoveFile</span> = (<span class="hljs-params">id: number</span>) =&gt; &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;handleRemoveFile&#x27;</span>, id)<br>  fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">splice</span>(id, <span class="hljs-number">1</span>)<br>  uploadRef.<span class="hljs-property">value</span>.<span class="hljs-title function_">removeFileOrigin</span>(id)<br>  fileListShow.<span class="hljs-property">value</span> = [...fileListShow.<span class="hljs-property">value</span>]<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>还需要对文件列表状态进行监听，只有所有文件解析完成才可以发送消息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-title function_">watch</span>(<br>  <span class="hljs-function">() =&gt;</span> fileListShow.<span class="hljs-property">value</span>,<br>  <span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> ok = fileListShow.<span class="hljs-property">value</span>.<span class="hljs-title function_">every</span>(<span class="hljs-function">(<span class="hljs-params">file: any</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> file.<span class="hljs-property">analyseStatus</span> === <span class="hljs-string">&#x27;SUCCESS&#x27;</span><br>    &#125;)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;watch&#x27;</span>, val, ok)<br>    <span class="hljs-keyword">if</span> (ok) &#123;<br>      analyseFile.<span class="hljs-property">value</span> = <span class="hljs-literal">false</span> <span class="hljs-comment">// 解析完成，可以发送消息</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      analyseFile.<span class="hljs-property">value</span> = <span class="hljs-literal">true</span> <span class="hljs-comment">// 解析中，不能发送消息</span><br>    &#125;<br>  &#125;,<br>  &#123; <span class="hljs-attr">immediate</span>: <span class="hljs-literal">true</span> &#125;<br>)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="语音播放"><a href="#语音播放" class="headerlink" title="语音播放"></a>语音播放</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleBroadcast</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://****&#x27;</span>, &#123;<br>      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(&#123; <span class="hljs-attr">text</span>: text &#125;)<br>    &#125;)<br><br>    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) &#123;<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;语音合成请求失败&#x27;</span>);<br>    &#125;<br>    <span class="hljs-keyword">const</span> reader = response.<span class="hljs-property">body</span>.<span class="hljs-title function_">getReader</span>();<br>    <span class="hljs-keyword">const</span> audioElement = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;audio&#x27;</span>);<br>    audioElement.<span class="hljs-property">src</span> = <span class="hljs-variable constant_">URL</span>.<span class="hljs-title function_">createObjectURL</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Blob</span>([])); <span class="hljs-comment">// 初始化音频</span><br><br>    <span class="hljs-keyword">const</span> stream = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReadableStream</span>(&#123;<br>      <span class="hljs-title function_">start</span>(<span class="hljs-params">controller</span>) &#123;<br>        <span class="hljs-keyword">function</span> <span class="hljs-title function_">push</span>(<span class="hljs-params"></span>) &#123;<br>          reader.<span class="hljs-title function_">read</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">&#123; done, value &#125;</span>) =&gt;</span> &#123;<br>            <span class="hljs-keyword">if</span> (done) &#123;<br>              controller.<span class="hljs-title function_">close</span>();<br>              <span class="hljs-keyword">return</span>;<br>            &#125;<br>            controller.<span class="hljs-title function_">enqueue</span>(value);<br>            <span class="hljs-title function_">push</span>();<br>          &#125;);<br>        &#125;<br>        <span class="hljs-title function_">push</span>();<br>      &#125;<br>    &#125;);<br><br>    <span class="hljs-keyword">const</span> audioStream = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Response</span>(stream);<br>    <span class="hljs-keyword">const</span> audioBlob = <span class="hljs-keyword">await</span> audioStream.<span class="hljs-title function_">blob</span>();<br>    audioElement.<span class="hljs-property">src</span> = <span class="hljs-variable constant_">URL</span>.<span class="hljs-title function_">createObjectURL</span>(audioBlob);<br>    audioElement.<span class="hljs-title function_">play</span>();<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error);<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue/">vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/typescript/">typescript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/28/vscode-AI%E7%BC%96%E7%A8%8B%E6%8F%92%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vscode AI编程插件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/19/vue3%E7%AC%94%E8%AE%B0%EF%BC%8842-3%EF%BC%89deepseek-%E5%B7%B2%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">vue3笔记（42-3）deepseek-已发送消息处理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

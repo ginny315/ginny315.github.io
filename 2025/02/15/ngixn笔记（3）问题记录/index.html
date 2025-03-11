@@ -16,21 +16,21 @@
   <meta name="author" content="Ningyan Guo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录一下阿里云服务器域名和 SSL 配置的过程。修改后记得重启 nginx 服务。">
+    <meta name="description" content="记录一下出现的问题及解决方式。修改后记得重启 nginx 服务。注意：如果运行在容器中，修改了 doeker 中 nginx 配置，通过 IP 访问正常，域名配置使用了 root 目录下的 nginx，需要再配置一次。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ngixn笔记（2）域名&amp;SSL配置">
-<meta property="og:url" content="http://guoningyan.com/2025/01/15/ngixn%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E5%9F%9F%E5%90%8D-SSL%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="ngixn笔记（3）问题记录">
+<meta property="og:url" content="http://guoningyan.com/2025/02/15/ngixn%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="ginny&#39;s blog">
-<meta property="og:description" content="记录一下阿里云服务器域名和 SSL 配置的过程。修改后记得重启 nginx 服务。">
+<meta property="og:description" content="记录一下出现的问题及解决方式。修改后记得重启 nginx 服务。注意：如果运行在容器中，修改了 doeker 中 nginx 配置，通过 IP 访问正常，域名配置使用了 root 目录下的 nginx，需要再配置一次。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-15T08:28:12.000Z">
-<meta property="article:modified_time" content="2025-01-15T08:35:31.279Z">
+<meta property="article:published_time" content="2025-02-15T08:28:12.000Z">
+<meta property="article:modified_time" content="2025-03-07T01:52:26.586Z">
 <meta property="article:author" content="Ningyan Guo">
 <meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>ngixn笔记（2）域名&amp;SSL配置 - ginny&#39;s blog</title>
+  <title>ngixn笔记（3）问题记录 - ginny&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -168,7 +168,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ngixn笔记（2）域名&amp;SSL配置">
+            <span class="h2" id="subtitle" title="ngixn笔记（3）问题记录">
               
             </span>
 
@@ -178,8 +178,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2025-01-15 16:28" pubdate>
-        2025年1月15日 下午
+      <time datetime="2025-02-15 16:28" pubdate>
+        2025年2月15日 下午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      466 字
     </span>
   
 
@@ -198,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      4 分钟
     </span>
   
 
@@ -227,17 +227,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ngixn笔记（2）域名&amp;SSL配置</h1>
+            <h1 style="display: none">ngixn笔记（3）问题记录</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>记录一下阿里云服务器域名和 SSL 配置的过程。修改后记得重启 nginx 服务。</p>
+<p>记录一下出现的问题及解决方式。修改后记得重启 nginx 服务。<br>注意：如果运行在容器中，修改了 doeker 中 nginx 配置，通过 IP 访问正常，域名配置使用了 root 目录下的 nginx，需要再配置一次。</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="文件修改"><a href="#文件修改" class="headerlink" title="文件修改"></a>文件修改</h3><p>根目录下 <code>nginx.conf</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">user www-data;<br>worker_processes auto;<br>pid /run/nginx.pid;<br>error_log /var/log/nginx/error.log;<br>include /etc/nginx/modules-enabled/*.conf;<br><br>events &#123;<br>	worker_connections 768;<br>&#125;<br><br>http &#123;<br>	sendfile on;<br>	tcp_nopush on;<br>	types_hash_max_size 2048;<br><br>	include /etc/nginx/mime.types;<br>	default_type application/octet-stream;<br><br>	##<br>	# SSL Settings<br>	##<br>	ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE<br>	ssl_prefer_server_ciphers on;<br><br>  ##<br>	# Logging Settings<br>	##<br>	access_log /var/log/nginx/access.log;<br><br>  ##<br>	# Gzip Settings<br>	##<br>	gzip on;<br>	gzip_vary on;<br>	gzip_proxied any;<br>	gzip_comp_level 6;<br>	gzip_buffers 16 8k;<br>  gzip_min_length 1024;<br>	# gzip_http_version 1.1;<br>	gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss image/svg+xml image/jpeg image/gif image/png text/javascript;<br><br>  ##<br>	# Virtual Host Configs<br>	##<br>	include /etc/nginx/conf.d/*.conf;<br>	include /etc/nginx/sites-enabled/*;<br><br>  server &#123;<br>    listen          80;<br>    server_name     111.com;<br>    #default_type   text/html;<br><br>    location / &#123;<br>      proxy_pass http://116.62.154.188:21011;<br>      proxy_set_header Host $proxy_host;<br>      proxy_set_header X-Real-IP $remote_addr;<br>      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>      proxy_http_version 1.1;<br>      proxy_set_header Upgrade $http_upgrade;<br>      proxy_set_header Connection &quot;upgrade&quot;;<br><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>修改如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">server &#123;<br>    listen 80;<br>    server_name 111.com www.111.com;<br><br>    # 将 HTTP 流量重定向到 HTTPS<br>    return 301 https://$host$request_uri;<br>&#125;<br><br>server &#123;<br>    listen 443 ssl;<br>    server_name swbind.com www.swbind.com;<br><br>    # 配置 SSL 证书和私钥<br>    ssl_certificate /etc/nginx/ssl/swbind.com.crt;  # SSL 证书路径<br>    ssl_certificate_key /etc/nginx/ssl/swbind.com.key;  # SSL 私钥路径<br><br>    # 配置强加密协议和密码套件<br>    ssl_protocols TLSv1.2 TLSv1.3;<br>    ssl_ciphers &#x27;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:...&#x27;;  # 添加更多安全的密码套件<br>    ssl_prefer_server_ciphers on;<br><br>    location / &#123;<br>      proxy_pass http://172.24.33.79:21009;<br>      proxy_set_header Host $proxy_host;<br>      proxy_set_header X-Real-IP $remote_addr;<br>      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>      proxy_http_version 1.1;<br>      proxy_set_header Upgrade $http_upgrade;<br>      proxy_set_header Connection &quot;upgrade&quot;;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="413-Request-Entity-Too-Large"><a href="#413-Request-Entity-Too-Large" class="headerlink" title="413 Request Entity Too Large"></a>413 Request Entity Too Large</h3><p>错误的原因是 Nginx 默认限制了客户端请求体的大小（默认为 1MB），而上传请求超过了这个限制，可以在 http、server、location 任意一个中添加以下字段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">http &#123;<br>  client_max_body_size 100M;  # 允许的最大请求体大小<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="流式数据输出卡顿"><a href="#流式数据输出卡顿" class="headerlink" title="流式数据输出卡顿"></a>流式数据输出卡顿</h3><p>在 location 中添加一个参数配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">http &#123;<br>  location /chatApi/ &#123;<br>      proxy_pass http://***/;<br>      proxy_buffering off;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="Request-failed-with-status-code-504"><a href="#Request-failed-with-status-code-504" class="headerlink" title="Request failed with status code 504"></a>Request failed with status code 504</h3><p>通常是由于 Nginx 作为反向代理时，等待后端服务器响应的时间超过了配置的超时时间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">http &#123;<br>&#125;<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -264,9 +268,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8842%EF%BC%89%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E6%80%BB%E7%BB%93/">
+                      <a href="/2025/02/18/vue3%E7%AC%94%E8%AE%B0%EF%BC%8842-1%EF%BC%89deepseek-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E6%80%BB%E7%BB%93/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue3笔记（42）用户输入总结</span>
+                        <span class="hidden-mobile">vue3笔记（42-1）deepseek-用户输入总结</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -274,8 +278,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/23/AlphaFold3/">
-                        <span class="hidden-mobile">AlphaFold3</span>
+                      <a href="/2025/01/15/ngixn%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E5%9F%9F%E5%90%8D-SSL%E9%85%8D%E7%BD%AE%20copy/">
+                        <span class="hidden-mobile">ngixn笔记（2）域名&SSL配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
