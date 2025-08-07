@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ningyan Guo">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="之前是针对 AF3 做了生物大分子预测，使用了rcsb-molstar；近期遇到新需求，要做分子性质和器件性质预测，使用了 3Dmol.js。本文对使用的库进行总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端使用分子相关库">
+<meta property="og:url" content="http://guoningyan.com/2025/08/04/%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8%E5%88%86%E5%AD%90%E7%9B%B8%E5%85%B3%E5%BA%93/index.html">
+<meta property="og:site_name" content="ginny&#39;s blog">
+<meta property="og:description" content="之前是针对 AF3 做了生物大分子预测，使用了rcsb-molstar；近期遇到新需求，要做分子性质和器件性质预测，使用了 3Dmol.js。本文对使用的库进行总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-04T08:26:24.000Z">
+<meta property="article:modified_time" content="2025-08-05T08:36:09.951Z">
+<meta property="article:author" content="Ningyan Guo">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="3Dmol">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>前端使用分子相关库 - ginny&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"guoningyan.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>PLMM Ginny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端使用分子相关库">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2025-08-04 16:26" pubdate>
+        2025年8月4日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端使用分子相关库</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>之前是针对 AF3 做了生物大分子预测，使用了rcsb-molstar；近期遇到新需求，要做分子性质和器件性质预测，使用了 3Dmol.js。<br>本文对使用的库进行总结。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>rcsb-molstar (Mol*)</th>
+<th>RDKit-js</th>
+<th>3Dmol.js</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>主要对象</strong></td>
+<td>蛋白质、核酸、复合物、冷冻电镜密度</td>
+<td>小分子、药物化学</td>
+<td>通用小分子&#x2F;蛋白，体积数据</td>
+</tr>
+<tr>
+<td><strong>输入格式</strong></td>
+<td>PDB&#x2F;mmCIF, BinaryCIF, SDF, MOL2, DCD 轨迹</td>
+<td>SMILES→2D&#x2F;3D</td>
+<td>SMILES, SDF, PDB, MOL2, 体积</td>
+</tr>
+<tr>
+<td><strong>功能亮点</strong></td>
+<td>结构对齐、轨迹播放、密度图、对称性、实体注释</td>
+<td>高质量 2D 绘制、化学感知</td>
+<td>轻量、快速嵌入、支持体积</td>
+</tr>
+<tr>
+<td><strong>包体大小</strong></td>
+<td>较大（功能全，按需分包）</td>
+<td>~3 MB</td>
+<td>~1 MB</td>
+</tr>
+<tr>
+<td><strong>典型 URL</strong></td>
+<td><a target="_blank" rel="noopener" href="https://www.rcsb.org/3d-view/1RB8">https://www.rcsb.org/3d-view/1RB8</a></td>
+<td>无官方托管</td>
+<td>无官方托管</td>
+</tr>
+<tr>
+<td><strong>是否 standalone</strong></td>
+<td>提供 standalone viewer 可以本地部署</td>
+<td>可以 standalone HTML</td>
+<td>可以 standalone HTML</td>
+</tr>
+</tbody></table>
+<ol>
+<li>AF3：rcsb-molstar 是 RCSB PDB 官方基于 Mol*(MolStar) 核心做的一层“定制外壳”，专门用来在 rcsb.org 上展示蛋白质、核酸等大分子结构，在需要展示的页面动态引入。ketcher 使用standalone模式引入，用于分子结构绘制。</li>
+<li>器件性质：RDKit，3Dmol</li>
+</ol>
+<h3 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h3><ul>
+<li>只看小分子 2D&#x2F;快速 3D → RDKit-js（2D 极清）或 3Dmol.js（3D 轻量）。</li>
+<li>需要 PDB 大分子 + 对齐 + 轨迹 + 密度 → rcsb-molstar（Mol*）。</li>
+<li>想离线&#x2F;内网部署 → 三者都可下载对应 .js + .wasm 本地引用，实现“完全 standalone”；rcsb-molstar 也提供 npm run build 后的 dist 目录一键起静态服务。</li>
+</ul>
+<h3 id="React-umi-框架下使用-3Dmol-js-实践"><a href="#React-umi-框架下使用-3Dmol-js-实践" class="headerlink" title="React + umi 框架下使用 3Dmol.js  实践"></a>React + umi 框架下使用 3Dmol.js  实践</h3><ol>
+<li>在 <code>public/3Dmol</code> 文件下加入 <code>3Dmol-min.js</code> 和 <code>3Dmol.ui-min.js</code> 两个文件（离线使用速度快）；</li>
+<li>在 <code>.umirc.ts</code> 中加入<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-attr">headScripts</span>: [<br>  &#123; <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;/3Dmol/3Dmol-min.js&#x27;</span>&#125;,<br>  &#123; <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;/3Dmol/3Dmol.ui-min.js&#x27;</span>&#125;<br>]<br></code></pre></div></td></tr></table></figure></li>
+<li>使用<br>官方 demo，实测生产环境有环境，暂时无法渲染。<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span></span><br><span class="hljs-tag">  <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">height:</span> &#x27;<span class="hljs-attr">400px</span>&#x27;, <span class="hljs-attr">width:</span> &#x27;<span class="hljs-attr">400px</span>&#x27;, <span class="hljs-attr">position:</span> &#x27;<span class="hljs-attr">relative</span>&#x27; &#125;&#125;</span><br><span class="hljs-tag">  <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;viewer_3Dmoljs&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">data-pdb</span>=<span class="hljs-string">&quot;2POR&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">data-backgroundcolor</span>=<span class="hljs-string">&quot;0xffffff&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">data-style</span>=<span class="hljs-string">&quot;stick&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">data-ui</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+官方下载后渲染，实测出了速度慢，渲染没问题。<figure class="highlight tsx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tsx"><span class="hljs-keyword">const</span> <span class="hljs-title function_">Device</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> containerRef = useRef&lt;<span class="hljs-title class_">HTMLDivElement</span>&gt;(<span class="hljs-literal">null</span>);<br>  <span class="hljs-keyword">const</span> $3Dmol = <span class="hljs-variable language_">window</span>.<span class="hljs-property">$3Dmol</span>;<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> element = containerRef.<span class="hljs-property">current</span>;<br>    <span class="hljs-keyword">if</span> (element &amp;&amp; $3Dmol) &#123;<br>      <span class="hljs-keyword">let</span> viewer = $3Dmol.<span class="hljs-title function_">createViewer</span>(element, &#123;<br>        <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&#x27;white&#x27;</span>,<br>      &#125;);<br><br>      $3Dmol.<span class="hljs-title function_">download</span>(<br>        <span class="hljs-string">&#x27;pdb:1MO8&#x27;</span>,<br>        viewer,<br>        &#123; <span class="hljs-attr">multimodel</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">frames</span>: <span class="hljs-literal">true</span> &#125;,<br>        <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>          viewer.<span class="hljs-title function_">setStyle</span>(&#123;&#125;, &#123; <span class="hljs-attr">cartoon</span>: &#123; <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;spectrum&#x27;</span> &#125; &#125;);<br>          viewer.<span class="hljs-title function_">render</span>();<br>        &#125;,<br>      );<br>    &#125;<br>  &#125;, [$3Dmol]);<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Flex</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;styles.mainContainer&#125;</span> <span class="hljs-attr">vertical</span> <span class="hljs-attr">flex</span>=<span class="hljs-string">&#123;1&#125;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span></span></span><br><span class="hljs-tag"><span class="language-xml">        <span class="hljs-attr">ref</span>=<span class="hljs-string">&#123;containerRef&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span></span></span><br><span class="hljs-tag"><span class="language-xml">          <span class="hljs-attr">height:</span> &#x27;<span class="hljs-attr">400px</span>&#x27;,</span></span><br><span class="hljs-tag"><span class="language-xml">          <span class="hljs-attr">width:</span> &#x27;<span class="hljs-attr">400px</span>&#x27;,</span></span><br><span class="hljs-tag"><span class="language-xml">          <span class="hljs-attr">position:</span> &#x27;<span class="hljs-attr">relative</span>&#x27;,</span></span><br><span class="hljs-tag"><span class="language-xml">          <span class="hljs-attr">border:</span> &#x27;<span class="hljs-attr">1px</span> <span class="hljs-attr">solid</span> #<span class="hljs-attr">ccc</span>&#x27;,</span></span><br><span class="hljs-tag"><span class="language-xml">        &#125;&#125;</span></span><br><span class="hljs-tag"><span class="language-xml">      &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Flex</span>&gt;</span></span><br>  );<br>&#125;;<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h3 id="standalone"><a href="#standalone" class="headerlink" title="standalone"></a>standalone</h3><p>“standalone” 这个词在网页&#x2F;前端语境里通常表示「一个文件就能跑」，不需要额外后端服务，也不需要把库拆成很多 chunk。</p>
+<ol>
+<li>把 HTML 保存后直接双击即可在浏览器打开，所有依赖（rdkit.js、3Dmol.js、wasm、css）都是从 CDN 一次性拉取，本地不需要任何服务器或打包工具。</li>
+<li>如果你想“更 standalone”——离线也能跑，只要把 CDN 资源下载到本地即可：</li>
+</ol>
+<ul>
+<li>把<script src="https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js"></script>
+换成下载下来的本地文件，如<script src="./lib/RDKit_minimal.js"></script></li>
+<li>同理，把 3Dmol 的 CDN 链接换成本地 3Dmol-min.js。<br>最终目录结构可能只有：<figure class="highlight glsl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs glsl"><span class="hljs-keyword">index</span>.html<br>lib/<br>  RDKit_minimal.js<br>  RDKit_minimal.wasm   <span class="hljs-meta"># 如果 RDKit 需要</span><br>  <span class="hljs-number">3</span>Dmol-<span class="hljs-built_in">min</span>.js<br></code></pre></div></td></tr></table></figure>
+这样即使断网，浏览器也能正常渲染 2D&#x2F;3D 结构——这就是“完全 standalone”。</li>
+</ul>
+<p><code>附录</code>：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://3dmol.org/doc/tutorial-embeddable.html">3Dmol</a></li>
+<li><a target="_blank" rel="noopener" href="https://shubihu.github.io/2023/11/03/3dmol-js%E5%9C%A8React%E4%B8%AD%E4%BD%BF%E7%94%A8demo">3dmol.js在React中直接使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://react.rdkitjs.com/#/">rdkit.js for react 官方</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rdkit/rdkit-js/tree/master/examples/react">rdkit.js for react 源代码</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/react/">react</a>
+                    
+                      <a class="hover-with-bg" href="/tags/3Dmol/">3Dmol</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/07/keycloak%E7%99%BB%E5%BD%95-%E5%89%8D%E7%AB%AF%E9%80%82%E9%85%8D/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">keycloak登录-前端适配-vue & react</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/30/keycloak%E7%99%BB%E5%BD%95-%E4%BF%AE%E6%94%B9%E9%A1%B5%E9%9D%A2/">
+                        <span class="hidden-mobile">keycloak登录-修改页面</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
